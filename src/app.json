@@ -20,7 +20,10 @@
       "text": "首页",
       "pagePath": "pages/index/main",
       "iconPath": "static/tabs/home.png",
-      "selectedIconPath": "static/tabs/home-active.png"
+      "selectedIconPath": "static/tabs/home-active.png",
+      "usingComponents": {
+        "van-button": "static/vant/button/index"
+      }
     }, {
       "text": "订单",
       "pagePath": "pages/logs/main",
