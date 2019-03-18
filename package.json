@@ -24,6 +24,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "@antv/f2-canvas": "^1.0.5",
     "mpvue": "^2.0.0",
     "vue-template-compiler": "^2.6.9",
     "vuex": "^3.0.1"
@@ -91,5 +92,15 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidWhom/recruit.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidWhom/recruit/issues"
+  },
+  "homepage": "https://github.com/DavidWhom/recruit#readme"
 }
