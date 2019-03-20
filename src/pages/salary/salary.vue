@@ -69,38 +69,41 @@
         </div>
       </van-tab>
       <van-tab title="薪资动态">
-        <div class="salary-title-bar panel-header-number">
-          <div class="before-title-blue"></div>
-          <div class="panel-title">查看薪资动态<span> (显示最近100条)</span></div>
+        <div :class='fixed ? "salary-dynamic-header salary-dynamic-header-fixed": "salary-dynamic-header"'>
+          <div class="salary-title-bar panel-header-number">
+            <div class="before-title-blue"></div>
+            <div class="panel-title">查看薪资动态<span> (显示最近100条)</span></div>
+          </div>
+          <van-field
+            :value="queryInd"
+            label="所在行业"
+            disabled
+            @click="queryIndClick"
+          />
+          <van-field
+            :value="queryEdu"
+            label="最高学历"
+            disabled
+            @click="queryEduClick"
+          />
+          <van-picker
+            show-toolbar
+            v-if="isqueryIndShow"
+            title="行业"
+            :columns="queryInds"
+            @cancel="onCancelqueryInd"
+            @confirm="onConfirmqueryInd"
+          />
+          <van-picker
+            show-toolbar
+            v-if="isqueryEduShow"
+            title="学历"
+            :columns="queryEdus"
+            @cancel="onCancelqueryEdu"
+            @confirm="onConfirmqueryEdu"
+          />
         </div>
-        <van-field
-          :value="queryInd"
-          label="所在行业"
-          disabled
-          @click="queryIndClick"
-        />
-        <van-field
-          :value="queryEdu"
-          label="最高学历"
-          disabled
-          @click="queryEduClick"
-        />
-        <van-picker
-          show-toolbar
-          v-if="isqueryIndShow"
-          title="行业"
-          :columns="queryInds"
-          @cancel="onCancelqueryInd"
-          @confirm="onConfirmqueryInd"
-        />
-        <van-picker
-          show-toolbar
-          v-if="isqueryEduShow"
-          title="学历"
-          :columns="queryEdus"
-          @cancel="onCancelqueryEdu"
-          @confirm="onConfirmqueryEdu"
-        />
+        <div v-if="fixed" class="salary-dynamic-header-placeholder"></div>
         <div v-if="isSalaryDynShow" class="salary-dynamics">
           <div class="salary-dynamic">
             <div class="salary-dynamic-content">
@@ -224,7 +227,10 @@
         isqueryEduShow: false,
         queryEdus: ['全部', '硕士其他', '本科其他', '本科985', '本科211', '本科海归', '硕士985', '硕士211', '硕士海归', '博士985',
           '博士211', '博士海归', '博士其他', '大专', '其他'],
-        isSalaryDynShow: true
+        isSalaryDynShow: true,
+        headerLocationTop: 0,
+        scrollTop: 0,
+        fixed: false
       }
     },
 
@@ -318,7 +324,22 @@
       }
     },
     mounted () {
-      // const this_ = this
+      const this_ = this
+      let query = wx.createSelectorQuery()
+      query.select('.salary-dynamic-header').boundingClientRect(function (res) {
+        // console.log(res)
+        // section header 距离 ‘当前顶部’ 距离
+        this_.headerLocationTop = res.top + this_.scrollTop
+      }).exec()
+    },
+    onPageScroll: function (e) {
+      // console.log(e)
+      this.scrollTop = e.scrollTop
+      if (e.scrollTop > this.headerLocationTop) {
+        this.fixed = true
+      } else {
+        this.fixed = false
+      }
     },
     created () {
       // let app = getApp()
@@ -410,5 +431,17 @@
     margin-top: 10rpx;
     font-size: 25rpx;
     color: #1c86ee;
+  }
+  .salary-dynamic-header {
+    background-color: white;
+    width: 100%;
+  }
+  .salary-dynamic-header-fixed {
+    position: fixed;
+    top: 0;
+  }
+  .salary-dynamic-header-placeholder  {
+    background-color: white;
+    height: 260rpx;
   }
 </style>
