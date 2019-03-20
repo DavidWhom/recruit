@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/salary/main",
     "pages/logs/main",
     "pages/mine/main"
   ],
@@ -29,12 +30,16 @@
       "pagePath": "pages/logs/main",
       "iconPath": "static/tabs/orders.png",
       "selectedIconPath": "static/tabs/orders-active.png"
-    },
-      {
+    },{
+        "text": "薪资爆料",
+        "pagePath": "pages/salary/main",
+        "iconPath": "static/tabs/salary.png",
+        "selectedIconPath": "static/tabs/salary-active.png"
+    },{
         "text": "我的",
         "pagePath": "pages/mine/main",
-        "iconPath": "static/tabs/orders.png",
-        "selectedIconPath": "static/tabs/orders-active.png"
+        "iconPath": "static/tabs/mine.png",
+        "selectedIconPath": "static/tabs/mine-active.png"
       }],
 
     "items": [{
@@ -47,6 +52,11 @@
       "pagePath": "pages/logs/main",
       "icon": "static/tabs/orders.png",
       "activeIcon": "static/tabs/orders-active.png"
+    },{
+      "name": "薪资爆料",
+      "pagePath": "pages/salary/main",
+      "icon": "static/tabs/salary.png",
+      "activeIcon": "static/tabs/salary-active.png"
     },
       {
         "name": "我的",
