@@ -26,10 +26,10 @@
         "van-button": "static/vant/button/index"
       }
     }, {
-      "text": "订单",
+      "text": "招聘资讯",
       "pagePath": "pages/logs/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
+      "iconPath": "static/tabs/hire.png",
+      "selectedIconPath": "static/tabs/hire-active.png"
     },{
         "text": "薪资爆料",
         "pagePath": "pages/salary/main",
@@ -48,10 +48,10 @@
       "icon": "static/tabs/home.png",
       "activeIcon": "static/tabs/home-active.png"
     }, {
-      "name": "订单",
+      "name": "招聘资讯",
       "pagePath": "pages/logs/main",
-      "icon": "static/tabs/orders.png",
-      "activeIcon": "static/tabs/orders-active.png"
+      "icon": "static/tabs/hire.png",
+      "activeIcon": "static/tabs/hire-active.png"
     },{
       "name": "薪资爆料",
       "pagePath": "pages/salary/main",
