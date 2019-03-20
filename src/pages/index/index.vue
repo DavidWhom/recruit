@@ -1,11 +1,47 @@
 <template>
   <div @click="clickHandle">
-    <van-button type="info">测试</van-button>
-    <vue-panel>
-      <view class="mix-chart-wrapper">
-        <ff-canvas id="mixChart-dom" canvas-id="mixChart" :opts="opts"></ff-canvas>
-      </view>
-    </vue-panel>
+    <van-panel background="#ffffff">
+      <van-panel class="my-logo-panel">
+        <img src="/static/images/logo.png" alt="OfferGo" class="my-logo"/>
+      </van-panel>
+      <van-panel class="job-search">
+          <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
+                      background="#ffffff">
+            <view slot="action" @tap="onSearch">搜索</view>
+          </van-search>
+      </van-panel>
+      <div class="kind-tip">
+        <span>温馨提示：公司+地点/岗位可组合查询，例如：锐捷网络+福州</span>
+      </div>
+      <div  class="job-ads">
+        <div class="all-jobAds">
+          <div class="job-ad">
+            <img class="job-ad-img" src="/static/images/job-ad-default.png">
+            <div class="job-ad-title">锐捷网络春季招聘简章</div>
+          </div>
+          <div class="job-ad">
+            <img class="job-ad-img" src="/static/images/job-ad-default.png">
+            <div class="job-ad-title">2019年网龙网络春季招聘简章福州专场</div>
+          </div>
+          <div class="job-ad">
+            <img class="job-ad-img" src="/static/images/job-ad-default.png">
+            <div class="job-ad-title">锐捷网络春季招聘简章</div>
+          </div>
+          <div class="job-ad">
+            <img class="job-ad-img" src="/static/images/job-ad-default.png">
+            <div class="job-ad-title">锐捷网络春季招聘简章</div>
+          </div>
+          <div class="job-ad">
+            <img class="job-ad-img" src="/static/images/job-ad-default.png">
+            <div class="job-ad-title">锐捷网络春季招聘简章</div>
+          </div>
+          <div class="job-ad">
+            <img class="job-ad-img" src="/static/images/job-ad-default.png">
+            <div class="job-ad-title">锐捷网络春季招聘简章</div>
+          </div>
+        </div>
+      </div>
+    </van-panel>
   </div>
 </template>
 
@@ -24,7 +60,8 @@ export default {
         // 使用延时初始化
         // lazyLoad: true
         // onInit: mixChartInit
-      }
+      },
+      keyword: ''
     }
   },
 
@@ -44,45 +81,10 @@ export default {
     clickHandle (ev) {
       console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
-    },
-    initChart (canvas, width, height, F2) { // 使用 F2 绘制图表
-      const data = [
-        { year: '1951 年', sales: 38 },
-        { year: '1952 年', sales: 52 },
-        { year: '1956 年', sales: 61 },
-        { year: '1957 年', sales: 145 },
-        { year: '1958 年', sales: 48 },
-        { year: '1959 年', sales: 38 },
-        { year: '1960 年', sales: 38 },
-        { year: '1962 年', sales: 38 }
-      ]
-      var chart = new F2.Chart({
-        el: canvas,
-        width,
-        height
-      })
-      chart.source(data, {
-        sales: {
-          tickCount: 5
-        }
-      })
-      chart.tooltip({
-        showItemMarker: false,
-        onShow (ev) {
-          const { items } = ev
-          items[0].name = null
-          items[0].name = items[0].title
-          items[0].value = '¥ ' + items[0].value
-        }
-      })
-      chart.interval().position('year*sales')
-      chart.render()
-      return chart
     }
   },
   mounted () {
-    const this_ = this
-    this_.$mp.page.selectComponent('#mixChart-dom').init(this_.initChart)
+    // const this_ = this
   },
   created () {
     // let app = getApp()
@@ -91,9 +93,52 @@ export default {
 </script>
 
 <style scoped>
-  .mix-chart-wrapper {
+  .my-logo-panel {
+    text-align: center;
+    vertical-align:middle;
+  }
+  .my-logo {
+    display: inline-block;
+    width: 250rpx;
+    height: 250rpx;
+    padding: 30rpx 0rpx 30rpx 0rpx;
+  }
+  .job-search {
+    align-items: center;
+  }
+  .kind-tip {
+    text-align: center;
+    font-size: 25rpx;
+  }
+  .job-ads {
     width: 100%;
-    height: 500rpx;
-    padding-bottom: 10px;
+    margin: 0 auto;
+  }
+  .all-jobAds {
+    margin: 0 auto;
+    width: 85%;
+  }
+  .job-ad {
+    float: left;
+    margin: 15rpx 10rpx 15rpx 5rpx;
+  }
+  .job-ad-img {
+    display: inline-block;
+    width: 300rpx;
+    height: 200rpx;
+  }
+  .job-ad-title {
+    position: relative;
+    width: 300rpx;
+    height: 30rpx;
+    font-size: 20rpx;
+    color: #ffffff;
+    margin-top: -45rpx;
+    background-color: rgba(180,180,180,0.8);
+    border-radius: 10rpx;
+    z-index: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>

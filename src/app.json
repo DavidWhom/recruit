@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/main",
     "pages/logs/main",
-    "pages/counter/main"
+    "pages/mine/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,7 +29,13 @@
       "pagePath": "pages/logs/main",
       "iconPath": "static/tabs/orders.png",
       "selectedIconPath": "static/tabs/orders-active.png"
-    }],
+    },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/main",
+        "iconPath": "static/tabs/orders.png",
+        "selectedIconPath": "static/tabs/orders-active.png"
+      }],
 
     "items": [{
       "name": "首页",
@@ -41,7 +47,13 @@
       "pagePath": "pages/logs/main",
       "icon": "static/tabs/orders.png",
       "activeIcon": "static/tabs/orders-active.png"
-    }],
+    },
+      {
+        "name": "我的",
+        "pagePath": "pages/mine/main",
+        "icon": "static/tabs/orders.png",
+        "activeIcon": "static/tabs/orders-active.png"
+      }],
     "position": "bottom"
   }
 }

@@ -3,7 +3,6 @@
   "usingComponents": {
     "van-button": "/static/vant-weapp/dist/button/index",
     "van-panel": "/static/vant-weapp/dist/panel/index",
-    "van-search": "/static/vant-weapp/dist/search/index",
     "ff-canvas": "/static/@antv/f2-canvas/index"
   }
 }
