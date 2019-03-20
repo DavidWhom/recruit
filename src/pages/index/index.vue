@@ -81,10 +81,21 @@ export default {
     clickHandle (ev) {
       console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
+    },
+    flyioTest () {
+      const this_ = this
+      const requestUrl = '/testPathVariable/111'
+      const params = {
+      }
+      this_.$http.get(requestUrl, params).then(function (res) {
+        const resData = res
+        console.log(resData)
+      })
     }
   },
   mounted () {
-    // const this_ = this
+    const this_ = this
+    this_.flyioTest()
   },
   created () {
     // let app = getApp()
