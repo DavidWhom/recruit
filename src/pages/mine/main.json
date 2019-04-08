@@ -3,6 +3,9 @@
   "usingComponents": {
     "van-button": "/static/vant-weapp/dist/button/index",
     "van-panel": "/static/vant-weapp/dist/panel/index",
-    "ff-canvas": "/static/@antv/f2-canvas/index"
+    "ff-canvas": "/static/@antv/f2-canvas/index",
+    "van-panel": "/static/vant-weapp/dist/panel/index",
+    "van-row": "/static/vant-weapp/dist/row/index",
+    "van-col": "/static/vant-weapp/dist/col/index"
   }
 }

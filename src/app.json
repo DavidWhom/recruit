@@ -26,7 +26,7 @@
         "van-button": "static/vant/button/index"
       }
     }, {
-      "text": "招聘资讯",
+      "text": "招聘信息",
       "pagePath": "pages/logs/main",
       "iconPath": "static/tabs/hire.png",
       "selectedIconPath": "static/tabs/hire-active.png"
@@ -48,7 +48,7 @@
       "icon": "static/tabs/home.png",
       "activeIcon": "static/tabs/home-active.png"
     }, {
-      "name": "招聘资讯",
+      "name": "招聘信息",
       "pagePath": "pages/logs/main",
       "icon": "static/tabs/hire.png",
       "activeIcon": "static/tabs/hire-active.png"

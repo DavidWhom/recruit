@@ -70,7 +70,7 @@
       </van-tab>
       <van-tab title="薪资动态">
         <div :class='fixed ? "salary-dynamic-header salary-dynamic-header-fixed": "salary-dynamic-header"'>
-          <div class="salary-title-bar panel-header-number">
+          <div class="van-hairline--bottom salary-title-bar panel-header-number">
             <div class="before-title-blue"></div>
             <div class="panel-title">查看薪资动态<span> (显示最近100条)</span></div>
           </div>

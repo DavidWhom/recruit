@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "查看启动日志",
   "usingComponents": {
-    "van-button": "/static/vant-weapp/dist/button/index"
+    "van-button": "/static/vant-weapp/dist/button/index",
+    "van-panel": "/static/vant-weapp/dist/panel/index",
+    "ff-canvas": "/static/@antv/f2-canvas/index"
   }
 }
