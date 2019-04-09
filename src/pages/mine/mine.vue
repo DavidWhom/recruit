@@ -116,11 +116,13 @@
           <van-tabs animated color="#1c86ee" class="flex-basis" @change="onMainTabChange" line-width="60">
             <van-tab title="仪表盘" class="mine-admin-tabs">
               <van-panel>
-                <van-tabs animated :active="reportTabIndex" color="#1c86ee" class="flex-basis" @change="onTabChange" line-width="60">
-                  <van-tab title="日报" style="flex-basis: 20% !important;"></van-tab>
-                  <van-tab title="周报" style="flex-basis: 20% !important;"></van-tab>
-                  <van-tab title="月报" style="flex-basis: 20% !important;"></van-tab>
-                </van-tabs>
+                <div class="data-panel">
+                  <van-tabs animated :active="reportTabIndex" color="#1c86ee" class="flex-basis" @change="onTabChange" line-width="60">
+                    <van-tab title="日报" style="flex-basis: 20% !important;"></van-tab>
+                    <van-tab title="周报" style="flex-basis: 20% !important;"></van-tab>
+                    <van-tab title="月报" style="flex-basis: 20% !important;"></van-tab>
+                  </van-tabs>
+                </div>
                 <van-row>
                   <van-col :span="11" class="van-hairline--bottom van-hairline--top">
                     <div class="panel-header-number">
