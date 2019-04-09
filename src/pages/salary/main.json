@@ -10,6 +10,7 @@
     "van-field": "/static/vant-weapp/dist/field/index",
     "van-cell-group": "/static/vant-weapp/dist/cell-group/index",
     "van-picker": "/static/vant-weapp/dist/picker/index",
-    "van-toast": "/static/vant-weapp/dist/toast/index"
+    "van-toast": "/static/vant-weapp/dist/toast/index",
+    "van-search": "/static/vant-weapp/dist/search/index"
   }
 }

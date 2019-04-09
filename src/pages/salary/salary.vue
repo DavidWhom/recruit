@@ -74,34 +74,10 @@
             <div class="before-title-blue"></div>
             <div class="panel-title">查看薪资动态<span> (显示最近100条)</span></div>
           </div>
-          <van-field
-            :value="queryInd"
-            label="所在行业"
-            disabled
-            @click="queryIndClick"
-          />
-          <van-field
-            :value="queryEdu"
-            label="最高学历"
-            disabled
-            @click="queryEduClick"
-          />
-          <van-picker
-            show-toolbar
-            v-if="isqueryIndShow"
-            title="行业"
-            :columns="queryInds"
-            @cancel="onCancelqueryInd"
-            @confirm="onConfirmqueryInd"
-          />
-          <van-picker
-            show-toolbar
-            v-if="isqueryEduShow"
-            title="学历"
-            :columns="queryEdus"
-            @cancel="onCancelqueryEdu"
-            @confirm="onConfirmqueryEdu"
-          />
+          <van-search :value="salaryKeyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
+          background="#ffffff">
+          <view slot="action" @tap="onSearch">搜索</view>
+          </van-search>
         </div>
         <div v-if="fixed" class="salary-dynamic-header-placeholder"></div>
         <div v-if="isSalaryDynShow" class="salary-dynamics">
@@ -218,19 +194,11 @@
         remark: '',
         active: 0,
         reportTabIndex: 0,
-        isqueryIndShow: false,
-        queryInd: '全部',
-        queryInds: ['全部', 'IT|互联网|通信', '房产|建筑|物业管理', '金融', '采购|贸易|交通|物流', '生产制造', '传媒|印刷|艺术|设计',
-          '咨询|法律|教育|翻译', '服务业', '能源|环保|农业|科研', '销售|客服|市场', '财务|人力资源|行政',
-          '项目|质量|高级管理', '兼职|实习|社工|其他', '其他行业'],
-        queryEdu: '全部',
-        isqueryEduShow: false,
-        queryEdus: ['全部', '硕士其他', '本科其他', '本科985', '本科211', '本科海归', '硕士985', '硕士211', '硕士海归', '博士985',
-          '博士211', '博士海归', '博士其他', '大专', '其他'],
         isSalaryDynShow: true,
         headerLocationTop: 0,
         scrollTop: 0,
-        fixed: false
+        fixed: false,
+        salaryKeyword: ''
       }
     },
 
@@ -321,6 +289,9 @@
           this.isSalaryDynShow = !this.isSalaryDynShow
         }
         this.isqueryEduShow = !this.isqueryEduShow
+      },
+      onSearch () {
+        console.log('搜索关键字:' + this.salaryKeyword)
       }
     },
     mounted () {
@@ -442,6 +413,6 @@
   }
   .salary-dynamic-header-placeholder  {
     background-color: white;
-    height: 260rpx;
+    height: 180rpx;
   }
 </style>
