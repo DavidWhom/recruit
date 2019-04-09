@@ -6,6 +6,8 @@
     "ff-canvas": "/static/@antv/f2-canvas/index",
     "van-panel": "/static/vant-weapp/dist/panel/index",
     "van-row": "/static/vant-weapp/dist/row/index",
-    "van-col": "/static/vant-weapp/dist/col/index"
+    "van-col": "/static/vant-weapp/dist/col/index",
+    "van-tab": "/static/vant-weapp/dist/tab/index",
+    "van-tabs": "/static/vant-weapp/dist/tabs/index"
   }
 }

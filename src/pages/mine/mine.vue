@@ -25,90 +25,163 @@
       </div>
     </van-panel>
     <div class="user_common" v-if="identity == 'user'">
-      <!-- 用户显示的内容 -->
-      <div style="width: 100%;" class="van-hairline--bottom guide-tr">
-        <van-row>
-          <van-col offset="1" span="1">
-            <div class="member-content mine-guide-list">
-              <img src="../../../static/images/mine_storeup.png" style="height: 20px;width: 20px;"/>
-            </div>
-          </van-col>
-          <van-col span="7" offset="3">
-            <div class="van-ellipsis guide-name mine-guide-list"><span>我的收藏</span></div>
-          </van-col>
-          <van-col span="7">
-            <div class="mine-guide-list"><span>2 个 </span></div>
-          </van-col>
-          <van-col offset="1" span="2">
-            <div class="member-content mine-guide-list">
-              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-            </div>
-          </van-col>
-        </van-row>
-      </div>
-      <div style="width: 100%;" class="van-hairline--bottom guide-tr">
-        <van-row>
-          <van-col offset="1" span="1">
-            <div class="member-content mine-guide-list">
-              <img src="../../../static/images/mine_baoliao.png" style="height: 20px;width: 20px;"/>
-            </div>
-          </van-col>
-          <van-col span="7" offset="3">
-            <div class="van-ellipsis guide-name mine-guide-list"><span>我的爆料</span></div>
-          </van-col>
-          <van-col span="7">
-            <div class="mine-guide-list"><span>3 条 </span></div>
-          </van-col>
-          <van-col offset="1" span="2">
-            <div class="member-content mine-guide-list">
-              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-            </div>
-          </van-col>
-        </van-row>
-      </div>
-      <div style="width: 100%;" class="van-hairline--bottom guide-tr">
-        <van-row>
-          <van-col offset="1" span="1">
-            <div class="member-content mine-guide-list">
-              <img src="../../../static/images/mine_pinglun.png" style="height: 20px;width: 20px;"/>
-            </div>
-          </van-col>
-          <van-col span="7" offset="3">
-            <div class="van-ellipsis guide-name mine-guide-list"><span>我的评论</span></div>
-          </van-col>
-          <van-col span="7">
-            <div class="mine-guide-list"><span>15 条 </span></div>
-          </van-col>
-          <van-col offset="1" span="2">
-            <div class="member-content mine-guide-list">
-              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-            </div>
-          </van-col>
-        </van-row>
-      </div>
-      <div style="width: 100%;" class="van-hairline--bottom guide-tr">
-        <van-row>
-          <van-col offset="1" span="1">
-            <div class="member-content mine-guide-list">
-              <img src="../../../static/images/mine_fankui.png" style="height: 20px;width: 20px;"/>
-            </div>
-          </van-col>
-          <van-col span="7" offset="3">
-            <div class="van-ellipsis guide-name mine-guide-list"><span>意见反馈</span></div>
-          </van-col>
-          <van-col span="7">
-            <div class="mine-guide-list"><s</div>
-          </van-col>
-          <van-col offset="1" span="2">
-            <div class="member-content mine-guide-list">
-              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-            </div>
-          </van-col>
-        </van-row>
-      </div>
+      <van-panel>
+        <!-- 用户显示的内容 -->
+        <div style="width: 100%;" class="van-hairline--bottom guide-tr">
+          <van-row>
+            <van-col offset="1" span="1">
+              <div class="member-content mine-guide-list">
+                <img src="../../../static/images/mine_storeup.png" style="height: 20px;width: 20px;"/>
+              </div>
+            </van-col>
+            <van-col span="7" offset="3">
+              <div class="van-ellipsis guide-name mine-guide-list"><span>我的收藏</span></div>
+            </van-col>
+            <van-col span="7">
+              <div class="mine-guide-list"><span>2 个 </span></div>
+            </van-col>
+            <van-col offset="1" span="2">
+              <div class="member-content mine-guide-list">
+                <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+              </div>
+            </van-col>
+          </van-row>
+        </div>
+        <div style="width: 100%;" class="van-hairline--bottom guide-tr">
+          <van-row>
+            <van-col offset="1" span="1">
+              <div class="member-content mine-guide-list">
+                <img src="../../../static/images/mine_baoliao.png" style="height: 20px;width: 20px;"/>
+              </div>
+            </van-col>
+            <van-col span="7" offset="3">
+              <div class="van-ellipsis guide-name mine-guide-list"><span>我的爆料</span></div>
+            </van-col>
+            <van-col span="7">
+              <div class="mine-guide-list"><span>3 条 </span></div>
+            </van-col>
+            <van-col offset="1" span="2">
+              <div class="member-content mine-guide-list">
+                <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+              </div>
+            </van-col>
+          </van-row>
+        </div>
+        <div style="width: 100%;" class="van-hairline--bottom guide-tr">
+          <van-row>
+            <van-col offset="1" span="1">
+              <div class="member-content mine-guide-list">
+                <img src="../../../static/images/mine_pinglun.png" style="height: 20px;width: 20px;"/>
+              </div>
+            </van-col>
+            <van-col span="7" offset="3">
+              <div class="van-ellipsis guide-name mine-guide-list"><span>我的评论</span></div>
+            </van-col>
+            <van-col span="7">
+              <div class="mine-guide-list"><span>15 条 </span></div>
+            </van-col>
+            <van-col offset="1" span="2">
+              <div class="member-content mine-guide-list">
+                <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+              </div>
+            </van-col>
+          </van-row>
+        </div>
+        <div style="width: 100%;" class="van-hairline--bottom guide-tr">
+          <van-row>
+            <van-col offset="1" span="1">
+              <div class="member-content mine-guide-list">
+                <img src="../../../static/images/mine_fankui.png" style="height: 20px;width: 20px;"/>
+              </div>
+            </van-col>
+            <van-col span="7" offset="3">
+              <div class="van-ellipsis guide-name mine-guide-list"><span>意见反馈</span></div>
+            </van-col>
+            <van-col span="7">
+              <div class="mine-guide-list"></div>
+            </van-col>
+            <van-col offset="1" span="2">
+              <div class="member-content mine-guide-list">
+                <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+              </div>
+            </van-col>
+          </van-row>
+        </div>
+      </van-panel>
     </div>
     <div v-else>
-      管理员
+      <div @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
+        <!--管理员显示的内容-->
+        <div class="data-panel">
+          <van-panel>
+            <van-tabs animated :active="tabIndex" color="#1c86ee" class="flex-basis" @change="onTabChange" line-width="60">
+              <van-tab title="日报" style="flex-basis: 20% !important;"></van-tab>
+              <van-tab title="周报" style="flex-basis: 20% !important;"></van-tab>
+              <van-tab title="月报" style="flex-basis: 20% !important;"></van-tab>
+            </van-tabs>
+            <van-row>
+              <van-col :span="11" class="van-hairline--bottom van-hairline--top">
+                <div class="panel-header-number">
+                  <div class="before-title-blue"></div>
+                  <div class="panel-title" style="font-size: 14px;">招聘发布</div>
+                </div>
+              </van-col>
+              <van-col :span="13" class="van-hairline--bottom van-hairline--top">
+                <div class="panel-header-number">
+                  <div class="before-title-orange"></div>
+                  <div class="panel-title" style="font-size: 14px;">用户流量</div>
+                </div>
+              </van-col>
+            </van-row>
+            <van-row>
+              <van-col :span="11">
+                <span class="large-text blue-text">103</span><span class="small-text blue-text">条</span>
+              </van-col>
+              <van-col :span="13">
+                <span class="large-text orange-text">987</span><span class="small-text orange-text">次</span>
+              </van-col>
+            </van-row>
+            <van-row>
+              <div class="tendency-unit">
+                <div class="tendency_unit_left tendency-small-text">单位：条</div>
+                <div class="tendency_unit_right tendency-small-text">单位：次</div>
+              </div>
+            </van-row>
+            <van-row>
+              <van-col :span="24">
+                <view class="mix-chart-wrapper">
+                  <ff-canvas id="mixMainChart-dom" canvas-id="mixMainChart" :opts="opts"></ff-canvas>
+                </view>
+              </van-col>
+            </van-row>
+          </van-panel>
+        </div>
+        <div class="data-panel">
+          <van-panel>
+            <van-row>
+              <van-col :span="11" class="van-hairline--bottom van-hairline--top">
+                <div class="panel-header-number">
+                  <div class="before-title-blue"></div>
+                  <div class="panel-title" style="font-size: 14px;">薪资爆料</div>
+                  <span class="medim-text blue-text"> - 14条</span>
+                </div>
+              </van-col>
+            </van-row>
+            <van-row>
+              <div class="tendency-unit">
+                <div class="tendency_unit_left tendency-small-text">单位：条</div>
+              </div>
+            </van-row>
+            <van-row>
+              <van-col :span="24">
+                <view class="mix-chart-wrapper">
+                  <ff-canvas id="mixBLChart-dom" canvas-id="mixBLChart" :opts="opts"></ff-canvas>
+                </view>
+              </van-col>
+            </van-row>
+          </van-panel>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -120,16 +193,144 @@
         opts: {
           // 使用延时初始化
           // lazyLoad: true
-          // onInit: mixChartInit
         },
-        identity: 'user'
+        identity: 'admin',
+        mainTendencyData: [],
+        mainTendencyCount: 7,
+        tabIndex: 0,
+        // 报表页面左右滑切换tab
+        startX: 0,
+        moveX: 0,
+        disX: 0,
+        tabSensitivity: 150
       }
     },
 
     methods: {
+      initMainChart (canvas, width, height, F2) { // 使用 F2 绘制图表
+        const data = [
+          {'date': '12/17', 'left': 20, 'right': 40},
+          {'date': '12/18', 'left': 22, 'right': 220},
+          {'date': '12/19', 'left': 30, 'right': 123},
+          {'date': '12/20', 'left': 10, 'right': 14},
+          {'date': '12/21', 'left': 10, 'right': 12},
+          {'date': '12/22', 'left': 20, 'right': 123},
+          {'date': '12/23', 'left': 30, 'right': 1},
+          {'date': '12/24', 'left': 65, 'right': 54},
+          {'date': '12/25', 'left': 65, 'right': 234},
+          {'date': '12/26', 'left': 39, 'right': 123},
+          {'date': '12/27', 'left': 80, 'right': 146},
+          {'date': '12/28', 'left': 12, 'right': 268},
+          {'date': '12/29', 'left': 1, 'right': 7},
+          {'date': '12/30', 'left': 1, 'right': 6}
+        ]
+        var chart = new F2.Chart({
+          el: canvas,
+          padding: [20, 'auto', 'auto'],
+          width,
+          height
+        })
+        chart.source(data, {
+          left: {
+            tickCount: 6,
+            ticks: [0, 20, 40, 60, 80, 100]
+          },
+          right: {
+            tickCount: 6,
+            ticks: [0, 60, 120, 180, 240, 300]
+          },
+          date: {
+            tickCount: 7
+          }
+        })
+        chart.tooltip({
+          showItemMarker: false,
+          onShow: function onShow (ev) {
+            // 关键接口 ev.items[0].origin 可以获取到原始数据
+            ev.items.pop()
+            var items = ev.items
+            var dateStr = '日期:' + ev.items[0].origin.date
+            items[0].name = dateStr + ' ' + '发布'
+            // items[0].name = ' 销售金额'
+            items[0].value = ev.items[0].origin.left
+
+            items[1].name = '流量'
+            items[1].vaule = items[1].value
+          }
+        })
+        // 规避：防止右边刻度交给f2自己计算时出现左右刻度不同时出现的虚线混乱问题 截止2019-1-8 三轮测试后尚未发现这个问题
+        // chart.axis('right', {
+        //   grid: null
+        // })
+        chart.axis('date', {
+          line: F2.Global._defaultAxis.line,
+          grid: null
+        })
+        chart.legend(false)
+        chart.interval().position('date*left').style('tem', {
+          radius: [3, 3, 0, 0]
+        }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        chart.line().position('date*right').color('#df651b')
+        chart.point().position('date*right').size('tag', function (val) {
+          return val === 1 ? 3 : 0
+        }).style('tag', {
+          fill: '#df651b',
+          stroke: '#FFFFFF',
+          lineWidth: 1
+        })
+        chart.render()
+      },
+      onTabChange (event) {
+        this.tabIndex = event.mp.detail.index
+        console.log(this.tabIndex)
+      },
+      touchStart (e) {
+        this.moveX = 0
+        this.disX = 0
+        this.startX = e.clientX
+      },
+      touchMove (e) {
+        this.moveX = e.clientX
+      },
+      touchEnd (e) {
+        this.disX = this.moveX - this.startX
+        if ((this.disX >= this.tabSensitivity || this.disX <= -this.tabSensitivity) && this.moveX !== 0) {
+          // 判断即将跳转的页面
+          switch (this.tabIndex) {
+            case 0:
+              if (this.disX < 0) {
+                this.tabIndex = 1
+                // this.dayReportInit()
+              }
+              break
+            case 1:
+              if (this.disX < 0) {
+                this.tabIndex = 2
+                // this.weekReportInit()
+                break
+              }
+              this.tabIndex = 0
+              // this.dayReportInit()
+              break
+            case 2:
+              if (this.disX < 0) {
+                this.tabIndex = 3
+                // this.monthReportInit()
+                break
+              }
+              this.tabIndex = 1
+              // this.dayReportInit()
+              break
+          }
+          // this.updateALlData()
+        }
+      }
     },
     mounted () {
-      // const this_ = this
+      const this_ = this
+      if (this_.identity === 'admin') {
+        this_.$mp.page.selectComponent('#mixMainChart-dom').init(this_.initMainChart)
+      }
     },
     created () {
       // let app = getApp()
@@ -138,6 +339,13 @@
 </script>
 
 <style>
+  page {
+    background-color: #f8f8f8;
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+  }
+
   .panel-complete {
     margin-top: 20rpx;
   }
@@ -210,5 +418,69 @@
 
   .user_common span{
     font-size: 30rpx;
+  }
+  .mine-title-bar span {
+    color: darkgray;
+  }
+  .before-title-blue {
+    width: 5px;
+    height: 16px;
+    background-color: #1c85ee;
+    border-radius: 5px;
+    margin-left: 20px;
+  }
+  .panel-header-number {
+    align-items: center;
+    position: relative;
+    min-width: 0;
+    flex: 0 0 5px;
+    display: flex;
+    height: 35px;
+  }
+  .before-title-orange {
+    width: 5px;
+    height: 16px;
+    background-color: #df651b;
+    border-radius: 5px;
+    margin-left: 20px;
+  }
+  .data-panel {
+    width: 100%;
+    margin-top: 20rpx;
+    background-color: #ffffff;
+  }
+  .large-text {
+    margin-left: 20px;
+    font-size: 50rpx;
+  }
+  .medim-text {
+    margin-left: 8px;
+    font-size: 15px;
+  }
+  .small-text {
+    font-size: 10px;
+  }
+  .blue-text {
+    color: #1c86ee;
+  }
+
+  .orange-text {
+    color:#df651b;
+  }
+  .tendency-unit {
+    margin-top: 15px;
+  }
+  .tendency_unit_left {
+    margin-left: 15px;
+    float:left
+  }
+
+  .tendency_unit_right {
+    margin-right: 15px;
+    float:right
+  }
+  .tendency-small-text {
+    font-size: 18rpx;
+    color:#858585
   }
 </style>
