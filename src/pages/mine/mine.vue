@@ -16,7 +16,7 @@
             </view>
           </van-col>
           <van-col span="15" offset="1" class="member-complete">
-            <div class="member-content" style="margin-top: 38px;">
+            <div class="mine-title-content" style="margin-top: 38px;">
               <span style="font-size: 18px;">Jovan佳传</span>
               <span style="margin-left: 14px;font-size: 14px;">{{identity == 'user' ? "普通用户" : "管理员"}}</span>
             </div>
@@ -27,81 +27,81 @@
     <div class="user_common" v-if="identity == 'user'">
       <van-panel>
         <!-- 用户显示的内容 -->
-        <div style="width: 100%;" class="van-hairline--bottom guide-tr">
+        <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
           <van-row>
             <van-col offset="1" span="1">
-              <div class="member-content mine-guide-list">
+              <div class="mine-title-content mine-title-list">
                 <img src="../../../static/images/mine_storeup.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
             <van-col span="7" offset="3">
-              <div class="van-ellipsis guide-name mine-guide-list"><span>我的收藏</span></div>
+              <div class="van-ellipsis mine-title-name mine-title-list"><span>我的收藏</span></div>
             </van-col>
             <van-col span="7">
-              <div class="mine-guide-list"><span>2 个 </span></div>
+              <div class="mine-title-list"><span>2 个 </span></div>
             </van-col>
             <van-col offset="1" span="2">
-              <div class="member-content mine-guide-list">
+              <div class="mine-title-content mine-title-list">
                 <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
           </van-row>
         </div>
-        <div style="width: 100%;" class="van-hairline--bottom guide-tr">
+        <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
           <van-row>
             <van-col offset="1" span="1">
-              <div class="member-content mine-guide-list">
+              <div class="mine-title-content mine-title-list">
                 <img src="../../../static/images/mine_baoliao.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
             <van-col span="7" offset="3">
-              <div class="van-ellipsis guide-name mine-guide-list"><span>我的爆料</span></div>
+              <div class="van-ellipsis mine-title-name mine-title-list"><span>我的爆料</span></div>
             </van-col>
             <van-col span="7">
-              <div class="mine-guide-list"><span>3 条 </span></div>
+              <div class="mine-title-list"><span>3 条 </span></div>
             </van-col>
             <van-col offset="1" span="2">
-              <div class="member-content mine-guide-list">
+              <div class="mine-title-content mine-title-list">
                 <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
           </van-row>
         </div>
-        <div style="width: 100%;" class="van-hairline--bottom guide-tr">
+        <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
           <van-row>
             <van-col offset="1" span="1">
-              <div class="member-content mine-guide-list">
+              <div class="mine-title-content mine-title-list">
                 <img src="../../../static/images/mine_pinglun.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
             <van-col span="7" offset="3">
-              <div class="van-ellipsis guide-name mine-guide-list"><span>我的评论</span></div>
+              <div class="van-ellipsis mine-title-name mine-title-list"><span>我的评论</span></div>
             </van-col>
             <van-col span="7">
-              <div class="mine-guide-list"><span>15 条 </span></div>
+              <div class="mine-title-list"><span>15 条 </span></div>
             </van-col>
             <van-col offset="1" span="2">
-              <div class="member-content mine-guide-list">
+              <div class="mine-title-content mine-title-list">
                 <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
           </van-row>
         </div>
-        <div style="width: 100%;" class="van-hairline--bottom guide-tr">
+        <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
           <van-row>
             <van-col offset="1" span="1">
-              <div class="member-content mine-guide-list">
+              <div class="mine-title-content mine-title-list">
                 <img src="../../../static/images/mine_fankui.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
             <van-col span="7" offset="3">
-              <div class="van-ellipsis guide-name mine-guide-list"><span>意见反馈</span></div>
+              <div class="van-ellipsis mine-title-name mine-title-list"><span>意见反馈</span></div>
             </van-col>
             <van-col span="7">
-              <div class="mine-guide-list"></div>
+              <div class="mine-title-list"></div>
             </van-col>
             <van-col offset="1" span="2">
-              <div class="member-content mine-guide-list">
+              <div class="mine-title-content mine-title-list">
                 <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
@@ -209,7 +209,294 @@
               </div>
             </van-tab>
             <van-tab title="版块管理" class="mine-admin-tabs">
-              版块管理
+              <div class="data-panel">
+                <van-panel>
+                <van-row>
+                  <van-col :span="11" class="van-hairline--bottom van-hairline--top">
+                    <div class="panel-header-number">
+                      <div class="before-title-blue"></div>
+                      <div class="panel-title" style="font-size: 14px;">头条版块</div>
+                    </div>
+                  </van-col>
+                </van-row>
+                <van-row>
+                  <div style="width: 100%;" class="van-hairline--bottom toutiao-title">
+                    <van-row>
+                      <van-col span="13" offset="1">
+                        <div class="van-ellipsis mine-title-name mine-title-list">
+                          <img src="../../../static/images/mine-toutiao.png" style="height: 15px;width: 15px;"/>
+                          <span>招聘头条</span>
+                        </div>
+                      </van-col>
+                      <van-col  span="4" offset="0">
+                        <div class="mine-title-list">
+                          <img src="../../../static/images/mine-shangb.png" style="height: 15px;width: 15px;"/>
+                          <span>上榜</span>
+                        </div>
+                      </van-col>
+                      <van-col span="3" offset="0">
+                        <div class="mine-title-list">
+                          <img src="../../../static/images/mine-redu.png" style="height: 15px;width: 15px;"/>
+                          <span>热度</span>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <van-row>
+                      <van-col span="14" offset="1">
+                        <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
+                      </van-col>
+                      <van-col span="2">
+                        <div class="mine-title-list"><span>3 天 </span></div>
+                      </van-col>
+                      <van-col span="3" offset="1">
+                        <div class="mine-title-list"><span>5998 次 </span></div>
+                      </van-col>
+                      <van-col offset="1" span="2">
+                        <div class="mine-title-content mine-title-list">
+                          <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <van-row>
+                      <van-col span="14" offset="1">
+                        <div class="van-ellipsis mine-title-name mine-title-list"><span>深信服2019届春季补招暨2020届实习生招聘</span></div>
+                      </van-col>
+                      <van-col span="2">
+                        <div class="mine-title-list"><span>4 天 </span></div>
+                      </van-col>
+                      <van-col span="3" offset="1">
+                        <div class="mine-title-list"><span>3438 次 </span></div>
+                      </van-col>
+                      <van-col offset="1" span="2">
+                        <div class="mine-title-content mine-title-list">
+                          <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <van-row>
+                      <van-col span="14" offset="1">
+                        <div class="van-ellipsis mine-title-name mine-title-list"><span>三七互娱2019届春季招聘</span></div>
+                      </van-col>
+                      <van-col span="2">
+                        <div class="mine-title-list"><span>4 天 </span></div>
+                      </van-col>
+                      <van-col span="3" offset="1">
+                        <div class="mine-title-list"><span>3438 次 </span></div>
+                      </van-col>
+                      <van-col offset="1" span="2">
+                        <div class="mine-title-content mine-title-list">
+                          <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <van-row>
+                      <van-col span="14" offset="1">
+                        <div class="van-ellipsis mine-title-name mine-title-list"><span>腾讯2019届春季补招暨2020届实习生招聘</span></div>
+                      </van-col>
+                      <van-col span="2">
+                        <div class="mine-title-list"><span>4 天 </span></div>
+                      </van-col>
+                      <van-col span="3" offset="1">
+                        <div class="mine-title-list"><span>3438 次 </span></div>
+                      </van-col>
+                      <van-col offset="1" span="2">
+                        <div class="mine-title-content mine-title-list">
+                          <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <van-row>
+                      <van-col span="14" offset="1">
+                        <div class="van-ellipsis mine-title-name mine-title-list"><span>深信服2019届春季补招暨2020届实习生招聘</span></div>
+                      </van-col>
+                      <van-col span="2">
+                        <div class="mine-title-list"><span>4 天 </span></div>
+                      </van-col>
+                      <van-col span="3" offset="1">
+                        <div class="mine-title-list"><span>3438 次 </span></div>
+                      </van-col>
+                      <van-col offset="1" span="2">
+                        <div class="mine-title-content mine-title-list">
+                          <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <van-row>
+                      <van-col span="14" offset="1">
+                        <div class="van-ellipsis mine-title-name mine-title-list"><span>深信服2019届春季补招暨2020届实习生招聘</span></div>
+                      </van-col>
+                      <van-col span="2">
+                        <div class="mine-title-list"><span>4 天 </span></div>
+                      </van-col>
+                      <van-col span="3" offset="1">
+                        <div class="mine-title-list"><span>3438 次 </span></div>
+                      </van-col>
+                      <van-col offset="1" span="2">
+                        <div class="mine-title-content mine-title-list">
+                          <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </div>
+                </van-row>
+              </van-panel>
+              </div>
+              <div class="data-panel">
+                <van-panel>
+                  <van-row>
+                    <van-col :span="11" class="van-hairline--bottom van-hairline--top">
+                      <div class="panel-header-number">
+                        <div class="before-title-blue"></div>
+                        <div class="panel-title" style="font-size: 14px;">头条版块</div>
+                      </div>
+                    </van-col>
+                  </van-row>
+                  <van-row>
+                    <div style="width: 100%;" class="van-hairline--bottom toutiao-title">
+                      <van-row>
+                        <van-col span="13" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list">
+                            <img src="../../../static/images/mine-toutiao.png" style="height: 15px;width: 15px;"/>
+                            <span>招聘头条</span>
+                          </div>
+                        </van-col>
+                        <van-col  span="4" offset="0">
+                          <div class="mine-title-list">
+                            <img src="../../../static/images/mine-shangb.png" style="height: 15px;width: 15px;"/>
+                            <span>上榜</span>
+                          </div>
+                        </van-col>
+                        <van-col span="3" offset="0">
+                          <div class="mine-title-list">
+                            <img src="../../../static/images/mine-redu.png" style="height: 15px;width: 15px;"/>
+                            <span>热度</span>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="14" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
+                        </van-col>
+                        <van-col span="2">
+                          <div class="mine-title-list"><span>3 天 </span></div>
+                        </van-col>
+                        <van-col span="3" offset="1">
+                          <div class="mine-title-list"><span>5998 次 </span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="14" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>深信服2019届春季补招暨2020届实习生招聘</span></div>
+                        </van-col>
+                        <van-col span="2">
+                          <div class="mine-title-list"><span>4 天 </span></div>
+                        </van-col>
+                        <van-col span="3" offset="1">
+                          <div class="mine-title-list"><span>3438 次 </span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="14" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>三七互娱2019届春季招聘</span></div>
+                        </van-col>
+                        <van-col span="2">
+                          <div class="mine-title-list"><span>4 天 </span></div>
+                        </van-col>
+                        <van-col span="3" offset="1">
+                          <div class="mine-title-list"><span>3438 次 </span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="14" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>腾讯2019届春季补招暨2020届实习生招聘</span></div>
+                        </van-col>
+                        <van-col span="2">
+                          <div class="mine-title-list"><span>4 天 </span></div>
+                        </van-col>
+                        <van-col span="3" offset="1">
+                          <div class="mine-title-list"><span>3438 次 </span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="14" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>深信服2019届春季补招暨2020届实习生招聘</span></div>
+                        </van-col>
+                        <van-col span="2">
+                          <div class="mine-title-list"><span>4 天 </span></div>
+                        </van-col>
+                        <van-col span="3" offset="1">
+                          <div class="mine-title-list"><span>3438 次 </span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="14" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>深信服2019届春季补招暨2020届实习生招聘</span></div>
+                        </van-col>
+                        <van-col span="2">
+                          <div class="mine-title-list"><span>4 天 </span></div>
+                        </van-col>
+                        <van-col span="3" offset="1">
+                          <div class="mine-title-list"><span>3438 次 </span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                  </van-row>
+                </van-panel>
+              </div>
             </van-tab>
           </van-tabs>
         </div>
@@ -545,16 +832,19 @@
     align-items: center;
     height: auto;
   }
-  .member-content {
+  .mine-title-content {
     width: 100%;
     float: left;
     justify-content: center;
     align-items: flex-start;
   }
-  .guide-tr:active{
+  .mine-title-tr:active{
     background-color:#e8e8e8
   }
-  .mine-guide-list {
+  .toutiao-title span {
+    margin-left: 5px;
+  }
+  .mine-title-list {
     justify-content: center;
     align-items: flex-start;
     height: 24px;
@@ -563,7 +853,7 @@
     padding: 10px 0;
   }
 
-  .guide-name {
+  .mine-title-name {
     display: inline-block;
     width: 90%;
     vertical-align: middle;
