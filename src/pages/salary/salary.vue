@@ -217,7 +217,7 @@
         isIndShow: false,
         remark: '',
         active: 0,
-        tabIndex: 0,
+        reportTabIndex: 0,
         isqueryIndShow: false,
         queryInd: '全部',
         queryInds: ['全部', 'IT|互联网|通信', '房产|建筑|物业管理', '金融', '采购|贸易|交通|物流', '生产制造', '传媒|印刷|艺术|设计',
@@ -245,7 +245,7 @@
       },
       onChange (event) {
         this.tabIndex = event.mp.detail.index
-        console.log('薪资爆料' + this.tabIndex)
+        console.log('薪资爆料' + this.reportTabIndex)
       },
       eduClick () {
         if (this.isIndShow) {

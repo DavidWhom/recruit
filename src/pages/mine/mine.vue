@@ -113,98 +113,105 @@
       <div @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <!--管理员显示的内容-->
         <div class="data-panel">
-          <van-panel>
-            <van-tabs animated :active="tabIndex" color="#1c86ee" class="flex-basis" @change="onTabChange" line-width="60">
-              <van-tab title="日报" style="flex-basis: 20% !important;"></van-tab>
-              <van-tab title="周报" style="flex-basis: 20% !important;"></van-tab>
-              <van-tab title="月报" style="flex-basis: 20% !important;"></van-tab>
-            </van-tabs>
-            <van-row>
-              <van-col :span="11" class="van-hairline--bottom van-hairline--top">
-                <div class="panel-header-number">
-                  <div class="before-title-blue"></div>
-                  <div class="panel-title" style="font-size: 14px;">招聘发布</div>
-                </div>
-              </van-col>
-              <van-col :span="13" class="van-hairline--bottom van-hairline--top">
-                <div class="panel-header-number">
-                  <div class="before-title-orange"></div>
-                  <div class="panel-title" style="font-size: 14px;">用户流量</div>
-                </div>
-              </van-col>
-            </van-row>
-            <van-row>
-              <van-col :span="11">
-                <span class="large-text blue-text">103</span><span class="small-text blue-text">条</span>
-              </van-col>
-              <van-col :span="13">
-                <span class="large-text orange-text">987</span><span class="small-text orange-text">次</span>
-              </van-col>
-            </van-row>
-            <van-row>
-              <div class="tendency-unit">
-                <div class="tendency_unit_left tendency-small-text">单位：条</div>
-                <div class="tendency_unit_right tendency-small-text">单位：次</div>
+          <van-tabs animated color="#1c86ee" class="flex-basis" @change="onMainTabChange" line-width="60">
+            <van-tab title="仪表盘" class="mine-admin-tabs">
+              <van-panel>
+                <van-tabs animated :active="reportTabIndex" color="#1c86ee" class="flex-basis" @change="onTabChange" line-width="60">
+                  <van-tab title="日报" style="flex-basis: 20% !important;"></van-tab>
+                  <van-tab title="周报" style="flex-basis: 20% !important;"></van-tab>
+                  <van-tab title="月报" style="flex-basis: 20% !important;"></van-tab>
+                </van-tabs>
+                <van-row>
+                  <van-col :span="11" class="van-hairline--bottom van-hairline--top">
+                    <div class="panel-header-number">
+                      <div class="before-title-blue"></div>
+                      <div class="panel-title" style="font-size: 14px;">招聘发布</div>
+                    </div>
+                  </van-col>
+                  <van-col :span="13" class="van-hairline--bottom van-hairline--top">
+                    <div class="panel-header-number">
+                      <div class="before-title-orange"></div>
+                      <div class="panel-title" style="font-size: 14px;">用户流量</div>
+                    </div>
+                  </van-col>
+                </van-row>
+                <van-row>
+                  <van-col :span="11">
+                    <span class="large-text blue-text">103</span><span class="small-text blue-text">条</span>
+                  </van-col>
+                  <van-col :span="13">
+                    <span class="large-text orange-text">987</span><span class="small-text orange-text">次</span>
+                  </van-col>
+                </van-row>
+                <van-row>
+                  <div class="tendency-unit">
+                    <div class="tendency_unit_left tendency-small-text">单位：条</div>
+                    <div class="tendency_unit_right tendency-small-text">单位：次</div>
+                  </div>
+                </van-row>
+                <van-row>
+                  <van-col :span="24">
+                    <view class="mix-chart-wrapper">
+                      <ff-canvas id="mixMainChart-dom" canvas-id="mixMainChart" :opts="opts"></ff-canvas>
+                    </view>
+                  </van-col>
+                </van-row>
+              </van-panel>
+              <div class="data-panel">
+                <van-panel>
+                  <van-row>
+                    <van-col :span="11" class="van-hairline--bottom van-hairline--top">
+                      <div class="panel-header-number">
+                        <div class="before-title-blue"></div>
+                        <div class="panel-title" style="font-size: 14px;">薪资爆料</div>
+                        <span class="medim-text blue-text"> - 14条</span>
+                      </div>
+                    </van-col>
+                  </van-row>
+                  <van-row>
+                    <div class="tendency-unit">
+                      <div class="tendency_unit_left tendency-small-text">单位：条</div>
+                    </div>
+                  </van-row>
+                  <van-row>
+                    <van-col :span="24">
+                      <view class="mix-chart-wrapper">
+                        <ff-canvas id="mixBLChart-dom" canvas-id="mixBLChart" :opts="opts"></ff-canvas>
+                      </view>
+                    </van-col>
+                  </van-row>
+                </van-panel>
               </div>
-            </van-row>
-            <van-row>
-              <van-col :span="24">
-                <view class="mix-chart-wrapper">
-                  <ff-canvas id="mixMainChart-dom" canvas-id="mixMainChart" :opts="opts"></ff-canvas>
-                </view>
-              </van-col>
-            </van-row>
-          </van-panel>
-        </div>
-        <div class="data-panel">
-          <van-panel>
-            <van-row>
-              <van-col :span="11" class="van-hairline--bottom van-hairline--top">
-                <div class="panel-header-number">
-                  <div class="before-title-blue"></div>
-                  <div class="panel-title" style="font-size: 14px;">薪资爆料</div>
-                  <span class="medim-text blue-text"> - 14条</span>
-                </div>
-              </van-col>
-            </van-row>
-            <van-row>
-              <div class="tendency-unit">
-                <div class="tendency_unit_left tendency-small-text">单位：条</div>
+              <div class="data-panel">
+                <van-panel>
+                  <van-row>
+                    <van-col :span="11" class="van-hairline--bottom van-hairline--top">
+                      <div class="panel-header-number">
+                        <div class="before-title-blue"></div>
+                        <div class="panel-title" style="font-size: 14px;">用户评论</div>
+                        <span class="medim-text blue-text"> - 345条</span>
+                      </div>
+                    </van-col>
+                  </van-row>
+                  <van-row>
+                    <div class="tendency-unit">
+                      <div class="tendency_unit_left tendency-small-text">单位：条</div>
+                    </div>
+                  </van-row>
+                  <van-row>
+                    <van-col :span="24">
+                      <view class="mix-chart-wrapper">
+                        <ff-canvas id="mixPLChart-dom" canvas-id="mixPLChart" :opts="opts"></ff-canvas>
+                      </view>
+                    </van-col>
+                  </van-row>
+                </van-panel>
               </div>
-            </van-row>
-            <van-row>
-              <van-col :span="24">
-                <view class="mix-chart-wrapper">
-                  <ff-canvas id="mixBLChart-dom" canvas-id="mixBLChart" :opts="opts"></ff-canvas>
-                </view>
-              </van-col>
-            </van-row>
-          </van-panel>
-        </div>
-        <div class="data-panel">
-          <van-panel>
-            <van-row>
-              <van-col :span="11" class="van-hairline--bottom van-hairline--top">
-                <div class="panel-header-number">
-                  <div class="before-title-blue"></div>
-                  <div class="panel-title" style="font-size: 14px;">用户评论</div>
-                  <span class="medim-text blue-text"> - 345条</span>
-                </div>
-              </van-col>
-            </van-row>
-            <van-row>
-              <div class="tendency-unit">
-                <div class="tendency_unit_left tendency-small-text">单位：条</div>
-              </div>
-            </van-row>
-            <van-row>
-              <van-col :span="24">
-                <view class="mix-chart-wrapper">
-                  <ff-canvas id="mixPLChart-dom" canvas-id="mixPLChart" :opts="opts"></ff-canvas>
-                </view>
-              </van-col>
-            </van-row>
-          </van-panel>
+            </van-tab>
+            <van-tab title="版块管理" class="mine-admin-tabs">
+              版块管理
+            </van-tab>
+          </van-tabs>
         </div>
       </div>
     </div>
@@ -222,7 +229,7 @@
         identity: 'admin',
         mainTendencyData: [],
         mainTendencyCount: 7,
-        tabIndex: 0,
+        reportTabIndex: 0,
         // 报表页面左右滑切换tab
         startX: 0,
         moveX: 0,
@@ -418,8 +425,8 @@
         chart.render()
       },
       onTabChange (event) {
-        this.tabIndex = event.mp.detail.index
-        console.log(this.tabIndex)
+        this.reportTabIndex = event.mp.detail.index
+        console.log(this.reportTabIndex)
       },
       touchStart (e) {
         this.moveX = 0
@@ -433,29 +440,29 @@
         this.disX = this.moveX - this.startX
         if ((this.disX >= this.tabSensitivity || this.disX <= -this.tabSensitivity) && this.moveX !== 0) {
           // 判断即将跳转的页面
-          switch (this.tabIndex) {
+          switch (this.reportTabIndex) {
             case 0:
               if (this.disX < 0) {
-                this.tabIndex = 1
+                this.reportTabIndex = 1
                 // this.dayReportInit()
               }
               break
             case 1:
               if (this.disX < 0) {
-                this.tabIndex = 2
+                this.reportTabIndex = 2
                 // this.weekReportInit()
                 break
               }
-              this.tabIndex = 0
+              this.reportTabIndex = 0
               // this.dayReportInit()
               break
             case 2:
               if (this.disX < 0) {
-                this.tabIndex = 3
+                this.reportTabIndex = 3
                 // this.monthReportInit()
                 break
               }
-              this.tabIndex = 1
+              this.reportTabIndex = 1
               // this.dayReportInit()
               break
           }
@@ -479,6 +486,13 @@
 
 <style>
   page {
+    background-color: #f8f8f8;
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+  }
+
+  .mine-admin-tabs {
     background-color: #f8f8f8;
     height: 100%;
     width: 100%;
