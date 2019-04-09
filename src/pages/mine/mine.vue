@@ -165,8 +165,8 @@
                     <van-col :span="11" class="van-hairline--bottom van-hairline--top">
                       <div class="panel-header-number">
                         <div class="before-title-blue"></div>
-                        <div class="panel-title" style="font-size: 14px;">薪资爆料</div>
-                        <span class="medim-text blue-text"> - 14条</span>
+                        <div class="panel-title" style="font-size: 14px;">薪资爆料 -</div>
+                        <span class="medim-text blue-text"> 14条</span>
                       </div>
                     </van-col>
                   </van-row>
@@ -190,8 +190,8 @@
                     <van-col :span="11" class="van-hairline--bottom van-hairline--top">
                       <div class="panel-header-number">
                         <div class="before-title-blue"></div>
-                        <div class="panel-title" style="font-size: 14px;">用户评论</div>
-                        <span class="medim-text blue-text"> - 345条</span>
+                        <div class="panel-title" style="font-size: 14px;">用户评论 -</div>
+                        <span class="medim-text blue-text"> 345条</span>
                       </div>
                     </van-col>
                   </van-row>
@@ -217,7 +217,7 @@
                   <van-col :span="11" class="van-hairline--bottom van-hairline--top">
                     <div class="panel-header-number">
                       <div class="before-title-blue"></div>
-                      <div class="panel-title" style="font-size: 14px;">头条版块</div>
+                      <div class="panel-title" style="font-size: 14px;">头条版块 - <span class="blue-text">6 条</span></div>
                     </div>
                   </van-col>
                 </van-row>
