@@ -238,7 +238,7 @@
             <van-tab title="版块管理" class="mine-admin-tabs">
               <div class="data-panel">
                 <van-panel>
-                  <div class="van-hairline--bottom van-hairline--top">
+                  <div @click="toHeadline" class="van-hairline--bottom van-hairline--top">
                     <van-row>
                       <van-col span="11">
                         <div class="panel-header-number">
@@ -857,6 +857,7 @@
 </template>
 
 <script>
+  import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
   export default {
     data () {
       return {
@@ -1161,6 +1162,10 @@
           }
           // this.updateALlData()
         }
+      },
+      toHeadline () {
+        console.log('toHeadline')
+        navigateTo('headline/main?id=111')
       }
     },
     mounted () {

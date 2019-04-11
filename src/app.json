@@ -3,7 +3,8 @@
     "pages/index/main",
     "pages/salary/main",
     "pages/logs/main",
-    "pages/mine/main"
+    "pages/mine/main",
+    "pages/mine/headline/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
