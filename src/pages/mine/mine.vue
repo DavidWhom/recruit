@@ -209,6 +209,31 @@
                   </van-row>
                 </van-panel>
               </div>
+              <div class="data-panel">
+                <van-panel>
+                  <van-row>
+                    <van-col :span="11" class="van-hairline--bottom van-hairline--top">
+                      <div class="panel-header-number">
+                        <div class="before-title-blue"></div>
+                        <div class="panel-title" style="font-size: 14px;">问题反馈 -</div>
+                        <span class="medim-text blue-text"> 3条 </span>
+                      </div>
+                    </van-col>
+                  </van-row>
+                  <van-row>
+                    <div class="tendency-unit">
+                      <div class="tendency_unit_left tendency-small-text">单位：条</div>
+                    </div>
+                  </van-row>
+                  <van-row>
+                    <van-col :span="24">
+                      <view class="mix-chart-wrapper">
+                        <ff-canvas id="mixFKChart-dom" canvas-id="mixFKChart" :opts="opts"></ff-canvas>
+                      </view>
+                    </van-col>
+                  </van-row>
+                </van-panel>
+              </div>
             </van-tab>
             <van-tab title="版块管理" class="mine-admin-tabs">
               <div class="data-panel">
@@ -860,6 +885,61 @@
         }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
         chart.render()
       },
+      initFKChart (canvas, width, height, F2) { // 使用 F2 绘制图表
+        const data = [
+          {'date': '12/17', 'left': 34},
+          {'date': '12/18', 'left': 78},
+          {'date': '12/19', 'left': 19},
+          {'date': '12/20', 'left': 2},
+          {'date': '12/21', 'left': 0},
+          {'date': '12/22', 'left': 20},
+          {'date': '12/23', 'left': 30},
+          {'date': '12/24', 'left': 65},
+          {'date': '12/25', 'left': 65},
+          {'date': '12/26', 'left': 39},
+          {'date': '12/27', 'left': 80},
+          {'date': '12/28', 'left': 12},
+          {'date': '12/29', 'left': 13},
+          {'date': '12/30', 'left': 81}
+        ]
+        var chart = new F2.Chart({
+          el: canvas,
+          padding: [20, 'auto', 'auto'],
+          width,
+          height
+        })
+        chart.source(data, {
+          left: {
+            tickCount: 6,
+            ticks: [0, 20, 40, 60, 80, 100]
+          },
+          date: {
+            tickCount: 7
+          }
+        })
+        chart.tooltip({
+          showItemMarker: false,
+          onShow: function onShow (ev) {
+            var items = ev.items
+            items[0].name = null
+            items[0].name = '时间：' + items[0].title
+            items[0].value = '反馈 ' + items[0].value + '条'
+          }
+        })
+        // 规避：防止右边刻度交给f2自己计算时出现左右刻度不同时出现的虚线混乱问题 截止2019-1-8 三轮测试后尚未发现这个问题
+        // chart.axis('right', {
+        //   grid: null
+        // })
+        chart.axis('date', {
+          line: F2.Global._defaultAxis.line,
+          grid: null
+        })
+        chart.legend(false)
+        chart.interval().position('date*left').style('tem', {
+          radius: [3, 3, 0, 0]
+        }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        chart.render()
+      },
       onTabChange (event) {
         this.reportTabIndex = event.mp.detail.index
         console.log(this.reportTabIndex)
@@ -912,6 +992,7 @@
         this_.$mp.page.selectComponent('#mixMainChart-dom').init(this_.initMainChart)
         this_.$mp.page.selectComponent('#mixBLChart-dom').init(this_.initBLChart)
         this_.$mp.page.selectComponent('#mixPLChart-dom').init(this_.initPLChart)
+        this_.$mp.page.selectComponent('#mixFKChart-dom').init(this_.initFKChart)
       }
     },
     created () {
