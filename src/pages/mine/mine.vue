@@ -31,7 +31,7 @@
           <van-row>
             <van-col offset="1" span="1">
               <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/mine_storeup.png" style="height: 20px;width: 20px;"/>
+                <img src="../../../static/images/mine/mine_storeup.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
             <van-col span="7" offset="3">
@@ -51,7 +51,7 @@
           <van-row>
             <van-col offset="1" span="1">
               <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/mine_baoliao.png" style="height: 20px;width: 20px;"/>
+                <img src="../../../static/images/mine/mine_baoliao.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
             <van-col span="7" offset="3">
@@ -71,7 +71,7 @@
           <van-row>
             <van-col offset="1" span="1">
               <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/mine_pinglun.png" style="height: 20px;width: 20px;"/>
+                <img src="../../../static/images/mine/mine_pinglun.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
             <van-col span="7" offset="3">
@@ -91,7 +91,7 @@
           <van-row>
             <van-col offset="1" span="1">
               <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/mine_fankui.png" style="height: 20px;width: 20px;"/>
+                <img src="../../../static/images/mine/mine_fankui.png" style="height: 20px;width: 20px;"/>
               </div>
             </van-col>
             <van-col span="7" offset="3">
@@ -226,19 +226,19 @@
                     <van-row>
                       <van-col span="13" offset="1">
                         <div class="van-ellipsis mine-title-name mine-title-list">
-                          <img src="../../../static/images/mine-toutiao.png" style="height: 15px;width: 15px;"/>
+                          <img src="../../../static/images/mine/mine-toutiao.png" style="height: 15px;width: 15px;"/>
                           <span>招聘头条</span>
                         </div>
                       </van-col>
                       <van-col  span="4" offset="0">
                         <div class="mine-title-list">
-                          <img src="../../../static/images/mine-shangb.png" style="height: 15px;width: 15px;"/>
+                          <img src="../../../static/images/mine/mine-shangb.png" style="height: 15px;width: 15px;"/>
                           <span>上榜</span>
                         </div>
                       </van-col>
                       <van-col span="3" offset="0">
                         <div class="mine-title-list">
-                          <img src="../../../static/images/mine-redu.png" style="height: 15px;width: 15px;"/>
+                          <img src="../../../static/images/mine/mine-redu.png" style="height: 15px;width: 15px;"/>
                           <span>热度</span>
                         </div>
                       </van-col>
@@ -377,19 +377,19 @@
                       <van-row>
                         <van-col span="5" offset="1">
                           <div class="van-ellipsis mine-title-name mine-title-list">
-                            <img src="../../../static/images/mine-time.png" style="height: 15px;width: 15px;"/>
+                            <img src="../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
                             <span>发布时间</span>
                           </div>
                         </van-col>
                         <van-col  span="10" offset="2">
                           <div class="mine-title-list van-ellipsis">
-                            <img src="../../../static/images/mine-zixun.png" style="height: 15px;width: 15px;"/>
+                            <img src="../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
                             <span>招聘动态</span>
                           </div>
                         </van-col>
                         <van-col span="4" offset="1">
                           <div class="mine-title-list">
-                            <img src="../../../static/images/mine-liulang.png" style="height: 15px;width: 15px;"/>
+                            <img src="../../../static/images/mine/mine-liulang.png" style="height: 15px;width: 15px;"/>
                             <span>浏览</span>
                           </div>
                         </van-col>
@@ -510,19 +510,19 @@
                       <van-row>
                         <van-col span="5" offset="1">
                           <div class="van-ellipsis mine-title-name mine-title-list">
-                            <img src="../../../static/images/mine-time.png" style="height: 15px;width: 15px;"/>
+                            <img src="../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
                             <span>发布时间</span>
                           </div>
                         </van-col>
                         <van-col  span="10" offset="2">
                           <div class="mine-title-list van-ellipsis">
-                            <img src="../../../static/images/mine-baoliao.png" style="height: 15px;width: 15px;"/>
+                            <img src="../../../static/images/mine/mine-baoliao.png" style="height: 15px;width: 15px;"/>
                             <span>薪资动态</span>
                           </div>
                         </van-col>
                         <van-col span="4" offset="1">
                           <div class="mine-title-list">
-                            <img src="../../../static/images/mine-liulang.png" style="height: 15px;width: 15px;"/>
+                            <img src="../../../static/images/mine/mine-liulang.png" style="height: 15px;width: 15px;"/>
                             <span>浏览</span>
                           </div>
                         </van-col>
