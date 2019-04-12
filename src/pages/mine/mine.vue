@@ -1443,12 +1443,12 @@
     color:#858585
   }
   .circle-div {
-    width: 8px;
-    height: 8px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
     background-color: #1c85ee;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    display: inline-block;
   }
 </style>
