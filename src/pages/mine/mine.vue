@@ -274,7 +274,7 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" @click="showHeadlineDetail" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="14" offset="1">
                           <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
@@ -394,7 +394,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div class="van-hairline--bottom van-hairline--top">
+                  <div @click="toRecruit" class="van-hairline--bottom van-hairline--top">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -430,7 +430,7 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
                           <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
@@ -532,7 +532,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div class="van-hairline--bottom van-hairline--top">
+                  <div @click="toSalary" class="van-hairline--bottom van-hairline--top">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -568,7 +568,7 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
                           <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
@@ -688,7 +688,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div class="van-hairline--bottom van-hairline--top">
+                  <div @click="toAdvice" class="van-hairline--bottom van-hairline--top">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -724,7 +724,7 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" @click="showAdviceDetail" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
                           <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
@@ -848,6 +848,58 @@
                   </van-row>
                 </van-panel>
               </div>
+              <van-popup :show="isHeadlineDetailShow" position="bottom">
+                <div style="height: 100%;padding-bottom: 55px;">
+                  <headline-detail></headline-detail>
+                </div>
+              </van-popup>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isHeadlineDetailShow">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+                  <view style="width: 88px;">提交</view>
+                </van-button>
+                <van-button type="danger" @click="hideDetailPopup()" style="margin-right: 5%;width: 40%;float: right">
+                  <view style="width: 88px;">取消</view>
+                </van-button>
+              </div>
+              <van-popup :show="isrecruitDetailShow" position="bottom">
+                <div style="height: 100%;padding-bottom: 55px;">
+                  <recruit-detail></recruit-detail>
+                </div>
+              </van-popup>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isrecruitDetailShow">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+                  <view style="width: 88px;">提交</view>
+                </van-button>
+                <van-button type="danger" @click="hideRecruitDetailPopup()" style="margin-right: 5%;width: 40%;float: right">
+                  <view style="width: 88px;">取消</view>
+                </van-button>
+              </div>
+              <van-popup :show="isSalaryDetailShow" position="bottom">
+                <div style="height: 100%;padding-bottom: 55px;">
+                  <salary-detail></salary-detail>
+                </div>
+              </van-popup>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isSalaryDetailShow">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+                  <view style="width: 88px;">提交</view>
+                </van-button>
+                <van-button type="danger" @click="hideSalaryDetailPopup()" style="margin-right: 5%;width: 40%;float: right">
+                  <view style="width: 88px;">取消</view>
+                </van-button>
+              </div>
+              <van-popup :show="isAdviceDetailShow" position="bottom">
+                <div style="height: 100%;padding-bottom: 55px;">
+                  <advice-detail></advice-detail>
+                </div>
+              </van-popup>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isAdviceDetailShow">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+                  <view style="width: 88px;">提交</view>
+                </van-button>
+                <van-button type="danger" @click="hideAdviceDetailPopup()" style="margin-right: 5%;width: 40%;float: right">
+                  <view style="width: 88px;">取消</view>
+                </van-button>
+              </div>
             </van-tab>
           </van-tabs>
         </div>
@@ -858,7 +910,17 @@
 
 <script>
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
+  import headlineDetail from '@/components/headlineDetail/headlineDetail'
+  import recruitDetail from '@/components/recruitDetail/recruitDetail'
+  import salaryDetail from '@/components/salaryDetail/salaryDetail'
+  import adviceDetail from '@/components/adviceDetail/adviceDetail'
   export default {
+    components: {
+      headlineDetail,
+      recruitDetail,
+      salaryDetail,
+      adviceDetail
+    },
     data () {
       return {
         opts: {
@@ -875,11 +937,17 @@
         disX: 0,
         tabSensitivity: 150,
         blTendencyData: [],
-        blTendencyCount: 7
+        blTendencyCount: 7,
+        isHeadlineDetailShow: false,
+        isrecruitDetailShow: false,
+        isSalaryDetailShow: false,
+        isAdviceDetailShow: false
       }
     },
 
     methods: {
+      onCancel () {},
+      onConfirm () {},
       initMainChart (canvas, width, height, F2) { // 使用 F2 绘制图表
         const data = [
           {'date': '12/17', 'left': 20, 'right': 40},
@@ -1166,6 +1234,42 @@
       toHeadline () {
         console.log('toHeadline')
         navigateTo('headline/main?id=111')
+      },
+      toRecruit () {
+        console.log('toRecruit')
+        navigateTo('recruit/main?id=111')
+      },
+      toSalary () {
+        console.log('toSalary')
+        navigateTo('salary/main?id=111')
+      },
+      toAdvice () {
+        console.log('toAdvice')
+        navigateTo('advice/main?id=111')
+      },
+      showHeadlineDetail () {
+        this.isHeadlineDetailShow = true
+      },
+      hideDetailPopup () {
+        this.isHeadlineDetailShow = false
+      },
+      showRecruitDetail () {
+        this.isrecruitDetailShow = true
+      },
+      hideRecruitDetailPopup () {
+        this.isrecruitDetailShow = false
+      },
+      showSalaryDetail () {
+        this.isSalaryDetailShow = true
+      },
+      hideSalaryDetailPopup () {
+        this.isSalaryDetailShow = false
+      },
+      showAdviceDetail () {
+        this.isAdviceDetailShow = true
+      },
+      hideAdviceDetailPopup () {
+        this.isAdviceDetailShow = false
       }
     },
     mounted () {

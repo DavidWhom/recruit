@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "我的",
+  "navigationBarTitleText": "招聘资讯",
   "usingComponents": {
     "van-button": "/static/vant-weapp/dist/button/index",
     "van-panel": "/static/vant-weapp/dist/panel/index",

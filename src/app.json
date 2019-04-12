@@ -4,7 +4,10 @@
     "pages/salary/main",
     "pages/logs/main",
     "pages/mine/main",
-    "pages/mine/headline/main"
+    "pages/mine/headline/main",
+    "pages/mine/recruit/main",
+    "pages/mine/salary/main",
+    "pages/mine/advice/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
