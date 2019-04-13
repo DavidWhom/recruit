@@ -26,7 +26,7 @@
     </van-panel>
     <div class="user_common" v-if="identity == 'user'">
       <!-- 用户显示的内容 -->
-      <div style="width: 100%;" class="van-hairline--bottom mine-title-tr data-panel">
+      <div style="width: 100%;" @click="showUserCollection" class="van-hairline--bottom mine-title-tr data-panel">
         <van-row>
           <van-col offset="1" span="1">
             <div class="mine-title-content mine-title-list">
@@ -46,7 +46,7 @@
           </van-col>
         </van-row>
       </div>
-      <div style="width: 100%;" class="van-hairline--bottom mine-title-tr data-panel">
+      <div style="width: 100%;" @click="showUserTipoff" class="van-hairline--bottom mine-title-tr data-panel">
         <van-row>
           <van-col offset="1" span="1">
             <div class="mine-title-content mine-title-list">
@@ -66,7 +66,7 @@
           </van-col>
         </van-row>
       </div>
-      <div style="width: 100%;" class="van-hairline--bottom mine-title-tr data-panel">
+      <div style="width: 100%;" @click="showUserComment" class="van-hairline--bottom mine-title-tr data-panel">
         <van-row>
           <van-col offset="1" span="1">
             <div class="mine-title-content mine-title-list">
@@ -86,7 +86,7 @@
           </van-col>
         </van-row>
       </div>
-      <div style="width: 100%;" class="van-hairline--bottom mine-title-tr data-panel">
+      <div style="width: 100%;" @click="showUserAdvice" class="van-hairline--bottom mine-title-tr data-panel">
         <van-row>
           <van-col offset="1" span="1">
             <div class="mine-title-content mine-title-list">
@@ -105,6 +105,58 @@
             </div>
           </van-col>
         </van-row>
+      </div>
+      <van-popup :show="isUserAdviceShow" position="bottom">
+        <div style="height: 100%;padding-bottom: 55px;">
+          <user-advice></user-advice>
+        </div>
+      </van-popup>
+      <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserAdviceShow">
+        <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+          <view style="width: 88px;">提交</view>
+        </van-button>
+        <van-button type="danger" @click="hideUserAdvicePopup()" style="margin-right: 5%;width: 40%;float: right">
+          <view style="width: 88px;">取消</view>
+        </van-button>
+      </div>
+      <van-popup :show="isUserTipoffShow" position="bottom">
+        <div style="height: 100%;padding-bottom: 55px;">
+          <user-tipoff></user-tipoff>
+        </div>
+      </van-popup>
+      <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserTipoffShow">
+        <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+          <view style="width: 88px;">提交</view>
+        </van-button>
+        <van-button type="danger" @click="hideUserTipoffPopup()" style="margin-right: 5%;width: 40%;float: right">
+          <view style="width: 88px;">取消</view>
+        </van-button>
+      </div>
+      <van-popup :show="isUserCollectionShow" position="bottom">
+        <div style="height: 100%;padding-bottom: 55px;">
+          <user-collection></user-collection>
+        </div>
+      </van-popup>
+      <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCollectionShow">
+        <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+          <view style="width: 88px;">提交</view>
+        </van-button>
+        <van-button type="danger" @click="hideUserCollectionPopup()" style="margin-right: 5%;width: 40%;float: right">
+          <view style="width: 88px;">取消</view>
+        </van-button>
+      </div>
+      <van-popup :show="isUserCommentShow" position="bottom">
+        <div style="height: 100%;padding-bottom: 55px;">
+          <user-comment></user-comment>
+        </div>
+      </van-popup>
+      <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCommentShow">
+        <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+          <view style="width: 88px;">提交</view>
+        </van-button>
+        <van-button type="danger" @click="hideUserCommentPopup()" style="margin-right: 5%;width: 40%;float: right">
+          <view style="width: 88px;">取消</view>
+        </van-button>
       </div>
     </div>
     <div v-else>
@@ -912,12 +964,20 @@
   import recruitDetail from '@/components/recruitDetail/recruitDetail'
   import salaryDetail from '@/components/salaryDetail/salaryDetail'
   import adviceDetail from '@/components/adviceDetail/adviceDetail'
+  import userAdvice from '@/components/userAdvice/userAdvice'
+  import userCollection from '@/components/userCollection/userCollection'
+  import userComment from '@/components/userComment/userComment'
+  import userTipoff from '@/components/userTipoff/userTipoff'
   export default {
     components: {
       headlineDetail,
       recruitDetail,
       salaryDetail,
-      adviceDetail
+      adviceDetail,
+      userAdvice,
+      userCollection,
+      userComment,
+      userTipoff
     },
     data () {
       return {
@@ -939,7 +999,11 @@
         isHeadlineDetailShow: false,
         isrecruitDetailShow: false,
         isSalaryDetailShow: false,
-        isAdviceDetailShow: false
+        isAdviceDetailShow: false,
+        isUserAdviceShow: false,
+        isUserCollectionShow: false,
+        isUserCommentShow: false,
+        isUserTipoffShow: false
       }
     },
 
@@ -1268,6 +1332,30 @@
       },
       hideAdviceDetailPopup () {
         this.isAdviceDetailShow = false
+      },
+      showUserAdvice () {
+        this.isUserAdviceShow = true
+      },
+      hideUserAdvicePopup () {
+        this.isUserAdviceShow = false
+      },
+      showUserCollection () {
+        this.isUserCollectionShow = true
+      },
+      hideUserCollectionPopup () {
+        this.isUserCollectionShow = false
+      },
+      showUserComment () {
+        this.isUserCommentShow = true
+      },
+      hideUserCommentPopup () {
+        this.isUserCommentShow = false
+      },
+      showUserTipoff () {
+        this.isUserTipoffShow = true
+      },
+      hideUserTipoffPopup () {
+        this.isUserTipoffShow = false
       }
     },
     mounted () {
