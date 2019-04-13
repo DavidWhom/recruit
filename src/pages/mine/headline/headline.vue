@@ -59,29 +59,27 @@
         </van-search>
       </div>
       <van-panel>
-        <van-row>
-          <div style="width: 100%;" class="van-hairline--bottom headline-title">
+        <div style="width: 100%;" class="van-hairline--bottom headline-title">
           <van-row>
-            <van-col  span="18" offset="1">
-              <div class="headline-title-list van-ellipsis">
-                <img src="../../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
-                <span>招聘资讯</span>
-              </div>
-            </van-col>
-            <van-col span="4" offset="1">
-              <div class="headline-title-list">
-                <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
-                <span>编号</span>
-              </div>
-            </van-col>
-          </van-row>
-          </div>
+          <van-col  span="18" offset="1">
+            <div class="headline-title-list van-ellipsis">
+              <img src="../../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
+              <span>招聘资讯</span>
+            </div>
+          </van-col>
+          <van-col span="4" offset="1">
+            <div class="headline-title-list">
+              <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
+              <span>编号</span>
+            </div>
+          </van-col>
         </van-row>
+        </div>
       </van-panel>
       <div v-for="(item,index) in headlines" :key="index" class="van-hairline--bottom">
         <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="upHeadline(item.recruit_title,item.recruit_id, index)">
           <van-cell-group :border="false">
-            <van-cell class="van-ellipsis" :title-width="200" :title="item.create_time + ' ' + item.recruit_title" :value="item.recruit_id" :border="false" />
+            <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + ' ' + item.recruit_title" :value="item.recruit_id" :border="false" />
           </van-cell-group>
           <view slot="right">
             <van-button type="info">上线</van-button>

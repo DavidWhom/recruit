@@ -1,9 +1,9 @@
 <template>
-  <div @click="clickHandle">
-    <van-panel background="#ffffff">
-      <van-panel class="my-logo-panel">
-        <img src="/static/images/logo.png" alt="OfferGo" class="my-logo"/>
-      </van-panel>
+  <div class="panel-complete" @click="clickHandle">
+    <van-panel class="my-logo-panel">
+      <img src="/static/images/index/logo.png" alt="OfferGo" class="my-logo"/>
+    </van-panel>
+    <div class="data-panel">
       <van-panel class="job-search">
           <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
                       background="#ffffff">
@@ -13,35 +13,36 @@
       <div class="kind-tip">
         <span>温馨提示：公司+地点/岗位可组合查询，例如：锐捷网络+福州</span>
       </div>
-      <div  class="job-ads">
-        <div class="all-jobAds">
-          <div class="job-ad">
-            <img class="job-ad-img" src="/static/images/job-ad-default.png">
-            <div class="job-ad-title">锐捷网络春季招聘简章</div>
-          </div>
-          <div class="job-ad">
-            <img class="job-ad-img" src="/static/images/job-ad-default.png">
-            <div class="job-ad-title">2019年网龙网络春季招聘简章福州专场</div>
-          </div>
-          <div class="job-ad">
-            <img class="job-ad-img" src="/static/images/job-ad-default.png">
-            <div class="job-ad-title">锐捷网络春季招聘简章</div>
-          </div>
-          <div class="job-ad">
-            <img class="job-ad-img" src="/static/images/job-ad-default.png">
-            <div class="job-ad-title">锐捷网络春季招聘简章</div>
-          </div>
-          <div class="job-ad">
-            <img class="job-ad-img" src="/static/images/job-ad-default.png">
-            <div class="job-ad-title">锐捷网络春季招聘简章</div>
-          </div>
-          <div class="job-ad">
-            <img class="job-ad-img" src="/static/images/job-ad-default.png">
-            <div class="job-ad-title">锐捷网络春季招聘简章</div>
-          </div>
+    </div>
+    <div class="data-panel job-ads">
+      <div class="data-panel all-jobAds">
+        <div class="job-ad">
+          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
+          <div class="job-ad-title">锐捷网络春季招聘简章</div>
         </div>
+        <div class="job-ad">
+          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
+          <div class="job-ad-title">2019年网龙网络春季招聘简章福州专场</div>
+        </div>
+        <div class="job-ad">
+          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
+          <div class="job-ad-title">锐捷网络春季招聘简章</div>
+        </div>
+        <div class="job-ad">
+          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
+          <div class="job-ad-title">锐捷网络春季招聘简章</div>
+        </div>
+        <div class="job-ad">
+          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
+          <div class="job-ad-title">锐捷网络春季招聘简章</div>
+        </div>
+        <div class="job-ad">
+          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
+          <div class="job-ad-title">锐捷网络春季招聘简章</div>
+        </div>
+        <div style="clear: both"></div>
       </div>
-    </van-panel>
+    </div>
   </div>
 </template>
 
@@ -103,15 +104,29 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+  page {
+    background-color: #f8f8f8;
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+  }
+  .panel-complete {
+    margin-top: 20rpx;
+  }
+  .data-panel {
+    width: 100%;
+    margin-top: 20rpx;
+    background-color: #ffffff;
+  }
   .my-logo-panel {
     text-align: center;
     vertical-align:middle;
   }
   .my-logo {
     display: inline-block;
-    width: 250rpx;
-    height: 250rpx;
+    width: 300rpx;
+    height: 100rpx;
     padding: 30rpx 0rpx 30rpx 0rpx;
   }
   .job-search {
@@ -120,6 +135,9 @@ export default {
   .kind-tip {
     text-align: center;
     font-size: 25rpx;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
   }
   .job-ads {
     width: 100%;
@@ -131,7 +149,7 @@ export default {
   }
   .job-ad {
     float: left;
-    margin: 15rpx 10rpx 15rpx 5rpx;
+    margin: 15rpx 15rpx 15rpx 5rpx;
   }
   .job-ad-img {
     display: inline-block;

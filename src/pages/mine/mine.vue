@@ -11,7 +11,7 @@
           <van-col span="8">
             <view class="member-title">
               <div class="member-circle-header">
-                <img src="/static/images/logo.png"/>
+                <img src="/static/images/mine/default-headimg.png"/>
               </div>
             </view>
           </van-col>
@@ -113,7 +113,7 @@
       <div @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <!--管理员显示的内容-->
         <div class="data-panel">
-          <van-tabs animated color="#1c86ee" class="flex-basis" @change="onMainTabChange" line-width="60">
+          <van-tabs animated color="#1c86ee" class="flex-basis" @change="" line-width="60">
             <van-tab title="仪表盘" class="mine-admin-tabs">
               <van-panel>
                 <div class="data-panel">
