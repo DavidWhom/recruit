@@ -1,14 +1,107 @@
 <template>
-    <div>
-      头条 + {{id}}
+    <div class="panel-complete">
+      <div>
+        <van-panel>
+          <van-row>
+            <van-col span="11">
+              <div class="panel-header-number">
+                <div class="before-title-blue"></div>
+                <div class="panel-title" style="font-size: 14px;">头条管理 - <span class="blue-text">10 条</span></div>
+              </div>
+            </van-col>
+          </van-row>
+        </van-panel>
+        <van-panel>
+          <div v-for="(item,index) in headlines" :key="index" class="van-hairline--bottom">
+            <van-row>
+              <van-col span="5" offset="0">
+                <div class="headline-img">
+                  <div @click="headlineToRoof(item.recruit_id, index)" style="float: left;margin-left: 5px">
+                    <img :src="index === 0 ? headlineRoofArr.close: headlineRoofArr.normal" style="height: 19px;width: 19px;"/>
+                  </div>
+                  <div @click="headlineUp(item.recruit_id, index)" style="float: left;margin-left: 5px">
+                    <img :src="index === 0 ? headlineUpArr.close: headlineUpArr.normal" style="height: 20px;width: 20px;"/>
+                  </div>
+                  <div @click="headlineDown(item.recruit_id, index, headlines)" style="float: left;margin-left: 5px">
+                    <img :src="index === headlines.length - 1 ? headlineDownArr.close: headlineDownArr.normal" style="height: 20px;width: 20px;"/>
+                  </div>
+                </div>
+              </van-col>
+              <van-col span="19" offset="0">
+                <van-swipe-cell id="swipe-cell" right-width="65" async-close @close="onCloseHeadline(item.recruit_title,item.recruit_id, index)">
+                  <van-cell-group :border="false">
+                    <van-cell class="van-ellipsis" title-width="200px" :title="item.recruit_title" value=" " :border="false" />
+                  </van-cell-group>
+                  <view slot="right">
+                    <van-button type="danger">下线</van-button>
+                  </view>
+                </van-swipe-cell>
+              </van-col>
+            </van-row>
+          </div>
+        </van-panel>
+        <van-dialog id="van-dialog" />
+      </div>
     </div>
 </template>
 
 <script>
+  import Dialog from '../../../../static/vant-weapp/dist/dialog/dialog'
   export default {
     data () {
       return {
-        id: ''
+        id: '',
+        headlines: [{'recruit_id': 1200, 'recruit_title': '锐捷网络2019届春季招聘1'},
+          {'recruit_id': 1201, 'recruit_title': '深信服2019届春季补招暨2020届实习生招聘'},
+          {'recruit_id': 1202, 'recruit_title': '锐捷网络2019届春季招聘2'},
+          {'recruit_id': 1203, 'recruit_title': '锐捷网络2019届春季招聘3'},
+          {'recruit_id': 1204, 'recruit_title': '锐捷网络2019届春季招聘4'}],
+        headlineRoofArr: {
+          normal: require('../../../../static/images/headline/headline-roof.png'),
+          close: require('../../../../static/images/headline/headline-root-no.png')
+        },
+        headlineUpArr: {
+          normal: require('../../../../static/images/headline/headline-up.png'),
+          close: require('../../../../static/images/headline/headline-up-no.png')
+        },
+        headlineDownArr: {
+          normal: require('../../../../static/images/headline/headline-down.png'),
+          close: require('../../../../static/images/headline/headline-down-no.png')
+        }
+      }
+    },
+    methods: {
+      onCloseHeadline (recruitTitle, recruitId, index, event) {
+        console.log(recruitId)
+        // const this_ = this
+        Dialog.confirm({
+          message: '确定下线' + recruitTitle + '吗？'
+        }).then(() => {
+        })
+      },
+      headlineToRoof (recruitId, index) {
+        if (index === 0) {
+          return
+        }
+        console.log('置顶')
+      },
+      headlineUp (recruitId, index, headlines) {
+        if (index === 0) {
+          return
+        }
+        const this_ = this
+        var temp = this_.headlines[index]
+        this_.$set(this_.headlines, index, this_.headlines[index - 1])
+        this_.$set(this_.headlines, index - 1, temp)
+      },
+      headlineDown (recruitId, index, headlines) {
+        if (index === headlines.length - 1) {
+          return
+        }
+        const this_ = this
+        var temp = this_.headlines[index]
+        this_.$set(this_.headlines, index, this_.headlines[index + 1])
+        this_.$set(this_.headlines, index + 1, temp)
       }
     },
     mounted () {
@@ -17,6 +110,40 @@
   }
 </script>
 
-<style scoped>
-
+<style>
+  page {
+    background-color: #f8f8f8;
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+  }
+  .panel-header-number {
+    align-items: center;
+    position: relative;
+    min-width: 0;
+    flex: 0 0 5px;
+    display: flex;
+    height: 35px;
+  }
+  .before-title-blue {
+    width: 5px;
+    height: 16px;
+    background-color: #1c85ee;
+    border-radius: 5px;
+    margin-left: 20px;
+  }
+  .panel-title {
+    margin-left: 12px;
+    font-size: 14px;
+    float: left;
+  }
+  .blue-text {
+    color: #1c86ee;
+  }
+  .panel-complete {
+    margin-top: 20rpx;
+  }
+  .headline-img {
+    padding-top: 13px;
+  }
 </style>
