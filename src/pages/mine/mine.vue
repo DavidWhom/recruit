@@ -25,89 +25,87 @@
       </div>
     </van-panel>
     <div class="user_common" v-if="identity == 'user'">
-      <van-panel>
-        <!-- 用户显示的内容 -->
-        <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-          <van-row>
-            <van-col offset="1" span="1">
-              <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/mine/mine_storeup.png" style="height: 20px;width: 20px;"/>
-              </div>
-            </van-col>
-            <van-col span="7" offset="3">
-              <div class="van-ellipsis mine-title-name mine-title-list"><span>我的收藏</span></div>
-            </van-col>
-            <van-col span="7">
-              <div class="mine-title-list"><span>2 个 </span></div>
-            </van-col>
-            <van-col offset="1" span="2">
-              <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-              </div>
-            </van-col>
-          </van-row>
-        </div>
-        <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-          <van-row>
-            <van-col offset="1" span="1">
-              <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/mine/mine_baoliao.png" style="height: 20px;width: 20px;"/>
-              </div>
-            </van-col>
-            <van-col span="7" offset="3">
-              <div class="van-ellipsis mine-title-name mine-title-list"><span>我的爆料</span></div>
-            </van-col>
-            <van-col span="7">
-              <div class="mine-title-list"><span>3 条 </span></div>
-            </van-col>
-            <van-col offset="1" span="2">
-              <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-              </div>
-            </van-col>
-          </van-row>
-        </div>
-        <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-          <van-row>
-            <van-col offset="1" span="1">
-              <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/mine/mine_pinglun.png" style="height: 20px;width: 20px;"/>
-              </div>
-            </van-col>
-            <van-col span="7" offset="3">
-              <div class="van-ellipsis mine-title-name mine-title-list"><span>我的评论</span></div>
-            </van-col>
-            <van-col span="7">
-              <div class="mine-title-list"><span>15 条 </span></div>
-            </van-col>
-            <van-col offset="1" span="2">
-              <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-              </div>
-            </van-col>
-          </van-row>
-        </div>
-        <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-          <van-row>
-            <van-col offset="1" span="1">
-              <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/mine/mine_fankui.png" style="height: 20px;width: 20px;"/>
-              </div>
-            </van-col>
-            <van-col span="7" offset="3">
-              <div class="van-ellipsis mine-title-name mine-title-list"><span>意见反馈</span></div>
-            </van-col>
-            <van-col span="7">
-              <div class="mine-title-list"></div>
-            </van-col>
-            <van-col offset="1" span="2">
-              <div class="mine-title-content mine-title-list">
-                <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-              </div>
-            </van-col>
-          </van-row>
-        </div>
-      </van-panel>
+      <!-- 用户显示的内容 -->
+      <div style="width: 100%;" class="van-hairline--bottom mine-title-tr data-panel">
+        <van-row>
+          <van-col offset="1" span="1">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/mine/mine_storeup.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+          <van-col span="7" offset="3">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>我的收藏</span></div>
+          </van-col>
+          <van-col span="7">
+            <div class="mine-title-list"><span>2 个 </span></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" class="van-hairline--bottom mine-title-tr data-panel">
+        <van-row>
+          <van-col offset="1" span="1">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/mine/mine_baoliao.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+          <van-col span="7" offset="3">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>我的爆料</span></div>
+          </van-col>
+          <van-col span="7">
+            <div class="mine-title-list"><span>3 条 </span></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" class="van-hairline--bottom mine-title-tr data-panel">
+        <van-row>
+          <van-col offset="1" span="1">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/mine/mine_pinglun.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+          <van-col span="7" offset="3">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>我的评论</span></div>
+          </van-col>
+          <van-col span="7">
+            <div class="mine-title-list"><span>15 条 </span></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" class="van-hairline--bottom mine-title-tr data-panel">
+        <van-row>
+          <van-col offset="1" span="1">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/mine/mine_fankui.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+          <van-col span="7" offset="3">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>意见反馈</span></div>
+          </van-col>
+          <van-col span="7">
+            <div class="mine-title-list"></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
     </div>
     <div v-else>
       <div @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
@@ -927,7 +925,7 @@
           // 使用延时初始化
           // lazyLoad: true
         },
-        identity: 'admin',
+        identity: 'user',
         mainTendencyData: [],
         mainTendencyCount: 7,
         reportTabIndex: 0,
