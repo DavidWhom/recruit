@@ -1,7 +1,28 @@
 <template>
   <div class="panel-complete">
-    <div>
-      我的收藏
+    <div class="data-panel">
+      <van-panel>
+        <van-row>
+          <van-col span="11">
+            <div class="panel-header-number">
+              <div class="before-title-blue"></div>
+              <div class="panel-title" style="font-size: 14px;">我的收藏</div>
+            </div>
+          </van-col>
+        </van-row>
+      </van-panel>
+    </div>
+    <div class="data-panel">
+      <van-panel>
+        <van-row>
+          <van-col  span="8" offset="1">
+            <div class="mine-title-list van-ellipsis">
+              <img src="../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
+              <span>招聘动态</span>
+            </div>
+          </van-col>
+        </van-row>
+      </van-panel>
     </div>
   </div>
 </template>
@@ -24,8 +45,52 @@
     height: 100%;
     width: 100%;
     overflow-x:hidden;
+    padding-bottom: 55px;
+  }
+  .panel-complete {
+    padding-top: 10rpx;
+    background-color: #f8f8f8;
+  }
+  .data-panel {
+    width: 100%;
+    margin-top: 10rpx;
+    background-color: #ffffff;
+  }
+  .panel-header-number {
+    align-items: center;
+    position: relative;
+    min-width: 0;
+    flex: 0 0 5px;
+    display: flex;
+    height: 35px;
+  }
+  .before-title-blue {
+    width: 5px;
+    height: 16px;
+    background-color: #1c85ee;
+    border-radius: 5px;
+    margin-left: 20px;
+  }
+  .panel-title {
+    margin-left: 12px;
+    font-size: 14px;
+    float: left;
+  }
+  .blue-text {
+    color: #1c86ee;
   }
   .panel-complete {
     margin-top: 20rpx;
+  }
+  .mine-title-list {
+    justify-content: center;
+    align-items: flex-start;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    padding: 10px 0;
+  }
+  .mine-title-list span{
+    margin-left: 5px;
   }
 </style>

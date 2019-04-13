@@ -19,6 +19,7 @@
             <div class="mine-title-content" style="margin-top: 38px;">
               <span style="font-size: 18px;">Jovan佳传</span>
               <span style="margin-left: 14px;font-size: 14px;">{{identity == 'user' ? "普通用户" : "管理员"}}</span>
+              <van-button type="info" size="small" @click="changeIdentity">devTest</van-button>
             </div>
           </van-col>
         </van-row>
@@ -106,57 +107,59 @@
           </van-col>
         </van-row>
       </div>
-      <van-popup :show="isUserAdviceShow" position="bottom">
-        <div style="height: 100%;padding-bottom: 55px;">
-          <user-advice></user-advice>
+      <div class="user-popup">
+        <van-popup :show="isUserAdviceShow" position="bottom">
+          <div style="height: 100%;padding-bottom: 55px;">
+            <user-advice></user-advice>
+          </div>
+        </van-popup>
+        <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserAdviceShow">
+          <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+            <view style="width: 88px;">提交</view>
+          </van-button>
+          <van-button type="danger" @click="hideUserAdvicePopup()" style="margin-right: 5%;width: 40%;float: right">
+            <view style="width: 88px;">取消</view>
+          </van-button>
         </div>
-      </van-popup>
-      <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserAdviceShow">
-        <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-          <view style="width: 88px;">提交</view>
-        </van-button>
-        <van-button type="danger" @click="hideUserAdvicePopup()" style="margin-right: 5%;width: 40%;float: right">
-          <view style="width: 88px;">取消</view>
-        </van-button>
-      </div>
-      <van-popup :show="isUserTipoffShow" position="bottom">
-        <div style="height: 100%;padding-bottom: 55px;">
-          <user-tipoff></user-tipoff>
+        <van-popup :show="isUserTipoffShow" position="bottom">
+          <div style="height: 100%;padding-bottom: 55px;">
+            <user-tipoff></user-tipoff>
+          </div>
+        </van-popup>
+        <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserTipoffShow">
+          <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+            <view style="width: 88px;">提交</view>
+          </van-button>
+          <van-button type="danger" @click="hideUserTipoffPopup()" style="margin-right: 5%;width: 40%;float: right">
+            <view style="width: 88px;">取消</view>
+          </van-button>
         </div>
-      </van-popup>
-      <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserTipoffShow">
-        <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-          <view style="width: 88px;">提交</view>
-        </van-button>
-        <van-button type="danger" @click="hideUserTipoffPopup()" style="margin-right: 5%;width: 40%;float: right">
-          <view style="width: 88px;">取消</view>
-        </van-button>
-      </div>
-      <van-popup :show="isUserCollectionShow" position="bottom">
-        <div style="height: 100%;padding-bottom: 55px;">
-          <user-collection></user-collection>
+        <van-popup :show="isUserCollectionShow" position="bottom">
+          <div style="height: 100%;padding-bottom: 55px;">
+            <user-collection></user-collection>
+          </div>
+        </van-popup>
+        <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCollectionShow">
+          <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+            <view style="width: 88px;">提交</view>
+          </van-button>
+          <van-button type="danger" @click="hideUserCollectionPopup()" style="margin-right: 5%;width: 40%;float: right">
+            <view style="width: 88px;">取消</view>
+          </van-button>
         </div>
-      </van-popup>
-      <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCollectionShow">
-        <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-          <view style="width: 88px;">提交</view>
-        </van-button>
-        <van-button type="danger" @click="hideUserCollectionPopup()" style="margin-right: 5%;width: 40%;float: right">
-          <view style="width: 88px;">取消</view>
-        </van-button>
-      </div>
-      <van-popup :show="isUserCommentShow" position="bottom">
-        <div style="height: 100%;padding-bottom: 55px;">
-          <user-comment></user-comment>
-        </div>
-      </van-popup>
-      <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCommentShow">
+        <van-popup :show="isUserCommentShow" position="bottom">
+          <div style="height: 100%;padding-bottom: 55px;">
+            <user-comment></user-comment>
+          </div>
+        </van-popup>
+        <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCommentShow">
         <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
           <view style="width: 88px;">提交</view>
         </van-button>
         <van-button type="danger" @click="hideUserCommentPopup()" style="margin-right: 5%;width: 40%;float: right">
           <view style="width: 88px;">取消</view>
         </van-button>
+      </div>
       </div>
     </div>
     <div v-else>
@@ -985,7 +988,7 @@
           // 使用延时初始化
           // lazyLoad: true
         },
-        identity: 'user',
+        identity: 'admin',
         mainTendencyData: [],
         mainTendencyCount: 7,
         reportTabIndex: 0,
@@ -1010,6 +1013,13 @@
     methods: {
       onCancel () {},
       onConfirm () {},
+      changeIdentity () {
+        if (this.identity === 'user') {
+          this.identity = 'admin'
+        } else {
+          this.identity = 'user'
+        }
+      },
       initMainChart (canvas, width, height, F2) { // 使用 F2 绘制图表
         const data = [
           {'date': '12/17', 'left': 20, 'right': 40},
