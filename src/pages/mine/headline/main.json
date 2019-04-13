@@ -13,6 +13,7 @@
     "van-swipe-cell": "/static/vant-weapp/dist/swipe-cell/index",
     "van-cell": "/static/vant-weapp/dist/cell/index",
     "van-cell-group": "/static/vant-weapp/dist/cell-group/index",
-    "van-dialog": "/static/vant-weapp/dist/dialog/index"
+    "van-dialog": "/static/vant-weapp/dist/dialog/index",
+    "van-search": "/static/vant-weapp/dist/search/index"
   }
 }
