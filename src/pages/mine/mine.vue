@@ -746,6 +746,167 @@
                       <van-col span="13">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
+                          <div class="panel-title" style="font-size: 14px;">用户评论 - <span class="blue-text">今日 14 条</span></div>
+                        </div>
+                      </van-col>
+                      <van-col span="2" offset="9">
+                        <div class="circle-div"></div>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <van-row>
+                    <div style="width: 100%;" class="van-hairline--bottom toutiao-title">
+                      <van-row>
+                        <van-col span="5" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list">
+                            <img src="../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
+                            <span>发表时间</span>
+                          </div>
+                        </van-col>
+                        <van-col span="4" offset="0">
+                          <div class="mine-title-list">
+                            <img src="../../../static/images/mine/mine-user.png" style="height: 15px;width: 15px;"/>
+                            <span>用户</span>
+                          </div>
+                        </van-col>
+                        <van-col  span="10" offset="2">
+                          <div class="mine-title-list van-ellipsis">
+                            <img src="../../../static/images/mine/mine-fankui.png" style="height: 15px;width: 15px;"/>
+                            <span>发表内容</span>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" @click="showAdviceDetail" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="5" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                        </van-col>
+                        <van-col span="4" offset="0">
+                          <div class="mine-title-list van-ellipsis"><span>Jovan_Hu </span></div>
+                        </van-col>
+                        <van-col span="11">
+                          <div class="mine-title-list van-ellipsis"><span>支持楼主，期待这次的宣讲会，hr姐姐太可爱了</span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="5" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                        </van-col>
+
+                        <van-col span="4" offset="0">
+                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
+                        </van-col>
+                        <van-col span="11">
+                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="5" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                        </van-col>
+
+                        <van-col span="4" offset="0">
+                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
+                        </van-col>
+                        <van-col span="11">
+                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="5" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                        </van-col>
+
+                        <van-col span="4" offset="0">
+                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
+                        </van-col>
+                        <van-col span="11">
+                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="5" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                        </van-col>
+
+                        <van-col span="4" offset="0">
+                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
+                        </van-col>
+                        <van-col span="11">
+                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="5" offset="1">
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                        </van-col>
+
+                        <van-col span="4" offset="0">
+                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
+                        </van-col>
+                        <van-col span="11">
+                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
+                        </van-col>
+                        <van-col offset="1" span="2">
+                          <div class="mine-title-content mine-title-list">
+                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                          </div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                      <van-row>
+                        <van-col span="10" offset="10">
+                          <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
+                        </van-col>
+                      </van-row>
+                    </div>
+                  </van-row>
+                </van-panel>
+              </div>
+              <div class="data-panel">
+                <van-panel>
+                  <div @click="toAdvice" class="van-hairline--bottom van-hairline--top">
+                    <van-row>
+                      <van-col span="13">
+                        <div class="panel-header-number">
+                          <div class="before-title-blue"></div>
                           <div class="panel-title" style="font-size: 14px;">意见反馈 - <span class="blue-text">今日 14 条</span></div>
                         </div>
                       </van-col>
