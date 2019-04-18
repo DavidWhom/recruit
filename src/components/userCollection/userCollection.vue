@@ -1,128 +1,285 @@
 <template>
-  <div>
+  <div class="panel-complete">
     <div class="data-panel">
       <van-panel>
         <van-row>
           <van-col span="11">
             <div class="panel-header-number">
               <div class="before-title-blue"></div>
-              <div class="panel-title">我的收藏 - <span class="blue-text">5 条</span></div>
+              <div class="panel-title">招聘资讯 - <span class="blue-text">5 条</span></div>
             </div>
           </van-col>
         </van-row>
       </van-panel>
     </div>
-    <div class="data-panel van-hairline--bottom">
-      <van-row>
-        <van-col span="7" offset="1">
-          <div class="van-ellipsis mine-title-name mine-title-list">
-            <img src="../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
-            <span>发布时间</span>
-          </div>
-        </van-col>
-        <van-col  span="8" offset="0">
-          <div class="mine-title-list van-ellipsis">
-            <img src="../../../static/images/mine/mine-baoliao.png" style="height: 15px;width: 15px;"/>
-            <span>薪资动态</span>
-          </div>
-        </van-col>
-        <van-col span="4" offset="1">
-          <div class="mine-title-list">
-            <img src="../../../static/images/mine/mine-liulang.png" style="height: 15px;width: 15px;"/>
-            <span>浏览</span>
-          </div>
-        </van-col>
-      </van-row>
+    <div class="data-panel">
+      <div class="data-panel van-hairline--bottom">
+        <van-row>
+          <van-col span="7" offset="1">
+            <div class="van-ellipsis mine-title-name mine-title-list">
+              <img src="../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
+              <span>发布时间</span>
+            </div>
+          </van-col>
+          <van-col  span="8" offset="0">
+            <div class="mine-title-list van-ellipsis">
+              <img src="../../../static/images/mine/mine-baoliao.png" style="height: 15px;width: 15px;"/>
+              <span>薪资动态</span>
+            </div>
+          </van-col>
+          <van-col span="4" offset="1">
+            <div class="mine-title-list">
+              <img src="../../../static/images/mine/mine-liulang.png" style="height: 15px;width: 15px;"/>
+              <span>浏览</span>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
+        <van-row>
+          <van-col span="5" offset="1">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+          </van-col>
+          <van-col span="10">
+            <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
+          </van-col>
+          <van-col span="4" offset="1">
+            <div class="mine-title-list"><span>5998 次 </span></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
+        <van-row>
+          <van-col span="5" offset="1">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+          </van-col>
+          <van-col span="10">
+            <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
+          </van-col>
+          <van-col span="4" offset="1">
+            <div class="mine-title-list"><span>5998 次 </span></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
+        <van-row>
+          <van-col span="5" offset="1">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+          </van-col>
+          <van-col span="10">
+            <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
+          </van-col>
+          <van-col span="4" offset="1">
+            <div class="mine-title-list"><span>5998 次 </span></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
+        <van-row>
+          <van-col span="5" offset="1">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+          </van-col>
+          <van-col span="10">
+            <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
+          </van-col>
+          <van-col span="4" offset="1">
+            <div class="mine-title-list"><span>5998 次 </span></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
+        <van-row>
+          <van-col span="5" offset="1">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+          </van-col>
+          <van-col span="10">
+            <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
+          </van-col>
+          <van-col span="4" offset="1">
+            <div class="mine-title-list"><span>5998 次 </span></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
     </div>
-    <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
-      <van-row>
-        <van-col span="5" offset="1">
-          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-        </van-col>
-        <van-col span="10">
-          <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
-        </van-col>
-        <van-col span="4" offset="1">
-          <div class="mine-title-list"><span>5998 次 </span></div>
-        </van-col>
-        <van-col offset="1" span="2">
-          <div class="mine-title-content mine-title-list">
-            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-          </div>
-        </van-col>
-      </van-row>
+    <div class="data-panel">
+      <van-panel>
+        <van-row>
+          <van-col span="11">
+            <div class="panel-header-number">
+              <div class="before-title-blue"></div>
+              <div class="panel-title">薪资爆料 - <span class="blue-text">5 条</span></div>
+            </div>
+          </van-col>
+        </van-row>
+      </van-panel>
     </div>
-    <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
-      <van-row>
-        <van-col span="5" offset="1">
-          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-        </van-col>
-        <van-col span="10">
-          <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
-        </van-col>
-        <van-col span="4" offset="1">
-          <div class="mine-title-list"><span>5998 次 </span></div>
-        </van-col>
-        <van-col offset="1" span="2">
-          <div class="mine-title-content mine-title-list">
-            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+    <div class="data-panel">
+      <van-panel>
+        <van-row>
+          <div style="width: 100%;" class="van-hairline--bottom toutiao-title">
+            <van-row>
+              <van-col span="7" offset="1">
+                <div class="van-ellipsis mine-title-name mine-title-list">
+                  <img src="../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
+                  <span>发布时间</span>
+                </div>
+              </van-col>
+              <van-col  span="8" offset="0">
+                <div class="mine-title-list van-ellipsis">
+                  <img src="../../../static/images/mine/mine-baoliao.png" style="height: 15px;width: 15px;"/>
+                  <span>薪资动态</span>
+                </div>
+              </van-col>
+              <van-col span="4" offset="1">
+                <div class="mine-title-list">
+                  <img src="../../../static/images/mine/mine-liulang.png" style="height: 15px;width: 15px;"/>
+                  <span>浏览</span>
+                </div>
+              </van-col>
+            </van-row>
           </div>
-        </van-col>
-      </van-row>
-    </div>
-    <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
-      <van-row>
-        <van-col span="5" offset="1">
-          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-        </van-col>
-        <van-col span="10">
-          <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
-        </van-col>
-        <van-col span="4" offset="1">
-          <div class="mine-title-list"><span>5998 次 </span></div>
-        </van-col>
-        <van-col offset="1" span="2">
-          <div class="mine-title-content mine-title-list">
-            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+          <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
+            <van-row>
+              <van-col span="5" offset="1">
+                <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+              </van-col>
+              <van-col span="10">
+                <div class="mine-title-list van-ellipsis"><span>拼多多 - Java后台 - 16*14</span></div>
+              </van-col>
+              <van-col span="4" offset="1">
+                <div class="mine-title-list"><span>5998 次 </span></div>
+              </van-col>
+              <van-col offset="1" span="2">
+                <div class="mine-title-content mine-title-list">
+                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                </div>
+              </van-col>
+            </van-row>
           </div>
-        </van-col>
-      </van-row>
-    </div>
-    <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
-      <van-row>
-        <van-col span="5" offset="1">
-          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-        </van-col>
-        <van-col span="10">
-          <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
-        </van-col>
-        <van-col span="4" offset="1">
-          <div class="mine-title-list"><span>5998 次 </span></div>
-        </van-col>
-        <van-col offset="1" span="2">
-          <div class="mine-title-content mine-title-list">
-            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+          <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+            <van-row>
+              <van-col span="5" offset="1">
+                <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+              </van-col>
+              <van-col span="10">
+                <div class="mine-title-list van-ellipsis"><span>美的电子商务 - 前端 - 10.5k*14-16</span></div>
+              </van-col>
+              <van-col span="4" offset="1">
+                <div class="mine-title-list"><span>5998 次 </span></div>
+              </van-col>
+              <van-col offset="1" span="2">
+                <div class="mine-title-content mine-title-list">
+                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                </div>
+              </van-col>
+            </van-row>
           </div>
-        </van-col>
-      </van-row>
-    </div>
-    <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
-      <van-row>
-        <van-col span="5" offset="1">
-          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-        </van-col>
-        <van-col span="10">
-          <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
-        </van-col>
-        <van-col span="4" offset="1">
-          <div class="mine-title-list"><span>5998 次 </span></div>
-        </van-col>
-        <van-col offset="1" span="2">
-          <div class="mine-title-content mine-title-list">
-            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+          <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+            <van-row>
+              <van-col span="5" offset="1">
+                <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+              </van-col>
+              <van-col span="10">
+                <div class="mine-title-list van-ellipsis"><span>字节跳动 - 销售管培 - 11k*15</span></div>
+              </van-col>
+              <van-col span="4" offset="1">
+                <div class="mine-title-list"><span>5998 次 </span></div>
+              </van-col>
+              <van-col offset="1" span="2">
+                <div class="mine-title-content mine-title-list">
+                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                </div>
+              </van-col>
+            </van-row>
           </div>
-        </van-col>
-      </van-row>
+          <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+            <van-row>
+              <van-col span="5" offset="1">
+                <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+              </van-col>
+              <van-col span="10">
+                <div class="mine-title-list van-ellipsis"><span>腾讯 - 后台实习生 - 6000 + 2000</span></div>
+              </van-col>
+              <van-col span="4" offset="1">
+                <div class="mine-title-list"><span>5998 次 </span></div>
+              </van-col>
+              <van-col offset="1" span="2">
+                <div class="mine-title-content mine-title-list">
+                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                </div>
+              </van-col>
+            </van-row>
+          </div>
+          <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+            <van-row>
+              <van-col span="5" offset="1">
+                <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+              </van-col>
+              <van-col span="10">
+                <div class="mine-title-list van-ellipsis"><span>上海农商银行 - IT培训生 - 12000</span></div>
+              </van-col>
+              <van-col span="4" offset="1">
+                <div class="mine-title-list"><span>5998 次 </span></div>
+              </van-col>
+              <van-col offset="1" span="2">
+                <div class="mine-title-content mine-title-list">
+                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                </div>
+              </van-col>
+            </van-row>
+          </div>
+          <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+            <van-row>
+              <van-col span="5" offset="1">
+                <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+              </van-col>
+              <van-col span="10">
+                <div class="mine-title-list van-ellipsis"><span>宁德时代 - 大数据分析工程师 - 19.2万</span></div>
+              </van-col>
+              <van-col span="4" offset="1">
+                <div class="mine-title-list"><span>5998 次 </span></div>
+              </van-col>
+              <van-col offset="1" span="2">
+                <div class="mine-title-content mine-title-list">
+                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                </div>
+              </van-col>
+            </van-row>
+          </div>
+          <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+            <van-row>
+              <van-col span="10" offset="10">
+                <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
+              </van-col>
+            </van-row>
+          </div>
+        </van-row>
+      </van-panel>
     </div>
   </div>
 </template>
