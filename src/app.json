@@ -7,7 +7,8 @@
     "pages/mine/headline/main",
     "pages/mine/recruit/main",
     "pages/mine/salary/main",
-    "pages/mine/advice/main"
+    "pages/mine/advice/main",
+    "pages/mine/feedback/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

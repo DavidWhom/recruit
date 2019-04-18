@@ -87,7 +87,7 @@
           </van-col>
         </van-row>
       </div>
-      <div style="width: 100%;" @click="showUserAdvice" class="van-hairline--bottom mine-title-tr data-panel">
+      <div style="width: 100%;" @click="toFeedback" class="van-hairline--bottom mine-title-tr data-panel">
         <van-row>
           <van-col offset="1" span="1">
             <div class="mine-title-content mine-title-list">
@@ -1479,6 +1479,9 @@
       toAdvice () {
         console.log('toAdvice')
         navigateTo('advice/main?id=111')
+      },
+      toFeedback () {
+        navigateTo('feedback/main')
       },
       showHeadlineDetail () {
         this.isHeadlineDetailShow = true
