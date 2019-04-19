@@ -26,6 +26,6 @@
     overflow-x:hidden;
   }
   .panel-complete {
-    margin-top: 20rpx;
+    margin-top: 10rpx;
   }
 </style>

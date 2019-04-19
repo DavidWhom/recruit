@@ -3,3 +3,9 @@ export function navigateTo (url) {
     url: url
   })
 }
+
+export function makePhoneCall (url) {
+  wx.makePhoneCall({
+    phoneNumber: '15859122565'
+  })
+}
