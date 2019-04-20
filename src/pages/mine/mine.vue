@@ -1072,32 +1072,6 @@
                   </van-row>
                 </van-panel>
               </div>
-              <van-popup :show="isHeadlineDetailShow" position="bottom">
-                <div style="height: 100%;padding-bottom: 55px;">
-                  <headline-detail></headline-detail>
-                </div>
-              </van-popup>
-              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isHeadlineDetailShow">
-                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-                  <view style="width: 88px;">提交</view>
-                </van-button>
-                <van-button type="danger" @click="hideDetailPopup()" style="margin-right: 5%;width: 40%;float: right">
-                  <view style="width: 88px;">取消</view>
-                </van-button>
-              </div>
-              <van-popup :show="isrecruitDetailShow" position="bottom">
-                <div style="height: 100%;padding-bottom: 55px;">
-                  <recruit-detail></recruit-detail>
-                </div>
-              </van-popup>
-              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isrecruitDetailShow">
-                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-                  <view style="width: 88px;">提交</view>
-                </van-button>
-                <van-button type="danger" @click="hideRecruitDetailPopup()" style="margin-right: 5%;width: 40%;float: right">
-                  <view style="width: 88px;">取消</view>
-                </van-button>
-              </div>
               <van-popup :show="isSalaryDetailShow" position="bottom">
                 <div style="height: 100%;padding-bottom: 55px;">
                   <salary-detail></salary-detail>
@@ -1134,8 +1108,6 @@
 
 <script>
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
-  import headlineDetail from '@/components/headlineDetail/headlineDetail'
-  import recruitDetail from '@/components/recruitDetail/recruitDetail'
   import salaryDetail from '@/components/salaryDetail/salaryDetail'
   import adviceDetail from '@/components/adviceDetail/adviceDetail'
   import userAdvice from '@/components/userAdvice/userAdvice'
@@ -1144,8 +1116,6 @@
   import userTipoff from '@/components/userTipoff/userTipoff'
   export default {
     components: {
-      headlineDetail,
-      recruitDetail,
       salaryDetail,
       adviceDetail,
       userAdvice,
