@@ -61,31 +61,42 @@
       <van-panel>
         <div style="width: 100%;" class="van-hairline--bottom headline-title">
           <van-row>
-          <van-col  span="18" offset="1">
-            <div class="headline-title-list van-ellipsis">
-              <img src="../../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
-              <span>招聘资讯</span>
-            </div>
-          </van-col>
-          <van-col span="4" offset="1">
-            <div class="headline-title-list">
-              <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
-              <span>编号</span>
-            </div>
-          </van-col>
+            <van-col  span="10" offset="1">
+              <div class="headline-title-list">
+                <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
+                <span>编号</span>
+              </div>
+            </van-col>
+            <van-col span="12" offset="1">
+              <div class="headline-title-list van-ellipsis">
+                <img src="../../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
+                <span>招聘资讯</span>
+              </div>
+            </van-col>
         </van-row>
         </div>
       </van-panel>
-      <div v-for="(item,index) in headlines" :key="index" class="van-hairline--bottom">
-        <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="upHeadline(item.recruit_title,item.recruit_id, index)">
-          <van-cell-group :border="false">
-            <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + ' ' + item.recruit_title" :value="item.recruit_id" :border="false" />
-          </van-cell-group>
-          <view slot="right">
-            <van-button type="info">上线</van-button>
-          </view>
-        </van-swipe-cell>
-      </div>
+      <van-panel>
+        <div v-for="(item,index) in headlines" :key="index" class="van-hairline--bottom">
+          <van-row>
+            <van-col span="4" offset="1">
+              <div class="van-ellipsis" style="height: 44px;">
+                <div class="mine-headline-recruit-id">{{item.recruit_id}}</div>
+              </div>
+            </van-col>
+            <van-col span="19" offset="0">
+              <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="upHeadline(item.recruit_title,item.recruit_id, index)">
+                <van-cell-group :border="false">
+                  <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + '：' + item.recruit_title" :border="false" />
+                </van-cell-group>
+                <view slot="right">
+                  <van-button type="info">上线</van-button>
+                </view>
+              </van-swipe-cell>
+            </van-col>
+          </van-row>
+        </div>
+      </van-panel>
     </div>
 </template>
 
@@ -95,11 +106,11 @@
     data () {
       return {
         id: '',
-        headlines: [{'recruit_id': 1200, 'recruit_title': '锐捷网络2019届春季招聘', 'create_time': '2019-04-13'},
-          {'recruit_id': 1201, 'recruit_title': '深信服2019届春季补招暨2020届实习生招聘', 'create_time': '2019-04-12'},
-          {'recruit_id': 1202, 'recruit_title': '星网锐捷升腾资讯招聘', 'create_time': '2019-04-08'},
-          {'recruit_id': 1203, 'recruit_title': '吉比特游戏公司（广州）招聘研发岗位', 'create_time': '2019-04-08'},
-          {'recruit_id': 1204, 'recruit_title': '4399（厦门）2019届春季招聘', 'create_time': '2019-04-01'}],
+        headlines: [{'recruit_id': 444441200, 'recruit_title': '锐捷网络2019届春季招聘', 'create_time': '2019-04-13'},
+          {'recruit_id': 444441201, 'recruit_title': '深信服2019届春季补招暨2020届实习生招聘', 'create_time': '2019-04-12'},
+          {'recruit_id': 444441202, 'recruit_title': '星网锐捷升腾资讯招聘', 'create_time': '2019-04-08'},
+          {'recruit_id': 444441203, 'recruit_title': '吉比特游戏公司（广州）招聘研发岗位', 'create_time': '2019-04-08'},
+          {'recruit_id': 444441204, 'recruit_title': '4399（厦门）2019届春季招聘', 'create_time': '2019-04-01'}],
         headlineRoofArr: {
           normal: require('../../../../static/images/headline/headline-roof.png'),
           close: require('../../../../static/images/headline/headline-root-no.png')
@@ -218,5 +229,10 @@
   }
   .headline-title span {
     margin-left: 5px;
+  }
+  .mine-headline-recruit-id {
+    font-size: 10px;
+    line-height: 44px;
+    color: #8f8f8f;
   }
 </style>
