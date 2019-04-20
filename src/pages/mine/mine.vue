@@ -37,7 +37,7 @@
           <van-col span="7" offset="3">
             <div class="van-ellipsis mine-title-name mine-title-list"><span>我的收藏</span></div>
           </van-col>
-          <van-col span="7">
+          <van-col span="7" offset="2">
             <div class="mine-title-list"><span>2 个 </span></div>
           </van-col>
           <van-col offset="1" span="2">
@@ -57,7 +57,7 @@
           <van-col span="7" offset="3">
             <div class="van-ellipsis mine-title-name mine-title-list"><span>我的爆料</span></div>
           </van-col>
-          <van-col span="7">
+          <van-col span="7" offset="2">
             <div class="mine-title-list"><span>3 条 </span></div>
           </van-col>
           <van-col offset="1" span="2">
@@ -77,7 +77,7 @@
           <van-col span="7" offset="3">
             <div class="van-ellipsis mine-title-name mine-title-list"><span>我的评论</span></div>
           </van-col>
-          <van-col span="7">
+          <van-col span="7" offset="2">
             <div class="mine-title-list"><span>15 条 </span></div>
           </van-col>
           <van-col offset="1" span="2">
@@ -97,7 +97,7 @@
           <van-col span="7" offset="3">
             <div class="van-ellipsis mine-title-name mine-title-list"><span>意见反馈</span></div>
           </van-col>
-          <van-col span="7">
+          <van-col span="6" offset="3">
             <div class="mine-title-list"></div>
           </van-col>
           <van-col offset="1" span="2">
