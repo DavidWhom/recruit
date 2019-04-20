@@ -177,14 +177,14 @@
                   </van-tabs>
                 </div>
                 <van-row>
-                  <van-col :span="11" class="van-hairline--bottom van-hairline--top">
-                    <div class="panel-header-number">
+                  <van-col :span="11">
+                    <div class="panel-header-number van-hairline--bottom van-hairline--top">
                       <div class="before-title-blue"></div>
                       <div class="panel-title" style="font-size: 14px;">招聘发布</div>
                     </div>
                   </van-col>
-                  <van-col :span="13" class="van-hairline--bottom van-hairline--top">
-                    <div class="panel-header-number">
+                  <van-col :span="13">
+                    <div class="panel-header-number van-hairline--bottom van-hairline--top">
                       <div class="before-title-orange"></div>
                       <div class="panel-title" style="font-size: 14px;">用户流量</div>
                     </div>
@@ -215,8 +215,8 @@
               <div class="data-panel">
                 <van-panel>
                   <van-row>
-                    <van-col :span="11" class="van-hairline--bottom van-hairline--top">
-                      <div class="panel-header-number">
+                    <van-col :span="24">
+                      <div class="panel-header-number van-hairline--bottom van-hairline--top">
                         <div class="before-title-blue"></div>
                         <div class="panel-title" style="font-size: 14px;">薪资爆料 -</div>
                         <span class="medim-text blue-text"> 14条</span>
@@ -240,8 +240,8 @@
               <div class="data-panel">
                 <van-panel>
                   <van-row>
-                    <van-col :span="11" class="van-hairline--bottom van-hairline--top">
-                      <div class="panel-header-number">
+                    <van-col :span="24">
+                      <div class="panel-header-number van-hairline--bottom van-hairline--top">
                         <div class="before-title-blue"></div>
                         <div class="panel-title" style="font-size: 14px;">用户评论 -</div>
                         <span class="medim-text blue-text"> 345条</span>
@@ -265,8 +265,8 @@
               <div class="data-panel">
                 <van-panel>
                   <van-row>
-                    <van-col :span="11" class="van-hairline--bottom van-hairline--top">
-                      <div class="panel-header-number">
+                    <van-col :span="24">
+                      <div class="panel-header-number van-hairline--bottom van-hairline--top">
                         <div class="before-title-blue"></div>
                         <div class="panel-title" style="font-size: 14px;">意见反馈 -</div>
                         <span class="medim-text blue-text"> 3条 </span>
@@ -291,7 +291,7 @@
             <van-tab title="版块管理" class="mine-admin-tabs">
               <div class="data-panel">
                 <van-panel>
-                  <div @click="toHeadline" class="van-hairline--bottom van-hairline--top">
+                  <div @click="toHeadline" class="van-hairline--bottom van-hairline--top mine-block-title">
                     <van-row>
                       <van-col span="11">
                         <div class="panel-header-number">
@@ -300,7 +300,9 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="11">
-                        <div class="circle-div"></div>
+                        <div class="circle-div-outside">
+                          <div class="circle-div"></div>
+                        </div>
                       </van-col>
                     </van-row>
                   </div>
@@ -447,7 +449,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div @click="toRecruit" class="van-hairline--bottom van-hairline--top">
+                  <div @click="toRecruit" class="van-hairline--bottom van-hairline--top mine-block-title">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -456,7 +458,9 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
-                        <div class="circle-div"></div>
+                        <div class="circle-div-outside">
+                          <div class="circle-div"></div>
+                        </div>
                       </van-col>
                     </van-row>
                   </div>
@@ -585,7 +589,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div @click="toSalary" class="van-hairline--bottom van-hairline--top">
+                  <div @click="toSalary" class="van-hairline--bottom van-hairline--top mine-block-title">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -594,7 +598,9 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
-                        <div class="circle-div"></div>
+                        <div class="circle-div-outside">
+                          <div class="circle-div"></div>
+                        </div>
                       </van-col>
                     </van-row>
                   </div>
@@ -741,7 +747,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div @click="toAdvice" class="van-hairline--bottom van-hairline--top">
+                  <div @click="toAdvice" class="van-hairline--bottom van-hairline--top mine-block-title">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -750,7 +756,9 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
-                        <div class="circle-div"></div>
+                        <div class="circle-div-outside">
+                          <div class="circle-div"></div>
+                        </div>
                       </van-col>
                     </van-row>
                   </div>
@@ -902,7 +910,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div @click="toAdvice" class="van-hairline--bottom van-hairline--top">
+                  <div @click="toAdvice" class="van-hairline--bottom van-hairline--top mine-block-title">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -911,7 +919,9 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
-                        <div class="circle-div"></div>
+                        <div class="circle-div-outside">
+                          <div class="circle-div"></div>
+                        </div>
                       </van-col>
                     </van-row>
                   </div>
@@ -1702,6 +1712,9 @@
     font-size: 18rpx;
     color:#858585
   }
+  .circle-div-outside {
+    padding-top: 5px;
+  }
   .circle-div {
     display: inline-block;
     width: 10px;
@@ -1710,5 +1723,9 @@
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
+  }
+  .mine-block-title {
+    height: 40px;
+    padding-top: 5px;
   }
 </style>
