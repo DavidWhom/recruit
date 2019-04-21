@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "资讯详情",
+  "usingComponents": {
+    "van-button": "/static/vant-weapp/dist/button/index",
+    "van-panel": "/static/vant-weapp/dist/panel/index",
+    "van-row": "/static/vant-weapp/dist/row/index",
+    "van-col": "/static/vant-weapp/dist/col/index"
+  }
+}

@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="data-panel job-ads">
-      <div class="data-panel all-jobAds">
+      <div class="data-panel all-jobAds" @click="showRecruit">
         <div class="job-ad">
           <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
           <div class="job-ad-title">锐捷网络春季招聘简章</div>
@@ -49,6 +49,7 @@
 <script>
 // import card from '@/components/card'
 
+import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
 export default {
   data () {
     return {
@@ -83,15 +84,18 @@ export default {
       console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
     },
+    showRecruit () {
+      navigateTo('../recruit/recruitDetail/main')
+    },
     flyioTest () {
       const this_ = this
       const requestUrl = '/testPathVariable/111'
       const params = {
       }
       this_.$http.get(requestUrl, params).then(function (res) {
-        const resData = res
-        console.log(resData)
+        this_.keyword = res.data.data
       })
+      console.log(this_.keyword)
     }
   },
   mounted () {
