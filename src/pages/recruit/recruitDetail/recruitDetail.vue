@@ -1,6 +1,174 @@
 <template>
-  <div>
-    <wxParse :content="article" :loading="isRecruitLoading"/>
+  <div class="panel-complete" >
+    <div class="recruit-header van-hairline--bottom">
+      <van-row>
+        <van-col span="24" style="text-align: center">
+          <div class="recruit-title"><span>深信服科技有限公司招聘</span></div>
+        </van-col>
+      </van-row>
+      <van-row>
+        <van-col span="10" offset="1">
+          <div class="van-ellipsis recruit-title-name">
+            <img src="../../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
+            <span class="recruit-header-son">2019-04-21 9:30:43</span>
+          </div>
+        </van-col>
+        <van-col span="5">
+          <div class="van-ellipsis recruit-title-name">
+            <img src="../../../../static/images/mine/mine-liulang.png" style="height: 15px;width: 15px;"/>
+            <span class="recruit-header-son">9444</span>
+          </div>
+        </van-col>
+      </van-row>
+    </div>
+    <div class="van-hairline--bottom data-panel">
+      <div class="recruit-content">
+        <wxParse :content="article" :loading="isRecruitLoading"/>
+      </div>
+    </div>
+    <div class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
+      <div style="height: 150px;padding: 5px 15px 15px 35px">
+        <textarea style="font-size: 14px;border:solid 1px #f8f8f8" :value="comment" rows="4" cols="50" placeholder="说点什么吧...">
+        </textarea>
+      </div>
+      <div style="text-align: center"><van-button type="info" size="small">&nbsp;&nbsp;评论&nbsp;</van-button></div>
+    </div>
+    <div class="data-panel" style="padding-bottom: 10px">
+      <van-panel>
+        <van-row>
+        <div class="recruit-user-common">
+          <van-col span="2" offset="1">
+            <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
+          </van-col>
+          <van-col span="20">
+            <div class="recruit-user-name">Jovan_Hu</div>
+            <div class="recruit-comment-before">
+              <div class="recruit-comment-before-content">
+                置顶
+              </div>
+            </div>
+            <div class="recruit-comment-good">
+              <img src="/static/images/recruit/recruit-good.png">
+              <span>25</span>
+            </div>
+            <div class="recruit-common-content">
+              <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
+            </div>
+          </van-col>
+        </div>
+      </van-row>
+        <van-row>
+          <div class="recruit-user-common">
+            <van-col span="2" offset="1">
+              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
+            </van-col>
+            <van-col span="20">
+              <div class="recruit-user-name">Jovan_Hu</div>
+              <div class="recruit-comment-before">
+                <div class="recruit-comment-before-content">
+                  置顶
+                </div>
+              </div>
+              <div class="recruit-comment-good">
+                <img src="/static/images/recruit/recruit-good.png">
+                <span>25</span>
+              </div>
+              <div class="recruit-common-content">
+                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
+              </div>
+            </van-col>
+          </div>
+        </van-row>
+        <van-row>
+          <div class="recruit-user-common">
+            <van-col span="2" offset="1">
+              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
+            </van-col>
+            <van-col span="20">
+              <div class="recruit-user-name">Jovan_Hu</div>
+              <div class="recruit-comment-before">
+                <div class="recruit-comment-before-content">
+                  置顶
+                </div>
+              </div>
+              <div class="recruit-comment-good">
+                <img src="/static/images/recruit/recruit-good.png">
+                <span>25</span>
+              </div>
+              <div class="recruit-common-content">
+                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
+              </div>
+            </van-col>
+          </div>
+        </van-row>
+        <van-row>
+          <div class="recruit-user-common">
+            <van-col span="2" offset="1">
+              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
+            </van-col>
+            <van-col span="20">
+              <div class="recruit-user-name">Jovan_Hu</div>
+              <div class="recruit-comment-before">
+                <div class="recruit-comment-before-content">
+                  置顶
+                </div>
+              </div>
+              <div class="recruit-comment-good">
+                <img src="/static/images/recruit/recruit-good.png">
+                <span>25</span>
+              </div>
+              <div class="recruit-common-content">
+                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
+              </div>
+            </van-col>
+          </div>
+        </van-row>
+        <van-row>
+          <div class="recruit-user-common">
+            <van-col span="2" offset="1">
+              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
+            </van-col>
+            <van-col span="20">
+              <div class="recruit-user-name">Jovan_Hu</div>
+              <div class="recruit-comment-before">
+                <div class="recruit-comment-before-content">
+                  置顶
+                </div>
+              </div>
+              <div class="recruit-comment-good">
+                <img src="/static/images/recruit/recruit-good.png">
+                <span>25</span>
+              </div>
+              <div class="recruit-common-content">
+                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
+              </div>
+            </van-col>
+          </div>
+        </van-row>
+        <van-row>
+          <div class="recruit-user-common">
+            <van-col span="2" offset="1">
+              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
+            </van-col>
+            <van-col span="20">
+              <div class="recruit-user-name">Jovan_Hu</div>
+              <div class="recruit-comment-before">
+                <div class="recruit-comment-before-content">
+                  置顶
+                </div>
+              </div>
+              <div class="recruit-comment-good">
+                <img src="/static/images/recruit/recruit-good.png">
+                <span>25</span>
+              </div>
+              <div class="recruit-common-content">
+                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
+              </div>
+            </van-col>
+          </div>
+        </van-row>
+      </van-panel>
+    </div>
   </div>
 </template>
 
@@ -14,57 +182,29 @@
     data () {
       return {
         isRecruitLoading: true,
-        markdown_test: '## 第 1 课 —— 数组与内存控制\n' +
-          '\n' +
-          '### 数组初始化\n' +
-          '\n' +
-          '数组初始化之后，该数组的长度是不可变的（可通过数组的 length 属性访问数组的长度）。Java 中的数组必须经过初始化（为数组对象的元素分配内存空间，并为每个数组元素指定初始值）才可使用。\n' +
-          '\n' +
-          '数组初始化的形式：\n' +
-          '\n' +
-          '+ 静态初始化：初始化时由程序员显示的指定每个数组的初始值，系统决定数组长度。\n' +
-          '+ 动态初始化：初始化时程序员只指定数组的长度，系统为数组元素分配初始值。\n' +
-          '\n' +
-          '<!-- more -->\n' +
-          '### 使用数组\n' +
-          '\n' +
-          '数组元素就是变量：例如 int[] 数组元素相当于 int 类型的变量\n' +
-          '\n' +
-          '当通过索引来使用数组元素时（访问数组元素的值、为数组元素赋值），将该数组元素当成普通变量使用即可。\n' +
-          '\n' +
-          '\n' +
-          '\n' +
-          '## 第 2 课 —— 对象与内存的控制\n' +
-          '\n' +
-          'Java 内存管理分为：内存分配和内存回收。\n' +
-          '\n' +
-          '> + 内存分配：创建 Java 对象时 JVM 为该对象在堆内存中所分配的内存空间。\n' +
-          '> + 内存回收：当 Java 对象失去引用，变成垃圾，JVM 的垃圾回收机制自动清理该对象，并回收内存\n' +
-          '\n' +
-          '### 实例变量 和 类变量\n' +
-          '\n' +
-          '#### 局部变量\n' +
-          '\n' +
-          '特点：作用时间短，存储在方法的栈内存中\n' +
-          '\n' +
-          '种类：\n' +
-          '\n' +
-          '+ 形参：方法签名中定义的局部变量，由方法调用者负责为其赋值，随方法结束而消亡\n' +
-          '+ 方法内的局部变量：方法内定义的局部变量，必须在方法内对其进行显示初始化，从初始化后开始生效，随方法结束而消亡\n' +
-          '+ 代码块内的局部变量：在代码块中定义的局部变量，必须在代码块中进行显示初始化，从初始化后开始生效，随代码块结束而消亡\n' +
-          '\n' +
-          '#### 成员变量\n' +
-          '\n' +
-          '类体内定义的变量，如果该成员变量没有使用 static 修饰，那该成员变量又被称为非静态变量或实例变量，如果使用 static 修饰，则该成员变量又可被称为静态变量或类变量。\n' +
-          '\n' +
-          '#### 实例变量和类变量的属性\n' +
-          '\n' +
-          '使用 static 修饰的成员变量是类变量，属于该类本身，没有使用 static 修饰的成员变量是实例变量，属于该类的实例，在同一个类中，每一个类只对应一个 Class 对象，但每个类可以创建多个对象。\n' +
-          '\n' +
-          '由于同一个 JVM 内的每个类只对应一个 CLass 对象，因此同一个 JVM 内的一个类的类变量只需要一块内存空间；但对于实例变量而言，该类每创建一次实例，就需要为该实例变量分配一块内存空间。也就是说，程序中创建了几个实例，实例变量就需要几块内存空间。\n' +
-          '\n' +
-          '这里我想到一道面试题目：',
-        article: ''
+        markdown_test: '**一、公司简介**\n' +
+          '深信服科技（股票代码：300454）成立于2000年12月，总部设在深圳，是一家专注于企业级安全、云计算、无线物联网的IT解决方案服务商，立志于承载各行业用户数字化转型过程中的基石性工作，从而让各行业用户的IT更简单、更安全、更有价值。现深信服已成长为中国企业级安全领导厂商，云计算业务也迎来快速成长，企业级无线业务高速跃居中国前三甲，自2014年起，深信服相继成立了信锐技术（无线物联网）、口袋助理（移动办公）2家集团下属子公司。2018年5月，深信服在深交所挂牌上市，迎来新的里程碑。\n' +
+          '目前公司人数超过4000人，其中研发人员占比近40%，公司每年将营收的20%投入到研发当中。设有深圳、北京、长沙、硅谷四个研发中心，并设有国家级信息安全工程实验室，博士后创新实践基地。以美国耶鲁大学博士后为首，一群来自北京大学、清华大学、香港科技大学、香港中文大学、上海交通大学、中国科技大学、中国科学院、华中科技大学、中山大学等国内外顶尖高校的博士团队组成的深信服创新研究院，共同推动着安全和云计算业务的快速发展。\n' +
+          '公司连续18年保持高速增长。深信服在全球设有50余个直属分支机构，覆盖中国各大省市及美国、英国、马来西亚、泰国、印尼、新加坡等国家和地区。深信服的产品和解决方案正在被超过80%的国家部委单位、85%以上的世界500强中资企业、三大运营商集团总部及90%的省级运营商、TOP20银行等超过50，000家用户使用。\n' +
+          ' \n' +
+          '**二、部分荣誉**\n' +
+          '连续两届被美国《财富》杂志评为“中国卓越雇主”－中国最适宜工作的公司；\n' +
+          '云计算行业增长最快的厂商之一；\n' +
+          '国内网络安全领域领导厂商；\n' +
+          '中国企业级无线市场前三甲；\n' +
+          '信锐技术获德勤高科技高成长中国前20强；\n' +
+          '入围全球顶尖网络安全厂商，国内仅6家入围；\n' +
+          '连续9年获评德勤“亚太地区高科技高成长500强”；\n' +
+          '微软MAPP计划合作单位；\n' +
+          '检测技术创新获得Google认可，加入全球顶级情报联盟；\n' +
+          '国家火炬计划项目单位（国家科技部批准）\n' +
+          '中国国家信息安全漏洞库CNNVD技术支撑单位；\n' +
+          '中国反网络病毒联盟ANVA成员单位；\n' +
+          '连续五年被评为“国家规划布局内重点软件企业”。\n' +
+          '荣获“CNCERT国家级网络安全应急服务支撑单位”称号\n' +
+          '连续六年蝉联德勤“中国高科技高成长50强”',
+        article: '',
+        comment: ''
       }
     },
     mounted () {
@@ -87,4 +227,89 @@
 
 <style>
   @import url("~mpvue-wxparse/src/wxParse.css");
+  page {
+    background-color: #f8f8f8;
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+  }
+  .panel-complete {
+    margin-top: 10rpx;
+  }
+  .data-panel {
+    width: 100%;
+    margin-top: 20rpx;
+    background-color: #ffffff;
+  }
+  .recruit-header {
+    background-color: #ffffff;
+    padding-top: 10rpx;
+  }
+  .recruit-title {
+    width: 100%;
+    font-size: 16px;
+    font: bold;
+    text-align: center;
+  }
+  .recruit-content {
+    padding: 10rpx 30rpx 10rpx 30rpx;
+  }
+  .recruit-header-son {
+    font-size: 12px;
+    margin-left: 5px;
+    color: #8f8f8f
+  }
+  .recruit-title-name {
+    justify-content: center;
+    display: inline-block;
+    width: 90%;
+    vertical-align: middle;
+  }
+  .recruit-user-img {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+  }
+  .recruit-user-name {
+    float: left;
+    color: #8f8f8f;
+    font-size: 12px
+  }
+  .recruit-comment-before {
+    float: left;
+    margin-left: 5px;
+  }
+  .recruit-comment-before-content {
+    width: 30px;
+    height: 20px;
+    border-radius: 3px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+    background-color: #8f8f8f;
+    color: #ffffff;
+    font-size: 11px;
+  }
+  .recruit-user-common {
+    padding-top: 20px;
+  }
+  .recruit-comment-good {
+    float: right;
+    font-size: 12px;
+    color: #8f8f8f;
+  }
+  .recruit-comment-good img{
+    display: inline-block;
+    width: 30rpx;
+    height: 30rpx;
+  }
+  .recruit-comment-good span {
+    margin-left: 5px;
+  }
+  .recruit-common-content {
+    float: left;
+  }
+  .recruit-common-content span {
+    font-size: 12px;
+  }
 </style>

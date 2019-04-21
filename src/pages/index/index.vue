@@ -159,6 +159,7 @@ export default {
     display: inline-block;
     width: 300rpx;
     height: 200rpx;
+    border-radius: 5px;
   }
   .job-ad-title {
     position: relative;
