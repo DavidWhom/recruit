@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/main",
     "pages/salary/main",
+    "pages/salary/salaryDetail/main",
     "pages/mine/main",
     "pages/mine/headline/main",
     "pages/mine/recruit/main",

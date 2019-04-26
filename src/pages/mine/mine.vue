@@ -627,7 +627,7 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" @click="toSalaryDetail(111)" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
                           <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
@@ -1072,19 +1072,6 @@
                   </van-row>
                 </van-panel>
               </div>
-              <van-popup :show="isSalaryDetailShow" position="bottom">
-                <div style="height: 100%;padding-bottom: 55px;">
-                  <salary-detail></salary-detail>
-                </div>
-              </van-popup>
-              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isSalaryDetailShow">
-                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-                  <view style="width: 88px;">提交</view>
-                </van-button>
-                <van-button type="danger" @click="hideSalaryDetailPopup()" style="margin-right: 5%;width: 40%;float: right">
-                  <view style="width: 88px;">取消</view>
-                </van-button>
-              </div>
               <van-popup :show="isAdviceDetailShow" position="bottom">
                 <div style="height: 100%;padding-bottom: 55px;">
                   <advice-detail></advice-detail>
@@ -1108,7 +1095,6 @@
 
 <script>
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
-  import salaryDetail from '@/components/salaryDetail/salaryDetail'
   import adviceDetail from '@/components/adviceDetail/adviceDetail'
   import userAdvice from '@/components/userAdvice/userAdvice'
   import userCollection from '@/components/userCollection/userCollection'
@@ -1116,7 +1102,6 @@
   import userTipoff from '@/components/userTipoff/userTipoff'
   export default {
     components: {
-      salaryDetail,
       adviceDetail,
       userAdvice,
       userCollection,
@@ -1129,7 +1114,7 @@
           // 使用延时初始化
           // lazyLoad: true
         },
-        identity: 'user',
+        identity: 'admin',
         mainTendencyData: [],
         mainTendencyCount: 7,
         reportTabIndex: 0,
@@ -1142,7 +1127,6 @@
         blTendencyCount: 7,
         isHeadlineDetailShow: false,
         isrecruitDetailShow: false,
-        isSalaryDetailShow: false,
         isAdviceDetailShow: false,
         isUserAdviceShow: false,
         isUserCollectionShow: false,
@@ -1463,6 +1447,9 @@
       toFeedback () {
         navigateTo('feedback/main')
       },
+      toSalaryDetail (id) {
+        navigateTo('../salary/salaryDetail/main?id=' + id)
+      },
       showHeadlineDetail () {
         this.isHeadlineDetailShow = true
       },
@@ -1474,12 +1461,6 @@
       },
       hideRecruitDetailPopup () {
         this.isrecruitDetailShow = false
-      },
-      showSalaryDetail () {
-        this.isSalaryDetailShow = true
-      },
-      hideSalaryDetailPopup () {
-        this.isSalaryDetailShow = false
       },
       showAdviceDetail () {
         this.isAdviceDetailShow = true

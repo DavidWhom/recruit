@@ -174,7 +174,7 @@
 
 <script>
   import wxParse from 'mpvue-wxparse'
-  import marked from 'marked'
+  // import marked from 'marked'
   export default {
     components: {
       wxParse
@@ -203,12 +203,65 @@
           '连续五年被评为“国家规划布局内重点软件企业”。\n' +
           '荣获“CNCERT国家级网络安全应急服务支撑单位”称号\n' +
           '连续六年蝉联德勤“中国高科技高成长50强”',
-        article: '',
+        article: '<div>一、<b><font face=宋体>公司简介</font></b><b></b></div>\n' +
+          '<div><font face=宋体>蕃茄田艺术，专业从事</font>2-15<font face=宋体>岁儿童</font><font face=宋体>美</font><font face=宋体>术教育。通过</font>“平面艺术”及“立体雕塑”课程启发孩子的创意思维，让孩子在自由、平等、快乐的环境中培养其独特的思维力、美感力和创新力。遍布全国<font face=calibri>1</font>50<font face=宋体>个城市</font><font face=宋体>，</font>500<font face=宋体>家校区，每天有</font>20<font face=宋体>万名孩子在享受蕃茄田艺术创意美术课程。</font></div>\n' +
+          '<div>“蕃茄田艺术”隶属于精中教育集团，精中教育集团进入中国十年，成功推广、运营全球早教领先品牌金宝贝<font face=calibri>&lt;gymboree&gt;</font><font face=宋体>，丰富的儿童教育资源与教学经验让我们更了解孩子。凭籍多年来在幼教创新领域的努力扎根，我们期望在适当的时间里给予孩子最适当的协助，包含课程的阶段设计与专业导师辅导，以及如何让家长一同参与，创造良好的亲子互动，共同成长。</font></div>\n' +
+          '<div>&nbsp;</div>\n' +
+          '<div></div>\n' +
+          '<div></div>\n' +
+          '<div>二、<b><font face=宋体>招聘信息</font> </b></div>\n' +
+          '<div><font face=宋体>招聘职位</font><font face=宋体>：</font></div>\n' +
+          '<div><font face=宋体>美术指导师</font></div>\n' +
+          '<div><font face=宋体>薪资：</font>4.5k-9k/<font face=宋体>招聘人数：</font><font face=calibri>6</font><font face=宋体>人</font></div>\n' +
+          '<div>1<font face=宋体>、美术或设计等相关专业</font></div>\n' +
+          '<div>2<font face=宋体>、良好的语言表达能力、活泼开朗、热爱小孩</font></div>\n' +
+          '<div>3<font face=宋体>、有美术指导经验或幼儿教育经验优先</font></div>\n' +
+          '<div>4<font face=宋体>、能接受周六日上班</font></div>\n' +
+          '<div><font face=宋体>教育顾问</font></div>\n' +
+          '<div><font face=宋体>薪资：</font>4k-15k/<font face=宋体>招聘人数：</font><font face=calibri>3</font><font face=宋体>人</font></div>\n' +
+          '<div>1<font face=宋体>、具有销售或者培训行业工作经验者优先</font></div>\n' +
+          '<div>2<font face=宋体>、良好的沟通能力，抗压能力强，热爱小孩</font></div>\n' +
+          '<div>3<font face=宋体>、能接受周六日上班</font></div>\n' +
+          '<div><font face=宋体>教育推广专员</font></div>\n' +
+          '<div><font face=宋体>薪资：</font>4k-6k/<font face=宋体>招聘人数：</font><font face=calibri>2</font><font face=宋体>人</font></div>\n' +
+          '<div>1<font face=宋体>、市场营销，广告等相关专业优先</font></div>\n' +
+          '<div>2<font face=宋体>、性格开朗，热爱小孩</font></div>\n' +
+          '<div>3<font face=宋体>、具备良好沟通能力、组织协调能力及团队合作精神</font></div>\n' +
+          '<div>4<font face=宋体>、有婴童、培训行业市场工作经验优先</font></div>\n' +
+          '<div>5<font face=宋体>、能接受周六日上班</font></div>\n' +
+          '<div><font face=宋体>行政专员</font></div>\n' +
+          '<div><font face=宋体>薪资：</font>3k/<font face=宋体>招聘人数：</font><font face=calibri>1</font><font face=宋体>人</font></div>\n' +
+          '<div>1<font face=宋体>、细心、耐心、活泼开朗、热爱小孩</font></div>\n' +
+          '<div>2<font face=宋体>、熟练操作</font><font face=calibri>office</font><font face=宋体>软件，有敏锐的服务意识和沟通能力</font></div>\n' +
+          '<div>3<font face=宋体>、有行政或者培训行业工作经验者优先</font></div>\n' +
+          '<div>4<font face=宋体>、能接受周六日上班</font></div>\n' +
+          '<div>&nbsp;</div>\n' +
+          '<div></div>\n' +
+          '<div><b><font face=宋体>三、</font></b><b><font face=宋体>福利待遇</font></b><b></b></div>\n' +
+          '<div><font face=宋体>行业内的高薪酬、完善的晋升渠道和培训体系、各类奖金；</font></div>\n' +
+          '<div><font face=宋体>市内规定的医社保、带薪年假；</font></div>\n' +
+          '<div><font face=宋体>年度旅游、</font><font face=宋体>不定期的聚餐；</font></div>\n' +
+          '<div><font face=宋体>外地伙伴提供住宿。</font></div>\n' +
+          '<div>&nbsp;</div>\n' +
+          '<div></div>\n' +
+          '<div><b><font face=宋体>四、联系方式</font></b><b></b></div>\n' +
+          '<div><font face=宋体>联系人：阮老师</font> </div>\n' +
+          '<div><font face=宋体>电话：</font>0591-28203366/13859089728</div>\n' +
+          '<div><font face=宋体>邮箱：</font><a href="mailto:sky.ruan347ci@tomatoart.com.cn%3e"><u>sky.ruan347ci@tomatoart.com.cn</u><u>&gt;</u></a> </div>\n' +
+          '<div><font face=宋体>地址</font><font face=宋体>：</font><font face=宋体>福州市</font><font face=宋体>长乐</font><font face=宋体>区</font><font face=宋体>皇庭丹郡商业街</font>13#s34-s36</div>\n' +
+          '<div></div>\n' +
+          '<div></div>\n' +
+          '<p><!--endfragment--></p>\n' +
+          '<p></p>\n' +
+          '<div style="width: 100%; text-align: right">福州大学学生就业创业指导中心</div>\n' +
+          '<div style="width: 100%; text-align: right">2019年4月23日</div>\n' +
+          '<a href="http://www.baidu.com">百度链接</a>' +
+          '<br/>',
         comment: ''
       }
     },
     mounted () {
-      this.article = marked(this.markdown_test)
+      // this.article = marked(this.markdown_test)
       this.isRecruitLoading = false
     },
     methods: {
