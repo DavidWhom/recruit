@@ -785,7 +785,7 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" @click="showAdviceDetail" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" @click="showCommentDetail" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
                           <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
@@ -1072,16 +1072,23 @@
                   </van-row>
                 </van-panel>
               </div>
-              <van-popup :show="isAdviceDetailShow" position="bottom">
+              <van-popup :show="isCommentDetailShow" position="bottom">
                 <div style="height: 100%;padding-bottom: 55px;">
-                  <advice-detail></advice-detail>
+                  <comment-admin id="5"></comment-admin>
                 </div>
               </van-popup>
-              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isAdviceDetailShow">
-                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-                  <view style="width: 88px;">提交</view>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isCommentDetailShow">
+                <van-button type="danger" @click="hideCommentDetailPopup()" style="width: 40%;">
+                  <view style="width: 88px;">取消</view>
                 </van-button>
-                <van-button type="danger" @click="hideAdviceDetailPopup()" style="margin-right: 5%;width: 40%;float: right">
+              </div>
+              <van-popup :show="isAdviceDetailShow" position="bottom">
+                <div style="height: 100%;padding-bottom: 55px;">
+                  <advice-admin id="3"></advice-admin>
+                </div>
+              </van-popup>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isAdviceDetailShow">
+                <van-button type="danger" @click="hideAdviceDetailPopup()" style="width: 40%;">
                   <view style="width: 88px;">取消</view>
                 </van-button>
               </div>
@@ -1095,14 +1102,16 @@
 
 <script>
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
-  import adviceDetail from '@/components/adviceDetail/adviceDetail'
+  import commentAdmin from '@/components/commentAdmin/commentAdmin'
+  import adviceAdmin from '@/components/adviceAdmin/adviceAdmin'
   import userAdvice from '@/components/userAdvice/userAdvice'
   import userCollection from '@/components/userCollection/userCollection'
   import userComment from '@/components/userComment/userComment'
   import userTipoff from '@/components/userTipoff/userTipoff'
   export default {
     components: {
-      adviceDetail,
+      commentAdmin,
+      adviceAdmin,
       userAdvice,
       userCollection,
       userComment,
@@ -1128,6 +1137,7 @@
         isHeadlineDetailShow: false,
         isrecruitDetailShow: false,
         isAdviceDetailShow: false,
+        isCommentDetailShow: false,
         isUserAdviceShow: false,
         isUserCollectionShow: false,
         isUserCommentShow: false,
@@ -1467,6 +1477,12 @@
       },
       hideAdviceDetailPopup () {
         this.isAdviceDetailShow = false
+      },
+      showCommentDetail () {
+        this.isCommentDetailShow = true
+      },
+      hideCommentDetailPopup () {
+        this.isCommentDetailShow = false
       },
       showUserAdvice () {
         this.isUserAdviceShow = true
