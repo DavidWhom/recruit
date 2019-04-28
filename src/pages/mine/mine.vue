@@ -300,8 +300,8 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="11">
-                        <div class="circle-div-outside">
-                          <div class="circle-div"></div>
+                        <div class="mine-management-outside">
+                          <img src="../../../static/images/mine/mine-management.png" style="height: 20px;width: 20px;"/>
                         </div>
                       </van-col>
                     </van-row>
@@ -458,8 +458,8 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
-                        <div class="circle-div-outside">
-                          <div class="circle-div"></div>
+                        <div class="mine-management-outside">
+                          <img src="../../../static/images/mine/mine-management.png" style="height: 20px;width: 20px;"/>
                         </div>
                       </van-col>
                     </van-row>
@@ -598,8 +598,8 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
-                        <div class="circle-div-outside">
-                          <div class="circle-div"></div>
+                        <div class="mine-management-outside">
+                          <img src="../../../static/images/mine/mine-management.png" style="height: 20px;width: 20px;"/>
                         </div>
                       </van-col>
                     </van-row>
@@ -756,8 +756,8 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
-                        <div class="circle-div-outside">
-                          <div class="circle-div"></div>
+                        <div class="mine-management-outside">
+                          <img src="../../../static/images/mine/mine-management.png" style="height: 20px;width: 20px;"/>
                         </div>
                       </van-col>
                     </van-row>
@@ -919,8 +919,8 @@
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
-                        <div class="circle-div-outside">
-                          <div class="circle-div"></div>
+                        <div class="mine-management-outside">
+                          <img src="../../../static/images/mine/mine-management.png" style="height: 20px;width: 20px;"/>
                         </div>
                       </van-col>
                     </van-row>
@@ -1679,8 +1679,8 @@
     font-size: 18rpx;
     color:#858585
   }
-  .circle-div-outside {
-    padding-top: 5px;
+  .mine-management-outside {
+    padding-top: 8px;
   }
   .circle-div {
     display: inline-block;
