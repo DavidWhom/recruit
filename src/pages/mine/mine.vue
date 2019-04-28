@@ -747,7 +747,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div @click="toAdvice" class="van-hairline--bottom van-hairline--top mine-block-title">
+                  <div @click="toAdviceAndFeedback(1)" class="van-hairline--bottom van-hairline--top mine-block-title">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -910,7 +910,7 @@
               </div>
               <div class="data-panel">
                 <van-panel>
-                  <div @click="toAdvice" class="van-hairline--bottom van-hairline--top mine-block-title">
+                  <div @click="toAdviceAndFeedback(2)" class="van-hairline--bottom van-hairline--top mine-block-title">
                     <van-row>
                       <van-col span="13">
                         <div class="panel-header-number">
@@ -1448,14 +1448,14 @@
       },
       toSalary () {
         console.log('toSalary')
-        navigateTo('salary/main?id=111')
+        navigateTo('salary/main')
       },
-      toAdvice () {
-        console.log('toAdvice')
-        navigateTo('advice/main?id=111')
+      toAdviceAndFeedback (type) {
+        console.log('toAdviceAndFeedback')
+        navigateTo('adviceFeedback/main?type=' + type)
       },
       toFeedback () {
-        navigateTo('feedback/main')
+        navigateTo('feedback/main?type=2')
       },
       toSalaryDetail (id) {
         navigateTo('../salary/salaryDetail/main?id=' + id)

@@ -9,6 +9,10 @@
     "van-col": "/static/vant-weapp/dist/col/index",
     "van-tab": "/static/vant-weapp/dist/tab/index",
     "van-tabs": "/static/vant-weapp/dist/tabs/index",
-    "van-popup": "/static/vant-weapp/dist/popup/index"
+    "van-popup": "/static/vant-weapp/dist/popup/index",
+    "van-swipe-cell": "/static/vant-weapp/dist/swipe-cell/index",
+    "van-cell": "/static/vant-weapp/dist/cell/index",
+    "van-cell-group": "/static/vant-weapp/dist/cell-group/index",
+    "van-search": "/static/vant-weapp/dist/search/index"
   }
 }

@@ -7,7 +7,7 @@
     "pages/mine/headline/main",
     "pages/recruit/recruitSys/main",
     "pages/mine/salary/main",
-    "pages/mine/advice/main",
+    "pages/mine/adviceFeedback/main",
     "pages/mine/feedback/main",
     "pages/recruit/recruitDetail/main"
   ],

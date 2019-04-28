@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './advice'
+import App from './adviceFeedback'
 
 // add this to handle exception
 Vue.config.errorHandler = function (err) {

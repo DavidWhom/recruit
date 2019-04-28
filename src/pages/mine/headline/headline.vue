@@ -73,7 +73,7 @@
                 <span>招聘资讯</span>
               </div>
             </van-col>
-        </van-row>
+          </van-row>
         </div>
       </van-panel>
       <van-panel>
