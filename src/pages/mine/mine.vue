@@ -1444,7 +1444,7 @@
       },
       toRecruit () {
         console.log('toRecruit')
-        navigateTo('../recruit/main?id=111')
+        navigateTo('../recruit/recruitSys/main')
       },
       toSalary () {
         console.log('toSalary')

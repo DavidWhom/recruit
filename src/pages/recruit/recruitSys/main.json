@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "招聘资讯",
+  "navigationBarTitleText": "招聘资讯管理",
   "usingComponents": {
     "van-button": "/static/vant-weapp/dist/button/index",
     "van-panel": "/static/vant-weapp/dist/panel/index",
@@ -10,6 +10,9 @@
     "van-tab": "/static/vant-weapp/dist/tab/index",
     "van-tabs": "/static/vant-weapp/dist/tabs/index",
     "van-popup": "/static/vant-weapp/dist/popup/index",
-    "van-search": "/static/vant-weapp/dist/search/index"
+    "van-search": "/static/vant-weapp/dist/search/index",
+    "van-swipe-cell": "/static/vant-weapp/dist/swipe-cell/index",
+    "van-cell": "/static/vant-weapp/dist/cell/index",
+    "van-cell-group": "/static/vant-weapp/dist/cell-group/index"
   }
 }

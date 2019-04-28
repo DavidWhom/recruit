@@ -5,7 +5,7 @@
     "pages/salary/salaryDetail/main",
     "pages/mine/main",
     "pages/mine/headline/main",
-    "pages/recruit/main",
+    "pages/recruit/recruitSys/main",
     "pages/mine/salary/main",
     "pages/mine/advice/main",
     "pages/mine/feedback/main",
@@ -33,7 +33,7 @@
       }
     }, {
       "text": "招聘信息",
-      "pagePath": "pages/recruit/main",
+      "pagePath": "pages/index/main",
       "iconPath": "static/tabs/hire.png",
       "selectedIconPath": "static/tabs/hire-active.png"
     },{
@@ -55,7 +55,7 @@
       "activeIcon": "static/tabs/home-active.png"
     }, {
       "name": "招聘信息",
-      "pagePath": "pages/recruit/main",
+      "pagePath": "pages/index/main",
       "icon": "static/tabs/hire.png",
       "activeIcon": "static/tabs/hire-active.png"
     },{

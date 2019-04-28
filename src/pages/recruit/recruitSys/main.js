@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './recruit'
+import App from './recruitSys'
 
 // add this to handle exception
 Vue.config.errorHandler = function (err) {
