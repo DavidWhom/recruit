@@ -74,6 +74,7 @@
     },
     data () {
       return {
+        queryId: 0
       }
     },
     methods: {
@@ -81,6 +82,8 @@
     mounted () {
       console.log('用户评论子组件')
       console.log(this._props.id)
+      this.queryId = this._props.id
+      console.log(this.queryId)
     }
   }
 </script>

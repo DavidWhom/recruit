@@ -1074,7 +1074,7 @@
               </div>
               <van-popup :show="isCommentDetailShow" position="bottom">
                 <div style="height: 100%;padding-bottom: 55px;">
-                  <comment-admin id="5"></comment-admin>
+                  <comment-admin id="5" v-if="isCommentDetailShow"></comment-admin>
                 </div>
               </van-popup>
               <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isCommentDetailShow">
@@ -1084,7 +1084,7 @@
               </div>
               <van-popup :show="isAdviceDetailShow" position="bottom">
                 <div style="height: 100%;padding-bottom: 55px;">
-                  <advice-admin id="3"></advice-admin>
+                  <advice-admin v-if="isAdviceDetailShow" id="3"></advice-admin>
                 </div>
               </van-popup>
               <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isAdviceDetailShow">
