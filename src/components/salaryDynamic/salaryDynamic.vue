@@ -102,18 +102,34 @@
 
 <script>
   export default {
+    props: {
+      keyword: {
+        type: String,
+        required: true,
+        default: 0
+      }
+    },
     data () {
       return {
-        keyword: '',
+        salaryKeyword: '',
         isSalaryDynShow: true,
         headerLocationTop: 0,
         scrollTop: 0,
-        fixed: false,
-        salaryKeyword: ''
+        fixed: false
       }
     },
     mounted () {
       console.log('mounted')
+      console.log('架子啊')
+      const this_ = this
+      let query = wx.createSelectorQuery()
+      query.select('.salary-dynamic-header').boundingClientRect(function (res) {
+        // console.log(res)
+        // section header 距离 ‘当前顶部’ 距离
+        this_.headerLocationTop = res.top + this_.scrollTop
+      }).exec()
+      this.salaryKeyword = this._props.keyword
+      console.log(this.salaryKeyword)
     },
     onPageScroll: function (e) {
       // console.log(e)
@@ -125,17 +141,6 @@
       }
     },
     onShow: function (e) {
-      console.log('架子啊')
-      const this_ = this
-      let query = wx.createSelectorQuery()
-      query.select('.salary-dynamic-header').boundingClientRect(function (res) {
-        // console.log(res)
-        // section header 距离 ‘当前顶部’ 距离
-        this_.headerLocationTop = res.top + this_.scrollTop
-      }).exec()
-      this.keyword = this.$root.$mp.query.keyword
-      console.log('keyword')
-      console.log(this.keyword)
     }
   }
 </script>

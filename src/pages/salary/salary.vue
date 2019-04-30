@@ -69,103 +69,7 @@
         </div>
       </van-tab>
       <van-tab title="薪资动态">
-        <div :class='fixed ? "salary-dynamic-header salary-dynamic-header-fixed": "salary-dynamic-header"'>
-          <div class="van-hairline--bottom salary-title-bar panel-header-number">
-            <div class="before-title-blue"></div>
-            <div class="panel-title">查看薪资动态<span> (显示最近100条)</span></div>
-          </div>
-          <van-search :value="salaryKeyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
-          background="#ffffff">
-          <view slot="action" @tap="onSearch">搜索</view>
-          </van-search>
-        </div>
-        <div v-if="fixed" class="salary-dynamic-header-placeholder"></div>
-        <div v-if="isSalaryDynShow" class="salary-dynamics">
-          <div class="salary-dynamic">
-            <div class="salary-dynamic-content">
-              <div class="salary-dynamic-left">
-                  <span class="salary-dynamic-content-first">锐捷网络</span>
-                  <span class="salary-dynamic-content-second">12k</span>
-                  <span class="salary-dynamic-content-second">硕士海归</span>
-              </div>
-              <div class="salary-dynamic-right">
-                <span class="salary-dynamic-content-first">软件开发工程师</span>
-                <span class="salary-dynamic-content-second">福州</span>
-                <span class="salary-dynamic-content-second">可信度：3</span>
-              </div>
-            </div>
-          </div>
-          <div class="salary-dynamic">
-            <div class="salary-dynamic-content">
-              <div class="salary-dynamic-left">
-                <span class="salary-dynamic-content-first">锐捷网络</span>
-                <span class="salary-dynamic-content-second">12k</span>
-                <span class="salary-dynamic-content-second">硕士海归</span>
-              </div>
-              <div class="salary-dynamic-right">
-                <span class="salary-dynamic-content-first">软件开发工程师</span>
-                <span class="salary-dynamic-content-second">福州</span>
-                <span class="salary-dynamic-content-second">可信度：3</span>
-              </div>
-            </div>
-          </div>
-          <div class="salary-dynamic">
-            <div class="salary-dynamic-content">
-              <div class="salary-dynamic-left">
-                <span class="salary-dynamic-content-first">锐捷网络</span>
-                <span class="salary-dynamic-content-second">12k</span>
-                <span class="salary-dynamic-content-second">硕士海归</span>
-              </div>
-              <div class="salary-dynamic-right">
-                <span class="salary-dynamic-content-first">软件开发工程师</span>
-                <span class="salary-dynamic-content-second">福州</span>
-                <span class="salary-dynamic-content-second">可信度：3</span>
-              </div>
-            </div>
-          </div>
-          <div class="salary-dynamic">
-            <div class="salary-dynamic-content">
-              <div class="salary-dynamic-left">
-                <span class="salary-dynamic-content-first">锐捷网络</span>
-                <span class="salary-dynamic-content-second">12k</span>
-                <span class="salary-dynamic-content-second">硕士海归</span>
-              </div>
-              <div class="salary-dynamic-right">
-                <span class="salary-dynamic-content-first">软件开发工程师</span>
-                <span class="salary-dynamic-content-second">福州</span>
-                <span class="salary-dynamic-content-second">可信度：3</span>
-              </div>
-            </div>
-          </div>
-          <div class="salary-dynamic">
-            <div class="salary-dynamic-content">
-              <div class="salary-dynamic-left">
-                <span class="salary-dynamic-content-first">锐捷网络</span>
-                <span class="salary-dynamic-content-second">12k</span>
-                <span class="salary-dynamic-content-second">硕士海归</span>
-              </div>
-              <div class="salary-dynamic-right">
-                <span class="salary-dynamic-content-first">软件开发工程师</span>
-                <span class="salary-dynamic-content-second">福州</span>
-                <span class="salary-dynamic-content-second">可信度：3</span>
-              </div>
-            </div>
-          </div>
-          <div class="salary-dynamic">
-            <div class="salary-dynamic-content">
-              <div class="salary-dynamic-left">
-                <span class="salary-dynamic-content-first">锐捷网络</span>
-                <span class="salary-dynamic-content-second">12k</span>
-                <span class="salary-dynamic-content-second">硕士海归</span>
-              </div>
-              <div class="salary-dynamic-right">
-                <span class="salary-dynamic-content-first">软件开发工程师</span>
-                <span class="salary-dynamic-content-second">福州</span>
-                <span class="salary-dynamic-content-second">可信度：3</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <salary-dynamic keyword="锐捷"></salary-dynamic>
       </van-tab>
     </van-tabs>
     <van-toast id="van-toast" />
@@ -174,8 +78,11 @@
 
 <script>
   import Toast from '../../../static/vant-weapp/dist/toast/toast'
-
+  import salaryDynamic from '@/components/salaryDynamic/salaryDynamic'
   export default {
+    components: {
+      salaryDynamic
+    },
     data () {
       return {
         company: '',
