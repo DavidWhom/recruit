@@ -69,7 +69,7 @@
         </div>
       </van-tab>
       <van-tab title="薪资动态">
-        <salary-dynamic keyword="锐捷"></salary-dynamic>
+        <salary-dynamic :keyword="salaryKeyword"></salary-dynamic>
       </van-tab>
     </van-tabs>
     <van-toast id="van-toast" />

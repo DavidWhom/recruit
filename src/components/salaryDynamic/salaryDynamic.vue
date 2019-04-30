@@ -128,6 +128,8 @@
         // section header 距离 ‘当前顶部’ 距离
         this_.headerLocationTop = res.top + this_.scrollTop
       }).exec()
+      console.log(this._props.keyword)
+      console.log('keyword')
       this.salaryKeyword = this._props.keyword
       console.log(this.salaryKeyword)
     },
@@ -141,6 +143,8 @@
       }
     },
     onShow: function (e) {
+      this.salaryKeyword = this.$root.$mp.query.keyword
+      console.log(this.salaryKeyword)
     }
   }
 </script>

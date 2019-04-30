@@ -2,7 +2,7 @@
   <div class="panel-complete">
     <div style="background-color: #ffffff;">
       <div class="salry-banner van-hairline--bottom">
-        <van-row>
+        <van-row @click="ToSalaryDynamicDetail('Java开发工程师')">
           <van-col span="8" offset="1">职位</van-col>
           <van-col span="15"><span class="blue-text">Java开发工程师 >></span></van-col>
         </van-row>
@@ -14,13 +14,13 @@
         </van-row>
       </div>
       <div class="salry-banner van-hairline--bottom">
-        <van-row>
+        <van-row @click="ToSalaryDynamicDetail('锐捷网络')">
           <van-col span="8" offset="1">企业</van-col>
           <van-col span="15"><span class="blue-text">锐捷网络 >></span></van-col>
         </van-row>
       </div>
       <div class="salry-banner van-hairline--bottom">
-        <van-row>
+        <van-row @click="ToSalaryDynamicDetail('福州')">
           <van-col span="8" offset="1">城市</van-col>
           <van-col span="15"><span class="blue-text">福州 >></span></van-col>
         </van-row>
@@ -98,6 +98,7 @@
 </template>
 
 <script>
+  import {navigateTo} from '../../../../../recruit/src/utils/wxApiPack.js'
   export default {
     data () {
       return {
@@ -105,6 +106,11 @@
       }
     },
     mounted () {
+    },
+    methods: {
+      ToSalaryDynamicDetail (keyword) {
+        navigateTo('../salaryDynamic/main?keyword=' + keyword)
+      }
     }
   }
 </script>

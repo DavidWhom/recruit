@@ -3,6 +3,7 @@
     "pages/index/main",
     "pages/salary/main",
     "pages/salary/salaryDetail/main",
+    "pages/salary/salaryDynamic/main",
     "pages/mine/main",
     "pages/mine/headline/main",
     "pages/recruit/recruitSys/main",
