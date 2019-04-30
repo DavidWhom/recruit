@@ -1,6 +1,6 @@
 <template>
   <div @click="clickHandle">
-    <van-tabs swipeable :active="active" :change="onChange" color="#1c86ee">
+    <van-tabs swipeable :change="onChange" color="#1c86ee">
       <van-tab title="薪资爆料">
         <van-cell-group>
           <van-field
@@ -69,7 +69,9 @@
         </div>
       </van-tab>
       <van-tab title="薪资动态">
-        <salary-dynamic :keyword="salaryKeyword"></salary-dynamic>
+        <div>
+          <salary-dynamic v-show="active == 1" :keyword="salaryKeyword"></salary-dynamic>
+        </div>
       </van-tab>
     </van-tabs>
     <van-toast id="van-toast" />

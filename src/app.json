@@ -6,6 +6,7 @@
     "pages/salary/salaryDynamic/main",
     "pages/mine/main",
     "pages/mine/headline/main",
+    "pages/recruit/main",
     "pages/recruit/recruitSys/main",
     "pages/mine/salary/main",
     "pages/mine/adviceFeedback/main",
@@ -34,7 +35,7 @@
       }
     }, {
       "text": "招聘信息",
-      "pagePath": "pages/index/main",
+      "pagePath": "pages/recruit/main",
       "iconPath": "static/tabs/hire.png",
       "selectedIconPath": "static/tabs/hire-active.png"
     },{
