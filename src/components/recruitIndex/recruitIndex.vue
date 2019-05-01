@@ -26,25 +26,9 @@
         </div>
         <div style="clear: both"></div>
       </div>
-    </div>
-    <div class="data-panel recruit-content">
       <div class="recruit-content-row">
-        <div class="recruit-content-row-left">
-          <div class="van-ellipsis">Java开发工程师</div>
-        </div>
         <div class="recruit-content-row-right">
-          <div class="van-ellipsis red-text">8K-10K</div>
-        </div>
-        <div style="clear: both"></div>
-      </div>
-      <div class="recruit-content-row">
-        <div class="recruit-content-row-left">
-          <div class="recruit-content-company">深信服科技有限公司</div>
-        </div>
-        <div class="recruit-content-row-right">
-          <div class="blue-text float-right" style="margin-left: 5px">上市公司</div>
-          <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
-          <div class="blue-text float-right">深圳</div>
+          <div class="gray-text float-right">2019-04-12</div>
         </div>
         <div style="clear: both"></div>
       </div>
@@ -70,25 +54,12 @@
         </div>
         <div style="clear: both"></div>
       </div>
-    </div>
-    <div class="data-panel recruit-content">
       <div class="recruit-content-row">
         <div class="recruit-content-row-left">
-          <div class="van-ellipsis">Java开发工程师</div>
+          <div class="gray-text float-left">本科</div>
         </div>
         <div class="recruit-content-row-right">
-          <div class="van-ellipsis red-text">8K-10K</div>
-        </div>
-        <div style="clear: both"></div>
-      </div>
-      <div class="recruit-content-row">
-        <div class="recruit-content-row-left">
-          <div class="recruit-content-company">深信服科技有限公司</div>
-        </div>
-        <div class="recruit-content-row-right">
-          <div class="blue-text float-right" style="margin-left: 5px">上市公司</div>
-          <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
-          <div class="blue-text float-right">深圳</div>
+          <div class="gray-text float-right">2019-04-12</div>
         </div>
         <div style="clear: both"></div>
       </div>
@@ -114,25 +85,12 @@
         </div>
         <div style="clear: both"></div>
       </div>
-    </div>
-    <div class="data-panel recruit-content">
       <div class="recruit-content-row">
         <div class="recruit-content-row-left">
-          <div class="van-ellipsis">Java开发工程师</div>
+          <div class="gray-text float-left">本科</div>
         </div>
         <div class="recruit-content-row-right">
-          <div class="van-ellipsis red-text">8K-10K</div>
-        </div>
-        <div style="clear: both"></div>
-      </div>
-      <div class="recruit-content-row">
-        <div class="recruit-content-row-left">
-          <div class="recruit-content-company">深信服科技有限公司</div>
-        </div>
-        <div class="recruit-content-row-right">
-          <div class="blue-text float-right" style="margin-left: 5px">上市公司</div>
-          <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
-          <div class="blue-text float-right">深圳</div>
+          <div class="gray-text float-right">2019-04-12</div>
         </div>
         <div style="clear: both"></div>
       </div>
@@ -155,6 +113,108 @@
           <div class="blue-text float-right" style="margin-left: 5px">上市公司</div>
           <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
           <div class="blue-text float-right">深圳</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="gray-text float-left">本科</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="gray-text float-right">2019-04-12</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+    </div>
+    <div class="data-panel recruit-content">
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="van-ellipsis">Java开发工程师</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="van-ellipsis red-text">8K-10K</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="recruit-content-company">深信服科技有限公司</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="blue-text float-right" style="margin-left: 5px">上市公司</div>
+          <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
+          <div class="blue-text float-right">深圳</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="gray-text float-left">本科</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="gray-text float-right">2019-04-12</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+    </div>
+    <div class="data-panel recruit-content">
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="van-ellipsis">Java开发工程师</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="van-ellipsis red-text">8K-10K</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="recruit-content-company">深信服科技有限公司</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="blue-text float-right" style="margin-left: 5px">上市公司</div>
+          <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
+          <div class="blue-text float-right">深圳</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="gray-text float-left">本科</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="gray-text float-right">2019-04-12</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+    </div>
+    <div class="data-panel recruit-content">
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="van-ellipsis">Java开发工程师</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="van-ellipsis red-text">8K-10K</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="recruit-content-company">深信服科技有限公司</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="blue-text float-right" style="margin-left: 5px">上市公司</div>
+          <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
+          <div class="blue-text float-right">深圳</div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+      <div class="recruit-content-row">
+        <div class="recruit-content-row-left">
+          <div class="gray-text float-left">本科</div>
+        </div>
+        <div class="recruit-content-row-right">
+          <div class="gray-text float-right">2019-04-12</div>
         </div>
         <div style="clear: both"></div>
       </div>
@@ -249,7 +309,7 @@
     color: #1c86ee;
   }
   .gray-text {
-    color: lightgray;
+    color: darkgray;
   }
   .red-text {
     color: #ff5959;
