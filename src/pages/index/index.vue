@@ -84,6 +84,14 @@ export default {
       console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
     },
+    onSearch (event) {
+      if (event == null) {
+        return
+      }
+      this.keyword = event.mp.detail
+      console.log(this.keyword)
+      navigateTo('../recruit/recruitIndex/main?keyword=' + this.keyword)
+    },
     showRecruit () {
       navigateTo('../recruit/recruitDetail/main')
     },

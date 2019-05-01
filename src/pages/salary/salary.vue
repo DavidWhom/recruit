@@ -1,6 +1,6 @@
 <template>
   <div @click="clickHandle">
-    <van-tabs swipeable :change="onChange" color="#1c86ee">
+    <van-tabs swipeable :active="active" :change="onChange" color="#1c86ee">
       <van-tab title="薪资爆料">
         <van-cell-group>
           <van-field
