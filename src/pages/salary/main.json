@@ -11,6 +11,7 @@
     "van-cell-group": "/static/vant-weapp/dist/cell-group/index",
     "van-picker": "/static/vant-weapp/dist/picker/index",
     "van-toast": "/static/vant-weapp/dist/toast/index",
-    "van-search": "/static/vant-weapp/dist/search/index"
+    "van-search": "/static/vant-weapp/dist/search/index",
+    "van-popup": "/static/vant-weapp/dist/popup/index"
   }
 }

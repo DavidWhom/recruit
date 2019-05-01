@@ -29,28 +29,32 @@
             disabled
             @click="eduClick"
           />
-          <van-picker
-            show-toolbar
-            v-if="isEduShow"
-            title="学历"
-            :columns="educations"
-            @cancel="onCancelEdu"
-            @confirm="onConfirmEdu"
-          />
+          <van-popup :show="isEduShow" position="bottom">
+            <van-picker
+              show-toolbar
+              v-if="isEduShow"
+              title="学历"
+              :columns="educations"
+              @cancel="onCancelEdu"
+              @confirm="onConfirmEdu"
+            />
+          </van-popup>
           <van-field
             :value="industry"
             label="行业"
             disabled
             @click="indClick"
           />
-          <van-picker
-            show-toolbar
-            v-if="isIndShow"
-            title="行业"
-            :columns="industrys"
-            @cancel="onCancelInd"
-            @confirm="onConfirmInd"
-          />
+          <van-popup :show="isIndShow" position="bottom">
+            <van-picker
+              show-toolbar
+              v-if="isIndShow"
+              title="行业"
+              :columns="industrys"
+              @cancel="onCancelInd"
+              @confirm="onConfirmInd"
+            />
+          </van-popup>
           <van-field
             :value="remark"
             label="备注"
