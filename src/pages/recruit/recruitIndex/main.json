@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "招聘资讯",
+  "usingComponents": {
+    "van-button": "/static/vant-weapp/dist/button/index",
+    "van-row": "/static/vant-weapp/dist/row/index",
+    "van-col": "/static/vant-weapp/dist/col/index",
+    "van-search": "/static/vant-weapp/dist/search/index"
+  }
+}
