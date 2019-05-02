@@ -9,6 +9,7 @@ var MpvueVendorPlugin = require('webpack-mpvue-vendor-plugin')
 
 // copy from ./webpack.prod.conf.js
 var path = require('path')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
@@ -39,7 +40,11 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
-
+    // vendor.js过大，还是压缩一下比较好。小程序对500KB以上的js不做压缩，会导致整体大小超过2MB，出不了二维码
+    new UglifyJsPlugin({
+      sourceMap: true,
+      test: /vendor\.js$/i
+    }),
     // copy from ./webpack.prod.conf.js
     // extract css into its own file
     new ExtractTextPlugin({
