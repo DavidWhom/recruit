@@ -1104,7 +1104,7 @@
                           <div class="panel-title" style="font-size: 14px;">HR信息管理 - <span class="blue-text">1002 席</span></div>
                         </div>
                       </van-col>
-                      <van-col span="2" offset="7">
+                      <van-col span="2" offset="7" @click="ShowAddHR">
                         <div class="mine-management-outside">
                           <img src="../../../static/images/mine/mine-add.png" style="height: 20px;width: 20px;"/>
                         </div>
@@ -1282,6 +1282,45 @@
                   </van-row>
                 </div>
               </div>
+              <van-popup :show="isHRAddShow" position="bottom">
+                <div style="height: 100%;padding-bottom: 55px;">
+                  <van-panel>
+                    <van-row>
+                      <van-col span="11">
+                        <div class="panel-header-number">
+                          <div class="before-title-blue"></div>
+                          <div class="panel-title">添加HR</div>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </van-panel>
+                  <van-cell-group>
+                    <van-field
+                      :value="company"
+                      label="公司"
+                      placeholder="公司名称"
+                    />
+                    <van-field
+                      :value="hrName"
+                      label="HR名"
+                      placeholder="HR名称"
+                    />
+                    <van-field
+                      :value="hrTel"
+                      label="手机号"
+                      placeholder="手机号码"
+                    />
+                  </van-cell-group>
+                </div>
+              </van-popup>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isHRAddShow">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+                  <view style="width: 88px;">提交</view>
+                </van-button>
+                <van-button type="danger" @click="hideHRAdd()" style="margin-right: 5%;width: 40%;float: right">
+                  <view style="width: 88px;">取消</view>
+                </van-button>
+              </div>
               <!-- 会员信息 -->
               <div class="data-panel">
                 <div class="van-hairline--bottom van-hairline--top mine-block-title">
@@ -1291,11 +1330,6 @@
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
                           <div class="panel-title" style="font-size: 14px;">会员信息管理 - <span class="blue-text">3002 位</span></div>
-                        </div>
-                      </van-col>
-                      <van-col span="2" offset="7">
-                        <div class="mine-management-outside">
-                          <img src="../../../static/images/mine/mine-add.png" style="height: 20px;width: 20px;"/>
                         </div>
                       </van-col>
                     </van-row>
@@ -1518,7 +1552,7 @@
                           <div class="panel-title" style="font-size: 14px;">管理员信息管理 - <span class="blue-text">30 位</span></div>
                         </div>
                       </van-col>
-                      <van-col span="2" offset="7">
+                      <van-col span="2" offset="7" @click="showAddAdmin()">
                         <div class="mine-management-outside">
                           <img src="../../../static/images/mine/mine-add.png" style="height: 20px;width: 20px;"/>
                         </div>
@@ -1528,7 +1562,7 @@
                 </div>
               </div>
               <van-panel class="job-search">
-                <van-search :value="keyword" placeholder="请输入会员名/编号" use-action-slot @search="onSearch"
+                <van-search :value="keyword" placeholder="请输入管理员名/编号" use-action-slot @search="onSearch"
                             background="#ffffff">
                   <view slot="action" @tap="onSearch">搜索</view>
                 </van-search>
@@ -1696,6 +1730,40 @@
                   </van-row>
                 </div>
               </div>
+              <van-popup :show="isAdminAddShow" position="bottom">
+                <div style="height: 100%;padding-bottom: 55px;">
+                  <van-panel>
+                    <van-row>
+                      <van-col span="11">
+                        <div class="panel-header-number">
+                          <div class="before-title-blue"></div>
+                          <div class="panel-title">添加管理员</div>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </van-panel>
+                  <van-cell-group>
+                    <van-field
+                      :value="pAdminName"
+                      label="管理员名"
+                      placeholder="管理员姓名"
+                    />
+                    <van-field
+                      :value="pAdminTel"
+                      label="手机号"
+                      placeholder="手机号码"
+                    />
+                  </van-cell-group>
+                </div>
+              </van-popup>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isAdminAddShow">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+                  <view style="width: 88px;">提交</view>
+                </van-button>
+                <van-button type="danger" @click="hideAdminAdd()" style="margin-right: 5%;width: 40%;float: right">
+                  <view style="width: 88px;">取消</view>
+                </van-button>
+              </div>
             </van-tab>
           </van-tabs>
         </div>
@@ -1745,7 +1813,15 @@
         isUserAdviceShow: false,
         isUserCollectionShow: false,
         isUserCommentShow: false,
-        isUserTipoffShow: false
+        isUserTipoffShow: false,
+        isHRAddShow: false,
+        isHRDetailShow: false,
+        isVipDetailShow: false,
+        isAdminDetailShow: false,
+        isAdminAddShow: false,
+        company: '',
+        hrName: '',
+        hrTel: ''
       }
     },
 
@@ -2111,6 +2187,18 @@
       },
       hideUserTipoffPopup () {
         this.isUserTipoffShow = false
+      },
+      ShowAddHR () {
+        this.isHRAddShow = true
+      },
+      hideHRAdd () {
+        this.isHRAddShow = false
+      },
+      showAddAdmin () {
+        this.isAdminAddShow = true
+      },
+      hideAdminAdd () {
+        this.isAdminAddShow = false
       }
     },
     mounted () {

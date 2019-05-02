@@ -4,13 +4,13 @@
     "van-button": "/static/vant-weapp/dist/button/index",
     "van-panel": "/static/vant-weapp/dist/panel/index",
     "ff-canvas": "/static/@antv/f2-canvas/index",
-    "van-panel": "/static/vant-weapp/dist/panel/index",
     "van-row": "/static/vant-weapp/dist/row/index",
     "van-col": "/static/vant-weapp/dist/col/index",
     "van-tab": "/static/vant-weapp/dist/tab/index",
     "van-tabs": "/static/vant-weapp/dist/tabs/index",
+    "van-cell-group": "/static/vant-weapp/dist/cell-group/index",
+    "van-field": "/static/vant-weapp/dist/field/index",
     "van-search": "/static/vant-weapp/dist/search/index",
-    "van-popup": "/static/vant-weapp/dist/popup/index",
-    "van-notice-bar": "/static/vant-weapp/dist/notice-bar/index"
+    "van-popup": "/static/vant-weapp/dist/popup/index"
   }
 }
