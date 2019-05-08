@@ -24,7 +24,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "@types/node": "^11.13.4",
+    "@types/node": "^11.13.10",
     "flyio": "^0.6.14",
     "marked": "^0.6.2",
     "mpvue": "^2.0.0",

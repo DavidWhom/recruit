@@ -4,6 +4,7 @@
     "van-button": "/static/vant-weapp/dist/button/index",
     "van-panel": "/static/vant-weapp/dist/panel/index",
     "van-row": "/static/vant-weapp/dist/row/index",
-    "van-col": "/static/vant-weapp/dist/col/index"
+    "van-col": "/static/vant-weapp/dist/col/index",
+    "van-loading": "/static/vant-weapp/dist/loading/index"
   }
 }

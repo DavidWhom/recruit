@@ -15,30 +15,10 @@
       </div>
     </div>
     <div class="data-panel job-ads">
-      <div class="data-panel all-jobAds" @click="showRecruit">
-        <div class="job-ad">
-          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
-          <div class="job-ad-title">锐捷网络春季招聘简章</div>
-        </div>
-        <div class="job-ad">
-          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
-          <div class="job-ad-title">2019年网龙网络春季招聘简章福州专场</div>
-        </div>
-        <div class="job-ad">
-          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
-          <div class="job-ad-title">锐捷网络春季招聘简章</div>
-        </div>
-        <div class="job-ad">
-          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
-          <div class="job-ad-title">锐捷网络春季招聘简章</div>
-        </div>
-        <div class="job-ad">
-          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
-          <div class="job-ad-title">锐捷网络春季招聘简章</div>
-        </div>
-        <div class="job-ad">
-          <img class="job-ad-img" src="/static/images/index/job-ad-default.png">
-          <div class="job-ad-title">锐捷网络春季招聘简章</div>
+      <div class="data-panel all-jobAds">
+        <div class="job-ad" v-for="(item,index) in headlines" :key="index"  @click="showRecruit(item.id)">
+          <img class="job-ad-img" :src="item.cover_img === '' ? default_cover : item.cover_img">
+          <div class="job-ad-title">{{item.title}}</div>
         </div>
         <div style="clear: both"></div>
       </div>
@@ -47,8 +27,6 @@
 </template>
 
 <script>
-// import card from '@/components/card'
-
 import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
 export default {
   data () {
@@ -58,28 +36,13 @@ export default {
         nickName: 'mpvue',
         avatarUrl: 'http://mpvue.com/assets/logo.png'
       },
-      opts: {
-        // 使用延时初始化
-        // lazyLoad: true
-        // onInit: mixChartInit
-      },
-      keyword: ''
+      keyword: '',
+      headlines: {},
+      default_cover: require('../../../static/images/index/job-ad-default.png')
     }
   },
 
-  // components: {
-  //   card
-  // },
-
   methods: {
-    // bindViewTap () {
-    //   const url = '../logs/main'
-    //   if (mpvuePlatform === 'wx') {
-    //     mpvue.switchTab({ url })
-    //   } else {
-    //     mpvue.navigateTo({ url })
-    //   }
-    // },
     clickHandle (ev) {
       console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
@@ -92,26 +55,20 @@ export default {
       console.log(this.keyword)
       navigateTo('../recruit/recruitIndex/main?keyword=' + this.keyword)
     },
-    showRecruit () {
-      navigateTo('../recruit/recruitDetail/main')
+    showRecruit (id) {
+      navigateTo('../recruit/recruitDetail/main?id=' + id)
     },
-    flyioTest () {
+    getHeadlines () {
       const this_ = this
-      const requestUrl = '/testPathVariable/111'
-      const params = {
-      }
-      this_.$http.get(requestUrl, params).then(function (res) {
-        this_.keyword = res.data.data
+      const requestUrl = '/api/index/getHeadlines'
+      this_.$http.get(requestUrl).then(function (res) {
+        this_.headlines = res.data.data
       })
-      console.log(this_.keyword)
     }
   },
   mounted () {
     const this_ = this
-    this_.flyioTest()
-  },
-  created () {
-    // let app = getApp()
+    this_.getHeadlines()
   }
 }
 </script>
