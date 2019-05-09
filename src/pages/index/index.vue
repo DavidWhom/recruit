@@ -7,7 +7,6 @@
       <van-panel class="job-search">
           <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
                       background="#ffffff">
-            <view slot="action" @tap="onSearch">搜索</view>
           </van-search>
       </van-panel>
       <div class="kind-tip">
@@ -27,7 +26,7 @@
 </template>
 
 <script>
-import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
+import {switchTab, navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
 export default {
   data () {
     return {
@@ -51,9 +50,8 @@ export default {
       if (event == null) {
         return
       }
-      this.keyword = event.mp.detail
-      console.log(this.keyword)
-      navigateTo('../recruit/recruitIndex/main?keyword=' + this.keyword)
+      this.global.keyword = event.mp.detail
+      switchTab('../recruit/main')
     },
     showRecruit (id) {
       navigateTo('../recruit/recruitDetail/main?id=' + id)
@@ -64,6 +62,15 @@ export default {
       this_.$http.get(requestUrl).then(function (res) {
         this_.headlines = res.data.data
       })
+    },
+    commonInit () {
+      this.global.user.id = '1'
+      this.global.user.openId = 'augsjdgajsgdjgj11'
+      this.global.user.name = '杨过'
+      this.global.user.nickname = '远方'
+      this.global.user.avatar_url = 'http://img0.pconline.com.cn/pconline/1509/28/7007256_312_thumb.jpg'
+      this.global.user.gender = 1
+      this.global.user.type = 0
     }
   },
   mounted () {

@@ -46,138 +46,43 @@
     </div>
     <div class="data-panel" style="padding-bottom: 10px">
       <van-panel>
-        <van-row>
-        <div class="recruit-user-common">
-          <van-col span="2" offset="1">
-            <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
-          </van-col>
-          <van-col span="20">
-            <div class="recruit-user-name">Jovan_Hu</div>
-            <div class="recruit-comment-before">
-              <div class="recruit-comment-before-content">
-                置顶
+        <div class="recruit-user-common" v-for="(item, index) in comments" :key="index">
+          <van-row>
+            <van-col span="2" offset="1">
+              <img class="recruit-user-img" :src="item.avatarUrl">
+            </van-col>
+            <van-col span="16">
+              <div class="recruit-user-name">{{item.userName}}</div>
+              <div class="recruit-comment-before" v-if="item.isTop">
+                <div class="recruit-comment-before-content">
+                  置顶
+                </div>
               </div>
-            </div>
-            <div class="recruit-comment-good">
-              <img src="/static/images/recruit/recruit-good.png">
-              <span>25</span>
-            </div>
-            <div class="recruit-common-content">
-              <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
-            </div>
-          </van-col>
+            </van-col>
+            <van-col span="4">
+              <div class="recruit-comment-good">
+                <img src="/static/images/recruit/recruit-good.png">
+                <span>{{item.good}}</span>
+              </div>
+            </van-col>
+          </van-row>
+          <van-row>
+            <van-col span="20" offset="3">
+              <div class="recruit-common-content">
+                <span>{{item.content}}</span>
+              </div>
+            </van-col>
+          </van-row>
         </div>
-      </van-row>
-        <van-row>
-          <div class="recruit-user-common">
-            <van-col span="2" offset="1">
-              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
-            </van-col>
-            <van-col span="20">
-              <div class="recruit-user-name">Jovan_Hu</div>
-              <div class="recruit-comment-before">
-                <div class="recruit-comment-before-content">
-                  置顶
-                </div>
-              </div>
-              <div class="recruit-comment-good">
-                <img src="/static/images/recruit/recruit-good.png">
-                <span>25</span>
-              </div>
-              <div class="recruit-common-content">
-                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
+        <div class="van-hairline--bottom">
+          <van-row>
+            <van-col span="24">
+              <div class="normal-rol" @click="recruitMoreHandler(1)">
+                <span>留下你的精彩评论吧~</span>
               </div>
             </van-col>
-          </div>
-        </van-row>
-        <van-row>
-          <div class="recruit-user-common">
-            <van-col span="2" offset="1">
-              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
-            </van-col>
-            <van-col span="20">
-              <div class="recruit-user-name">Jovan_Hu</div>
-              <div class="recruit-comment-before">
-                <div class="recruit-comment-before-content">
-                  置顶
-                </div>
-              </div>
-              <div class="recruit-comment-good">
-                <img src="/static/images/recruit/recruit-good.png">
-                <span>25</span>
-              </div>
-              <div class="recruit-common-content">
-                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
-              </div>
-            </van-col>
-          </div>
-        </van-row>
-        <van-row>
-          <div class="recruit-user-common">
-            <van-col span="2" offset="1">
-              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
-            </van-col>
-            <van-col span="20">
-              <div class="recruit-user-name">Jovan_Hu</div>
-              <div class="recruit-comment-before">
-                <div class="recruit-comment-before-content">
-                  置顶
-                </div>
-              </div>
-              <div class="recruit-comment-good">
-                <img src="/static/images/recruit/recruit-good.png">
-                <span>25</span>
-              </div>
-              <div class="recruit-common-content">
-                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
-              </div>
-            </van-col>
-          </div>
-        </van-row>
-        <van-row>
-          <div class="recruit-user-common">
-            <van-col span="2" offset="1">
-              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
-            </van-col>
-            <van-col span="20">
-              <div class="recruit-user-name">Jovan_Hu</div>
-              <div class="recruit-comment-before">
-                <div class="recruit-comment-before-content">
-                  置顶
-                </div>
-              </div>
-              <div class="recruit-comment-good">
-                <img src="/static/images/recruit/recruit-good.png">
-                <span>25</span>
-              </div>
-              <div class="recruit-common-content">
-                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
-              </div>
-            </van-col>
-          </div>
-        </van-row>
-        <van-row>
-          <div class="recruit-user-common">
-            <van-col span="2" offset="1">
-              <img class="recruit-user-img" src="/static/images/mine/default-headimg.png">
-            </van-col>
-            <van-col span="20">
-              <div class="recruit-user-name">Jovan_Hu</div>
-              <div class="recruit-comment-before">
-                <div class="recruit-comment-before-content">
-                  置顶
-                </div>
-              </div>
-              <div class="recruit-comment-good">
-                <img src="/static/images/recruit/recruit-good.png">
-                <span>25</span>
-              </div>
-              <div class="recruit-common-content">
-                <span>评论给啊数据库收到货发卡上很快就安徽省空间的话卡上多看哈会计师的卡号</span>
-              </div>
-            </van-col>
-          </div>
-        </van-row>
+          </van-row>
+        </div>
       </van-panel>
     </div>
   </div>
@@ -196,7 +101,8 @@
         isRecruitLoading: true,
         id: '',
         recruitDetail: {},
-        isLoading: true
+        isLoading: true,
+        comments: []
       }
     },
     mounted () {
@@ -204,6 +110,7 @@
       const this_ = this
       setTimeout(function () {
         this_.getRecruitDetail()
+        this_.getRecruitComment()
       }, 1000)
     },
     methods: {
@@ -217,6 +124,13 @@
             this_.recruitDetail.content = marked(this_.recruitDetail.content)
             this_.isRecruitLoading = false
           }
+        })
+      },
+      getRecruitComment () {
+        const this_ = this
+        const requestUrl = '/api/recruit/getRecruitComment/' + this_.id
+        this_.$http.get(requestUrl).then(function (res) {
+          this_.comments = res.data.data
         })
       }
     }
@@ -266,6 +180,7 @@
   }
   .recruit-user-img {
     display: inline-block;
+    border-radius: 10rpx;
     width: 40rpx;
     height: 40rpx;
   }
@@ -310,5 +225,14 @@
   }
   .recruit-common-content span {
     font-size: 12px;
+  }
+  .normal-rol {
+    width: 100%;
+    height: 75rpx;
+    font-size: 14px;
+    text-align: center;
+    align-items: center;
+    vertical-align: center;
+    padding-top: 38rpx;
   }
 </style>

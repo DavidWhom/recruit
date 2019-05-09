@@ -9,3 +9,9 @@ export function makePhoneCall (url) {
     phoneNumber: '15859122565'
   })
 }
+
+export function switchTab (url) {
+  wx.switchTab({
+    url: url
+  })
+}
