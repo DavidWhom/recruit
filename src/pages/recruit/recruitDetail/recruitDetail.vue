@@ -14,7 +14,7 @@
               <span class="recruit-header-son">{{recruitDetail.create_time}}</span>
             </div>
           </van-col>
-          <van-col span="3">
+          <van-col span="5">
             <div class="van-ellipsis recruit-title-name">
               <img src="../../../../static/images/mine/mine-liulang.png" style="height: 15px;width: 15px;"/>
               <span class="recruit-header-son">{{recruitDetail.view}}</span>
@@ -23,7 +23,7 @@
           <van-col span="3">
             <div class="van-ellipsis recruit-title-name">
               <img src="../../../../static/images/mine/mine-fankui.png" style="height: 15px;width: 15px;"/>
-              <span class="recruit-header-son">{{recruitDetail.comment}}</span>
+              <span class="recruit-header-son">{{comments.length}}</span>
             </div>
           </van-col>
         </van-row>
@@ -39,10 +39,10 @@
     </div>
     <div class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
       <div style="height: 150px;padding: 5px 15px 15px 35px">
-        <textarea style="font-size: 14px;border:solid 1px #f8f8f8" :value="comment" rows="4" cols="50" placeholder="说点什么吧...">
+        <textarea v-model="comment" style="font-size: 14px;border:solid 1px #f8f8f8" rows="4" cols="50" placeholder="说点什么吧...">
         </textarea>
       </div>
-      <div style="text-align: center"><van-button type="info" size="small">&nbsp;&nbsp;评论&nbsp;</van-button></div>
+      <div style="text-align: center"><van-button type="info" size="small" @click="addComment">&nbsp;&nbsp;评论&nbsp;</van-button></div>
     </div>
     <div class="data-panel" style="padding-bottom: 10px">
       <van-panel>
@@ -59,9 +59,9 @@
                 </div>
               </div>
             </van-col>
-            <van-col span="4">
+            <van-col span="4" @click="good(item)">
               <div class="recruit-comment-good">
-                <img src="/static/images/recruit/recruit-good.png">
+                <img :src="item.isGooded ? goodedImg : goodImg" />
                 <span>{{item.good}}</span>
               </div>
             </van-col>
@@ -85,6 +85,7 @@
         </div>
       </van-panel>
     </div>
+    <van-toast id="van-toast" />
   </div>
 </template>
 
@@ -92,6 +93,7 @@
   import wxParse from 'mpvue-wxparse'
   import marked from 'marked'
   import {formateDate} from '../../../utils/index'
+  import Toast from '../../../../static/vant-weapp/dist/toast/toast'
   export default {
     components: {
       wxParse
@@ -102,7 +104,10 @@
         id: '',
         recruitDetail: {},
         isLoading: true,
-        comments: []
+        comments: [],
+        goodedImg: require('../../../../static/images/recruit/recruit-gooed.png'),
+        goodImg: require('../../../../static/images/recruit/recruit-good.png'),
+        comment: ''
       }
     },
     mounted () {
@@ -114,10 +119,41 @@
       }, 1000)
     },
     methods: {
+      addComment () {
+        if (this.comment.length > 100) {
+          Toast.fail('评论不能超过100字哦~')
+          return
+        }
+        const this_ = this
+        const requestUrl = '/api/recruit/addComment'
+        const params = {
+          'recruitId': this.id,
+          'userid': this.global.id,
+          'content': this.comment
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            let temp = {}
+            temp.avatarUrl = this_.global.avatarUrl
+            temp.content = this_.comment
+            temp.good = 0
+            temp.isTop = false
+            temp.userName = this_.global.name
+            this_.comments.push(temp)
+            Toast.success(res.data.data)
+          } else {
+            Toast.fail('评论失败')
+          }
+        })
+      },
       getRecruitDetail () {
         const this_ = this
-        const requestUrl = '/api/index/getRecruitDetail/' + this_.id
-        this_.$http.get(requestUrl).then(function (res) {
+        const requestUrl = '/api/index/getRecruitDetail'
+        const params = {
+          'id': this.id,
+          'userid': this.global.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
           this_.recruitDetail = res.data.data
           this_.recruitDetail.create_time = formateDate(this_.recruitDetail.create_time, 'yyyy-MM-dd')
           if (this_.recruitDetail.content_id === 1) {
@@ -128,10 +164,43 @@
       },
       getRecruitComment () {
         const this_ = this
-        const requestUrl = '/api/recruit/getRecruitComment/' + this_.id
-        this_.$http.get(requestUrl).then(function (res) {
+        const requestUrl = '/api/recruit/getRecruitComment'
+        const params = {
+          'id': this.id,
+          'userid': this.global.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
           this_.comments = res.data.data
+          for (var i = 0; i < this_.comments.length; i++) {
+            if (this_.comments[i].isGooded === null) {
+              this_.comments[i].isGooded = false
+            }
+          }
         })
+      },
+      good (item) {
+        if (item.id === undefined) {
+          Toast.fail('稍后再点赞哦~')
+          return
+        }
+        if (item.isGooded) {
+          Toast.fail('已经点赞啦~')
+          return
+        }
+        const this_ = this
+        const requestUrl = '/api/recruit/goodComment'
+        const params = {
+          'recruitId': this.id,
+          'userid': this.global.id,
+          'commentId': item.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            Toast.success(res.data.data)
+          }
+        })
+        item.isGooded = true
+        item.good = item.good + 1
       }
     }
   }

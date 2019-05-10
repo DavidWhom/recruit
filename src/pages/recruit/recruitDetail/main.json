@@ -5,6 +5,7 @@
     "van-panel": "/static/vant-weapp/dist/panel/index",
     "van-row": "/static/vant-weapp/dist/row/index",
     "van-col": "/static/vant-weapp/dist/col/index",
-    "van-loading": "/static/vant-weapp/dist/loading/index"
+    "van-loading": "/static/vant-weapp/dist/loading/index",
+    "van-toast": "/static/vant-weapp/dist/toast/index"
   }
 }
