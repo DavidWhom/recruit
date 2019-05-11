@@ -1,30 +1,34 @@
 <template>
   <div @click="clickHandle">
-    <van-tabs swipeable :active="active" :change="onChange" color="#1c86ee">
+    <van-tabs swipeable :change="onChange" color="#1c86ee">
       <van-tab title="薪资爆料">
         <van-cell-group>
           <van-field
             :value="company"
             label="公司"
             placeholder="公司名称"
+            @change="companyTextChange"
           />
           <van-field
-            :value="jobTitle"
+            v-model="jobTitle"
             label="职位"
             placeholder="职位名称"
+            @change="jobTextChange"
           />
           <van-field
-            :value="jobTitle"
+            v-model="city"
             label="城市"
             placeholder="城市，如福州"
+            @change="cityTextChange"
           />
           <van-field
-            :value="salary"
+            v-model="salary"
             label="工资"
             placeholder="薪水，如20W或者15*15"
+            @change="salaryTextChange"
           />
           <van-field
-            :value="education"
+            v-model="education"
             label="学历"
             disabled
             @click="eduClick"
@@ -56,15 +60,16 @@
             />
           </van-popup>
           <van-field
-            :value="remark"
+            v-model="remark"
             label="备注"
             placeholder="备注(希望大家真实爆料，保护隐私)"
+            @change="remarkTextChange"
           />
           <div class="remark-tip">
             <span>备注信息建议，如是否special、补贴、相关福利等等</span>
           </div>
           <div class="baoliao-button">
-            <van-button type="info" >&nbsp;&nbsp;点我爆料&nbsp;&nbsp;</van-button>
+            <van-button type="info" @click="addSalary">&nbsp;&nbsp;点我爆料&nbsp;&nbsp;</van-button>
           </div>
         </van-cell-group>
         <div class="baoliao-declare">
@@ -74,7 +79,7 @@
       </van-tab>
       <van-tab title="薪资动态">
         <div>
-          <salary-dynamic v-show="active == 1" :keyword="salaryKeyword"></salary-dynamic>
+          <salary-dynamic :keyword="keyword"></salary-dynamic>
         </div>
       </van-tab>
     </van-tabs>
@@ -94,7 +99,7 @@
         company: '',
         jobTitle: '',
         city: '',
-        salary: null,
+        salary: '',
         education: '硕士其他',
         educations: ['硕士其他', '本科其他', '本科985', '本科211', '本科海归', '硕士985', '硕士211', '硕士海归', '博士985',
           '博士211', '博士海归', '博士其他', '大专', '其他'],
@@ -105,13 +110,15 @@
           '项目|质量|高级管理', '兼职|实习|社工|其他', '其他行业'],
         isIndShow: false,
         remark: '',
-        active: 0,
         reportTabIndex: 0,
         isSalaryDynShow: true,
         headerLocationTop: 0,
         scrollTop: 0,
         fixed: false,
-        salaryKeyword: ''
+        keyword: {
+          salaryKeyword: '',
+          from: 1
+        }
       }
     },
 
@@ -120,6 +127,49 @@
     // },
 
     methods: {
+      companyTextChange (e) {
+        this.company = e.mp.detail
+      },
+      jobTextChange (e) {
+        this.jobTitle = e.mp.detail
+      },
+      remarkTextChange (e) {
+        this.remark = e.mp.detail
+      },
+      salaryTextChange (e) {
+        this.salary = e.mp.detail
+      },
+      cityTextChange (e) {
+        this.city = e.mp.detail
+      },
+      addSalary () {
+        if (this.company.length === 0 || this.jobTitle.length === 0 || this.remark.length === 0 || this.salary.length === 0 || this.city.length === 0) {
+          Toast.fail('信息不全哦~')
+          return
+        }
+        if (this.remark.length > 150) {
+          Toast.fail('备注不能超过150字哦~')
+          return
+        }
+        const this_ = this
+        const requestUrl = '/api/salary/addSalary'
+        const params = {
+          'company': this.company,
+          'job': this.jobTitle,
+          'city': this.city,
+          'salary': this.salary,
+          'education': this.education,
+          'remark': this.remark,
+          'industry': this.industry
+        }
+        this_.$http.post(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            Toast.success('爆料成功')
+          } else {
+            Toast.fail('爆料失败，稍后重试哦~')
+          }
+        })
+      },
       clickHandle (ev) {
         console.log('clickHandle:', ev)
         // throw {message: 'custom test'}

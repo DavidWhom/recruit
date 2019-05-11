@@ -3,7 +3,7 @@
     <div :class='fixed ? "salary-dynamic-header salary-dynamic-header-fixed": "salary-dynamic-header"'>
       <div class="van-hairline--bottom salary-title-bar panel-header-number">
         <div class="before-title-blue"></div>
-        <div class="panel-title">查看薪资动态<span> (显示最近100条)</span></div>
+        <div class="panel-title">查看薪资动态<!--<span> (显示最近100条)</span>--></div>
       </div>
       <van-search :value="salaryKeyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
                   background="#ffffff">
@@ -11,96 +11,61 @@
       </van-search>
     </div>
     <div v-if="fixed" class="salary-dynamic-header-placeholder"></div>
-    <div v-if="isSalaryDynShow" class="salary-dynamics">
-      <div class="salary-dynamic">
-        <div class="salary-dynamic-content">
-          <div class="salary-dynamic-left">
-            <span class="salary-dynamic-content-first">锐捷网络</span>
-            <span class="salary-dynamic-content-second">12k</span>
-            <span class="salary-dynamic-content-second">硕士海归</span>
+    <div v-if="!salaryNoData" class="salary-dynamics">
+      <view class="salary-dynamic" v-for="(item,index) in salaries" :key="index" @click="toSalaryDetail(item.id)">
+        <view class="salary-dynamic-content">
+          <view class="salary-dynamic-left">
+            <span class="salary-dynamic-content-first">{{item.company}}</span>
+            <span class="salary-dynamic-content-second">{{item.salary}}</span>
+            <span class="salary-dynamic-content-second">{{item.education}}</span>
+          </view>
+          <view class="salary-dynamic-right">
+            <span class="salary-dynamic-content-first">{{item.job}}</span>
+            <span class="salary-dynamic-content-second">{{item.city}}</span>
+            <span class="salary-dynamic-content-second">可信度：{{item.auth}}</span>
+          </view>
+        </view>
+      </view>
+    </div>
+    <div style="position: fixed;bottom: 0px;background-color: #ffffff;width: 100%;text-align: center">
+      <van-row v-if="salaryMore">
+        <van-col span="8">
+          <div class="normal-rol">
           </div>
-          <div class="salary-dynamic-right">
-            <span class="salary-dynamic-content-first">软件开发工程师</span>
-            <span class="salary-dynamic-content-second">福州</span>
-            <span class="salary-dynamic-content-second">可信度：3</span>
+        </van-col>
+        <van-col span="8" v-if="salarySingleMore">
+          <div class="normal-rol" @click="salaryMoreHandler(1)">
+            <span>加载更多</span>
           </div>
-        </div>
-      </div>
-      <div class="salary-dynamic">
-        <div class="salary-dynamic-content">
-          <div class="salary-dynamic-left">
-            <span class="salary-dynamic-content-first">锐捷网络</span>
-            <span class="salary-dynamic-content-second">12k</span>
-            <span class="salary-dynamic-content-second">硕士海归</span>
+        </van-col>
+        <van-col span="8" v-if="salaryBottom">
+          <div class="normal-rol">
+            <span>没有了~</span>
           </div>
-          <div class="salary-dynamic-right">
-            <span class="salary-dynamic-content-first">软件开发工程师</span>
-            <span class="salary-dynamic-content-second">福州</span>
-            <span class="salary-dynamic-content-second">可信度：3</span>
+        </van-col>
+        <van-col span="8" v-if="salaryLess">
+          <view class="normal-rol" @click="salaryMoreHandler(2)">
+            <view style="float: right;margin-right:50px">
+              <span style="display:inline-block;margin-right: 5px">收起</span>
+              <img style="display:inline-block;width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+            </view>
+          </view>
+        </van-col>
+      </van-row>
+      <van-row v-if="salaryNoData">
+        <van-col span="24">
+          <div class="normal-rol">
+            <span>没有哦~</span>
           </div>
-        </div>
-      </div>
-      <div class="salary-dynamic">
-        <div class="salary-dynamic-content">
-          <div class="salary-dynamic-left">
-            <span class="salary-dynamic-content-first">锐捷网络</span>
-            <span class="salary-dynamic-content-second">12k</span>
-            <span class="salary-dynamic-content-second">硕士海归</span>
-          </div>
-          <div class="salary-dynamic-right">
-            <span class="salary-dynamic-content-first">软件开发工程师</span>
-            <span class="salary-dynamic-content-second">福州</span>
-            <span class="salary-dynamic-content-second">可信度：3</span>
-          </div>
-        </div>
-      </div>
-      <div class="salary-dynamic">
-        <div class="salary-dynamic-content">
-          <div class="salary-dynamic-left">
-            <span class="salary-dynamic-content-first">锐捷网络</span>
-            <span class="salary-dynamic-content-second">12k</span>
-            <span class="salary-dynamic-content-second">硕士海归</span>
-          </div>
-          <div class="salary-dynamic-right">
-            <span class="salary-dynamic-content-first">软件开发工程师</span>
-            <span class="salary-dynamic-content-second">福州</span>
-            <span class="salary-dynamic-content-second">可信度：3</span>
-          </div>
-        </div>
-      </div>
-      <div class="salary-dynamic">
-        <div class="salary-dynamic-content">
-          <div class="salary-dynamic-left">
-            <span class="salary-dynamic-content-first">锐捷网络</span>
-            <span class="salary-dynamic-content-second">12k</span>
-            <span class="salary-dynamic-content-second">硕士海归</span>
-          </div>
-          <div class="salary-dynamic-right">
-            <span class="salary-dynamic-content-first">软件开发工程师</span>
-            <span class="salary-dynamic-content-second">福州</span>
-            <span class="salary-dynamic-content-second">可信度：3</span>
-          </div>
-        </div>
-      </div>
-      <div class="salary-dynamic">
-        <div class="salary-dynamic-content">
-          <div class="salary-dynamic-left">
-            <span class="salary-dynamic-content-first">锐捷网络</span>
-            <span class="salary-dynamic-content-second">12k</span>
-            <span class="salary-dynamic-content-second">硕士海归</span>
-          </div>
-          <div class="salary-dynamic-right">
-            <span class="salary-dynamic-content-first">软件开发工程师</span>
-            <span class="salary-dynamic-content-second">福州</span>
-            <span class="salary-dynamic-content-second">可信度：3</span>
-          </div>
-        </div>
-      </div>
+        </van-col>
+      </van-row>
     </div>
   </div>
 </template>
 
 <script>
+  import {formateDate} from '../../utils/index'
+  import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
   export default {
     props: {
       keyword: {
@@ -111,11 +76,85 @@
     },
     data () {
       return {
-        salaryKeyword: '',
-        isSalaryDynShow: true,
+        keyword: {
+          salaryKeyword: '',
+          from: ''
+        },
         headerLocationTop: 0,
         scrollTop: 0,
-        fixed: false
+        fixed: false,
+        salaries: [],
+        salaryIndex: 0,
+        salaryNum: 0,
+        salaryMore: false,
+        salaryLess: false,
+        salarySingleMore: false,
+        salaryNoData: false,
+        pageNo: 1
+      }
+    },
+    methods: {
+      toSalaryDetail (id) {
+        if (this.keyword.from === 1) {
+          console.log('1')
+          navigateTo('../salary/salaryDetail/main?id=' + id)
+        } else {
+          console.log('2')
+          navigateTo('../../salary/salaryDetail/main?id=' + id)
+        }
+      },
+      salaryMoreHandler (type) {
+        if (type !== 1) {
+          this.salaries = []
+          this.salaryIndex = 0
+          this.pageNo = 1
+        }
+        this.getSalaries(10)
+      },
+      onSearch (event) {
+        if (event == null) {
+          return
+        }
+        this.salaryKeyword = event.mp.detail
+        this.salaries = []
+        this.salaryIndex = 0
+        this.pageNo = 1
+        this.getSalaries()
+      },
+      getSalaries () {
+        const requestUrl = '/api/salary/getSalarys'
+        const params = {
+          'keyword': this.salaryKeyword === undefined ? '' : this.salaryKeyword,
+          'pageSize': 10,
+          'pageNo': this.pageNo++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.salaryNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpsalary = {}
+            tmpsalary.id = tmp.id
+            tmpsalary.company = tmp.company
+            tmpsalary.city = tmp.city
+            tmpsalary.auth = tmp.auth
+            tmpsalary.education = tmp.education
+            tmpsalary.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
+            tmpsalary.salary = tmp.salary
+            tmpsalary.job = tmp.job
+            this_.salaries.push(tmpsalary)
+          }
+          console.log(this_.salaries)
+          this_.salaryIndex = this_.salaries.length
+          this_.salaryMore = this_.salaryNum > 10
+          this_.salaryBottom = this_.salaryNum === this_.salaries.length
+          this_.salaryLess = this_.salaryIndex > 10
+          this_.salarySingleMore = this_.salaryIndex < this_.salaryNum
+          this_.salaryNoData = this_.salaries.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
       }
     },
     mounted () {
@@ -130,8 +169,12 @@
       }).exec()
       console.log(this._props.keyword)
       console.log('keyword')
-      this.salaryKeyword = this._props.keyword
-      console.log(this.salaryKeyword)
+      this.keyword = this._props.keyword
+      console.log(this.keyword)
+      this_.salaries = []
+      this_.salaryIndex = 0
+      this.pageNo = 1
+      this.getSalaries()
     },
     onPageScroll: function (e) {
       // console.log(e)
@@ -143,8 +186,13 @@
       }
     },
     onShow: function (e) {
-      this.salaryKeyword = this.$root.$mp.query.keyword
-      console.log(this.salaryKeyword)
+      // this.keyword = this.$root.$mp.query.keyword
+      // console.log(this.salaryKeyword)
+      // console.log(this.from)
+      // this.salaries = []
+      // this.salaryIndex = 0
+      // this.pageNo = 1
+      // this.getSalaries()
     }
   }
 </script>
@@ -181,8 +229,7 @@
     color: darkgray;
   }
   .salary-dynamics {
-    background-color: rgba(65,65,65,0.11);
-    padding: 10rpx 10rpx;
+    padding: 10rpx 10rpx 120rpx 10rpx;
   }
   .salary-dynamic {
     background-color: #ffffff;
@@ -225,5 +272,14 @@
   .salary-dynamic-header-placeholder  {
     background-color: white;
     height: 180rpx;
+  }
+  .normal-rol {
+    width: 100%;
+    height: 75rpx;
+    font-size: 14px;
+    text-align: center;
+    align-items: center;
+    vertical-align: center;
+    padding-top: 38rpx;
   }
 </style>

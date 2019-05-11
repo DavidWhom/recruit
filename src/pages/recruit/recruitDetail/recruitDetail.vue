@@ -120,6 +120,10 @@
     },
     methods: {
       addComment () {
+        if (this.comment === undefined || this.comment.length === 0) {
+          Toast.fail('评论内容不能为空哦~')
+          return
+        }
         if (this.comment.length > 100) {
           Toast.fail('评论不能超过100字哦~')
           return
