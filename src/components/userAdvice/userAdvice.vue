@@ -10,7 +10,8 @@
   export default {
     data () {
       return {
-        id: ''
+        id: '',
+        content: ''
       }
     },
     mounted () {

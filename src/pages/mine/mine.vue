@@ -11,13 +11,13 @@
           <van-col span="8">
             <view class="member-title">
               <div class="member-circle-header">
-                <img src="/static/images/mine/default-headimg.png"/>
+                <img :src="userinfo.avatarUrl"/>
               </div>
             </view>
           </van-col>
           <van-col span="15" offset="1" class="member-complete">
             <div class="mine-title-content" style="margin-top: 38px;">
-              <span style="font-size: 18px;">Jovan佳传</span>
+              <span style="font-size: 18px;">{{userinfo.name}}</span>
               <span style="margin-left: 14px;font-size: 14px;">{{identity == 'user' ? "普通用户" : "管理员"}}</span>
               <van-button type="info" size="small" @click="changeIdentity">devTest</van-button>
             </div>
@@ -38,7 +38,7 @@
             <div class="van-ellipsis mine-title-name mine-title-list"><span>我的收藏</span></div>
           </van-col>
           <van-col span="7" offset="2">
-            <div class="mine-title-list"><span>2 个 </span></div>
+            <div class="mine-title-list"><span>{{global.recruitNum + global.salaryNum}} 个 </span></div>
           </van-col>
           <van-col offset="1" span="2">
             <div class="mine-title-content mine-title-list">
@@ -1795,6 +1795,7 @@
           // 使用延时初始化
           // lazyLoad: true
         },
+        userinfo: {},
         identity: 'admin',
         mainTendencyData: [],
         mainTendencyCount: 7,
@@ -1826,6 +1827,15 @@
     },
 
     methods: {
+      commonInit () {
+        this.userinfo.id = this.global.id
+        this.userinfo.openId = this.global.openId
+        this.userinfo.name = this.global.name
+        this.userinfo.nickname = this.global.nickname
+        this.userinfo.avatarUrl = this.global.avatarUrl
+        this.userinfo.gender = this.global.gender
+        this.userinfo.type = this.global.type
+      },
       onCancel () {},
       onConfirm () {},
       changeIdentity () {
@@ -2212,6 +2222,9 @@
     },
     created () {
       // let app = getApp()
+    },
+    onShow () {
+      this.commonInit()
     }
   }
 </script>

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "意见反馈",
   "usingComponents": {
-    "van-panel": "/static/vant-weapp/dist/panel/index"
+    "van-panel": "/static/vant-weapp/dist/panel/index",
+    "van-toast": "/static/vant-weapp/dist/toast/index"
   }
 }

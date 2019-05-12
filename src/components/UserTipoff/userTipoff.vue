@@ -6,7 +6,7 @@
           <van-col span="11">
             <div class="panel-header-number">
               <div class="before-title-blue"></div>
-              <div class="panel-title">我的爆料 - <span class="blue-text">5 条</span></div>
+              <div class="panel-title">我的爆料 - <span class="blue-text">{{tipNum}} 条</span></div>
             </div>
           </van-col>
         </van-row>
@@ -37,13 +37,13 @@
               </van-col>
             </van-row>
           </div>
-          <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
+          <div style="width: 100%;"  v-for="(item, index) in tips" :key="index" @click="toSalaryDetail(item.id)" class="van-hairline--bottom mine-title-tr">
             <van-row>
               <van-col span="8" offset="1">
-                <div class="van-ellipsis mine-title-name mine-title-list"><span>2019-4-18 18:20</span></div>
+                <div class="van-ellipsis mine-title-name mine-title-list"><span>{{item.create_time}}</span></div>
               </van-col>
               <van-col span="9">
-                <div class="mine-title-list van-ellipsis"><span>拼多多 - Java后台 - 16*14</span></div>
+                <div class="mine-title-list van-ellipsis"><span>{{item.company}} - {{item.job}} - {{item.salary}}</span></div>
               </van-col>
               <van-col  span="3" offset="0">
                 <div class="mine-title-list van-ellipsis">
@@ -57,113 +57,37 @@
               </van-col>
             </van-row>
           </div>
-          <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
-            <van-row>
-              <van-col span="8" offset="1">
-                <div class="van-ellipsis mine-title-name mine-title-list"><span>2019-4-18 18:20</span></div>
-              </van-col>
-              <van-col span="9">
-                <div class="mine-title-list van-ellipsis"><span>拼多多 - Java后台 - 16*14</span></div>
-              </van-col>
-              <van-col  span="3" offset="0">
-                <div class="mine-title-list van-ellipsis">
-                  <span>5000</span>
-                </div>
-              </van-col>
-              <van-col offset="1" span="2">
-                <div class="mine-title-content mine-title-list">
-                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                </div>
-              </van-col>
-            </van-row>
-          </div>
-          <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
-            <van-row>
-              <van-col span="8" offset="1">
-                <div class="van-ellipsis mine-title-name mine-title-list"><span>2019-4-18 18:20</span></div>
-              </van-col>
-              <van-col span="9">
-                <div class="mine-title-list van-ellipsis"><span>拼多多 - Java后台 - 16*14</span></div>
-              </van-col>
-              <van-col  span="3" offset="0">
-                <div class="mine-title-list van-ellipsis">
-                  <span>5000</span>
-                </div>
-              </van-col>
-              <van-col offset="1" span="2">
-                <div class="mine-title-content mine-title-list">
-                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                </div>
-              </van-col>
-            </van-row>
-          </div>
-          <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
-            <van-row>
-              <van-col span="8" offset="1">
-                <div class="van-ellipsis mine-title-name mine-title-list"><span>2019-4-18 18:20</span></div>
-              </van-col>
-              <van-col span="9">
-                <div class="mine-title-list van-ellipsis"><span>拼多多 - Java后台 - 16*14</span></div>
-              </van-col>
-              <van-col  span="3" offset="0">
-                <div class="mine-title-list van-ellipsis">
-                  <span>5000</span>
-                </div>
-              </van-col>
-              <van-col offset="1" span="2">
-                <div class="mine-title-content mine-title-list">
-                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                </div>
-              </van-col>
-            </van-row>
-          </div>
-          <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
-            <van-row>
-              <van-col span="8" offset="1">
-                <div class="van-ellipsis mine-title-name mine-title-list"><span>2019-4-18 18:20</span></div>
-              </van-col>
-              <van-col span="9">
-                <div class="mine-title-list van-ellipsis"><span>拼多多 - Java后台 - 16*14</span></div>
-              </van-col>
-              <van-col  span="3" offset="0">
-                <div class="mine-title-list van-ellipsis">
-                  <span>5000</span>
-                </div>
-              </van-col>
-              <van-col offset="1" span="2">
-                <div class="mine-title-content mine-title-list">
-                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                </div>
-              </van-col>
-            </van-row>
-          </div>
-          <div style="width: 100%;" @click="showSalaryDetail()" class="van-hairline--bottom mine-title-tr">
-            <van-row>
-              <van-col span="8" offset="1">
-                <div class="van-ellipsis mine-title-name mine-title-list"><span>2019-4-18 18:20</span></div>
-              </van-col>
-              <van-col span="9">
-                <div class="mine-title-list van-ellipsis"><span>拼多多 - Java后台 - 16*14</span></div>
-              </van-col>
-              <van-col  span="3" offset="0">
-                <div class="mine-title-list van-ellipsis">
-                  <span>5000</span>
-                </div>
-              </van-col>
-              <van-col offset="1" span="2">
-                <div class="mine-title-content mine-title-list">
-                  <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                </div>
-              </van-col>
-            </van-row>
-          </div>
-          <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-            <van-row>
-              <van-col span="10" offset="10">
-                <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
-              </van-col>
-            </van-row>
-          </div>
+        </van-row>
+        <van-row v-if="tipMore">
+          <van-col span="8">
+            <div class="normal-rol">
+            </div>
+          </van-col>
+          <van-col span="8" v-if="tipSingleMore">
+            <div class="normal-rol" @click="tipMoreHandler(1)">
+              <span>加载更多</span>
+            </div>
+          </van-col>
+          <van-col span="8" v-if="tipBottom">
+            <div class="normal-rol">
+              <span>没有了~</span>
+            </div>
+          </van-col>
+          <van-col span="8" v-if="tipLess">
+            <view class="normal-rol" @click="tipMoreHandler(2)">
+              <view style="float: right;margin-right:50px">
+                <span style="display:inline-block;margin-right: 5px">收起</span>
+                <img style="display:inline-block;width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+              </view>
+            </view>
+          </van-col>
+        </van-row>
+        <van-row v-if="tipNoData">
+          <van-col span="24">
+            <div class="normal-rol">
+              <span>没有哦~</span>
+            </div>
+          </van-col>
         </van-row>
       </van-panel>
     </div>
@@ -171,13 +95,75 @@
 </template>
 
 <script>
+  import {navigateTo} from '../../utils/wxApiPack.js'
+  import {formateDate} from '../../utils/index'
   export default {
     data () {
       return {
-        id: ''
+        id: '',
+        tips: [],
+        tipIndex: 0,
+        tipNum: 0,
+        tipMore: false,
+        tipLess: false,
+        tipSingleMore: false,
+        tipNoData: false,
+        pageNo: 1
+      }
+    },
+    methods: {
+      tipMoreHandler (type) {
+        if (type !== 1) {
+          this.tips = []
+          this.tipIndex = 0
+          this.pageNo = 1
+        }
+        this.getUserSalaryTip(5)
+      },
+      toSalaryDetail (id) {
+        navigateTo('../salary/salaryDetail/main?id=' + id)
+      },
+      getUserSalaryTip (size) {
+        const requestUrl = '/api/mine/user/getUserSalaryTip'
+        const params = {
+          'userId': this.global.id,
+          'pageSize': size,
+          'pageNo': this.pageNo++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.tipNum = res.data.data.total
+          this_.global.tipNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmptip = {}
+            tmptip.id = tmp.id
+            tmptip.company = tmp.company
+            tmptip.city = tmp.city
+            tmptip.auth = tmp.auth
+            tmptip.education = tmp.education
+            tmptip.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd hh:mm')
+            tmptip.salary = tmp.salary
+            tmptip.job = tmp.job
+            this_.tips.push(tmptip)
+          }
+          this_.tipIndex = this_.tips.length
+          this_.tipMore = this_.tipNum > size
+          this_.tipBottom = this_.tipNum === this_.tips.length
+          this_.tipLess = this_.tipIndex > size
+          this_.tipSingleMore = this_.tipIndex < this_.tipNum
+          this_.tipNoData = this_.tips.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
       }
     },
     mounted () {
+      this.tips = []
+      this.tipIndex = 0
+      this.pageNo = 1
+      this.getUserSalaryTip(5)
     }
   }
 </script>
