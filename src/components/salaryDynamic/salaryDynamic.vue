@@ -27,7 +27,7 @@
         </view>
       </view>
     </div>
-    <div style="position: fixed;bottom: 0px;background-color: #ffffff;width: 100%;text-align: center">
+    <div>
       <van-row v-if="salaryMore">
         <van-col span="8">
           <div class="normal-rol">
@@ -229,7 +229,7 @@
     color: darkgray;
   }
   .salary-dynamics {
-    padding: 10rpx 10rpx 120rpx 10rpx;
+    padding: 10rpx 10rpx 10rpx 10rpx;
   }
   .salary-dynamic {
     background-color: #ffffff;

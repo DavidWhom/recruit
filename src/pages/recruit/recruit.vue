@@ -13,31 +13,31 @@
           </van-search>
         </div>
         <div v-if="fixed" class="salary-dynamic-header-placeholder"></div>
-        <div style="padding-bottom: 120rpx;">
+        <div>
           <div class="recruit-content data-panel" v-for="(item,index) in recruits" :key="index">
-          <div v-if="item.type === 0" @click="showRecruit(item.id)">
-            <div class="recruit-content-row">
-              <div class="van-ellipsis">{{item.title}}</div>
-            </div>
-            <div class="recruit-content-row">
-              <div class="recruit-content-row-left">
-                <div class="recruit-content-company">{{item.companyName}}</div>
+            <div v-if="item.type === 0" @click="showRecruit(item.id)">
+              <div class="recruit-content-row">
+                <div class="van-ellipsis">{{item.title}}</div>
               </div>
-              <div class="recruit-content-row-right">
-                <div class="blue-text float-right" style="margin-left: 5px">{{item.companyType}}</div>
-                <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
-                <div class="blue-text float-right">{{item.companyPlace}}</div>
+              <div class="recruit-content-row">
+                <div class="recruit-content-row-left">
+                  <div class="recruit-content-company">{{item.companyName}}</div>
+                </div>
+                <div class="recruit-content-row-right">
+                  <div class="blue-text float-right" style="margin-left: 5px">{{item.companyType}}</div>
+                  <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
+                  <div class="blue-text float-right">{{item.companyPlace}}</div>
+                </div>
+                <div style="clear: both"></div>
               </div>
-              <div style="clear: both"></div>
-            </div>
-            <div class="recruit-content-row">
-              <div class="recruit-content-row-right">
-                <div class="gray-text float-right">{{item.create_time}}</div>
+              <div class="recruit-content-row">
+                <div class="recruit-content-row-right">
+                  <div class="gray-text float-right">{{item.create_time}}</div>
+                </div>
+                <div style="clear: both"></div>
               </div>
-              <div style="clear: both"></div>
             </div>
-          </div>
-          <div v-if="item.type === 1" @click="showRecruit(item.id)">
+            <div v-if="item.type === 1" @click="showRecruit(item.id)">
             <div class="recruit-content-row">
               <div class="recruit-content-row-left">
                 <div class="van-ellipsis">{{item.title}}</div>
@@ -68,40 +68,40 @@
               <div style="clear: both"></div>
             </div>
           </div>
-        </div>
-        </div>
-        <div style="position: fixed;bottom: 0px;background-color: #ffffff;width: 100%;text-align: center">
-          <van-row v-if="recruitMore">
-            <van-col span="8">
-              <div class="normal-rol">
-              </div>
-            </van-col>
-            <van-col span="8" v-if="recruitSingleMore">
-              <div class="normal-rol" @click="recruitMoreHandler(1)">
-                <span>加载更多</span>
-              </div>
-            </van-col>
-            <van-col span="8" v-if="recruitBottom">
-              <div class="normal-rol">
-                <span>没有了~</span>
-              </div>
-            </van-col>
-            <van-col span="8" v-if="recruitLess">
-              <div class="normal-rol" @click="recruitMoreHandler(2)">
-                <div style="float: right;margin-right:50px">
-                  <span style="margin-right: 5px">收起</span>
-                  <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+          </div>
+          <van-panel>
+            <van-row v-if="recruitMore">
+              <van-col span="8">
+                <div class="normal-rol">
                 </div>
-              </div>
-            </van-col>
-          </van-row>
-          <van-row v-if="recruitNoData">
-            <van-col span="24">
-              <div class="normal-rol">
-                <span>没有哦~</span>
-              </div>
-            </van-col>
-          </van-row>
+              </van-col>
+              <van-col span="8" v-if="recruitSingleMore">
+                <div class="normal-rol" @click="recruitMoreHandler(1)">
+                  <span>加载更多</span>
+                </div>
+              </van-col>
+              <van-col span="8" v-if="recruitBottom">
+                <div class="normal-rol">
+                  <span>没有了~</span>
+                </div>
+              </van-col>
+              <van-col span="8" v-if="recruitLess">
+                <div class="normal-rol" @click="recruitMoreHandler(2)">
+                  <div style="float: right;margin-right:50px">
+                    <span style="margin-right: 5px">收起</span>
+                    <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                  </div>
+                </div>
+              </van-col>
+            </van-row>
+            <van-row v-if="recruitNoData">
+              <van-col span="24">
+                <div class="normal-rol">
+                  <span>没有哦~</span>
+                </div>
+              </van-col>
+            </van-row>
+          </van-panel>
         </div>
       </van-tab>
       <van-tab title="智能抓取" style="flex-basis: 20% !important;" class="mine-admin-tabs"></van-tab>
@@ -142,7 +142,7 @@
         const requestUrl = '/api/index/getRecruits'
         const params = {
           'keyword': this.jobkeyword,
-          'pageSize': 10,
+          'pageSize': size,
           'pageNo': this.pageNo++
         }
         const this_ = this
@@ -164,9 +164,9 @@
             this_.recruits.push(tmpRecruit)
           }
           this_.recruitIndex = this_.recruits.length
-          this_.recruitMore = this_.recruitNum > 10
+          this_.recruitMore = this_.recruitNum > size
           this_.recruitBottom = this_.recruitNum === this_.recruits.length
-          this_.recruitLess = this_.recruitIndex > 10
+          this_.recruitLess = this_.recruitIndex > size
           this_.recruitSingleMore = this_.recruitIndex < this_.recruitNum
           this_.recruitNoData = this_.recruits.length === 0
         }).catch(function (err) {
@@ -201,7 +201,7 @@
       this_.recruits = []
       this_.recruitIndex = 0
       this.pageNo = 1
-      this_.getRecruits()
+      this_.getRecruits(10)
     },
     onPageScroll: function (e) {
       this.scrollTop = e.scrollTop
@@ -220,7 +220,7 @@
       this_.recruits = []
       this_.recruitIndex = 0
       this.pageNo = 1
-      this_.getRecruits()
+      this_.getRecruits(10)
     }
   }
 </script>
