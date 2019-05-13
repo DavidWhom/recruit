@@ -20,7 +20,15 @@ export function formatTime (date) {
 
 export default {
   formatNumber,
-  formatTime
+  formatTime,
+  dateDiff
+}
+
+export function dateDiff (sDate1) {
+  var date2 = new Date()
+  var date1 = new Date(Date.parse(sDate1.replace(/-/g, '/')))
+  var iDays = parseInt(Math.abs(date2.getTime() - date1.getTime()) / 1000 / 60 / 60 / 24)
+  return iDays
 }
 
 export function formateDate (obj, fmt) {

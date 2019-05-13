@@ -16,21 +16,21 @@
             <van-row>
               <van-col span="5" offset="1">
                 <div class="headline-img">
-                  <div @click="headlineToRoof(item.recruit_id, index)" style="float: left;margin-left: 5px">
+                  <div @click="headlineToRoof(item.id, index)" style="float: left;margin-left: 5px">
                     <img :src="index === 0 ? headlineRoofArr.close: headlineRoofArr.normal" style="height: 19px;width: 19px;"/>
                   </div>
-                  <div @click="headlineUp(item.recruit_id, index)" style="float: left;margin-left: 5px">
+                  <div @click="headlineUp(item.id, index)" style="float: left;margin-left: 5px">
                     <img :src="index === 0 ? headlineUpArr.close: headlineUpArr.normal" style="height: 20px;width: 20px;"/>
                   </div>
-                  <div @click="headlineDown(item.recruit_id, index, headlines)" style="float: left;margin-left: 5px">
+                  <div @click="headlineDown(item.id, index)" style="float: left;margin-left: 5px">
                     <img :src="index === headlines.length - 1 ? headlineDownArr.close: headlineDownArr.normal" style="height: 20px;width: 20px;"/>
                   </div>
                 </div>
               </van-col>
-              <van-col span="18" offset="0">
-                <van-swipe-cell id="swipe-headline" right-width="65" async-close @close="onCloseHeadline(item.recruit_title,item.recruit_id, index)">
+              <van-col span="18" offset="0" @click="showRecruit(item.id)">
+                <van-swipe-cell id="swipe-headline" right-width="65" async-close @close="onCloseHeadline(item.title,item.id)">
                   <van-cell-group :border="false">
-                    <van-cell class="van-ellipsis" title-width="200px" :title="item.recruit_title" value=" " :border="false" />
+                    <van-cell class="van-ellipsis" title-width="200px" :title="item.title" value=" " :border="false" />
                   </van-cell-group>
                   <view slot="right">
                     <van-button type="danger">下线</van-button>
@@ -77,17 +77,17 @@
         </div>
       </van-panel>
       <van-panel>
-        <div v-for="(item,index) in headlines" :key="index" class="van-hairline--bottom">
+        <div v-for="(item,index) in recruits" :key="index" class="van-hairline--bottom">
           <van-row>
             <van-col span="4" offset="1">
               <div class="van-ellipsis" style="height: 44px;">
-                <div class="mine-headline-recruit-id">{{item.recruit_id}}</div>
+                <div class="mine-headline-recruit-id">{{item.id}}</div>
               </div>
             </van-col>
             <van-col span="19" offset="0">
-              <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="upHeadline(item.recruit_title,item.recruit_id, index)">
+              <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="upHeadline(item.title,item.id)">
                 <van-cell-group :border="false">
-                  <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + '：' + item.recruit_title" :border="false" />
+                  <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + '：' + item.title" :border="false" />
                 </van-cell-group>
                 <view slot="right">
                   <van-button type="info">上线</van-button>
@@ -97,20 +97,53 @@
           </van-row>
         </div>
       </van-panel>
+      <van-panel>
+        <van-row v-if="recruitMore">
+          <van-col span="8">
+            <div class="normal-rol">
+            </div>
+          </van-col>
+          <van-col span="8" v-if="recruitSingleMore">
+            <div class="normal-rol" @click="recruitMoreHandler(1)">
+              <span>加载更多</span>
+            </div>
+          </van-col>
+          <van-col span="8" v-if="recruitBottom">
+            <div class="normal-rol">
+              <span>没有了~</span>
+            </div>
+          </van-col>
+          <van-col span="8" v-if="recruitLess">
+            <div class="normal-rol" @click="recruitMoreHandler(2)">
+              <div style="float: right;margin-right:50px">
+                <span style="margin-right: 5px">收起</span>
+                <img style="width: 14px; height:8px;" src="../../../../static/images/recruit/collapse-up.png"/>
+              </div>
+            </div>
+          </van-col>
+        </van-row>
+        <van-row v-if="recruitNoData">
+          <van-col span="24">
+            <div class="normal-rol">
+              <span>没有哦~</span>
+            </div>
+          </van-col>
+        </van-row>
+      </van-panel>
+      <van-toast id="van-toast" />
     </div>
 </template>
 
 <script>
   import Dialog from '../../../../static/vant-weapp/dist/dialog/dialog'
+  import Toast from '../../../../static/vant-weapp/dist/toast/toast'
+  import {navigateTo} from '../../../../../recruit/src/utils/wxApiPack.js'
+  import {formateDate} from '../../../utils/index'
   export default {
     data () {
       return {
         id: '',
-        headlines: [{'recruit_id': 444441200, 'recruit_title': '锐捷网络2019届春季招聘', 'create_time': '2019-04-13'},
-          {'recruit_id': 444441201, 'recruit_title': '深信服2019届春季补招暨2020届实习生招聘', 'create_time': '2019-04-12'},
-          {'recruit_id': 444441202, 'recruit_title': '星网锐捷升腾资讯招聘', 'create_time': '2019-04-08'},
-          {'recruit_id': 444441203, 'recruit_title': '吉比特游戏公司（广州）招聘研发岗位', 'create_time': '2019-04-08'},
-          {'recruit_id': 444441204, 'recruit_title': '4399（厦门）2019届春季招聘', 'create_time': '2019-04-01'}],
+        headlines: [],
         headlineRoofArr: {
           normal: require('../../../../static/images/headline/headline-roof.png'),
           close: require('../../../../static/images/headline/headline-root-no.png')
@@ -123,45 +156,190 @@
           normal: require('../../../../static/images/headline/headline-down.png'),
           close: require('../../../../static/images/headline/headline-down-no.png')
         },
-        headlineKeyword: ''
+        headlineKeyword: '',
+        recruits: [],
+        recruitIndex: 0,
+        recruitNum: 0,
+        recruitMore: false,
+        recruitLess: false,
+        recruitSingleMore: false,
+        recruitNoData: false,
+        pageNo: 1
       }
     },
     methods: {
-      onCloseHeadline (recruitTitle, recruitId, index, event) {
+      recruitMoreHandler (type) {
+        if (type !== 1) {
+          this.recruits = []
+          this.recruitIndex = 0
+          this.pageNo = 1
+        }
+        this.getRecruits(10)
+      },
+      getRecruits (size) {
+        const requestUrl = '/api/mine/admin/getRecruitsByKeyword'
+        const params = {
+          'keyword': this.headlineKeyword,
+          'pageSize': 10,
+          'pageNo': this.pageNo++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.recruitNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpRecruit = {}
+            tmpRecruit.id = tmp.id
+            tmpRecruit.title = tmp.title
+            tmpRecruit.companyName = tmp.companyName
+            tmpRecruit.companyType = tmp.companyType
+            tmpRecruit.companyPlace = tmp.companyPlace
+            tmpRecruit.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
+            tmpRecruit.salary = tmp.salary
+            tmpRecruit.require = tmp.require
+            tmpRecruit.type = tmp.type
+            this_.recruits.push(tmpRecruit)
+          }
+          this_.recruitIndex = this_.recruits.length
+          this_.recruitMore = this_.recruitNum > 10
+          this_.recruitBottom = this_.recruitNum === this_.recruits.length
+          this_.recruitLess = this_.recruitIndex > 10
+          this_.recruitSingleMore = this_.recruitIndex < this_.recruitNum
+          this_.recruitNoData = this_.recruits.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      showRecruit (id) {
+        navigateTo('../../recruit/recruitDetail/main?id=' + id)
+      },
+      getHeadlines () {
+        const this_ = this
+        const requestUrl = '/api/index/getHeadlines'
+        this_.$http.get(requestUrl).then(function (res) {
+          const resData = res.data.data
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpHeadline = {}
+            tmpHeadline.id = tmp.id
+            tmpHeadline.title = tmp.title
+            tmpHeadline.headline_order = tmp.headline_order
+            this_.headlines.push(tmpHeadline)
+          }
+        })
+      },
+      onCloseHeadline (recruitTitle, recruitId) {
         console.log(recruitId)
         // const this_ = this
         Dialog.confirm({
           message: '确定下线' + recruitTitle + '吗？'
         }).then(() => {
+          const this_ = this
+          const requestUrl = '/api/mine/admin/downHeadline'
+          const params = {
+            'id': recruitId
+          }
+          this_.$http.get(requestUrl, params).then(function (res) {
+            if (res.data.code === 0) {
+              Toast.success('头条下线成功')
+              this_.headlines = []
+              this_.getHeadlines()
+            } else {
+              Toast.fail('头条下线失败')
+            }
+          })
         })
       },
       headlineToRoof (recruitId, index) {
         if (index === 0) {
           return
         }
-        console.log('置顶')
+        const this_ = this
+        const requestUrl = '/api/mine/admin/changeHeadlineOrder'
+        const params = {
+          'id': recruitId,
+          'order': this_.headlines[index].headline_order,
+          'type': 2
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            Toast.success('头条位置置顶成功')
+            // var top = this_.headlines[index]
+            // for (let i = index - 1; i >= 0; i--) {
+            //   this_.headlines[i].headline_order = this_.headlines[i].headline_order + 1
+            //   this_.$set(this_.headlines, i + 1, this_.headlines[i])
+            // }
+            // this_.$set(this_.headlines, 0, top)
+            // this_.headlines[0].headline_order = 1
+            this_.headlines = []
+            this_.getHeadlines()
+          } else {
+            Toast.fail('头条位置置顶失败')
+          }
+        })
       },
-      headlineUp (recruitId, index, headlines) {
+      headlineUp (recruitId, index) {
         if (index === 0) {
           return
         }
         const this_ = this
-        var temp = this_.headlines[index]
-        this_.$set(this_.headlines, index, this_.headlines[index - 1])
-        this_.$set(this_.headlines, index - 1, temp)
+        const requestUrl = '/api/mine/admin/changeHeadlineOrder'
+        const params = {
+          'id': recruitId,
+          'order': this_.headlines[index].headline_order,
+          'type': 0
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            Toast.success('头条位置上移成功')
+            // this_.headlines[index].headline_order = this_.headlines[index].headline_order - 1
+            // this_.headlines[index - 1].headline_order = this_.headlines[index - 1].headline_order + 1
+            // var temp = this_.headlines[index]
+            // this_.$set(this_.headlines, index, this_.headlines[index - 1])
+            // this_.$set(this_.headlines, index - 1, temp)
+            this_.headlines = []
+            this_.getHeadlines()
+          } else {
+            Toast.fail('头条位置上移失败')
+          }
+        })
       },
-      headlineDown (recruitId, index, headlines) {
-        if (index === headlines.length - 1) {
+      headlineDown (recruitId, index) {
+        if (index === this.headlines.length - 1) {
           return
         }
         const this_ = this
-        var temp = this_.headlines[index]
-        this_.$set(this_.headlines, index, this_.headlines[index + 1])
-        this_.$set(this_.headlines, index + 1, temp)
+        const requestUrl = '/api/mine/admin/changeHeadlineOrder'
+        const params = {
+          'id': recruitId,
+          'order': this_.headlines[index].headline_order,
+          'type': 1
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            Toast.success('头条位置下移成功')
+            // var temp = this_.headlines[index]
+            // this_.headlines[index].headline_order = this_.headlines[index].headline_order + 1
+            // this_.headlines[index - 1].headline_order = this_.headlines[index - 1].headline_order - 1
+            // this_.$set(this_.headlines, index, this_.headlines[index + 1])
+            // this_.$set(this_.headlines, index + 1, temp)
+            this_.headlines = []
+            this_.getHeadlines()
+          } else {
+            Toast.fail('头条位置下移失败')
+          }
+        })
       },
-      onSearch () {
-        const this_ = this
-        console.log(this_.headlineKeyword)
+      onSearch (event) {
+        if (event == null) {
+          return
+        }
+        this.headlineKeyword = event.mp.detail
+        this.recruits = []
+        this.recruitIndex = 0
+        this.pageNo = 1
+        this.getRecruits(10)
       },
       upHeadline (recruitTitle, recruitId, index) {
         console.log(recruitId)
@@ -169,11 +347,32 @@
         Dialog.confirm({
           message: '确定上线' + recruitTitle + '吗？'
         }).then(() => {
+          const this_ = this
+          const requestUrl = '/api/mine/admin/upHeadline'
+          const params = {
+            'id': recruitId
+          }
+          this_.$http.get(requestUrl, params).then(function (res) {
+            if (res.data.code === 0) {
+              Toast.success('头条上线成功')
+              this_.headlines = []
+              this_.getHeadlines()
+            } else {
+              Toast.fail('头条上线失败')
+            }
+          })
         })
       }
     },
     mounted () {
       this.id = this.$root.$mp.query.id
+      this.headlines = []
+      this.getHeadlines()
+
+      this.recruits = []
+      this.recruitIndex = 0
+      this.pageNo = 1
+      this.getRecruits(10)
     }
   }
 </script>
@@ -234,5 +433,14 @@
     font-size: 10px;
     line-height: 44px;
     color: #8f8f8f;
+  }
+  .normal-rol {
+    width: 100%;
+    height: 75rpx;
+    font-size: 14px;
+    text-align: center;
+    align-items: center;
+    vertical-align: center;
+    padding-top: 38rpx;
   }
 </style>

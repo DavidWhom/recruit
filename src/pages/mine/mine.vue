@@ -296,7 +296,7 @@
                       <van-col span="11">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">头条版块 - <span class="blue-text">10 条</span></div>
+                          <div class="panel-title" style="font-size: 14px;">头条版块 - <span class="blue-text">{{headlines.length}} 条</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="11">
@@ -329,118 +329,21 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" @click="showHeadlineDetail" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" v-for="(item,index) in headlines" :key="index"  @click="showRecruit(item.id)" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="13" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>{{item.title}}</span></div>
                         </van-col>
                         <van-col span="3">
-                          <div class="mine-title-list"><span>3 天 </span></div>
+                          <div class="mine-title-list"><span>{{item.dateDiff}} 天 </span></div>
                         </van-col>
                         <van-col span="4">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
+                          <div class="mine-title-list"><span>{{item.view}}</span></div>
                         </van-col>
                         <van-col offset="1" span="2">
                           <div class="mine-title-content mine-title-list">
                             <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
                           </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" @click="showHeadlineDetail" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="13" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
-                        </van-col>
-                        <van-col span="3">
-                          <div class="mine-title-list"><span>3 天 </span></div>
-                        </van-col>
-                        <van-col span="4">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" @click="showHeadlineDetail" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="13" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
-                        </van-col>
-                        <van-col span="3">
-                          <div class="mine-title-list"><span>3 天 </span></div>
-                        </van-col>
-                        <van-col span="4">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" @click="showHeadlineDetail" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="13" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
-                        </van-col>
-                        <van-col span="3">
-                          <div class="mine-title-list"><span>3 天 </span></div>
-                        </van-col>
-                        <van-col span="4">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" @click="showHeadlineDetail" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="13" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
-                        </van-col>
-                        <van-col span="3">
-                          <div class="mine-title-list"><span>3 天 </span></div>
-                        </van-col>
-                        <van-col span="4">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" @click="showHeadlineDetail" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="13" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>锐捷网络2019届春季招聘</span></div>
-                        </van-col>
-                        <van-col span="3">
-                          <div class="mine-title-list"><span>3 天 </span></div>
-                        </van-col>
-                        <van-col span="4">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="10" offset="10">
-                          <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
                         </van-col>
                       </van-row>
                     </div>
@@ -1780,6 +1683,7 @@
   import userCollection from '@/components/userCollection/userCollection'
   import userComment from '@/components/userComment/userComment'
   import userTipoff from '@/components/userTipoff/userTipoff'
+  import {dateDiff} from '../../utils/index'
   export default {
     components: {
       commentAdmin,
@@ -1822,11 +1726,32 @@
         isAdminAddShow: false,
         company: '',
         hrName: '',
-        hrTel: ''
+        hrTel: '',
+        headlines: []
       }
     },
 
     methods: {
+      showRecruit (id) {
+        navigateTo('../recruit/recruitDetail/main?id=' + id)
+      },
+      getHeadlines () {
+        const this_ = this
+        const requestUrl = '/api/index/getHeadlines'
+        this_.$http.get(requestUrl).then(function (res) {
+          const resData = res.data.data
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpHeadline = {}
+            tmpHeadline.id = tmp.id
+            tmpHeadline.view = tmp.view
+            tmpHeadline.title = tmp.title
+            tmpHeadline.create_time = tmp.create_time
+            tmpHeadline.dateDiff = dateDiff(tmp.create_time) + 1 // 第 0 天为第一天
+            this_.headlines.push(tmpHeadline)
+          }
+        })
+      },
       commonInit () {
         this.userinfo.id = this.global.id
         this.userinfo.openId = this.global.openId
@@ -2213,6 +2138,7 @@
     },
     mounted () {
       const this_ = this
+      this_.getHeadlines()
       if (this_.identity === 'admin') {
         this_.$mp.page.selectComponent('#mixMainChart-dom').init(this_.initMainChart)
         this_.$mp.page.selectComponent('#mixBLChart-dom').init(this_.initBLChart)
