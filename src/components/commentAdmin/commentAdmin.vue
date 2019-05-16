@@ -5,7 +5,8 @@
         <van-col span="13">
           <div class="panel-header-number">
             <div class="before-title-blue"></div>
-            <div class="panel-title" style="font-size: 14px;">用户评论</div>
+            <div v-if="comment.type === 1" class="panel-title" style="font-size: 14px;">用户评论</div>
+            <div v-if="comment.type === undefined" class="panel-title" style="font-size: 14px;">意见反馈</div>
           </div>
         </van-col>
       </van-row>
@@ -17,7 +18,7 @@
             发表时间
           </van-col>
           <van-col span="17" offset="0">
-            2019-02-14 09:08:21
+            {{comment.createTime}}
           </van-col>
         </van-row>
       </div>
@@ -27,36 +28,37 @@
             用户
           </van-col>
           <van-col span="17" offset="0">
-            <span class="blue-text">Jovan >></span>
+            <span class="blue-text">{{comment.userName}} >></span>
           </van-col>
         </van-row>
       </div>
       <div class="advice-son van-hairline--bottom">
         <van-row>
           <van-col span="5" offset="1">
-            发表内容
+            {{comment.type !== undefined ? "发表内容" : "反馈意见"}}
           </van-col>
           <van-col span="17" offset="0">
-            好好好哦啊好好说的hi哦啊是滴哦has的
-            好好好哦啊好好说的hi哦啊是滴哦has的
-            好好好哦啊好好说的hi哦啊是滴哦has的
+            {{comment.content}}
           </van-col>
         </van-row>
       </div>
-      <div class="advice-son van-hairline--bottom">
+      <div v-if="comment.type !== undefined && comment.good !== null" class="advice-son van-hairline--bottom">
         <van-row>
           <van-col span="5" offset="1">
             点赞数
           </van-col>
-          <van-col span="17" offset="0">23</van-col>
+          <van-col span="17" offset="0">{{comment.good}}</van-col>
         </van-row>
       </div>
-      <div class="advice-son van-hairline--bottom">
+      <div v-if = "comment.type !== undefined" class="advice-son van-hairline--bottom">
         <van-row>
           <van-col span="5" offset="1">
             发表位置
           </van-col>
-          <van-col span="17" offset="0"><span class="blue-text">深信服2019春季招聘 >></span></van-col>
+          <van-col span="17" offset="0">
+            <span v-if="comment.type === 0"class="blue-text" @click="showRecruit(comment.masterId)">{{comment.masterName}} >></span>
+            <span v-if="comment.type === 1"class="blue-text" @click="toSalaryDetail(comment.masterId)">{{comment.company + ' ' + comment.job + ' ' + comment.salary}} >></span>
+          </van-col>
         </van-row>
       </div>
     </div>
@@ -64,13 +66,10 @@
 </template>
 
 <script>
+  import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
   export default {
     props: {
-      id: {
-        type: Number,
-        required: true,
-        default: 0
-      }
+      comment: {}
     },
     data () {
       return {
@@ -78,12 +77,25 @@
       }
     },
     methods: {
+      toSalaryDetail (id) {
+        if (this.comment.from === 1) {
+          navigateTo('../salary/salaryDetail/main?id=' + id)
+          return
+        }
+        navigateTo('../../salary/salaryDetail/main?id=' + id)
+      },
+      showRecruit (id) {
+        if (this.comment.from === 1) {
+          navigateTo('../recruit/recruitDetail/main?id=' + id)
+          return
+        }
+        navigateTo('../../recruit/recruitDetail/main?id=' + id)
+      }
     },
     mounted () {
-      console.log('用户评论子组件')
-      console.log(this._props.id)
-      this.queryId = this._props.id
-      console.log(this.queryId)
+      console.log(this._props.comment)
+      this.comment = this._props.comment
+      console.log(this.comment)
     }
   }
 </script>

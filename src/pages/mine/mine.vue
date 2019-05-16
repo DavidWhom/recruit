@@ -357,7 +357,7 @@
                       <van-col span="13">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">招聘资讯 - <span class="blue-text">今日 45 条</span></div>
+                          <div class="panel-title" style="font-size: 14px;">招聘资讯 - <span class="blue-text">今日 {{recruitNum}} 条</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
@@ -390,104 +390,58 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" @click="showRecruitDetail" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" v-for="(item, index) in recruits" :key="index" @click="showRecruit(item.id)" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>{{item.create_time}}</span></div>
                         </van-col>
                         <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>锐捷网络2019年春季招聘</span></div>
+                          <div class="mine-title-list van-ellipsis"><span>{{item.title}}</span></div>
                         </van-col>
                         <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
+                          <div class="mine-title-list"><span>{{item.view}} 次 </span></div>
                         </van-col>
                         <van-col offset="1" span="2">
                           <div class="mine-title-content mine-title-list">
                             <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
                           </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>14:20:34</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>腾讯2019年春季招聘暨2020届实习生招聘</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>25998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>14:13:34</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>腾讯2019年春季招聘暨2020届实习生招聘</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>25998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>13:20:54</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>腾讯2019年春季招聘暨2020届实习生招聘</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>25998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>11:50:34</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>腾讯2019年春季招聘暨2020届实习生招聘</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>25998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="10" offset="10">
-                          <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
                         </van-col>
                       </van-row>
                     </div>
                   </van-row>
+                  <van-panel>
+                    <van-row v-if="recruitMore">
+                      <van-col span="8">
+                        <div class="normal-rol">
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="recruitSingleMore">
+                        <div class="normal-rol" @click="recruitMoreHandler(1)">
+                          <span>加载更多</span>
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="recruitBottom">
+                        <div class="normal-rol">
+                          <span>没有了~</span>
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="recruitLess">
+                        <div class="normal-rol" @click="recruitMoreHandler(2)">
+                          <div style="float: right;margin-right:50px">
+                            <span style="margin-right: 5px">收起</span>
+                            <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                          </div>
+                        </div>
+                      </van-col>
+                    </van-row>
+                    <van-row v-if="recruitNoData">
+                      <van-col span="24">
+                        <div class="normal-rol">
+                          <span>暂无数据~</span>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </van-panel>
                 </van-panel>
               </div>
               <div class="data-panel">
@@ -497,7 +451,7 @@
                       <van-col span="13">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">薪资爆料 - <span class="blue-text">今日 145 条</span></div>
+                          <div class="panel-title" style="font-size: 14px;">薪资爆料 - <span class="blue-text">今日 {{salaryNum}} 条</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
@@ -530,122 +484,58 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" @click="toSalaryDetail(111)" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" v-for="(item, index) in salaries" :key="index"  @click="showSalary(item.id)" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>{{item.create_time}}</span></div>
                         </van-col>
                         <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>拼多多 - Java后台 - 16*14</span></div>
+                          <div class="mine-title-list van-ellipsis"><span>{{item.company}} - {{item.job}} - {{item.salary}}</span></div>
                         </van-col>
                         <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
+                          <div class="mine-title-list"><span>{{item.view}} 次 </span></div>
                         </van-col>
                         <van-col offset="1" span="2">
                           <div class="mine-title-content mine-title-list">
                             <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
                           </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>美的电子商务 - 前端 - 10.5k*14-16</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>字节跳动 - 销售管培 - 11k*15</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>腾讯 - 后台实习生 - 6000 + 2000</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>上海农商银行 - IT培训生 - 12000</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-                        <van-col span="10">
-                          <div class="mine-title-list van-ellipsis"><span>宁德时代 - 大数据分析工程师 - 19.2万</span></div>
-                        </van-col>
-                        <van-col span="4" offset="1">
-                          <div class="mine-title-list"><span>5998 次 </span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="10" offset="10">
-                          <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
                         </van-col>
                       </van-row>
                     </div>
                   </van-row>
+                  <van-panel>
+                    <van-row v-if="salaryMore">
+                      <van-col span="8">
+                        <div class="normal-rol">
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="salarySingleMore">
+                        <div class="normal-rol" @click="salaryMoreHandler(1)">
+                          <span>加载更多</span>
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="salaryBottom">
+                        <div class="normal-rol">
+                          <span>没有了~</span>
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="salaryLess">
+                        <div class="normal-rol" @click="salaryMoreHandler(2)">
+                          <div style="float: right;margin-right:50px">
+                            <span style="margin-right: 5px">收起</span>
+                            <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                          </div>
+                        </div>
+                      </van-col>
+                    </van-row>
+                    <van-row v-if="salaryNoData">
+                      <van-col span="24">
+                        <div class="normal-rol">
+                          <span>暂无数据~</span>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </van-panel>
                 </van-panel>
               </div>
               <div class="data-panel">
@@ -655,7 +545,7 @@
                       <van-col span="13">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">用户评论 - <span class="blue-text">今日 14 条</span></div>
+                          <div class="panel-title" style="font-size: 14px;">用户评论 - <span class="blue-text">今日 {{commentNum}} 条</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
@@ -688,16 +578,16 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" @click="showCommentDetail" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" @click="showContentDetail(item)" v-for="(item, index) in comments" :key="index" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>{{item.createTime}}</span></div>
                         </van-col>
                         <van-col span="4" offset="0">
-                          <div class="mine-title-list van-ellipsis"><span>Jovan_Hu </span></div>
+                          <div class="mine-title-list van-ellipsis"><span>{{item.userName}} </span></div>
                         </van-col>
                         <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>支持楼主，期待这次的宣讲会，hr姐姐太可爱了</span></div>
+                          <div class="mine-title-list van-ellipsis"><span>{{item.content}}</span></div>
                         </van-col>
                         <van-col offset="1" span="2">
                           <div class="mine-title-content mine-title-list">
@@ -706,109 +596,50 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                    <van-panel>
+                      <van-row v-if="commentMore">
+                        <van-col span="8">
+                          <div class="normal-rol">
+                          </div>
                         </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
+                        <van-col span="8" v-if="commentSingleMore">
+                          <div class="normal-rol" @click="commentMoreHandler(1)">
+                            <span>加载更多</span>
+                          </div>
                         </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
+                        <van-col span="8" v-if="commentBottom">
+                          <div class="normal-rol">
+                            <span>没有了~</span>
+                          </div>
                         </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        <van-col span="8" v-if="commentLess">
+                          <div class="normal-rol" @click="commentMoreHandler(2)">
+                            <div style="float: right;margin-right:50px">
+                              <span style="margin-right: 5px">收起</span>
+                              <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                            </div>
                           </div>
                         </van-col>
                       </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                      <van-row v-if="commentNoData">
+                        <van-col span="24">
+                          <div class="normal-rol">
+                            <span>没有哦~</span>
                           </div>
                         </van-col>
                       </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="10" offset="10">
-                          <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
-                        </van-col>
-                      </van-row>
-                    </div>
+                    </van-panel>
                   </van-row>
+                  <van-popup :show="isCommentDetailShow" position="bottom">
+                    <div v-if ="isCommentDetailShow" style="height: 100%;padding-bottom: 55px;">
+                      <comment-admin :comment="comment"></comment-admin>
+                    </div>
+                  </van-popup>
+                  <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isCommentDetailShow">
+                    <van-button type="danger" @click="hideCommentDetailPopup()" style="width: 40%;">
+                      <view style="width: 88px;">取消</view>
+                    </van-button>
+                  </div>
                 </van-panel>
               </div>
               <div class="data-panel">
@@ -818,7 +649,7 @@
                       <van-col span="13">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">意见反馈 - <span class="blue-text">今日 14 条</span></div>
+                          <div class="panel-title" style="font-size: 14px;">意见反馈 - <span class="blue-text">今日 {{adviceNum}} 条</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="9">
@@ -851,145 +682,71 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" @click="showAdviceDetail" class="van-hairline--bottom mine-title-tr">
+                    <div style="width: 100%;" @click="showContentDetail(item)" v-for="(item, index) in advices" :key="index" class="van-hairline--bottom mine-title-tr">
                       <van-row>
                         <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
+                          <div class="van-ellipsis mine-title-name mine-title-list"><span>{{item.createTime}}</span></div>
                         </van-col>
 
                         <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
+                          <div class="mine-title-list"><span>{{item.userName}} </span></div>
                         </van-col>
                         <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
+                          <div class="mine-title-list van-ellipsis"><span>{{item.content}}</span></div>
                         </van-col>
                         <van-col offset="1" span="2">
                           <div class="mine-title-content mine-title-list">
                             <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
                           </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="5" offset="1">
-                          <div class="van-ellipsis mine-title-name mine-title-list"><span>18:20:34</span></div>
-                        </van-col>
-
-                        <van-col span="4" offset="0">
-                          <div class="mine-title-list"><span>Jovan_Hu </span></div>
-                        </van-col>
-                        <van-col span="11">
-                          <div class="mine-title-list van-ellipsis"><span>可以添加更多的名企招聘信息，感觉你们的界面做得还是挺棒的</span></div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="10" offset="10">
-                          <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
                         </van-col>
                       </van-row>
                     </div>
                   </van-row>
+                  <van-panel>
+                    <van-row v-if="adviceMore">
+                      <van-col span="8">
+                        <div class="normal-rol">
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="adviceSingleMore">
+                        <div class="normal-rol" @click="adviceMoreHandler(1)">
+                          <span>加载更多</span>
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="adviceBottom">
+                        <div class="normal-rol">
+                          <span>没有了~</span>
+                        </div>
+                      </van-col>
+                      <van-col span="8" v-if="adviceLess">
+                        <div class="normal-rol" @click="adviceMoreHandler(2)">
+                          <div style="float: right;margin-right:50px">
+                            <span style="margin-right: 5px">收起</span>
+                            <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                          </div>
+                        </div>
+                      </van-col>
+                    </van-row>
+                    <van-row v-if="adviceNoData">
+                      <van-col span="24">
+                        <div class="normal-rol">
+                          <span>没有哦~</span>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </van-panel>
                 </van-panel>
               </div>
-              <van-popup :show="isCommentDetailShow" position="bottom">
-                <div style="height: 100%;padding-bottom: 55px;">
-                  <comment-admin id="5" v-if="isCommentDetailShow"></comment-admin>
+              <van-popup :show="isAdviceDetailShow" position="bottom">
+                <div v-if="isAdviceDetailShow" style="height: 100%;padding-bottom: 55px;">
+                  <comment-admin :comment="comment"></comment-admin>
                 </div>
               </van-popup>
-              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isCommentDetailShow">
-                <van-button type="danger" @click="hideCommentDetailPopup()" style="width: 40%;">
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isAdviceDetailShow">
+                <van-button type="danger" @click="hideAdviceDetailPopup()" style="width: 40%;">
                   <view style="width: 88px;">取消</view>
                 </van-button>
               </div>
-              <van-popup :show="isAdviceDetailShow" position="bottom">
-                <div style="height: 100%;padding-bottom: 55px;">
-                  <advice-admin v-if="isAdviceDetailShow" id="3"></advice-admin>
-                </div>
-              </van-popup>
               <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isAdviceDetailShow">
                 <van-button type="danger" @click="hideAdviceDetailPopup()" style="width: 40%;">
                   <view style="width: 88px;">取消</view>
@@ -1670,12 +1427,14 @@
             </van-tab>
           </van-tabs>
         </div>
+        <van-toast id="van-toast" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import Toast from '../../../static/vant-weapp/dist/toast/toast'
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
   import commentAdmin from '@/components/commentAdmin/commentAdmin'
   import adviceAdmin from '@/components/adviceAdmin/adviceAdmin'
@@ -1683,7 +1442,7 @@
   import userCollection from '@/components/userCollection/userCollection'
   import userComment from '@/components/userComment/userComment'
   import userTipoff from '@/components/userTipoff/userTipoff'
-  import {dateDiff} from '../../utils/index'
+  import {dateDiff, formateDate} from '../../utils/index'
   export default {
     components: {
       commentAdmin,
@@ -1727,11 +1486,254 @@
         company: '',
         hrName: '',
         hrTel: '',
-        headlines: []
+        headlines: [],
+        // recruits
+        recruits: [],
+        recruitIndex: 0,
+        recruitNum: 0,
+        recruitMore: false,
+        recruitLess: false,
+        recruitSingleMore: false,
+        recruitNoData: false,
+        r_pageNo: 1,
+        salaries: [],
+        salaryIndex: 0,
+        salaryNum: 0,
+        salaryMore: false,
+        salaryLess: false,
+        salarySingleMore: false,
+        salaryNoData: false,
+        s_pageNo: 1,
+        comments: [],
+        commentIndex: 0,
+        commentNum: 0,
+        commentMore: false,
+        commentLess: false,
+        commentSingleMore: false,
+        commentNoData: false,
+        c_pageNo: 1,
+        comment: {},
+        advices: [],
+        advice: {},
+        adviceIndex: 0,
+        adviceNum: 0,
+        adviceMore: false,
+        adviceLess: false,
+        adviceSingleMore: false,
+        adviceNoData: false,
+        a_pageNo: 1
       }
     },
 
     methods: {
+      getAdvice (item) {
+        const this_ = this
+        const requestUrl = '/api/mine/admin/getAdvice'
+        const params = {
+          'id': item.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.comment = res.data.data
+            this_.comment.from = 1
+          } else {
+            Toast.fail('获取意见反馈详情失败')
+          }
+        })
+      },
+      getComment (item) {
+        let appendUrl = ''
+        if (item.type === 0) {
+          appendUrl = 'getRecruitComment'
+        } else {
+          appendUrl = 'getSalaryComment'
+        }
+        const this_ = this
+        const requestUrl = '/api/mine/admin/' + appendUrl
+        const params = {
+          'id': item.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.comment = res.data.data
+            this_.comment.from = 1
+          } else {
+            Toast.fail('获取评论详情失败')
+          }
+        })
+      },
+      showContentDetail (item) {
+        if (item.type === undefined) {
+          this.getAdvice(item)
+        } else {
+          this.getComment(item)
+        }
+        if (this.type === '2') {
+          this.isAdviceDetailShow = true
+          this.isCommentDetailShow = false
+          return
+        }
+        this.isCommentDetailShow = true
+        this.isAdviceDetailShow = false
+      },
+      showSalary (id) {
+        navigateTo('../salary/salaryDetail/main?id=' + id)
+      },
+      adviceMoreHandler (type) {
+        if (type !== 1) {
+          this.advices = []
+          this.adviceIndex = 0
+          this.a_pageNo = 1
+        }
+        this.getAdvices(10)
+      },
+      commentMoreHandler (type) {
+        if (type !== 1) {
+          this.comments = []
+          this.commentIndex = 0
+          this.c_pageNo = 1
+        }
+        this.getComments(5)
+      },
+      salaryMoreHandler (type) {
+        if (type !== 1) {
+          this.salaries = []
+          this.salaryIndex = 0
+          this.s_pageNo = 1
+        }
+        this.getSalaries(5)
+      },
+      recruitMoreHandler (type) {
+        if (type !== 1) {
+          this.recruits = []
+          this.recruitIndex = 0
+          this.r_pageNo = 1
+        }
+        this.getRecruits(5)
+      },
+      getRecruits (size) {
+        const requestUrl = '/api/mine/admin/getTodayRecruits'
+        const params = {
+          'pageSize': size,
+          'pageNo': this.r_pageNo++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.recruitNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpRecruit = {}
+            tmpRecruit.id = tmp.id
+            tmpRecruit.title = tmp.title
+            tmpRecruit.create_time = formateDate(tmp.create_time, 'hh:mm:ss')
+            tmpRecruit.view = tmp.view
+            this_.recruits.push(tmpRecruit)
+          }
+          this_.recruitIndex = this_.recruits.length
+          this_.recruitMore = this_.recruitNum > size
+          this_.recruitBottom = this_.recruitNum === this_.recruits.length
+          this_.recruitLess = this_.recruitIndex > size
+          this_.recruitSingleMore = this_.recruitIndex < this_.recruitNum
+          this_.recruitNoData = this_.recruits.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getSalaries (size) {
+        const requestUrl = '/api/mine/admin/getTodaySalaries'
+        const params = {
+          'pageSize': size,
+          'pageNo': this.s_pageNo++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.salaryNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpSalary = {}
+            tmpSalary.id = tmp.id
+            tmpSalary.company = tmp.company
+            tmpSalary.job = tmp.job
+            tmpSalary.salary = tmp.salary
+            tmpSalary.create_time = formateDate(tmp.create_time, 'hh:mm:ss')
+            tmpSalary.view = tmp.view
+            this_.salaries.push(tmpSalary)
+          }
+          this_.salaryIndex = this_.salaries.length
+          this_.salaryMore = this_.salaryNum > size
+          this_.salaryBottom = this_.salaryNum === this_.salaries.length
+          this_.salaryLess = this_.salaryIndex > size
+          this_.salarySingleMore = this_.salaryIndex < this_.salaryNum
+          this_.salaryNoData = this_.salaries.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getComments (size) {
+        const requestUrl = '/api/mine/admin/getTodayComments'
+        const params = {
+          'pageSize': size,
+          'pageNo': this.c_pageNo++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.commentNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpComment = {}
+            tmpComment.id = tmp.id
+            tmpComment.content = tmp.content
+            tmpComment.type = tmp.type
+            tmpComment.userId = tmp.userId
+            tmpComment.userName = tmp.userName
+            tmpComment.createTime = formateDate(tmp.createTime, 'hh:mm:ss')
+            tmpComment.masterId = tmp.masterId
+            this_.comments.push(tmpComment)
+          }
+          this_.commentIndex = this_.comments.length
+          this_.commentMore = this_.commentNum > size
+          this_.commentBottom = this_.commentNum === this_.comments.length
+          this_.commentLess = this_.commentIndex > size
+          this_.commentSingleMore = this_.commentIndex < this_.commentNum
+          this_.commentNoData = this_.comments.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getAdvices (size) {
+        const requestUrl = '/api/mine/admin/getTodayAdvices'
+        const params = {
+          'pageSize': size,
+          'pageNo': this.a_pageNo++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.adviceNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpAdvice = {}
+            tmpAdvice.id = tmp.id
+            tmpAdvice.content = tmp.content
+            tmpAdvice.userId = tmp.userId
+            tmpAdvice.userName = tmp.userName
+            tmpAdvice.createTime = formateDate(tmp.createTime, 'hh:mm:ss')
+            this_.advices.push(tmpAdvice)
+          }
+          console.log(this_.advices)
+          this_.adviceIndex = this_.advices.length
+          this_.adviceMore = this_.adviceNum > size
+          this_.adviceBottom = this_.adviceNum === this_.advices.length
+          this_.adviceLess = this_.adviceIndex > size
+          this_.adviceSingleMore = this_.adviceIndex < this_.adviceNum
+          this_.adviceNoData = this_.advices.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
       showRecruit (id) {
         navigateTo('../recruit/recruitDetail/main?id=' + id)
       },
@@ -2139,6 +2141,25 @@
     mounted () {
       const this_ = this
       this_.getHeadlines()
+      this.recruits = []
+      this.recruitIndex = 0
+      this.r_pageNo = 1
+      this.getRecruits(5)
+
+      this.salaries = []
+      this.salaryIndex = 0
+      this.s_pageNo = 1
+      this.getSalaries(5)
+
+      this.comments = []
+      this.commentIndex = 0
+      this.c_pageNo = 1
+      this.getComments(5)
+
+      this.advices = []
+      this.adviceIndex = 0
+      this.a_pageNo = 1
+      this.getAdvices(5)
       if (this_.identity === 'admin') {
         this_.$mp.page.selectComponent('#mixMainChart-dom').init(this_.initMainChart)
         this_.$mp.page.selectComponent('#mixBLChart-dom').init(this_.initBLChart)

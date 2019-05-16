@@ -50,11 +50,7 @@
 <script>
   export default {
     props: {
-      id: {
-        type: Number,
-        required: true,
-        default: 0
-      }
+      comment: {}
     },
     data () {
       return {
@@ -63,8 +59,8 @@
     methods: {
     },
     mounted () {
-      console.log('用户意见反馈子组件')
-      console.log(this._props.id)
+      console.log(this._props.comment)
+      this.comment = this._props.comment
     }
   }
 </script>

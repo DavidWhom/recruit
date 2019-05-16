@@ -7,6 +7,10 @@
     "van-swipe-cell": "/static/vant-weapp/dist/swipe-cell/index",
     "van-cell": "/static/vant-weapp/dist/cell/index",
     "van-cell-group": "/static/vant-weapp/dist/cell-group/index",
-    "van-search": "/static/vant-weapp/dist/search/index"
+    "van-search": "/static/vant-weapp/dist/search/index",
+    "van-button": "/static/vant-weapp/dist/button/index",
+    "van-dialog": "/static/vant-weapp/dist/dialog/index",
+    "van-toast": "/static/vant-weapp/dist/toast/index",
+    "van-field": "/static/vant-weapp/dist/field/index"
   }
 }

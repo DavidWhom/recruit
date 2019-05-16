@@ -77,24 +77,57 @@
         </div>
       </van-panel>
       <van-panel>
-        <div v-for="(item,index) in recruits" :key="index" class="van-hairline--bottom">
+        <div style="width: 100%;" class="van-hairline--bottom headline-title">
           <van-row>
-            <van-col span="4" offset="1">
-              <div class="van-ellipsis" style="height: 44px;">
-                <div class="mine-headline-recruit-id">{{item.id}}</div>
+            <van-col  span="4" offset="1">
+              <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                <div class="recruit-pass" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>审核通过</span>
               </div>
             </van-col>
-            <van-col span="19" offset="0">
-              <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="upHeadline(item.title,item.id)">
-                <van-cell-group :border="false">
-                  <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + '：' + item.title" :border="false" />
-                </van-cell-group>
-                <view slot="right">
-                  <van-button type="info">上线</van-button>
-                </view>
-              </van-swipe-cell>
+            <van-col  span="3" offset="1">
+              <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                <div class="recruit-wait" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>待审核</span>
+              </div>
+            </van-col>
+            <van-col  span="3" offset="1">
+              <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                <div class="recruit-head" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>头条</span>
+              </div>
+            </van-col>
+            <van-col  span="3" offset="1">
+              <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                <div class="recruit-down" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>已下线</span>
+              </div>
+            </van-col>
+            <van-col  span="3" offset="1">
+              <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                <div class="recruit-reject" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>拒绝</span>
+              </div>
             </van-col>
           </van-row>
+        </div>
+      </van-panel>
+      <van-panel>
+        <div v-for="(item,index) in recruits" :key="index" class="van-hairline--bottom">
+          <div :class="item.state === 1 ? 'recruit-pass' : (item.state === 2 ? 'recruit-head' : (item.state === 3 ? 'recruit-down' : (item.state === 0 ? 'recruit-wait' : 'recruit-reject')))">
+            <van-row>
+              <van-col span="4" offset="1">
+                <div class="van-ellipsis" style="height: 44px;">
+                  <div class="mine-headline-recruit-id">{{item.id}}</div>
+                </div>
+              </van-col>
+              <van-col span="19" offset="0" @click="showRecruit(item.id)">
+                <van-swipe-cell id="swipe-recruit" right-width="65">
+                  <van-cell-group :border="false">
+                    <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + '：' + item.title" :border="false" />
+                  </van-cell-group>
+                  <view slot="right">
+                    <van-button type="info" :disabled="item.state !== 1" @click="upHeadline(item)">上线</van-button>
+                  </view>
+                </van-swipe-cell>
+              </van-col>
+            </van-row>
+          </div>
         </div>
       </van-panel>
       <van-panel>
@@ -199,6 +232,7 @@
             tmpRecruit.salary = tmp.salary
             tmpRecruit.require = tmp.require
             tmpRecruit.type = tmp.type
+            tmpRecruit.state = tmp.state
             this_.recruits.push(tmpRecruit)
           }
           this_.recruitIndex = this_.recruits.length
@@ -341,22 +375,29 @@
         this.pageNo = 1
         this.getRecruits(10)
       },
-      upHeadline (recruitTitle, recruitId, index) {
-        console.log(recruitId)
+      upHeadline (item) {
+        if (item.state !== 1) {
+          return
+        }
         // const this_ = this
         Dialog.confirm({
-          message: '确定上线' + recruitTitle + '吗？'
+          message: '确定上线' + item.title + '吗？'
         }).then(() => {
           const this_ = this
           const requestUrl = '/api/mine/admin/upHeadline'
           const params = {
-            'id': recruitId
+            'id': item.id
           }
           this_.$http.get(requestUrl, params).then(function (res) {
             if (res.data.code === 0) {
               Toast.success('头条上线成功')
               this_.headlines = []
               this_.getHeadlines()
+
+              this.recruits = []
+              this.recruitIndex = 0
+              this.pageNo = 1
+              this.getRecruits(10)
             } else {
               Toast.fail('头条上线失败')
             }
@@ -383,6 +424,21 @@
     height: 100%;
     width: 100%;
     overflow-x:hidden;
+  }
+  .recruit-pass {
+    background: #99CC00;
+  }
+  .recruit-wait {
+    background: #ffe472;
+  }
+  .recruit-head {
+    background: #b7dbee;
+  }
+  .recruit-reject {
+    background: #eeaab5;
+  }
+  .recruit-down {
+    background: #ff4c11;
   }
   .data-panel {
     width: 100%;

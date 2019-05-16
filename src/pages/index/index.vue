@@ -16,7 +16,7 @@
     <div class="data-panel job-ads">
       <div class="data-panel all-jobAds">
         <div class="job-ad" v-for="(item,index) in headlines" :key="index"  @click="showRecruit(item.id)">
-          <img class="job-ad-img" :src="item.cover_img === '' ? default_cover : item.cover_img">
+          <img class="job-ad-img" :src="item.cover_img === '' || item.cover_img === null  ? default_cover : item.cover_img">
           <div class="job-ad-title">{{item.title}}</div>
         </div>
         <div style="clear: both"></div>

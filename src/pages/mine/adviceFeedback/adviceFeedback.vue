@@ -39,143 +39,132 @@
           </van-row>
         </div>
       </van-panel>
-      <div class="van-hairline--bottom" @click="showContentDetail">
+      <van-panel v-if="type === 1">
+        <div style="width: 100%;" class="van-hairline--bottom headline-title">
+          <van-row>
+            <van-col span="4" offset="1">
+              <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                <div class="recruit-head" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>资讯</span>
+              </div>
+            </van-col>
+            <van-col span="3" offset="1">
+              <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                <div class="recruit-wait" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>爆料</span>
+              </div>
+            </van-col>
+          </van-row>
+        </div>
+      </van-panel>
+      <div class="van-hairline--bottom" @click="showContentDetail(item)" v-for="(item, index) in comments" :key="index">
+        <div :class="item.type === 0 ? 'recruit-head' : 'recruit-wait'">
+          <van-row>
+            <van-col span="3" offset="1">
+              <div class="van-ellipsis" style="height: 44px;">
+                <div class="mine-headline-recruit-id">{{item.id}}</div>
+              </div>
+            </van-col>
+            <van-col span="20" offset="0">
+              <van-swipe-cell id="swipe-recruit" right-width="65" async-close>
+                <van-cell-group :border="false">
+                  <van-cell class="van-ellipsis" title-width="200px" :title="item.createTime + ' ' + item.userName + ' ' + item.content" :border="false" />
+                </van-cell-group>
+                <view slot="right">
+                  <van-button type="danger" @click="deleteComment(item)">删除</van-button>
+                </view>
+              </van-swipe-cell>
+            </van-col>
+          </van-row>
+        </div>
+      </div>
+      <div class="van-hairline--bottom" @click="showContentDetail(item)" v-for="(item, index) in advices" :key="index">
         <van-row>
           <van-col span="3" offset="1">
             <div class="van-ellipsis" style="height: 44px;">
-              <div class="mine-headline-recruit-id">22222</div>
+              <div class="mine-headline-recruit-id">{{item.id}}</div>
             </div>
           </van-col>
           <van-col span="20" offset="0">
-            <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="">
+            <van-swipe-cell id="swipe-recruit" right-width="65" async-close>
               <van-cell-group :border="false">
-                <van-cell class="van-ellipsis" title-width="200px" title="2019-03-14 Jovan_Hu 点触科技2019年校园招聘" :border="false" />
+                <van-cell class="van-ellipsis" title-width="200px" :title="item.createTime + ' ' + item.userName + ' ' + item.content" :border="false" />
               </van-cell-group>
               <view slot="right">
-                <van-button type="danger">删除</van-button>
+                <van-button type="danger" @click="deleteAdvice(item)">删除</van-button>
               </view>
             </van-swipe-cell>
           </van-col>
         </van-row>
       </div>
-      <div class="van-hairline--bottom">
-        <van-row>
-          <van-col span="3" offset="1">
-            <div class="van-ellipsis" style="height: 44px;">
-              <div class="mine-headline-recruit-id">22222</div>
+      <van-panel>
+        <van-row v-if="commentMore">
+          <van-col span="8">
+            <div class="normal-rol">
             </div>
           </van-col>
-          <van-col span="20" offset="0">
-            <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="">
-              <van-cell-group :border="false">
-                <van-cell class="van-ellipsis" title-width="200px" title="2019-03-14 Jovan_Hu 点触科技2019年校园招聘" :border="false" />
-              </van-cell-group>
-              <view slot="right">
-                <van-button type="danger">删除</van-button>
-              </view>
-            </van-swipe-cell>
-          </van-col>
-        </van-row>
-      </div>
-      <div class="van-hairline--bottom">
-        <van-row>
-          <van-col span="3" offset="1">
-            <div class="van-ellipsis" style="height: 44px;">
-              <div class="mine-headline-recruit-id">22222</div>
+          <van-col span="8" v-if="commentSingleMore">
+            <div class="normal-rol" @click="commentMoreHandler(1)">
+              <span>加载更多</span>
             </div>
           </van-col>
-          <van-col span="20" offset="0">
-            <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="">
-              <van-cell-group :border="false">
-                <van-cell class="van-ellipsis" title-width="200px" title="2019-03-14 Jovan_Hu 点触科技2019年校园招聘" :border="false" />
-              </van-cell-group>
-              <view slot="right">
-                <van-button type="danger">删除</van-button>
-              </view>
-            </van-swipe-cell>
-          </van-col>
-        </van-row>
-      </div>
-      <div class="van-hairline--bottom">
-        <van-row>
-          <van-col span="3" offset="1">
-            <div class="van-ellipsis" style="height: 44px;">
-              <div class="mine-headline-recruit-id">22222</div>
+          <van-col span="8" v-if="commentBottom">
+            <div class="normal-rol">
+              <span>没有了~</span>
             </div>
           </van-col>
-          <van-col span="20" offset="0">
-            <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="">
-              <van-cell-group :border="false">
-                <van-cell class="van-ellipsis" title-width="200px" title="2019-03-14 Jovan_Hu 点触科技2019年校园招聘" :border="false" />
-              </van-cell-group>
-              <view slot="right">
-                <van-button type="danger">删除</van-button>
-              </view>
-            </van-swipe-cell>
-          </van-col>
-        </van-row>
-      </div>
-      <div class="van-hairline--bottom">
-        <van-row>
-          <van-col span="3" offset="1">
-            <div class="van-ellipsis" style="height: 44px;">
-              <div class="mine-headline-recruit-id">22222</div>
+          <van-col span="8" v-if="commentLess">
+            <div class="normal-rol" @click="commentMoreHandler(2)">
+              <div style="float: right;margin-right:50px">
+                <span style="margin-right: 5px">收起</span>
+                <img style="width: 14px; height:8px;" src="../../../../static/images/recruit/collapse-up.png"/>
+              </div>
             </div>
           </van-col>
-          <van-col span="20" offset="0">
-            <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="">
-              <van-cell-group :border="false">
-                <van-cell class="van-ellipsis" title-width="200px" title="2019-03-14 Jovan_Hu 点触科技2019年校园招聘" :border="false" />
-              </van-cell-group>
-              <view slot="right">
-                <van-button type="danger">删除</van-button>
-              </view>
-            </van-swipe-cell>
-          </van-col>
         </van-row>
-      </div>
-      <div class="van-hairline--bottom">
-        <van-row>
-          <van-col span="3" offset="1">
-            <div class="van-ellipsis" style="height: 44px;">
-              <div class="mine-headline-recruit-id">22222</div>
+        <van-row v-if="commentNoData">
+          <van-col span="24">
+            <div class="normal-rol">
+              <span>没有哦~</span>
             </div>
           </van-col>
-          <van-col span="20" offset="0">
-            <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="">
-              <van-cell-group :border="false">
-                <van-cell class="van-ellipsis" title-width="200px" title="2019-03-14 Jovan_Hu 点触科技2019年校园招聘" :border="false" />
-              </van-cell-group>
-              <view slot="right">
-                <van-button type="danger">删除</van-button>
-              </view>
-            </van-swipe-cell>
-          </van-col>
         </van-row>
-      </div>
-      <div class="van-hairline--bottom">
-        <van-row>
-          <van-col span="3" offset="1">
-            <div class="van-ellipsis" style="height: 44px;">
-              <div class="mine-headline-recruit-id">22222</div>
+      </van-panel>
+      <van-panel>
+        <van-row v-if="adviceMore">
+          <van-col span="8">
+            <div class="normal-rol">
             </div>
           </van-col>
-          <van-col span="20" offset="0">
-            <van-swipe-cell id="swipe-recruit" right-width="65" async-close @close="">
-              <van-cell-group :border="false">
-                <van-cell class="van-ellipsis" title-width="200px" title="2019-03-14 Jovan_Hu 点触科技2019年校园招聘" :border="false" />
-              </van-cell-group>
-              <view slot="right">
-                <van-button type="danger">删除</van-button>
-              </view>
-            </van-swipe-cell>
+          <van-col span="8" v-if="adviceSingleMore">
+            <div class="normal-rol" @click="adviceMoreHandler(1)">
+              <span>加载更多</span>
+            </div>
+          </van-col>
+          <van-col span="8" v-if="adviceBottom">
+            <div class="normal-rol">
+              <span>没有了~</span>
+            </div>
+          </van-col>
+          <van-col span="8" v-if="adviceLess">
+            <div class="normal-rol" @click="adviceMoreHandler(2)">
+              <div style="float: right;margin-right:50px">
+                <span style="margin-right: 5px">收起</span>
+                <img style="width: 14px; height:8px;" src="../../../../static/images/recruit/collapse-up.png"/>
+              </div>
+            </div>
           </van-col>
         </van-row>
-      </div>
+        <van-row v-if="adviceNoData">
+          <van-col span="24">
+            <div class="normal-rol">
+              <span>没有哦~</span>
+            </div>
+          </van-col>
+        </van-row>
+      </van-panel>
     </div>
     <van-popup :show="isAdviceDetailShow" position="bottom">
-      <div style="height: 100%;padding-bottom: 55px;">
-        <advice-admin id="3"></advice-admin>
+      <div v-if="isAdviceDetailShow" style="height: 100%;padding-bottom: 55px;">
+        <comment-admin :comment="comment"></comment-admin>
       </div>
     </van-popup>
     <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isAdviceDetailShow">
@@ -184,8 +173,8 @@
       </van-button>
     </div>
     <van-popup :show="isCommentDetailShow" position="bottom">
-      <div style="height: 100%;padding-bottom: 55px;">
-        <comment-admin id="5"></comment-admin>
+      <div v-if ="isCommentDetailShow" style="height: 100%;padding-bottom: 55px;">
+        <comment-admin :comment="comment"></comment-admin>
       </div>
     </van-popup>
     <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isCommentDetailShow">
@@ -193,10 +182,15 @@
         <view style="width: 88px;">取消</view>
       </van-button>
     </div>
+    <van-toast id="van-toast" />
+    <van-dialog id="van-dialog" />
   </div>
 </template>
 
 <script>
+  import Toast from '../../../../static/vant-weapp/dist/toast/toast'
+  import Dialog from '../../../../static/vant-weapp/dist/dialog/dialog'
+  import {formateDate} from '../../../utils/index'
   import commentAdmin from '@/components/commentAdmin/commentAdmin'
   import adviceAdmin from '@/components/adviceAdmin/adviceAdmin'
   export default {
@@ -207,16 +201,252 @@
     data () {
       return {
         type: 0,
+        keyword: '',
         isAdviceDetailShow: false,
-        isCommentDetailShow: false
+        isCommentDetailShow: false,
+        comments: [],
+        commentIndex: 0,
+        commentNum: 0,
+        commentMore: false,
+        commentLess: false,
+        commentSingleMore: false,
+        commentNoData: false,
+        pageNo: 1,
+        comment: {},
+        advices: [],
+        adviceIndex: 0,
+        adviceNum: 0,
+        adviceMore: false,
+        adviceLess: false,
+        adviceSingleMore: false,
+        adviceNoData: false,
+        pageNo_: 1
       }
     },
     mounted () {
       console.log('mounted')
+      if (this.type === '1') {
+        this.comments = []
+        this.commentIndex = 0
+        this.pageNo = 1
+        this.getComments(10)
+      } else {
+        this.advices = []
+        this.adviceIndex = 0
+        this.pageNo_ = 1
+        this.getAdvices(10)
+      }
     },
     methods: {
-      showContentDetail () {
-        console.log(this.type)
+      commonInit () {
+        this.comments = []
+        this.commentIndex = 0
+        this.pageNo = 1
+        this.advices = []
+        this.adviceIndex = 0
+        this.pageNo_ = 1
+        this.adviceNum = 0
+        this.adviceMore = false
+        this.adviceLess = false
+        this.adviceSingleMore = false
+        this.adviceNoData = false
+        this.commentNum = 0
+        this.commentMore = false
+        this.commentLess = false
+        this.commentSingleMore = false
+        this.commentNoData = false
+      },
+      adviceMoreHandler (type) {
+        if (type !== 1) {
+          this.advices = []
+          this.adviceIndex = 0
+          this.pageNo_ = 1
+        }
+        this.getAdvices(10)
+      },
+      getAdvices (size) {
+        const requestUrl = '/api/mine/admin/getAdvices'
+        const params = {
+          'keyword': this.keyword,
+          'pageSize': size,
+          'pageNo': this.pageNo_++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.adviceNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpAdvice = {}
+            tmpAdvice.id = tmp.id
+            tmpAdvice.content = tmp.content
+            tmpAdvice.userId = tmp.userId
+            tmpAdvice.userName = tmp.userName
+            tmpAdvice.createTime = formateDate(tmp.createTime, 'yyyy-MM-dd')
+            this_.advices.push(tmpAdvice)
+          }
+          console.log(this_.advices)
+          this_.adviceIndex = this_.advices.length
+          this_.adviceMore = this_.adviceNum > size
+          this_.adviceBottom = this_.adviceNum === this_.advices.length
+          this_.adviceLess = this_.adviceIndex > size
+          this_.adviceSingleMore = this_.adviceIndex < this_.adviceNum
+          this_.adviceNoData = this_.advices.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getAdvice (item) {
+        const this_ = this
+        const requestUrl = '/api/mine/admin/getAdvice'
+        const params = {
+          'id': item.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.comment = res.data.data
+            this_.comment.from = 2
+          } else {
+            Toast.fail('获取意见反馈详情失败')
+          }
+        })
+      },
+      onSearch (event) {
+        if (event == null) {
+          return
+        }
+        if (this.type === '1') {
+          this.keyword = event.mp.detail
+          this.comments = []
+          this.commentIndex = 0
+          this.pageNo = 1
+          this.getComments(10)
+        } else {
+          this.keyword = event.mp.detail
+          this.advices = []
+          this.adviceIndex = 0
+          this.pageNo_ = 1
+          this.getAdvices(10)
+        }
+      },
+      commentMoreHandler (type) {
+        if (type !== 1) {
+          this.comments = []
+          this.commentIndex = 0
+          this.pageNo = 1
+        }
+        this.getComments(10)
+      },
+      deleteAdvice (item) {
+        Dialog.confirm({
+          message: '确定删除' + item.userName + '的意见反馈吗？'
+        }).then(() => {
+          const this_ = this
+          const requestUrl = '/api/mine/admin/deleteAdvice'
+          const params = {
+            'id': item.id
+          }
+          this_.$http.get(requestUrl, params).then(function (res) {
+            if (res.data.code === 0) {
+              Toast.success('删除成功')
+              this_.advices = []
+              this_.adviceIndex_ = 0
+              this_.pageNo_ = 1
+              this_.getAdvices(10)
+            } else {
+              Toast.fail('删除失败')
+            }
+          })
+        })
+      },
+      deleteComment (item) {
+        let appendUrl = ''
+        if (item.type === 0) {
+          appendUrl = 'deleteRecruitComment'
+        } else {
+          appendUrl = 'deleteSalaryComment'
+        }
+        Dialog.confirm({
+          message: '确定删除' + item.userName + '的评论吗？'
+        }).then(() => {
+          const this_ = this
+          const requestUrl = '/api/mine/admin/' + appendUrl
+          const params = {
+            'id': item.id
+          }
+          this_.$http.get(requestUrl, params).then(function (res) {
+            if (res.data.code === 0) {
+              Toast.success('评论删除成功')
+              this_.comments = []
+              this_.commentIndex_ = 0
+              this_.pageNo = 1
+              this_.getComments(10)
+            } else {
+              Toast.fail('评论删除失败')
+            }
+          })
+        })
+      },
+      getComments (size) {
+        const requestUrl = '/api/mine/admin/getRecruitSalaryComment'
+        const params = {
+          'keyword': this.keyword,
+          'pageSize': size,
+          'pageNo': this.pageNo++
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.commentNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpComment = {}
+            tmpComment.id = tmp.id
+            tmpComment.content = tmp.content
+            tmpComment.type = tmp.type
+            tmpComment.userId = tmp.userId
+            tmpComment.userName = tmp.userName
+            tmpComment.createTime = formateDate(tmp.createTime, 'yyyy-MM-dd')
+            tmpComment.masterId = tmp.masterId
+            this_.comments.push(tmpComment)
+          }
+          this_.commentIndex = this_.comments.length
+          this_.commentMore = this_.commentNum > size
+          this_.commentBottom = this_.commentNum === this_.comments.length
+          this_.commentLess = this_.commentIndex > size
+          this_.commentSingleMore = this_.commentIndex < this_.commentNum
+          this_.commentNoData = this_.comments.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getComment (item) {
+        let appendUrl = ''
+        if (item.type === 0) {
+          appendUrl = 'getRecruitComment'
+        } else {
+          appendUrl = 'getSalaryComment'
+        }
+        const this_ = this
+        const requestUrl = '/api/mine/admin/' + appendUrl
+        const params = {
+          'id': item.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.comment = res.data.data
+            this_.comment.from = 2
+          } else {
+            Toast.fail('获取评论详情失败')
+          }
+        })
+      },
+      showContentDetail (item) {
+        if (item.type === undefined) {
+          this.getAdvice(item)
+        } else {
+          this.getComment(item)
+        }
         if (this.type === '2') {
           this.isAdviceDetailShow = true
           this.isCommentDetailShow = false
@@ -246,6 +476,18 @@
           title: '意见反馈管理'
         })
       }
+      this.commonInit()
+      if (this.type === '1') {
+        this.comments = []
+        this.commentIndex = 0
+        this.pageNo = 1
+        this.getComments(10)
+      } else {
+        this.advices = []
+        this.adviceIndex = 0
+        this.pageNo_ = 1
+        this.getAdvices(10)
+      }
     }
   }
 </script>
@@ -256,6 +498,21 @@
     height: 100%;
     width: 100%;
     overflow-x:hidden;
+  }
+  .recruit-pass {
+    background: #99CC00;
+  }
+  .recruit-wait {
+    background: #ffe472;
+  }
+  .recruit-head {
+    background: #b7dbee;
+  }
+  .recruit-reject {
+    background: #eeaab5;
+  }
+  .recruit-down {
+    background: #ff4c11;
   }
   .data-panel {
     width: 100%;
@@ -310,7 +567,15 @@
     line-height: 44px;
     color: #8f8f8f;
   }
-
+  .normal-rol {
+    width: 100%;
+    height: 75rpx;
+    font-size: 14px;
+    text-align: center;
+    align-items: center;
+    vertical-align: center;
+    padding-top: 38rpx;
+  }
   .headline-title-list {
     justify-content: center;
     align-items: flex-start;
