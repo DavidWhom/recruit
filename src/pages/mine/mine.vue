@@ -192,10 +192,10 @@
                 </van-row>
                 <van-row>
                   <van-col :span="11">
-                    <span class="large-text blue-text">103</span><span class="small-text blue-text">条</span>
+                    <span class="large-text blue-text">{{recruitTotal}}</span><span class="small-text blue-text">条</span>
                   </van-col>
                   <van-col :span="13">
-                    <span class="large-text orange-text">987</span><span class="small-text orange-text">次</span>
+                    <span class="large-text orange-text">{{visitTotal}}</span><span class="small-text orange-text">次</span>
                   </van-col>
                 </van-row>
                 <van-row>
@@ -206,9 +206,9 @@
                 </van-row>
                 <van-row>
                   <van-col :span="24">
-                    <view class="mix-chart-wrapper">
+                    <div class="mix-chart-wrapper">
                       <ff-canvas id="mixMainChart-dom" canvas-id="mixMainChart" :opts="opts"></ff-canvas>
-                    </view>
+                    </div>
                   </van-col>
                 </van-row>
               </van-panel>
@@ -219,7 +219,7 @@
                       <div class="panel-header-number van-hairline--bottom van-hairline--top">
                         <div class="before-title-blue"></div>
                         <div class="panel-title" style="font-size: 14px;">薪资爆料 -</div>
-                        <span class="medim-text blue-text"> 14条</span>
+                        <span class="medim-text blue-text"> {{salaryTotal}}条</span>
                       </div>
                     </van-col>
                   </van-row>
@@ -230,9 +230,9 @@
                   </van-row>
                   <van-row>
                     <van-col :span="24">
-                      <view class="mix-chart-wrapper">
+                      <div class="mix-chart-wrapper">
                         <ff-canvas id="mixBLChart-dom" canvas-id="mixBLChart" :opts="opts"></ff-canvas>
-                      </view>
+                      </div>
                     </van-col>
                   </van-row>
                 </van-panel>
@@ -244,7 +244,7 @@
                       <div class="panel-header-number van-hairline--bottom van-hairline--top">
                         <div class="before-title-blue"></div>
                         <div class="panel-title" style="font-size: 14px;">用户评论 -</div>
-                        <span class="medim-text blue-text"> 345条</span>
+                        <span class="medim-text blue-text"> {{commentTotal}}条</span>
                       </div>
                     </van-col>
                   </van-row>
@@ -255,9 +255,9 @@
                   </van-row>
                   <van-row>
                     <van-col :span="24">
-                      <view class="mix-chart-wrapper">
+                      <div class="mix-chart-wrapper">
                         <ff-canvas id="mixPLChart-dom" canvas-id="mixPLChart" :opts="opts"></ff-canvas>
-                      </view>
+                      </div>
                     </van-col>
                   </van-row>
                 </van-panel>
@@ -269,7 +269,7 @@
                       <div class="panel-header-number van-hairline--bottom van-hairline--top">
                         <div class="before-title-blue"></div>
                         <div class="panel-title" style="font-size: 14px;">意见反馈 -</div>
-                        <span class="medim-text blue-text"> 3条 </span>
+                        <span class="medim-text blue-text"> {{adviceTotal}}条 </span>
                       </div>
                     </van-col>
                   </van-row>
@@ -280,9 +280,9 @@
                   </van-row>
                   <van-row>
                     <van-col :span="24">
-                      <view class="mix-chart-wrapper">
+                      <div class="mix-chart-wrapper">
                         <ff-canvas id="mixFKChart-dom" canvas-id="mixFKChart" :opts="opts"></ff-canvas>
-                      </view>
+                      </div>
                     </van-col>
                   </van-row>
                 </van-panel>
@@ -624,7 +624,7 @@
                       <van-row v-if="commentNoData">
                         <van-col span="24">
                           <div class="normal-rol">
-                            <span>没有哦~</span>
+                            <span>暂无数据~</span>
                           </div>
                         </van-col>
                       </van-row>
@@ -730,7 +730,7 @@
                     <van-row v-if="adviceNoData">
                       <van-col span="24">
                         <div class="normal-rol">
-                          <span>没有哦~</span>
+                          <span>暂无数据~</span>
                         </div>
                       </van-col>
                     </van-row>
@@ -1456,7 +1456,7 @@
       return {
         opts: {
           // 使用延时初始化
-          // lazyLoad: true
+          lazyLoad: true
         },
         userinfo: {},
         identity: 'admin',
@@ -1521,11 +1521,151 @@
         adviceLess: false,
         adviceSingleMore: false,
         adviceNoData: false,
-        a_pageNo: 1
+        a_pageNo: 1,
+        judgeTime: '',
+        mainTendencyChartData: {},
+        tendencyTickCount: 0,
+        recruitTotal: 0,
+        visitTotal: 0,
+        salaryTendencyChartData: {},
+        salaryTotal: 0,
+        commentTendencyChartData: {},
+        commentTotal: 0,
+        adviceTendencyChartData: {},
+        adviceTotal: 0
       }
     },
 
     methods: {
+      updateAllData () {
+        const this_ = this
+        let type = this_.reportTabIndex
+        this_.judgeTime = new Date().getTime() + ''
+        console.log(this_.judgeTime)
+        console.log(type)
+        this_.updateMainTendencyChartData(this_.judgeTime, type)
+        this_.updateBLTendencyChartData(this_.judgeTime, type)
+        this_.updatePLTendencyChartData(this_.judgeTime, type)
+        this_.updateFKTendencyChartData(this_.judgeTime, type)
+      },
+
+      updateBLTendencyChartData (judgeTime, type) {
+        const this_ = this
+        const requestUrl = '/api/admin/tendency/updateAll'
+        const params = {
+          'type': type,
+          'kind': 1,
+          'judgeTime': judgeTime
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          const resData = res.data.data
+          if (res.data.code === 0) {
+            if (res.data.data.type !== this_.reportTabIndex || res.data.data.judgeTime !== this_.judgeTime) {
+              return
+            }
+            this_.isSalaryPrepared = 1
+            this_.salaryTendencyChartData = resData
+            this_.salaryTotal = this_.salaryTendencyChartData.list[0].beDateLeftTotal
+            setTimeout(function () {
+              this_.$mp.page.selectComponent('#mixBLChart-dom').init(this_.initBLChart)
+            }, 1000)
+          } else {
+            Toast.fail('获取爆料趋势图数据失败')
+          }
+        }).catch(function (err) {
+          this_.isSalaryPrepared = 2
+          console.log('趋势图异常')
+          console.log(err)
+        })
+      },
+      updatePLTendencyChartData (judgeTime, type) {
+        const this_ = this
+        const requestUrl = '/api/admin/tendency/updateAll'
+        const params = {
+          'type': type,
+          'kind': 2,
+          'judgeTime': judgeTime
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          const resData = res.data.data
+          if (res.data.code === 0) {
+            if (res.data.data.type !== this_.reportTabIndex || res.data.data.judgeTime !== this_.judgeTime) {
+              return
+            }
+            this_.isCommentPrepared = 1
+            this_.commentTendencyChartData = resData
+            this_.commentTotal = this_.commentTendencyChartData.list[0].beDateLeftTotal
+            setTimeout(function () {
+              this_.$mp.page.selectComponent('#mixPLChart-dom').init(this_.initPLChart)
+            }, 1000)
+          } else {
+            Toast.fail('获取评论趋势图数据失败')
+          }
+        }).catch(function (err) {
+          this_.isCommentPrepared = 2
+          console.log('趋势图异常')
+          console.log(err)
+        })
+      },
+      updateFKTendencyChartData (judgeTime, type) {
+        const this_ = this
+        const requestUrl = '/api/admin/tendency/updateAll'
+        const params = {
+          'type': type,
+          'kind': 3,
+          'judgeTime': judgeTime
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          const resData = res.data.data
+          if (res.data.code === 0) {
+            if (res.data.data.type !== this_.reportTabIndex || res.data.data.judgeTime !== this_.judgeTime) {
+              return
+            }
+            this_.isAdvicePrepared = 1
+            this_.adviceTendencyChartData = resData
+            this_.adviceTotal = this_.adviceTendencyChartData.list[0].beDateLeftTotal
+            setTimeout(function () {
+              this_.$mp.page.selectComponent('#mixFKChart-dom').init(this_.initFKChart)
+            }, 1000)
+          } else {
+            Toast.fail('获取反馈趋势图数据失败')
+          }
+        }).catch(function (err) {
+          this_.isMainPrepared = 2
+          console.log('趋势图异常')
+          console.log(err)
+        })
+      },
+      updateMainTendencyChartData (judgeTime, type) {
+        const this_ = this
+        const requestUrl = '/api/admin/tendency/updateAll'
+        const params = {
+          'type': type,
+          'kind': 0,
+          'judgeTime': judgeTime
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          const resData = res.data.data
+          if (res.data.code === 0) {
+            if (res.data.data.type !== this_.reportTabIndex || res.data.data.judgeTime !== this_.judgeTime) {
+              return
+            }
+            this_.isMainPrepared = 1
+            this_.mainTendencyChartData = resData
+            this_.recruitTotal = this_.mainTendencyChartData.list[0].beDateLeftTotal
+            this_.visitTotal = this_.mainTendencyChartData.list[0].beDateRightTotal
+            setTimeout(function () {
+              this_.$mp.page.selectComponent('#mixMainChart-dom').init(this_.initMainChart)
+            }, 1000)
+          } else {
+            Toast.fail('获取主趋势图数据失败')
+          }
+        }).catch(function (err) {
+          this_.isMainPrepared = 2
+          console.log('趋势图异常')
+          console.log(err)
+        })
+      },
       getAdvice (item) {
         const this_ = this
         const requestUrl = '/api/mine/admin/getAdvice'
@@ -1750,6 +1890,7 @@
             tmpHeadline.title = tmp.title
             tmpHeadline.create_time = tmp.create_time
             tmpHeadline.dateDiff = dateDiff(tmp.create_time) + 1 // 第 0 天为第一天
+            console.log(dateDiff(tmp.create_time))
             this_.headlines.push(tmpHeadline)
           }
         })
@@ -1772,23 +1913,24 @@
           this.identity = 'user'
         }
       },
+      computedTendencyTickCount (resData) {
+        switch (this.reportTabIndex) {
+          case 0:
+            // 日报处理
+            return 7
+          case 1:
+            // 周报处理
+            return resData.length
+          case 2:
+            // 月报处理
+            return 7
+        }
+      },
       initMainChart (canvas, width, height, F2) { // 使用 F2 绘制图表
-        const data = [
-          {'date': '12/17', 'left': 20, 'right': 40},
-          {'date': '12/18', 'left': 22, 'right': 220},
-          {'date': '12/19', 'left': 30, 'right': 123},
-          {'date': '12/20', 'left': 10, 'right': 14},
-          {'date': '12/21', 'left': 10, 'right': 12},
-          {'date': '12/22', 'left': 20, 'right': 123},
-          {'date': '12/23', 'left': 30, 'right': 1},
-          {'date': '12/24', 'left': 65, 'right': 54},
-          {'date': '12/25', 'left': 65, 'right': 234},
-          {'date': '12/26', 'left': 39, 'right': 123},
-          {'date': '12/27', 'left': 80, 'right': 146},
-          {'date': '12/28', 'left': 12, 'right': 268},
-          {'date': '12/29', 'left': 1, 'right': 7},
-          {'date': '12/30', 'left': 1, 'right': 6}
-        ]
+        const this_ = this
+        var data = this_.mainTendencyChartData.list
+        // x 轴日期刻度数显示初始化
+        this_.tendencyTickCount = this_.computedTendencyTickCount(data)
         var chart = new F2.Chart({
           el: canvas,
           padding: [20, 'auto', 'auto'],
@@ -1797,15 +1939,15 @@
         })
         chart.source(data, {
           left: {
-            tickCount: 6,
-            ticks: [0, 20, 40, 60, 80, 100]
+            tickCount: this_.mainTendencyChartData.leftArr.length,
+            ticks: this_.mainTendencyChartData.leftArr
           },
           right: {
-            tickCount: 6,
-            ticks: [0, 60, 120, 180, 240, 300]
+            tickCount: this_.mainTendencyChartData.rightArr.length,
+            ticks: this_.mainTendencyChartData.rightArr
           },
           date: {
-            tickCount: 7
+            tickCount: this_.tendencyTickCount
           }
         })
         chart.tooltip({
@@ -1824,17 +1966,42 @@
           }
         })
         // 规避：防止右边刻度交给f2自己计算时出现左右刻度不同时出现的虚线混乱问题 截止2019-1-8 三轮测试后尚未发现这个问题
-        // chart.axis('right', {
-        //   grid: null
-        // })
+        chart.axis('right', {
+          grid: null
+        })
         chart.axis('date', {
           line: F2.Global._defaultAxis.line,
           grid: null
         })
-        chart.legend(false)
-        chart.interval().position('date*left').style('tem', {
-          radius: [3, 3, 0, 0]
-        }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        // 周报x轴日期过多，需要旋转显示文字
+        if (this_.reportTabIndex === 1) {
+          chart.axis('date', {
+            label: {
+              rotate: -Math.PI / 3,
+              textAlign: 'end',
+              textBaseline: 'middle'
+            }
+          })
+        }
+        // 周/月 报非本周/月 置灰处理
+        if (this_.reportTabIndex === 1 || this_.reportTabIndex === 2) {
+          const pillarArr = []
+          for (let i = 0; i < data.length; i++) {
+            if (!data[i].beDate) {
+              pillarArr[i] = 'l(90) 0:#dcdadb 1:#dcdadb'
+            } else {
+              pillarArr[i] = 'l(90) 0:#31b6f7 1:#1d87ed'
+            }
+          }
+          chart.legend(false)
+          chart.interval().position('date*left').style('tem', {
+            radius: [3, 3, 0, 0]
+          }).size(5).color('date', pillarArr)
+        } else {
+          chart.interval().position('date*left').style('tem', {
+            radius: [3, 3, 0, 0]
+          }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        }
         chart.line().position('date*right').color('#df651b')
         chart.point().position('date*right').size('tag', function (val) {
           return val === 1 ? 3 : 0
@@ -1844,24 +2011,13 @@
           lineWidth: 1
         })
         chart.render()
+        return chart
       },
       initBLChart (canvas, width, height, F2) { // 使用 F2 绘制图表
-        const data = [
-          {'date': '12/17', 'left': 20},
-          {'date': '12/18', 'left': 22},
-          {'date': '12/19', 'left': 30},
-          {'date': '12/20', 'left': 0},
-          {'date': '12/21', 'left': 10},
-          {'date': '12/22', 'left': 20},
-          {'date': '12/23', 'left': 30},
-          {'date': '12/24', 'left': 65},
-          {'date': '12/25', 'left': 65},
-          {'date': '12/26', 'left': 39},
-          {'date': '12/27', 'left': 80},
-          {'date': '12/28', 'left': 12},
-          {'date': '12/29', 'left': 1},
-          {'date': '12/30', 'left': 1}
-        ]
+        const this_ = this
+        var data = this_.salaryTendencyChartData.list
+        // x 轴日期刻度数显示初始化
+        var tendencyTickCount = this_.computedTendencyTickCount(data)
         var chart = new F2.Chart({
           el: canvas,
           padding: [20, 'auto', 'auto'],
@@ -1870,53 +2026,63 @@
         })
         chart.source(data, {
           left: {
-            tickCount: 6,
-            ticks: [0, 20, 40, 60, 80, 100]
+            tickCount: this_.salaryTendencyChartData.leftArr.length,
+            ticks: this_.salaryTendencyChartData.leftArr
           },
           date: {
-            tickCount: 7
+            tickCount: tendencyTickCount
           }
         })
         chart.tooltip({
           showItemMarker: false,
           onShow: function onShow (ev) {
             var items = ev.items
-            items[0].name = null
-            items[0].name = '时间：' + items[0].title
-            items[0].value = '爆料 ' + items[0].value + '条'
+            var dateStr = '日期:' + items[0].title
+            items[0].name = dateStr + ' ' + '爆料'
+            items[0].value = items[0].value + '条'
           }
         })
-        // 规避：防止右边刻度交给f2自己计算时出现左右刻度不同时出现的虚线混乱问题 截止2019-1-8 三轮测试后尚未发现这个问题
-        // chart.axis('right', {
-        //   grid: null
-        // })
         chart.axis('date', {
           line: F2.Global._defaultAxis.line,
           grid: null
         })
-        chart.legend(false)
-        chart.interval().position('date*left').style('tem', {
-          radius: [3, 3, 0, 0]
-        }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        // 周报x轴日期过多，需要旋转显示文字
+        if (this_.reportTabIndex === 1) {
+          chart.axis('date', {
+            label: {
+              rotate: -Math.PI / 3,
+              textAlign: 'end',
+              textBaseline: 'middle'
+            }
+          })
+        }
+        // 周/月 报非本周/月 置灰处理
+        if (this_.reportTabIndex === 1 || this_.reportTabIndex === 2) {
+          const pillarArr = []
+          for (let i = 0; i < data.length; i++) {
+            if (!data[i].beDate) {
+              pillarArr[i] = 'l(90) 0:#dcdadb 1:#dcdadb'
+            } else {
+              pillarArr[i] = 'l(90) 0:#31b6f7 1:#1d87ed'
+            }
+          }
+          chart.legend(false)
+          chart.interval().position('date*left').style('tem', {
+            radius: [3, 3, 0, 0]
+          }).size(5).color('date', pillarArr)
+        } else {
+          chart.interval().position('date*left').style('tem', {
+            radius: [3, 3, 0, 0]
+          }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        }
         chart.render()
+        return chart
       },
       initPLChart (canvas, width, height, F2) { // 使用 F2 绘制图表
-        const data = [
-          {'date': '12/17', 'left': 34},
-          {'date': '12/18', 'left': 78},
-          {'date': '12/19', 'left': 19},
-          {'date': '12/20', 'left': 2},
-          {'date': '12/21', 'left': 0},
-          {'date': '12/22', 'left': 20},
-          {'date': '12/23', 'left': 30},
-          {'date': '12/24', 'left': 65},
-          {'date': '12/25', 'left': 65},
-          {'date': '12/26', 'left': 39},
-          {'date': '12/27', 'left': 80},
-          {'date': '12/28', 'left': 12},
-          {'date': '12/29', 'left': 13},
-          {'date': '12/30', 'left': 81}
-        ]
+        const this_ = this
+        var data = this_.commentTendencyChartData.list
+        // x 轴日期刻度数显示初始化
+        var tendencyTickCount = this_.computedTendencyTickCount(data)
         var chart = new F2.Chart({
           el: canvas,
           padding: [20, 'auto', 'auto'],
@@ -1925,53 +2091,63 @@
         })
         chart.source(data, {
           left: {
-            tickCount: 6,
-            ticks: [0, 20, 40, 60, 80, 100]
+            tickCount: this_.commentTendencyChartData.leftArr.length,
+            ticks: this_.commentTendencyChartData.leftArr
           },
           date: {
-            tickCount: 7
+            tickCount: tendencyTickCount
           }
         })
         chart.tooltip({
           showItemMarker: false,
           onShow: function onShow (ev) {
             var items = ev.items
-            items[0].name = null
-            items[0].name = '时间：' + items[0].title
-            items[0].value = '评论 ' + items[0].value + '条'
+            var dateStr = '日期:' + items[0].title
+            items[0].name = dateStr + ' ' + '评论'
+            items[0].value = items[0].value + '条'
           }
         })
-        // 规避：防止右边刻度交给f2自己计算时出现左右刻度不同时出现的虚线混乱问题 截止2019-1-8 三轮测试后尚未发现这个问题
-        // chart.axis('right', {
-        //   grid: null
-        // })
         chart.axis('date', {
           line: F2.Global._defaultAxis.line,
           grid: null
         })
-        chart.legend(false)
-        chart.interval().position('date*left').style('tem', {
-          radius: [3, 3, 0, 0]
-        }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        // 周报x轴日期过多，需要旋转显示文字
+        if (this_.reportTabIndex === 1) {
+          chart.axis('date', {
+            label: {
+              rotate: -Math.PI / 3,
+              textAlign: 'end',
+              textBaseline: 'middle'
+            }
+          })
+        }
+        // 周/月 报非本周/月 置灰处理
+        if (this_.reportTabIndex === 1 || this_.reportTabIndex === 2) {
+          const pillarArr = []
+          for (let i = 0; i < data.length; i++) {
+            if (!data[i].beDate) {
+              pillarArr[i] = 'l(90) 0:#dcdadb 1:#dcdadb'
+            } else {
+              pillarArr[i] = 'l(90) 0:#31b6f7 1:#1d87ed'
+            }
+          }
+          chart.legend(false)
+          chart.interval().position('date*left').style('tem', {
+            radius: [3, 3, 0, 0]
+          }).size(5).color('date', pillarArr)
+        } else {
+          chart.interval().position('date*left').style('tem', {
+            radius: [3, 3, 0, 0]
+          }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        }
         chart.render()
+        return chart
       },
       initFKChart (canvas, width, height, F2) { // 使用 F2 绘制图表
-        const data = [
-          {'date': '12/17', 'left': 34},
-          {'date': '12/18', 'left': 78},
-          {'date': '12/19', 'left': 19},
-          {'date': '12/20', 'left': 2},
-          {'date': '12/21', 'left': 0},
-          {'date': '12/22', 'left': 20},
-          {'date': '12/23', 'left': 30},
-          {'date': '12/24', 'left': 65},
-          {'date': '12/25', 'left': 65},
-          {'date': '12/26', 'left': 39},
-          {'date': '12/27', 'left': 80},
-          {'date': '12/28', 'left': 12},
-          {'date': '12/29', 'left': 13},
-          {'date': '12/30', 'left': 81}
-        ]
+        const this_ = this
+        var data = this_.adviceTendencyChartData.list
+        // x 轴日期刻度数显示初始化
+        var tendencyTickCount = this_.computedTendencyTickCount(data)
         var chart = new F2.Chart({
           el: canvas,
           padding: [20, 'auto', 'auto'],
@@ -1980,39 +2156,61 @@
         })
         chart.source(data, {
           left: {
-            tickCount: 6,
-            ticks: [0, 20, 40, 60, 80, 100]
+            tickCount: this_.adviceTendencyChartData.leftArr.length,
+            ticks: this_.adviceTendencyChartData.leftArr
           },
           date: {
-            tickCount: 7
+            tickCount: tendencyTickCount
           }
         })
         chart.tooltip({
           showItemMarker: false,
           onShow: function onShow (ev) {
             var items = ev.items
-            items[0].name = null
-            items[0].name = '时间：' + items[0].title
-            items[0].value = '反馈 ' + items[0].value + '条'
+            var dateStr = '日期:' + items[0].title
+            items[0].name = dateStr + ' ' + '反馈'
+            items[0].value = items[0].value + '条'
           }
         })
-        // 规避：防止右边刻度交给f2自己计算时出现左右刻度不同时出现的虚线混乱问题 截止2019-1-8 三轮测试后尚未发现这个问题
-        // chart.axis('right', {
-        //   grid: null
-        // })
         chart.axis('date', {
           line: F2.Global._defaultAxis.line,
           grid: null
         })
-        chart.legend(false)
-        chart.interval().position('date*left').style('tem', {
-          radius: [3, 3, 0, 0]
-        }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        // 周报x轴日期过多，需要旋转显示文字
+        if (this_.reportTabIndex === 1) {
+          chart.axis('date', {
+            label: {
+              rotate: -Math.PI / 3,
+              textAlign: 'end',
+              textBaseline: 'middle'
+            }
+          })
+        }
+        // 周/月 报非本周/月 置灰处理
+        if (this_.reportTabIndex === 1 || this_.reportTabIndex === 2) {
+          const pillarArr = []
+          for (let i = 0; i < data.length; i++) {
+            if (!data[i].beDate) {
+              pillarArr[i] = 'l(90) 0:#dcdadb 1:#dcdadb'
+            } else {
+              pillarArr[i] = 'l(90) 0:#31b6f7 1:#1d87ed'
+            }
+          }
+          chart.legend(false)
+          chart.interval().position('date*left').style('tem', {
+            radius: [3, 3, 0, 0]
+          }).size(5).color('date', pillarArr)
+        } else {
+          chart.interval().position('date*left').style('tem', {
+            radius: [3, 3, 0, 0]
+          }).size(5).color('l(90) 0:#31b6f7 1:#1d87ed')
+        }
         chart.render()
+        return chart
       },
       onTabChange (event) {
         this.reportTabIndex = event.mp.detail.index
-        console.log(this.reportTabIndex)
+        this.updateAllData()
       },
       touchStart (e) {
         this.moveX = 0
@@ -2052,7 +2250,7 @@
               // this.dayReportInit()
               break
           }
-          // this.updateALlData()
+          this.updateAllData()
         }
       },
       toHeadline () {
@@ -2140,31 +2338,29 @@
     },
     mounted () {
       const this_ = this
-      this_.getHeadlines()
-      this.recruits = []
-      this.recruitIndex = 0
-      this.r_pageNo = 1
-      this.getRecruits(5)
-
-      this.salaries = []
-      this.salaryIndex = 0
-      this.s_pageNo = 1
-      this.getSalaries(5)
-
-      this.comments = []
-      this.commentIndex = 0
-      this.c_pageNo = 1
-      this.getComments(5)
-
-      this.advices = []
-      this.adviceIndex = 0
-      this.a_pageNo = 1
-      this.getAdvices(5)
       if (this_.identity === 'admin') {
-        this_.$mp.page.selectComponent('#mixMainChart-dom').init(this_.initMainChart)
-        this_.$mp.page.selectComponent('#mixBLChart-dom').init(this_.initBLChart)
-        this_.$mp.page.selectComponent('#mixPLChart-dom').init(this_.initPLChart)
-        this_.$mp.page.selectComponent('#mixFKChart-dom').init(this_.initFKChart)
+        this_.updateAllData()
+
+        this_.getHeadlines()
+        this_.recruits = []
+        this_.recruitIndex = 0
+        this_.r_pageNo = 1
+        this_.getRecruits(5)
+
+        this_.salaries = []
+        this_.salaryIndex = 0
+        this_.s_pageNo = 1
+        this_.getSalaries(5)
+
+        this_.comments = []
+        this_.commentIndex = 0
+        this_.c_pageNo = 1
+        this_.getComments(5)
+
+        this_.advices = []
+        this_.adviceIndex = 0
+        this_.a_pageNo = 1
+        this_.getAdvices(5)
       }
     },
     created () {
