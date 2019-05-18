@@ -39,7 +39,7 @@
           </van-row>
         </div>
       </van-panel>
-      <van-panel v-if="type === 1">
+      <van-panel v-if="type === '1'">
         <div style="width: 100%;" class="van-hairline--bottom headline-title">
           <van-row>
             <van-col span="4" offset="1">
@@ -58,7 +58,8 @@
       <div class="van-hairline--bottom" @click="showContentDetail(item)" v-for="(item, index) in comments" :key="index">
         <div :class="item.type === 0 ? 'recruit-head' : 'recruit-wait'">
           <van-row>
-            <van-col span="3" offset="1">
+            <van-col span="4" offset="0">
+              <div class="rank-circle">{{ index+1 }}</div>
               <div class="van-ellipsis" style="height: 44px;">
                 <div class="mine-headline-recruit-id">{{item.id}}</div>
               </div>
@@ -78,8 +79,9 @@
       </div>
       <div class="van-hairline--bottom" @click="showContentDetail(item)" v-for="(item, index) in advices" :key="index">
         <van-row>
-          <van-col span="3" offset="1">
-            <div class="van-ellipsis" style="height: 44px;">
+          <van-col span="4" offset="0">
+            <div class="rank-circle">{{ index+1 }}</div>
+            <div class="van-ellipsis" style="height: 44px; float: left;">
               <div class="mine-headline-recruit-id">{{item.id}}</div>
             </div>
           </van-col>
@@ -561,6 +563,23 @@
     display: inline-block;
     width: 90%;
     vertical-align: middle;
+  }
+  .rank-circle {
+    float: left;
+    margin-top: 15px;
+    margin-right: 5rpx;
+    z-index: 2000;
+    width: 35rpx;
+    height: 35rpx;
+    background-color: #1c85ee;
+    display: inline-block;
+    margin-left: 5rpx;
+    text-align: center;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    font-size: 25rpx;
+    color: #ffffff;
   }
   .mine-headline-recruit-id {
     font-size: 10px;

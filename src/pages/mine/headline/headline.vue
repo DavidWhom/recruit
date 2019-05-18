@@ -111,12 +111,13 @@
         <div v-for="(item,index) in recruits" :key="index" class="van-hairline--bottom">
           <div :class="item.state === 1 ? 'recruit-pass' : (item.state === 2 ? 'recruit-head' : (item.state === 3 ? 'recruit-down' : (item.state === 0 ? 'recruit-wait' : 'recruit-reject')))">
             <van-row>
-              <van-col span="4" offset="1">
-                <div class="van-ellipsis" style="height: 44px;">
+              <van-col span="4" offset="0">
+                <div class="rank-circle">{{ index+1 }}</div>
+                <div class="van-ellipsis" style="height: 44px; float: left">
                   <div class="mine-headline-recruit-id">{{item.id}}</div>
                 </div>
               </van-col>
-              <van-col span="19" offset="0" @click="showRecruit(item.id)">
+              <van-col span="20" offset="0" @click="showRecruit(item.id)">
                 <van-swipe-cell id="swipe-recruit" right-width="65">
                   <van-cell-group :border="false">
                     <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + '：' + item.title" :border="false" />
@@ -489,6 +490,23 @@
     font-size: 10px;
     line-height: 44px;
     color: #8f8f8f;
+  }
+  .rank-circle {
+    float: left;
+    margin-top: 15px;
+    margin-right: 5rpx;
+    z-index: 2000;
+    width: 35rpx;
+    height: 35rpx;
+    background-color: #1c85ee;
+    display: inline-block;
+    margin-left: 5rpx;
+    text-align: center;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    font-size: 25rpx;
+    color: #ffffff;
   }
   .normal-rol {
     width: 100%;

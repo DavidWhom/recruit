@@ -39,8 +39,9 @@
         </van-panel>
         <div class="van-hairline--bottom" v-for="(item, index) in salaries" :key="index" @click="showSalary(item.id)">
           <van-row>
-            <van-col span="3" offset="1">
-              <div class="van-ellipsis" style="height: 44px;">
+            <van-col span="4" offset="0">
+              <div class="rank-circle">{{ index+1 }}</div>
+              <div class="van-ellipsis" style="height: 44px; float: left;">
                 <div class="mine-headline-recruit-id">{{item.id}}</div>
               </div>
             </van-col>
@@ -174,6 +175,7 @@
           <div :class="item.state === 1 ? 'recruit-pass' : (item.state === 2 ? 'recruit-down' : (item.state === 0 ? 'recruit-wait' : 'recruit-reject'))">
           <van-row>
             <van-col span="3" offset="1">
+              <div class="rank-circle">{{ index+1 }}</div>
               <div class="van-ellipsis" style="height: 44px;">
                 <div class="mine-headline-recruit-id">{{item.id}}</div>
               </div>
@@ -559,6 +561,24 @@
     font-size: 14px;
     float: left;
   }
+  .rank-circle {
+    float: left;
+    margin-top: 15px;
+    margin-right: 5rpx;
+    z-index: 2000;
+    width: 35rpx;
+    height: 35rpx;
+    background-color: #1c85ee;
+    display: inline-block;
+    margin-left: 5rpx;
+    text-align: center;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    font-size: 25rpx;
+    color: #ffffff;
+  }
+
   .mine-headline-recruit-id {
     font-size: 10px;
     line-height: 44px;

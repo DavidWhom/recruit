@@ -112,7 +112,7 @@
           <div class="data-panel">
             <div class="panel-header-number">
               <div class="before-title-blue"></div>
-              <div class="panel-title" style="font-size: 14px;">已发布资讯</div>
+              <div class="panel-title" style="font-size: 14px;">已发布资讯 - <span class="blue-text">{{recruitNum}} 条</span></div>
             </div>
             <van-panel class="job-search">
               <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch_"
@@ -180,8 +180,9 @@
             <div class="van-hairline--bottom" v-for="(item, index) in recruits_" :key="index" @click="showRecruit(item.id)">
               <div :class="item.state === 1 ? 'recruit-pass' : (item.state === 2 ? 'recruit-head' : (item.state === 3 ? 'recruit-down' : (item.state === 0 ? 'recruit-wait' : 'recruit-reject')))">
               <van-row>
-                <van-col span="3" offset="1">
-                  <div class="van-ellipsis" style="height: 44px;">
+                <van-col span="4" offset="0">
+                  <div class="rank-circle">{{ index+1 }}</div>
+                  <div class="van-ellipsis" style="height: 44px;float:left">
                     <div class="mine-headline-recruit-id">{{item.id}}</div>
                   </div>
                 </van-col>
@@ -465,7 +466,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   page {
     background-color: #f8f8f8;
     height: 100%;
@@ -553,6 +554,23 @@
     margin-left: 12px;
     font-size: 14px;
     float: left;
+  }
+  .rank-circle {
+    float: left;
+    margin-top: 15px;
+    margin-right: 5rpx;
+    z-index: 2000;
+    width: 35rpx;
+    height: 35rpx;
+    background-color: #1c85ee;
+    display: inline-block;
+    margin-left: 5rpx;
+    text-align: center;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    font-size: 25rpx;
+    color: #ffffff;
   }
   .mine-headline-recruit-id {
     font-size: 10px;
