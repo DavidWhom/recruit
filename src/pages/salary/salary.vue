@@ -8,30 +8,35 @@
             label="公司"
             placeholder="公司名称"
             @change="companyTextChange"
+            clearable
           />
           <van-field
             v-model="jobTitle"
             label="职位"
             placeholder="职位名称"
             @change="jobTextChange"
+            clearable
           />
           <van-field
             v-model="city"
             label="城市"
             placeholder="城市，如福州"
             @change="cityTextChange"
+            clearable
           />
           <van-field
             v-model="salary"
             label="工资"
             placeholder="薪水，如20W或者15*15"
             @change="salaryTextChange"
+            clearable
           />
           <van-field
             v-model="education"
             label="学历"
             disabled
             @click="eduClick"
+            clearable
           />
           <van-popup :show="isEduShow" position="bottom">
             <van-picker
@@ -48,6 +53,7 @@
             label="行业"
             disabled
             @click="indClick"
+            clearable
           />
           <van-popup :show="isIndShow" position="bottom">
             <van-picker
@@ -64,6 +70,7 @@
             label="备注"
             placeholder="备注(希望大家真实爆料，保护隐私)"
             @change="remarkTextChange"
+            clearable
           />
           <div class="remark-tip">
             <span>备注信息建议，如是否special、补贴、相关福利等等</span>
@@ -194,7 +201,6 @@
 
       onCancelEdu () {
         this.isEduShow = !this.isEduShow
-        Toast('取消')
       },
       indClick () {
         if (this.isEduShow) {

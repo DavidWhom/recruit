@@ -761,7 +761,7 @@
                       <van-col span="15">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">HR信息管理 - <span class="blue-text">1002 席</span></div>
+                          <div class="panel-title" style="font-size: 14px;">HR信息管理 - <span class="blue-text">{{hrNum}} 席</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="7" @click="ShowAddHR">
@@ -774,9 +774,9 @@
                 </div>
               </div>
               <van-panel class="job-search">
-                <van-search :value="keyword" placeholder="请输入公司名/HR名/编号" use-action-slot @search="onSearch"
+                <van-search :value="keyword" placeholder="请输入公司名/HR名/编号" use-action-slot @search="onSearch_HR"
                             background="#ffffff">
-                  <view slot="action" @tap="onSearch">搜索</view>
+                  <view slot="action" @click="onSearch_HR">搜索</view>
                 </van-search>
               </van-panel>
               <div class="data-panel">
@@ -808,139 +808,60 @@
                     </van-col>
                   </van-row>
                 </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
+                <van-row v-for="(item, index) in hrs" :key="index">
+                  <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <van-col span="3" offset="1">
+                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>{{item.id}}</span></div>
                     </van-col>
                     <van-col span="8" offset="1">
-                      <div class="mine-title-list van-ellipsis"><span>福建星网锐捷股份有限公司</span></div>
+                      <div class="mine-title-list van-ellipsis"><span>{{item.companyName}}</span></div>
                     </van-col>
                     <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>小锐</span></div>
+                      <div class="mine-title-list"><span>{{item.name}}</span></div>
                     </van-col>
                     <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>123次</span></div>
+                      <div class="mine-title-list"><span>{{item.publishTimes}} 次</span></div>
                     </van-col>
                     <van-col offset="1" span="2">
                       <div class="mine-title-content mine-title-list">
                         <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
                       </div>
                     </van-col>
-                  </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
+                  </div>
+                </van-row>
+                <van-panel>
+                  <van-row v-if="hrMore">
+                    <van-col span="8">
+                      <div class="normal-rol">
+                      </div>
                     </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="mine-title-list van-ellipsis"><span>锐捷网络股份有限公司</span></div>
+                    <van-col span="8" v-if="hrSingleMore">
+                      <div class="normal-rol" @click="hrMoreHandler(1)">
+                        <span>加载更多</span>
+                      </div>
                     </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>小锐</span></div>
+                    <van-col span="8" v-if="hrBottom">
+                      <div class="normal-rol">
+                        <span>没有了~</span>
+                      </div>
                     </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>123次</span></div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                    <van-col span="8" v-if="hrLess">
+                      <div class="normal-rol" @click="hrMoreHandler(2)">
+                        <div style="float: right;margin-right:50px">
+                          <span style="margin-right: 5px">收起</span>
+                          <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                        </div>
                       </div>
                     </van-col>
                   </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="mine-title-list van-ellipsis"><span>锐捷网络股份有限公司</span></div>
-                    </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>小锐</span></div>
-                    </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>123次</span></div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                  <van-row v-if="hrNoData">
+                    <van-col span="24">
+                      <div class="normal-rol">
+                        <span>暂无数据~</span>
                       </div>
                     </van-col>
                   </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="mine-title-list van-ellipsis"><span>锐捷网络股份有限公司</span></div>
-                    </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>小锐</span></div>
-                    </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>123次</span></div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                      </div>
-                    </van-col>
-                  </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="mine-title-list van-ellipsis"><span>锐捷网络股份有限公司</span></div>
-                    </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>小锐</span></div>
-                    </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>123次</span></div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                      </div>
-                    </van-col>
-                  </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="mine-title-list van-ellipsis"><span>锐捷网络股份有限公司</span></div>
-                    </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>小锐</span></div>
-                    </van-col>
-                    <van-col span="3" offset="1">
-                      <div class="mine-title-list"><span>123次</span></div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                      </div>
-                    </van-col>
-                  </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="10" offset="10">
-                      <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
-                    </van-col>
-                  </van-row>
-                </div>
+                </van-panel>
               </div>
               <van-popup :show="isHRAddShow" position="bottom">
                 <div style="height: 100%;padding-bottom: 55px;">
@@ -959,25 +880,199 @@
                       :value="company"
                       label="公司"
                       placeholder="公司名称"
+                      clearable
+                      required
+                      @change="queryCompanyByName"
+                      :error-message="company_error"
                     />
+                    <van-popup custom-style="z-index=3000" :show="isChooseCompany" position="bottom">
+                      <van-picker
+                        show-toolbar
+                        v-if="isChooseCompany"
+                        title="公司"
+                        :columns="company_choose"
+                        @cancel="onCancelCompany"
+                        @confirm="onConfirmCompany"
+                      />
+                    </van-popup>
                     <van-field
                       :value="hrName"
                       label="HR名"
                       placeholder="HR名称"
+                      @change="hrNameChange"
+                      clearable
+                      required
+                      :error-message="hrName_error"
                     />
                     <van-field
                       :value="hrTel"
                       label="手机号"
                       placeholder="手机号码"
+                      @change="hrTelChange"
+                      clearable
+                      required
+                      :error-message="hrTel_error"
                     />
                   </van-cell-group>
                 </div>
               </van-popup>
               <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isHRAddShow">
-                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;" @click="addHR()">
                   <view style="width: 88px;">提交</view>
                 </van-button>
                 <van-button type="danger" @click="hideHRAdd()" style="margin-right: 5%;width: 40%;float: right">
+                  <view style="width: 88px;">取消</view>
+                </van-button>
+              </div>
+              <!-- 公司信息管理 -->
+              <div class="data-panel">
+                <div class="van-hairline--bottom van-hairline--top mine-block-title">
+                  <van-panel>
+                    <van-row>
+                      <van-col span="15">
+                        <div class="panel-header-number">
+                          <div class="before-title-blue"></div>
+                          <div class="panel-title" style="font-size: 14px;">企业信息管理 - <span class="blue-text">{{companyNum}} 席</span></div>
+                        </div>
+                      </van-col>
+                      <van-col span="2" offset="7" @click="ShowAddCompany()">
+                        <div class="mine-management-outside">
+                          <img src="../../../static/images/mine/mine-add.png" style="height: 20px;width: 20px;"/>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </van-panel>
+                </div>
+              </div>
+              <van-panel class="job-search">
+                <van-search :value="cp_keyword" placeholder="请输入公司名/编号" use-action-slot @search="onSearch_CP"
+                            background="#ffffff">
+                  <view slot="action" @click="onSearch_CP">搜索</view>
+                </van-search>
+              </van-panel>
+              <div class="data-panel">
+                <div style="width: 100%;" class="van-hairline--bottom toutiao-title">
+                  <van-row>
+                    <van-col span="4" offset="1">
+                      <div class="van-ellipsis mine-title-name mine-title-list">
+                        <img src="../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
+                        <span>编号</span>
+                      </div>
+                    </van-col>
+                    <van-col  span="6" offset="3">
+                      <div class="mine-title-list van-ellipsis">
+                        <img src="../../../static/images/mine/mine-enterprise.png" style="height: 15px;width: 15px;"/>
+                        <span>企业</span>
+                      </div>
+                    </van-col>
+                    <van-col span="3" offset="3">
+                      <div class="mine-title-list">
+                        <img src="../../../static/images/mine/mine-hr.png" style="height: 15px;width: 15px;"/>
+                        <span>HR</span>
+                      </div>
+                    </van-col>
+                  </van-row>
+                </div>
+                <van-row v-for="(item, index) in companys" :key="index">
+                  <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
+                    <van-col span="3" offset="1">
+                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>{{item.id}}</span></div>
+                    </van-col>
+                    <van-col span="8" offset="1">
+                      <div class="mine-title-list van-ellipsis"><span>{{item.name}}</span></div>
+                    </van-col>
+                    <van-col span="3" offset="4">
+                      <div class="mine-title-list"><span>{{item.hrNum}} 人</span></div>
+                    </van-col>
+                    <van-col offset="1" span="2">
+                      <div class="mine-title-content mine-title-list">
+                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                      </div>
+                    </van-col>
+                  </div>
+                </van-row>
+                <van-panel>
+                  <van-row v-if="companyMore">
+                    <van-col span="8">
+                      <div class="normal-rol">
+                      </div>
+                    </van-col>
+                    <van-col span="8" v-if="companySingleMore">
+                      <div class="normal-rol" @click="hrMoreHandler(1)">
+                        <span>加载更多</span>
+                      </div>
+                    </van-col>
+                    <van-col span="8" v-if="companyBottom">
+                      <div class="normal-rol">
+                        <span>没有了~</span>
+                      </div>
+                    </van-col>
+                    <van-col span="8" v-if="companyLess">
+                      <div class="normal-rol" @click="hrMoreHandler(2)">
+                        <div style="float: right;margin-right:50px">
+                          <span style="margin-right: 5px">收起</span>
+                          <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                        </div>
+                      </div>
+                    </van-col>
+                  </van-row>
+                  <van-row v-if="companyNoData">
+                    <van-col span="24">
+                      <div class="normal-rol">
+                        <span>暂无数据~</span>
+                      </div>
+                    </van-col>
+                  </van-row>
+                </van-panel>
+              </div>
+              <van-popup :show="isCompanyAddShow" position="bottom">
+                <div style="height: 100%;padding-bottom: 55px;">
+                  <van-panel>
+                    <van-row>
+                      <van-col span="11">
+                        <div class="panel-header-number">
+                          <div class="before-title-blue"></div>
+                          <div class="panel-title">添加企业</div>
+                        </div>
+                      </van-col>
+                    </van-row>
+                  </van-panel>
+                  <van-cell-group>
+                    <van-field
+                      :value="enterprise"
+                      label="企业"
+                      placeholder="企业名称"
+                      clearable
+                      required
+                      @change="enterpriseChange"
+                      :error-message="enterprise_error"
+                    />
+                    <van-field
+                      :value="enterprise_type"
+                      label="类型"
+                      placeholder="企业类型，例如上市公司"
+                      @change="enterprise_typeChange"
+                      clearable
+                      required
+                      :error-message="enterprise_type_error"
+                    />
+                    <van-field
+                      :value="enterprise_place"
+                      label="所在城市"
+                      placeholder="企业所在城市，例如福州"
+                      @change="enterprise_placeChange"
+                      clearable
+                      required
+                      :error-message="enterprise_place_error"
+                    />
+                  </van-cell-group>
+                </div>
+              </van-popup>
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isCompanyAddShow">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;" @click="addCompany()">
+                  <view style="width: 88px;">提交</view>
+                </van-button>
+                <van-button type="danger" @click="hideCompanyAdd()" style="margin-right: 5%;width: 40%;float: right">
                   <view style="width: 88px;">取消</view>
                 </van-button>
               </div>
@@ -989,7 +1084,7 @@
                       <van-col span="15">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">会员信息管理 - <span class="blue-text">3002 位</span></div>
+                          <div class="panel-title" style="font-size: 14px;">会员信息管理 - <span class="blue-text">{{memberNum}} 位</span></div>
                         </div>
                       </van-col>
                     </van-row>
@@ -997,9 +1092,9 @@
                 </div>
               </div>
               <van-panel class="job-search">
-                <van-search :value="keyword" placeholder="请输入会员名/编号" use-action-slot @search="onSearch"
+                <van-search :value="keyword" placeholder="请输入会员名/编号" use-action-slot @search="onSearch_Member"
                             background="#ffffff">
-                  <view slot="action" @tap="onSearch">搜索</view>
+                  <view slot="action" @click="onSearch_Member">搜索</view>
                 </van-search>
               </van-panel>
               <div class="data-panel">
@@ -1011,7 +1106,7 @@
                             <span>编号</span>
                           </div>
                         </van-col>
-                        <van-col  span="6" offset="3">
+                        <van-col  span="6" offset="1">
                           <div class="mine-title-list van-ellipsis">
                             <img src="../../../static/images/mine/mine-vip.png" style="height: 15px;width: 15px;"/>
                             <span>会员名</span>
@@ -1023,7 +1118,7 @@
                             <span>性别</span>
                           </div>
                         </van-col>
-                        <van-col span="3" offset="1">
+                        <van-col span="5" offset="1">
                           <div class="mine-title-list">
                             <img src="../../../static/images/mine/mine-city.png" style="height: 15px;width: 15px;"/>
                             <span>城市</span>
@@ -1031,175 +1126,66 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="4" offset="0">
-                          <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                        </van-col>
-                        <van-col span="8" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
+                    <van-row v-for="(item, index) in members" :key="index">
+                      <div class="van-hairline--bottom mine-title-tr" style="width: 100%;">
+                      <van-col span="3" offset="1">
+                        <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>{{item.id}}</span></div>
+                      </van-col>
+                      <van-col span="8" offset="0">
+                        <div class="content-text-center">
+                          <div class="mine-title-list van-ellipsis"><span>{{item.name}}</span></div>
+                        </div>
+                      </van-col>
+                      <van-col span="3" offset="0">
+                        <div class="content-text-center">
+                          <div class="mine-title-list"><span>{{item.gender}}</span></div>
+                        </div>
+                      </van-col>
+                      <van-col span="4" offset="0">
+                        <div class="content-text-center">
+                          <div class="mine-title-list van-ellipsis"><span>{{item.city}}</span></div>
+                        </div>
+                      </van-col>
+                      <van-col offset="3" span="2">
+                        <div class="mine-title-content mine-title-list">
+                          <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        </div>
+                      </van-col>
+                    </div>
+                    </van-row>
+                    <van-panel>
+                      <van-row v-if="memberMore">
+                        <van-col span="8">
+                          <div class="normal-rol">
                           </div>
                         </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list"><span>男</span></div>
+                        <van-col span="8" v-if="memberSingleMore">
+                          <div class="normal-rol" @click="memberMoreHandler(1)">
+                            <span>加载更多</span>
                           </div>
                         </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>不丹</span></div>
+                        <van-col span="8" v-if="memberBottom">
+                          <div class="normal-rol">
+                            <span>没有了~</span>
                           </div>
                         </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                        <van-col span="8" v-if="memberLess">
+                          <div class="normal-rol" @click="memberMoreHandler(2)">
+                            <div style="float: right;margin-right:50px">
+                              <span style="margin-right: 5px">收起</span>
+                              <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                            </div>
                           </div>
                         </van-col>
                       </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="4" offset="0">
-                          <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                        </van-col>
-                        <van-col span="8" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list"><span>男</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>不丹</span></div>
-                          </div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                      <van-row v-if="memberNoData">
+                        <van-col span="24">
+                          <div class="normal-rol">
+                            <span>暂无数据~</span>
                           </div>
                         </van-col>
                       </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="4" offset="0">
-                          <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                        </van-col>
-                        <van-col span="8" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list"><span>男</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>不丹</span></div>
-                          </div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="4" offset="0">
-                          <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                        </van-col>
-                        <van-col span="8" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list"><span>男</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>不丹</span></div>
-                          </div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="4" offset="0">
-                          <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                        </van-col>
-                        <van-col span="8" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list"><span>男</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>不丹</span></div>
-                          </div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="4" offset="0">
-                          <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                        </van-col>
-                        <van-col span="8" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list"><span>男</span></div>
-                          </div>
-                        </van-col>
-                        <van-col span="3" offset="1">
-                          <div class="content-text-center">
-                            <div class="mine-title-list van-ellipsis"><span>不丹</span></div>
-                          </div>
-                        </van-col>
-                        <van-col offset="1" span="2">
-                          <div class="mine-title-content mine-title-list">
-                            <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                          </div>
-                        </van-col>
-                      </van-row>
-                    </div>
-                    <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                      <van-row>
-                        <van-col span="10" offset="10">
-                          <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
-                        </van-col>
-                      </van-row>
-                    </div>
+                    </van-panel>
                   </div>
               <!-- 管理员信息 -->
               <div class="data-panel">
@@ -1209,7 +1195,7 @@
                       <van-col span="15">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">管理员信息管理 - <span class="blue-text">30 位</span></div>
+                          <div class="panel-title" style="font-size: 14px;">管理员信息管理 - <span class="blue-text">{{adminNum}} 位</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="7" @click="showAddAdmin()">
@@ -1222,9 +1208,9 @@
                 </div>
               </div>
               <van-panel class="job-search">
-                <van-search :value="keyword" placeholder="请输入管理员名/编号" use-action-slot @search="onSearch"
+                <van-search :value="keyword" placeholder="请输入管理员名/编号" use-action-slot @search="onSearch_Admin"
                             background="#ffffff">
-                  <view slot="action" @tap="onSearch">搜索</view>
+                  <view slot="action" @click="onSearch_Admin">搜索</view>
                 </van-search>
               </van-panel>
               <div class="data-panel">
@@ -1250,19 +1236,19 @@
                     </van-col>
                   </van-row>
                 </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
+                <van-row v-for="(item, index) in admins" :key="index" >
+                  <div class="van-hairline--bottom mine-title-tr" style="width: 100%;">
+                    <van-col span="3" offset="1">
+                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>{{item.id}}</span></div>
                     </van-col>
                     <van-col span="8" offset="1">
                       <div class="content-text-center">
-                        <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
+                        <div class="mine-title-list van-ellipsis"><span>{{item.name}}</span></div>
                       </div>
                     </van-col>
                     <van-col span="7" offset="1">
                       <div class="content-text-center">
-                        <div class="mine-title-list"><span>15280469787</span></div>
+                        <div class="mine-title-list"><span>{{item.tel}}</span></div>
                       </div>
                     </van-col>
                     <van-col offset="1" span="2">
@@ -1270,125 +1256,41 @@
                         <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
                       </div>
                     </van-col>
-                  </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
+                  </div>
+                </van-row>
+                <van-panel>
+                  <van-row v-if="adminMore">
+                    <van-col span="8">
+                      <div class="normal-rol">
                       </div>
                     </van-col>
-                    <van-col span="7" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list"><span>15280469787</span></div>
+                    <van-col span="8" v-if="adminSingleMore">
+                      <div class="normal-rol" @click="adminMoreHandler(1)">
+                        <span>加载更多</span>
                       </div>
                     </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                    <van-col span="8" v-if="adminBottom">
+                      <div class="normal-rol">
+                        <span>没有了~</span>
                       </div>
                     </van-col>
-                  </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                      </div>
-                    </van-col>
-                    <van-col span="7" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list"><span>15280469787</span></div>
-                      </div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                    <van-col span="8" v-if="adminLess">
+                      <div class="normal-rol" @click="adminMoreHandler(2)">
+                        <div style="float: right;margin-right:50px">
+                          <span style="margin-right: 5px">收起</span>
+                          <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+                        </div>
                       </div>
                     </van-col>
                   </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                      </div>
-                    </van-col>
-                    <van-col span="7" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list"><span>15280469787</span></div>
-                      </div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+                  <van-row v-if="adminNoData">
+                    <van-col span="24">
+                      <div class="normal-rol">
+                        <span>暂无数据~</span>
                       </div>
                     </van-col>
                   </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                      </div>
-                    </van-col>
-                    <van-col span="7" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list"><span>15280469787</span></div>
-                      </div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                      </div>
-                    </van-col>
-                  </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="4" offset="0">
-                      <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>321232</span></div>
-                    </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list van-ellipsis"><span>Jovan_Hu</span></div>
-                      </div>
-                    </van-col>
-                    <van-col span="7" offset="1">
-                      <div class="content-text-center">
-                        <div class="mine-title-list"><span>15280469787</span></div>
-                      </div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                      </div>
-                    </van-col>
-                  </van-row>
-                </div>
-                <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
-                  <van-row>
-                    <van-col span="10" offset="10">
-                      <div class="mine-title-list van-ellipsis"><span>加载更多</span></div>
-                    </van-col>
-                  </van-row>
-                </div>
+                </van-panel>
               </div>
               <van-popup :show="isAdminAddShow" position="bottom">
                 <div style="height: 100%;padding-bottom: 55px;">
@@ -1404,20 +1306,28 @@
                   </van-panel>
                   <van-cell-group>
                     <van-field
-                      :value="pAdminName"
+                      :value="adminName"
                       label="管理员名"
                       placeholder="管理员姓名"
+                      clearable
+                      required
+                      :error-message="adminName_error"
+                      @change="adminNameChange"
                     />
                     <van-field
-                      :value="pAdminTel"
+                      :value="adminTel"
                       label="手机号"
                       placeholder="手机号码"
+                      clearable
+                      required
+                      :error-message="adminTel_error"
+                      @change="adminTelChange"
                     />
                   </van-cell-group>
                 </div>
               </van-popup>
               <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isAdminAddShow">
-                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
+                <van-button type="info" @click="" style="margin-left: 13%;width: 40%;" @click="addAdmin()">
                   <view style="width: 88px;">提交</view>
                 </van-button>
                 <van-button type="danger" @click="hideAdminAdd()" style="margin-right: 5%;width: 40%;float: right">
@@ -1428,6 +1338,7 @@
           </van-tabs>
         </div>
         <van-toast id="van-toast" />
+        <van-notify id="van-notify" />
       </div>
     </div>
   </div>
@@ -1435,6 +1346,7 @@
 
 <script>
   import Toast from '../../../static/vant-weapp/dist/toast/toast'
+  import Notify from '../../../static/vant-weapp/dist/notify/notify'
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
   import commentAdmin from '@/components/commentAdmin/commentAdmin'
   import adviceAdmin from '@/components/adviceAdmin/adviceAdmin'
@@ -1484,14 +1396,26 @@
         isAdminDetailShow: false,
         isAdminAddShow: false,
         company: '',
+        company_id: '',
+        isChooseCompany: false,
+        company_choose: [],
+        company_full: [],
+        company_error: '',
         hrName: '',
+        hrName_error: '',
         hrTel: '',
+        hrTel_error: '',
+        adminName: '',
+        adminName_error: '',
+        adminTel: '',
+        adminTel_error: '',
         headlines: [],
         // recruits
         recruits: [],
         recruitIndex: 0,
         recruitNum: 0,
         recruitMore: false,
+        recruitBottom: false,
         recruitLess: false,
         recruitSingleMore: false,
         recruitNoData: false,
@@ -1500,6 +1424,7 @@
         salaryIndex: 0,
         salaryNum: 0,
         salaryMore: false,
+        salaryBottom: false,
         salaryLess: false,
         salarySingleMore: false,
         salaryNoData: false,
@@ -1507,11 +1432,45 @@
         comments: [],
         commentIndex: 0,
         commentNum: 0,
+        commentBottom: false,
         commentMore: false,
         commentLess: false,
         commentSingleMore: false,
         commentNoData: false,
         c_pageNo: 1,
+        // hr
+        hrs: [],
+        hrIndex: 0,
+        hrNum: 0,
+        hrMore: false,
+        hrBottom: false,
+        hrLess: false,
+        hrSingleMore: false,
+        hrNoData: false,
+        hr_pageNo: 1,
+        h_keyword: '',
+        // member
+        members: [],
+        memberIndex: 0,
+        memberNum: 0,
+        memberMore: false,
+        memberLess: false,
+        memberBottom: false,
+        memberSingleMore: false,
+        memberNoData: false,
+        m_pageNo: 1,
+        m_keyword: '',
+        // admin
+        admins: [],
+        adminIndex: 0,
+        adminNum: 0,
+        adminMore: false,
+        adminLess: false,
+        adminBottom: false,
+        adminSingleMore: false,
+        adminNoData: false,
+        ad_pageNo: 1,
+        ad_keyword: '',
         comment: {},
         advices: [],
         advice: {},
@@ -1519,9 +1478,20 @@
         adviceNum: 0,
         adviceMore: false,
         adviceLess: false,
+        adviceBottom: false,
         adviceSingleMore: false,
         adviceNoData: false,
         a_pageNo: 1,
+        companys: [],
+        companyIndex: 0,
+        companyNum: 0,
+        companyMore: false,
+        companyLess: false,
+        companySingleMore: false,
+        companyBottom: false,
+        companyNoData: false,
+        cp_pageNo: 1,
+        cp_keyword: '',
         judgeTime: '',
         mainTendencyChartData: {},
         tendencyTickCount: 0,
@@ -1532,11 +1502,276 @@
         commentTendencyChartData: {},
         commentTotal: 0,
         adviceTendencyChartData: {},
-        adviceTotal: 0
+        adviceTotal: 0,
+        isCompanyAddShow: false,
+        enterprise: '',
+        enterprise_error: '',
+        enterprise_type: '',
+        enterprise_type_error: '',
+        enterprise_place: '',
+        enterprise_place_error: ''
       }
     },
 
     methods: {
+      enterprise_placeChange (e) {
+        this.enterprise_place = e.mp.detail
+        if (this.enterprise_place.length > 10) {
+          this.enterprise_place_error = '地点信息太长'
+        } else {
+          this.enterprise_place_error = ''
+        }
+      },
+      enterprise_typeChange (e) {
+        this.enterprise_type = e.mp.detail
+        if (this.enterprise_type.length > 20) {
+          this.enterprise_type_error = '类型信息太长'
+        } else {
+          this.enterprise_type_error = ''
+        }
+      },
+      enterpriseChange (e) {
+        this.enterprise = e.mp.detail
+        if (this.enterprise.length > 30) {
+          this.enterprise_error = '名称信息太长'
+        } else {
+          this.enterprise_error = ''
+        }
+      },
+      onConfirmCompany (event) {
+        this.isChooseCompany = !this.isChooseCompany
+        this.company = event.mp.detail.value
+        console.log(this.company)
+        console.log(this.company_full)
+        for (var i = 0; i < this.company_full.length; i++) {
+          if (this.company === this.company_full[i].name) {
+            this.company_id = this.company_full[i].id
+          }
+        }
+        console.log(this.company_id)
+      },
+      onCancelCompany () {
+        this.isChooseCompany = !this.isChooseCompany
+      },
+      addAdmin () {
+        if (this.adminName_error !== '' || this.adminTel_error !== '' || this.adminName === '' || this.adminTel === '') {
+          Toast.fail('管理员信息不全，无法添加')
+          return
+        }
+        const this_ = this
+        const requestUrl = '/api/mine/admin/addAdmin'
+        const params = {
+          'name': this.adminName,
+          'tel': this.adminTel
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.adminName = ''
+            this_.adminName_error = ''
+            this_.adminTel = ''
+            this_.adminTel_error = ''
+            this_.hideAdminAdd()
+            Toast.success('管理员信息添加成功')
+            this_.ad_keyword = ''
+            this_.admins = []
+            this_.adminIndex = 0
+            this_.ad_pageNo = 1
+            this_.getAdmins(5)
+          } else {
+            Toast.fail('管理员信息添加失败')
+          }
+        }).catch(function (err) {
+          console.log('管理员信息添加失败')
+          console.log(err)
+        })
+      },
+      adminNameChange (e) {
+        this.adminName = e.mp.detail
+        if (this.adminName.length > 6) {
+          this.adminName_error = '名字太长'
+        } else {
+          this.adminName_error = ''
+        }
+      },
+      adminTelChange (e) {
+        this.adminTel = e.mp.detail
+        this.adminTel = e.mp.detail
+        var numReg = /^[0-9]+$/
+        var numRe = new RegExp(numReg)
+        if (!numRe.test(this.adminTel)) {
+          this.adminTel_error = '请输入正确的手机号'
+          return
+        }
+        if (this.adminTel.length !== 11) {
+          this.adminTel_error = '手机号格式不正确'
+        } else {
+          this.adminTel_error = ''
+        }
+      },
+      hrNameChange (e) {
+        this.hrName = e.mp.detail
+        if (this.hrName.length > 6) {
+          this.hrName_error = '名字太长'
+        } else {
+          this.hrName_error = ''
+        }
+      },
+      hrTelChange (e) {
+        this.hrTel = e.mp.detail
+        var numReg = /^[0-9]+$/
+        var numRe = new RegExp(numReg)
+        if (!numRe.test(this.hrTel)) {
+          this.hrTel_error = '请输入正确的手机号'
+          return
+        }
+        if (this.hrTel.length !== 11) {
+          this.hrTel_error = '手机号格式不正确'
+        } else {
+          this.hrTel_error = ''
+        }
+      },
+      addCompany () {
+        if (this.enterprise_error !== '' || this.enterprise_type_error !== '' || this.enterprise_place_error !== '' || this.enterprise === '' || this.enterprise_type === '' || this.enterprise_place === '') {
+          Toast.fail('企业信息不全，无法添加')
+          return
+        }
+        const this_ = this
+        const requestUrl = '/api/mine/admin/addCompany'
+        const params = {
+          'name': this.enterprise,
+          'type': this.enterprise_type,
+          'place': this.enterprise_place
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.enterprise = ''
+            this_.enterprise_error = ''
+            this_.enterprise_type = ''
+            this_.enterprise_type_error = ''
+            this_.enterprise_place = ''
+            this_.enterprise_place_error = ''
+            this_.hideCompanyAdd()
+            this_.cp_keyword = ''
+            this_.companys = []
+            this_.companyIndex = 0
+            this_.cp_pageNo = 1
+            this_.getCompanys(5)
+            Toast.success('企业信息添加成功')
+          } else {
+            Toast.fail('企业信息添加失败')
+          }
+        }).catch(function (err) {
+          console.log('企业信息添加异常')
+          console.log(err)
+        })
+      },
+      addHR () {
+        if (this.company_error !== '' || this.hrName_error !== '' || this.hrTel_error !== '' || this.company === '' || this.hrName === '' || this.hrTel === '') {
+          Toast.fail('HR信息不全，无法添加')
+          return
+        }
+        const this_ = this
+        const requestUrl = '/api/mine/admin/addHR'
+        const params = {
+          'master_id': this.company_id,
+          'name': this.hrName,
+          'tel': this.hrTel
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.company = ''
+            this_.company_error = ''
+            this_.hrTel = ''
+            this_.hrTel_error = ''
+            this_.hrName = ''
+            this_.hrName_error = ''
+            this_.hideHRAdd()
+            Toast.success('HR信息添加成功')
+            this_.h_keyword = ''
+            this_.hrs = []
+            this_.hrIndex = 0
+            this_.h_pageNo = 1
+            this_.getHRs(5)
+          } else {
+            Toast.fail('HR信息添加失败')
+          }
+        }).catch(function (err) {
+          console.log('获取公司信息异常')
+          console.log(err)
+        })
+      },
+      queryCompanyByName (e) {
+        this.company = e.mp.detail
+        const this_ = this
+        const requestUrl = '/api/mine/admin/queryCompanyByName'
+        const params = {
+          'name': this.company
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            const resData = res.data.data
+            this_.company_full = resData
+            for (var i = 0; i < resData.length; i++) {
+              this_.company_choose.push(resData[i].name)
+            }
+            if (this_.company_choose.length === 0) {
+              Notify({
+                text: '公司信息不存在',
+                duration: 1000,
+                selector: '#van-notify',
+                backgroundColor: '#ff4c11'
+              })
+              this_.company_error = '公司信息不存在'
+            } else {
+              this_.isChooseCompany = true
+              this_.company_error = ''
+            }
+          }
+        }).catch(function (err) {
+          console.log('获取公司信息异常')
+          console.log(err)
+        })
+      },
+      onSearch_CP (event) {
+        if (event == null) {
+          return
+        }
+        this.cp_keyword = event.mp.detail
+        this.companys = []
+        this.companyIndex = 0
+        this.cp_pageNo = 1
+        this.getCompanys(5)
+      },
+      onSearch_HR (event) {
+        if (event == null) {
+          return
+        }
+        this.h_keyword = event.mp.detail
+        this.hrs = []
+        this.hrIndex = 0
+        this.h_pageNo = 1
+        this.getHRs(5)
+      },
+      onSearch_Member (event) {
+        if (event == null) {
+          return
+        }
+        this.m_keyword = event.mp.detail
+        this.members = []
+        this.memberIndex = 0
+        this.m_pageNo = 1
+        this.getMembers(5)
+      },
+      onSearch_Admin (event) {
+        if (event == null) {
+          return
+        }
+        this.ad_keyword = event.mp.detail
+        this.admins = []
+        this.adminIndex = 0
+        this.ad_pageNo = 1
+        this.getAdmins(5)
+      },
       updateAllData () {
         const this_ = this
         let type = this_.reportTabIndex
@@ -1735,6 +1970,30 @@
         }
         this.getComments(5)
       },
+      hrMoreHandler (type) {
+        if (type !== 1) {
+          this.hrs = []
+          this.hrIndex = 0
+          this.h_pageNo = 1
+        }
+        this.getHRs(5)
+      },
+      memberMoreHandler (type) {
+        if (type !== 1) {
+          this.members = []
+          this.memberIndex = 0
+          this.m_pageNo = 1
+        }
+        this.getMembers(5)
+      },
+      adminMoreHandler (type) {
+        if (type !== 1) {
+          this.admins = []
+          this.adminIndex = 0
+          this.ad_pageNo = 1
+        }
+        this.getAdmins(5)
+      },
       salaryMoreHandler (type) {
         if (type !== 1) {
           this.salaries = []
@@ -1750,6 +2009,124 @@
           this.r_pageNo = 1
         }
         this.getRecruits(5)
+      },
+      getAdmins (size) {
+        const requestUrl = '/api/mine/admin/getAdmins'
+        const params = {
+          'pageSize': size,
+          'pageNo': this.a_pageNo++,
+          'keyword': this.ad_keyword
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.adminNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpadmin = {}
+            tmpadmin.id = tmp.id
+            tmpadmin.name = tmp.name
+            tmpadmin.tel = tmp.tel
+            this_.admins.push(tmpadmin)
+          }
+          this_.adminIndex = this_.admins.length
+          this_.adminMore = this_.adminNum > size
+          this_.adminBottom = this_.adminNum === this_.admins.length
+          this_.adminLess = this_.adminIndex > size
+          this_.adminSingleMore = this_.adminIndex < this_.adminNum
+          this_.adminNoData = this_.admins.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getCompanys (size) {
+        const requestUrl = '/api/mine/admin/getCompanys'
+        const params = {
+          'pageSize': size,
+          'pageNo': this.cp_pageNo++,
+          'keyword': this.cp_keyword
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.companyNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpcompany = {}
+            tmpcompany.id = tmp.id
+            tmpcompany.name = tmp.name
+            tmpcompany.hrNum = tmp.hrNum
+            this_.companys.push(tmpcompany)
+          }
+          this_.companyIndex = this_.companys.length
+          this_.companyMore = this_.companyNum > size
+          this_.companyBottom = this_.companyNum === this_.companys.length
+          this_.companyLess = this_.companyIndex > size
+          this_.companySingleMore = this_.companyIndex < this_.companyNum
+          this_.companyNoData = this_.companys.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getMembers (size) {
+        const requestUrl = '/api/mine/admin/getMembers'
+        const params = {
+          'pageSize': size,
+          'pageNo': this.m_pageNo++,
+          'keyword': this.m_keyword
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.memberNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpmember = {}
+            tmpmember.id = tmp.id
+            tmpmember.name = tmp.name
+            tmpmember.gender = tmp.gender === 1 ? '男' : (tmp.gender === 2 ? '女' : '未知')
+            tmpmember.city = tmp.city
+            this_.members.push(tmpmember)
+          }
+          this_.memberIndex = this_.members.length
+          this_.memberMore = this_.memberNum > size
+          this_.memberBottom = this_.memberNum === this_.members.length
+          this_.memberLess = this_.memberIndex > size
+          this_.memberSingleMore = this_.memberIndex < this_.memberNum
+          this_.memberNoData = this_.members.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getHRs (size) {
+        const requestUrl = '/api/mine/admin/getHRs'
+        const params = {
+          'pageSize': size,
+          'pageNo': this.h_pageNo++,
+          'keyword': this.h_keyword
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.hrNum = res.data.data.total
+          const resData = res.data.data.list ? res.data.data.list : []
+          for (let i = 0; i < resData.length; i++) {
+            let tmp = resData[i]
+            let tmpHr = {}
+            tmpHr.id = tmp.id
+            tmpHr.companyName = tmp.companyName
+            tmpHr.name = tmp.name
+            tmpHr.publishTimes = tmp.publishTimes
+            this_.hrs.push(tmpHr)
+          }
+          this_.hrIndex = this_.hrs.length
+          this_.hrMore = this_.hrNum > size
+          this_.hrBottom = this_.hrNum === this_.hrs.length
+          this_.hrLess = this_.hrIndex > size
+          this_.hrSingleMore = this_.hrIndex < this_.hrNum
+          this_.hrNoData = this_.hrs.length === 0
+        }).catch(function (err) {
+          console.log(err)
+        })
       },
       getRecruits (size) {
         const requestUrl = '/api/mine/admin/getTodayRecruits'
@@ -2323,24 +2700,43 @@
       hideUserTipoffPopup () {
         this.isUserTipoffShow = false
       },
+      ShowAddCompany () {
+        this.isCompanyAddShow = true
+      },
+      hideCompanyAdd () {
+        this.isCompanyAddShow = false
+        this.enterprise = ''
+        this.enterprise_error = ''
+        this.enterprise_type = ''
+        this.enterprise_type_error = ''
+        this.enterprise_place = ''
+        this.enterprise_place_error = ''
+      },
       ShowAddHR () {
         this.isHRAddShow = true
       },
       hideHRAdd () {
+        this.isChooseCompany = false
         this.isHRAddShow = false
+        this.comment = ''
+        this.company_error = ''
+        this.hrName_error = ''
+        this.hrTel_error = ''
+        this.hrTel = ''
+        this.hrName = ''
       },
       showAddAdmin () {
         this.isAdminAddShow = true
       },
       hideAdminAdd () {
         this.isAdminAddShow = false
-      }
-    },
-    mounted () {
-      const this_ = this
-      if (this_.identity === 'admin') {
-        this_.updateAllData()
-
+        this.adminTel = ''
+        this.adminName_error = ''
+        this.adminName = ''
+        this.adminTel_error = ''
+      },
+      initData () {
+        const this_ = this
         this_.getHeadlines()
         this_.recruits = []
         this_.recruitIndex = 0
@@ -2361,6 +2757,33 @@
         this_.adviceIndex = 0
         this_.a_pageNo = 1
         this_.getAdvices(5)
+
+        this_.hrs = []
+        this_.hrIndex = 0
+        this_.h_pageNo = 1
+        this_.getHRs(5)
+
+        this_.admins = []
+        this_.adminIndex = 0
+        this_.ad_pageNo = 1
+        this_.getAdmins(5)
+
+        this_.members = []
+        this_.memberIndex = 0
+        this_.m_pageNo = 1
+        this_.getMembers(5)
+
+        this_.companys = []
+        this_.companyIndex = 0
+        this_.cp_pageNo = 1
+        this_.getCompanys(5)
+      }
+    },
+    mounted () {
+      const this_ = this
+      if (this_.identity === 'admin') {
+        this_.updateAllData()
+        this_.initData()
       }
     },
     created () {
