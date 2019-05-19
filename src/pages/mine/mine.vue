@@ -169,7 +169,7 @@
           <van-tabs animated color="#1c86ee" class="flex-basis" @change="" line-width="60">
             <van-tab title="仪表盘" class="mine-admin-tabs">
               <van-panel>
-                <div class="data-panel">
+                <div>
                   <van-tabs animated :active="reportTabIndex" color="#1c86ee" class="flex-basis" @change="onTabChange" line-width="60">
                     <van-tab title="日报" style="flex-basis: 20% !important;"></van-tab>
                     <van-tab title="周报" style="flex-basis: 20% !important;"></van-tab>
@@ -289,7 +289,7 @@
               </div>
             </van-tab>
             <van-tab title="版块管理" class="mine-admin-tabs">
-              <div class="data-panel">
+              <div>
                 <van-panel>
                   <div @click="toHeadline" class="van-hairline--bottom van-hairline--top mine-block-title">
                     <van-row>
@@ -754,14 +754,14 @@
               </div>
             </van-tab>
             <van-tab title="信息管理" class="mine-admin-tabs">
-              <div class="data-panel">
+              <div>
                 <div class="van-hairline--bottom van-hairline--top mine-block-title">
                   <van-panel>
                     <van-row>
                       <van-col span="15">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">HR信息管理 - <span class="blue-text">{{hrNum}} 席</span></div>
+                          <div class="panel-title" style="font-size: 14px;">HR信息 - <span class="blue-text">{{hrNum}} 席</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="7" @click="ShowAddHR">
@@ -808,7 +808,7 @@
                     </van-col>
                   </van-row>
                 </div>
-                <van-row v-for="(item, index) in hrs" :key="index">
+                <van-row @click="toUserInfoPage(item)" v-for="(item, index) in hrs" :key="index">
                   <div style="width: 100%;" class="van-hairline--bottom mine-title-tr">
                     <van-col span="3" offset="1">
                       <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>{{item.id}}</span></div>
@@ -932,7 +932,7 @@
                       <van-col span="15">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">企业信息管理 - <span class="blue-text">{{companyNum}} 席</span></div>
+                          <div class="panel-title" style="font-size: 14px;">企业信息 - <span class="blue-text">{{companyNum}} 席</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="7" @click="ShowAddCompany()">
@@ -959,16 +959,22 @@
                         <span>编号</span>
                       </div>
                     </van-col>
-                    <van-col  span="6" offset="3">
+                    <van-col  span="7" offset="3">
                       <div class="mine-title-list van-ellipsis">
                         <img src="../../../static/images/mine/mine-enterprise.png" style="height: 15px;width: 15px;"/>
                         <span>企业</span>
                       </div>
                     </van-col>
-                    <van-col span="3" offset="3">
+                    <van-col span="3" offset="0">
                       <div class="mine-title-list">
                         <img src="../../../static/images/mine/mine-hr.png" style="height: 15px;width: 15px;"/>
                         <span>HR</span>
+                      </div>
+                    </van-col>
+                    <van-col span="4" offset="1">
+                      <div class="mine-title-list">
+                        <img src="../../../static/images/mine/mine-city.png" style="height: 15px;width: 15px;"/>
+                        <span>总部</span>
                       </div>
                     </van-col>
                   </van-row>
@@ -978,16 +984,14 @@
                     <van-col span="3" offset="1">
                       <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>{{item.id}}</span></div>
                     </van-col>
-                    <van-col span="8" offset="1">
-                      <div class="mine-title-list van-ellipsis"><span>{{item.name}}</span></div>
+                    <van-col span="10" offset="1">
+                      <div class="mine-title-list van-ellipsis"><span>{{item.name  + '-' + item.type}}</span></div>
                     </van-col>
-                    <van-col span="3" offset="4">
+                    <van-col span="3" offset="0">
                       <div class="mine-title-list"><span>{{item.hrNum}} 人</span></div>
                     </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
-                      </div>
+                    <van-col span="5" offset="1">
+                      <div class="mine-title-list"><span>{{item.place}}</span></div>
                     </van-col>
                   </div>
                 </van-row>
@@ -1084,7 +1088,7 @@
                       <van-col span="15">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">会员信息管理 - <span class="blue-text">{{memberNum}} 位</span></div>
+                          <div class="panel-title" style="font-size: 14px;">会员信息 - <span class="blue-text">{{memberNum}} 位</span></div>
                         </div>
                       </van-col>
                     </van-row>
@@ -1126,7 +1130,7 @@
                         </van-col>
                       </van-row>
                     </div>
-                    <van-row v-for="(item, index) in members" :key="index">
+                    <van-row @click="toUserInfoPage(item)" v-for="(item, index) in members" :key="index">
                       <div class="van-hairline--bottom mine-title-tr" style="width: 100%;">
                       <van-col span="3" offset="1">
                         <div class="van-ellipsis mine-title-name mine-title-list mine-id" style="margin-left: 5px"><span>{{item.id}}</span></div>
@@ -1195,7 +1199,7 @@
                       <van-col span="15">
                         <div class="panel-header-number">
                           <div class="before-title-blue"></div>
-                          <div class="panel-title" style="font-size: 14px;">管理员信息管理 - <span class="blue-text">{{adminNum}} 位</span></div>
+                          <div class="panel-title" style="font-size: 14px;">管理员信息 - <span class="blue-text">{{adminNum}} 位</span></div>
                         </div>
                       </van-col>
                       <van-col span="2" offset="7" @click="showAddAdmin()">
@@ -1249,11 +1253,6 @@
                     <van-col span="7" offset="1">
                       <div class="content-text-center">
                         <div class="mine-title-list"><span>{{item.tel}}</span></div>
-                      </div>
-                    </van-col>
-                    <van-col offset="1" span="2">
-                      <div class="mine-title-content mine-title-list">
-                        <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
                       </div>
                     </van-col>
                   </div>
@@ -1514,6 +1513,10 @@
     },
 
     methods: {
+      toUserInfoPage (item) {
+        let str = JSON.stringify(item)
+        navigateTo('../member/main?user=' + str)
+      },
       enterprise_placeChange (e) {
         this.enterprise_place = e.mp.detail
         if (this.enterprise_place.length > 10) {
@@ -2056,6 +2059,8 @@
             tmpcompany.id = tmp.id
             tmpcompany.name = tmp.name
             tmpcompany.hrNum = tmp.hrNum
+            tmpcompany.place = tmp.place
+            tmpcompany.type = tmp.type
             this_.companys.push(tmpcompany)
           }
           this_.companyIndex = this_.companys.length
@@ -2086,6 +2091,11 @@
             tmpmember.name = tmp.name
             tmpmember.gender = tmp.gender === 1 ? '男' : (tmp.gender === 2 ? '女' : '未知')
             tmpmember.city = tmp.city
+            tmpmember.avatar_url = tmp.avatar_url
+            tmpmember.type = tmp.type
+            tmpmember.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
+            tmpmember.tel = tmp.tel
+            tmpmember.province = tmp.province
             this_.members.push(tmpmember)
           }
           this_.memberIndex = this_.members.length
@@ -2115,7 +2125,16 @@
             tmpHr.id = tmp.id
             tmpHr.companyName = tmp.companyName
             tmpHr.name = tmp.name
+            tmpHr.nickname = tmp.nickname
+            tmpHr.master_id = tmp.master_id
             tmpHr.publishTimes = tmp.publishTimes
+            tmpHr.gender = tmp.gender === 1 ? '男' : (tmp.gender === 2 ? '女' : '未知')
+            tmpHr.city = tmp.city
+            tmpHr.avatar_url = tmp.avatar_url
+            tmpHr.type = tmp.type
+            tmpHr.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
+            tmpHr.tel = tmp.tel
+            tmpHr.province = tmp.province
             this_.hrs.push(tmpHr)
           }
           this_.hrIndex = this_.hrs.length
@@ -2809,7 +2828,17 @@
     width: 100%;
     overflow-x:hidden;
   }
-
+  .before-title-blue {
+    width: 5px;
+    height: 16px;
+    background-color: #1c85ee;
+    border-radius: 5px;
+    margin-left: 20px;
+  }
+  .panel-title {
+    margin-left: 12px;
+    font-size: 14px;
+  }
   .panel-complete {
     margin-top: 20rpx;
   }

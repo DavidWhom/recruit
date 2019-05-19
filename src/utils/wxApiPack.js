@@ -15,3 +15,9 @@ export function switchTab (url) {
     url: url
   })
 }
+
+export function setNavigationBarTitle (title) {
+  wx.setNavigationBarTitle({
+    title: title
+  })
+}

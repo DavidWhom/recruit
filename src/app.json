@@ -11,7 +11,8 @@
     "pages/mine/salary/main",
     "pages/mine/adviceFeedback/main",
     "pages/mine/feedback/main",
-    "pages/recruit/recruitDetail/main"
+    "pages/recruit/recruitDetail/main",
+    "pages/member/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

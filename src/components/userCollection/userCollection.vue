@@ -165,7 +165,7 @@
   export default {
     data () {
       return {
-        id: '',
+        user: {},
         recruits: [],
         recruitIndex: 0,
         recruitNum: 0,

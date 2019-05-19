@@ -31,7 +31,7 @@
     </div>
     <div class="van-hairline--bottom data-panel">
       <div class="recruit-content">
-        <div v-if="isRecruitLoading" style="height: 500px;padding-top: 200rpx">
+        <div v-if="isRecruitLoading" style="width: 100%;height: 500px;padding-top: 200rpx;text-align: center">
           <van-loading size="50px" color="#1c86ee" />
         </div>
         <wxParse :content="recruitDetail.content" :loading="isRecruitLoading"/>
@@ -103,7 +103,6 @@
         isRecruitLoading: true,
         id: '',
         recruitDetail: {},
-        isLoading: true,
         comments: [],
         goodedImg: require('../../../../static/images/recruit/recruit-gooed.png'),
         goodImg: require('../../../../static/images/recruit/recruit-good.png'),
@@ -117,6 +116,11 @@
         this_.getRecruitDetail()
         this_.getRecruitComment()
       }, 1000)
+    },
+    onShow () {
+      this.isRecruitLoading = true
+      this.recruitDetail = {}
+      this.comments = []
     },
     methods: {
       addComment () {
@@ -238,7 +242,6 @@
   }
   .recruit-content {
     padding: 10rpx 30rpx 10rpx 30rpx;
-    text-align: center;
   }
   .recruit-header-son {
     font-size: 12px;

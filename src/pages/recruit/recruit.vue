@@ -307,17 +307,6 @@
   .salary-title-bar span {
     color: darkgray;
   }
-  .before-title-blue {
-    width: 5px;
-    height: 16px;
-    background-color: #1c85ee;
-    border-radius: 5px;
-    margin-left: 20px;
-  }
-  .panel-title {
-    margin-left: 12px;
-    font-size: 14px;
-  }
   .recruit-content-row {
     padding: 10px 20px 10px 20px
   }
