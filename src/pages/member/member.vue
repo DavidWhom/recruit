@@ -23,13 +23,13 @@
                 </div>
               </view>
             </van-col>
-            <van-col span="9" offset="1" class="member-complete">
+            <van-col span="8" offset="1" class="member-complete">
               <div class="member-content">编号:{{user.id}}</div>
               <div class="member-content">电话:{{user.tel}}</div>
               <div class="member-content">性别:{{user.gender === 0 ? '未知' : (user.gender === 1 ? '男' : '女')}}</div>
               <div class="member-content">创建时间:{{user.create_time}}</div>
             </van-col>
-            <van-col span="7" class="member-complete">
+            <van-col span="8" class="member-complete">
               <div class="member-content van-ellipsis">姓名:{{user.name}}</div>
               <div class="member-content">昵称:{{user.nickname}}</div>
               <div class="member-content van-ellipsis">地址:{{user.province + user.city}}</div>
@@ -834,7 +834,7 @@
         }
         const this_ = this
         this_.$http.get(requestUrl, params).then(function (res) {
-          this_.recentDate = res.data.data
+          this_.recentDate = formateDate(res.data.data, 'yyyy-MM-dd')
         }).catch(function (err) {
           console.log(err)
         })

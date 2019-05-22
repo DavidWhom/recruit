@@ -199,6 +199,10 @@
         })
       },
       updateSalaryAuth (type) {
+        if (this.isUserAuthed) {
+          Toast.fail('您已经置评~')
+          return
+        }
         const this_ = this
         const requestUrl = '/api/salary/updateSalaryAuth'
         const params = {

@@ -166,8 +166,8 @@
           this_.recruitDetail.create_time = formateDate(this_.recruitDetail.create_time, 'yyyy-MM-dd')
           if (this_.recruitDetail.content_id === 1) {
             this_.recruitDetail.content = marked(this_.recruitDetail.content)
-            this_.isRecruitLoading = false
           }
+          this_.isRecruitLoading = false
         })
       },
       getRecruitComment () {
