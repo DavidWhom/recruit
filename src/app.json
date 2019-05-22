@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/main",
     "pages/index/main",
     "pages/salary/main",
     "pages/salary/salaryDetail/main",
@@ -49,29 +50,6 @@
         "pagePath": "pages/mine/main",
         "iconPath": "static/tabs/mine.png",
         "selectedIconPath": "static/tabs/mine-active.png"
-      }],
-
-    "items": [{
-      "name": "首页",
-      "pagePath": "pages/index/main",
-      "icon": "static/tabs/home.png",
-      "activeIcon": "static/tabs/home-active.png"
-    }, {
-      "name": "招聘信息",
-      "pagePath": "pages/index/main",
-      "icon": "static/tabs/hire.png",
-      "activeIcon": "static/tabs/hire-active.png"
-    },{
-      "name": "薪资爆料",
-      "pagePath": "pages/salary/main",
-      "icon": "static/tabs/salary.png",
-      "activeIcon": "static/tabs/salary-active.png"
-    },
-      {
-        "name": "我的",
-        "pagePath": "pages/mine/main",
-        "icon": "static/tabs/orders.png",
-        "activeIcon": "static/tabs/orders-active.png"
       }],
     "position": "bottom"
   }

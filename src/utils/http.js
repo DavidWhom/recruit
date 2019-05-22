@@ -1,7 +1,7 @@
 import Fly from '../../node_modules/flyio/dist/npm/wx'
 const fly = new Fly()
 // const baseURL = 'http://118.24.111.143:8081'
-const baseURL = 'http://192.168.1.108:8089'
+const baseURL = 'http://192.168.43.66:8089'
 // const baseURL = 'http://jovan.free.idcfengye.com'
 fly.config.baseURL = baseURL
 fly.interceptors.request.use((request) => {

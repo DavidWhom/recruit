@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "登录",
+  "usingComponents": {
+    "van-button": "/static/vant-weapp/dist/button/index",
+    "van-panel": "/static/vant-weapp/dist/panel/index",
+    "van-search": "/static/vant-weapp/dist/search/index",
+    "van-cell-group": "/static/vant-weapp/dist/cell-group/index",
+    "van-field": "/static/vant-weapp/dist/field/index",
+    "van-toast": "/static/vant-weapp/dist/toast/index",
+    "van-transition": "/static/vant-weapp/dist/transition/index",
+    "van-picker": "/static/vant-weapp/dist/picker/index",
+    "van-popup": "/static/vant-weapp/dist/popup/index"
+  }
+}
