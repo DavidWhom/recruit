@@ -128,7 +128,7 @@
         <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserTipoffShow">
           <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center">
             <van-button type="danger" @click="hideUserTipoffPopup()" style="width: 40%;">
-              <view style="width: 88px;">取消</view>
+              <view style="width: 88px;">关闭</view>
             </van-button>
           </div>
         </div>
@@ -140,7 +140,7 @@
         <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCollectionShow">
           <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center">
             <van-button type="danger" @click="hideUserCollectionPopup()" style="width: 40%;">
-              <view style="width: 88px;">取消</view>
+              <view style="width: 88px;">关闭</view>
             </van-button>
           </div>
         </div>
@@ -152,7 +152,7 @@
         <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCommentShow">
           <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center">
             <van-button type="danger" @click="hideUserCommentPopup()" style="width: 40%;">
-              <view style="width: 88px;">取消</view>
+              <view style="width: 88px;">关闭</view>
             </van-button>
           </div>
         </div>
