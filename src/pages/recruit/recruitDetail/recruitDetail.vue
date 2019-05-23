@@ -20,10 +20,16 @@
               <span class="recruit-header-son">{{recruitDetail.view}}</span>
             </div>
           </van-col>
-          <van-col span="3">
+          <van-col span="4">
             <div class="van-ellipsis recruit-title-name">
               <img src="../../../../static/images/mine/mine-fankui.png" style="height: 15px;width: 15px;"/>
               <span class="recruit-header-son">{{comments.length}}</span>
+            </div>
+          </van-col>
+          <van-col span="6" v-if="userInfo.type === 2">
+            <div class="van-ellipsis recruit-title-name">
+              <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
+              <span class="recruit-header-son">{{id}}</span>
             </div>
           </van-col>
         </van-row>
@@ -74,7 +80,7 @@
             </van-col>
           </van-row>
         </div>
-        <div class="van-hairline--bottom">
+        <div class="van-hairline--bottom" v-if="userInfo.type === 0">
           <van-row>
             <van-col span="24">
               <div class="normal-rol" @click="recruitMoreHandler(1)">
@@ -82,6 +88,13 @@
               </div>
             </van-col>
           </van-row>
+        </div>
+        <div class="recruit-collect" v-if="userInfo.type === 0" @click="collect">
+          <div style="margin: auto;">
+            <van-icon v-if="!isUserCollection" name="star-o" color="#1c85ee"/>
+            <van-icon v-if="isUserCollection" name="star" color="#1c85ee"/>
+            <div style="font-size: 10px">收藏</div>
+          </div>
         </div>
       </van-panel>
     </div>
@@ -100,29 +113,41 @@
     },
     data () {
       return {
+        userInfo: {},
         isRecruitLoading: true,
         id: '',
         recruitDetail: {},
         comments: [],
         goodedImg: require('../../../../static/images/recruit/recruit-gooed.png'),
         goodImg: require('../../../../static/images/recruit/recruit-good.png'),
-        comment: ''
+        comment: '',
+        isUserCollection: false
       }
     },
     mounted () {
-      this.id = this.$root.$mp.query.id
-      const this_ = this
-      setTimeout(function () {
-        this_.getRecruitDetail()
-        this_.getRecruitComment()
-      }, 1000)
     },
     onShow () {
+      this.id = this.$root.$mp.query.id
+      const this_ = this
+      this_.getRecruitDetail()
+      this_.getRecruitComment()
+      if (this.global.type === 0) {
+        this_.isUserCollect()
+      }
+      this.commonInit()
       this.isRecruitLoading = true
       this.recruitDetail = {}
       this.comments = []
     },
     methods: {
+      commonInit () {
+        this.userInfo.id = this.global.id
+        this.userInfo.name = this.global.name
+        this.userInfo.nickname = this.global.nickname
+        this.userInfo.avatarUrl = this.global.avatarUrl
+        this.userInfo.gender = this.global.gender
+        this.userInfo.type = this.global.type
+      },
       addComment () {
         if (this.comment === undefined || this.comment.length === 0) {
           Toast.fail('评论内容不能为空哦~')
@@ -152,6 +177,44 @@
           } else {
             Toast.fail('评论失败')
           }
+        })
+      },
+      isUserCollect () {
+        const this_ = this
+        const requestUrl = '/api/recruit/isUserCollect'
+        const params = {
+          'recruit_id': this.id,
+          'user_id': this.global.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.isUserCollection = res.data.data
+        })
+      },
+      collect () {
+        const this_ = this
+        var appendUrl = ''
+        if (this.isUserCollection) {
+          appendUrl = 'notCollect'
+        } else {
+          appendUrl = 'collect'
+        }
+        const requestUrl = '/api/recruit/' + appendUrl
+        const params = {
+          'recruit_id': this.id,
+          'user_id': this.global.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            if (!this_.isUserCollection) {
+              Toast.success('资讯收藏成功')
+              this_.isUserCollection = true
+            } else {
+              Toast.success('取消收藏成功')
+              this_.isUserCollection = false
+            }
+            return
+          }
+          Toast.fail('资讯收藏操作失败')
         })
       },
       getRecruitDetail () {
@@ -187,6 +250,10 @@
         })
       },
       good (item) {
+        if (this.userInfo.type !== 0) {
+          Toast('用户才能点赞哦~')
+          return
+        }
         if (item.id === undefined) {
           Toast.fail('稍后再点赞哦~')
           return
@@ -310,5 +377,21 @@
     align-items: center;
     vertical-align: center;
     padding-top: 38rpx;
+  }
+  .recruit-collect {
+    display: flex;
+    font-size: 20px;
+    right: 25px;
+    bottom: 25px;
+    z-index: 110;
+    position: fixed;
+    width: 46px;
+    text-align: center;
+    justify-content: center;
+    height: 46px;
+    background-color:#ccc;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
   }
 </style>
