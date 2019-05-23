@@ -772,7 +772,6 @@
               <van-panel class="job-search">
                 <van-search :value="keyword" placeholder="请输入公司名/HR名/编号" use-action-slot @search="onSearch_HR"
                             background="#ffffff">
-                  <view slot="action" @click="onSearch_HR">搜索</view>
                 </van-search>
               </van-panel>
               <div class="data-panel">
@@ -943,7 +942,6 @@
               <van-panel class="job-search">
                 <van-search :value="cp_keyword" placeholder="请输入公司名/编号" use-action-slot @search="onSearch_CP"
                             background="#ffffff">
-                  <view slot="action" @click="onSearch_CP">搜索</view>
                 </van-search>
               </van-panel>
               <div class="data-panel">
@@ -1094,7 +1092,6 @@
               <van-panel class="job-search">
                 <van-search :value="keyword" placeholder="请输入会员名/编号" use-action-slot @search="onSearch_Member"
                             background="#ffffff">
-                  <view slot="action" @click="onSearch_Member">搜索</view>
                 </van-search>
               </van-panel>
               <div class="data-panel">
@@ -1210,7 +1207,6 @@
               <van-panel class="job-search">
                 <van-search :value="keyword" placeholder="请输入管理员名/编号" use-action-slot @search="onSearch_Admin"
                             background="#ffffff">
-                  <view slot="action" @click="onSearch_Admin">搜索</view>
                 </van-search>
               </van-panel>
               <div class="data-panel">

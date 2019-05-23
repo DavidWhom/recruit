@@ -43,7 +43,7 @@
         <wxParse :content="recruitDetail.content" :loading="isRecruitLoading"/>
       </div>
     </div>
-    <div class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
+    <div v-if="userInfo.type === 0" class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
       <div style="height: 150px;padding: 5px 15px 15px 35px">
         <textarea v-model="comment" style="font-size: 14px;border:solid 1px #f8f8f8" rows="4" cols="50" placeholder="说点什么吧...">
         </textarea>

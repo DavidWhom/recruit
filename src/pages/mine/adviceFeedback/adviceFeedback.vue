@@ -4,7 +4,6 @@
       <van-panel class="job-search">
         <van-search :value="keyword" :placeholder="type == 1 ? '请输入评论内容/用户/编号' : '请输入反馈内容/用户/编号'" use-action-slot @search="onSearch"
                     background="#ffffff">
-          <view slot="action" @tap="onSearch">搜索</view>
         </van-search>
       </van-panel>
     </div>

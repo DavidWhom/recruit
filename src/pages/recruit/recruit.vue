@@ -9,7 +9,6 @@
           </div>
           <van-search :value="jobkeyword" placeholder="请输入公司名/职位名称" use-action-slot @search="onSearch"
                       background="#ffffff">
-            <view slot="action" @click="onSearch">搜索</view>
           </van-search>
         </div>
         <div v-if="fixed" class="salary-dynamic-header-placeholder"></div>

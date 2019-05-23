@@ -10,8 +10,9 @@
             <van-panel class="job-search">
               <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
                           background="#ffffff">
-                <view slot="action" @click="onSearch">搜索</view>
               </van-search>
+
+
             </van-panel>
           </div>
           <div class="data-panel">
@@ -117,7 +118,6 @@
             <van-panel class="job-search">
               <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch_"
                           background="#ffffff">
-                <view slot="action" @click="onSearch_">搜索</view>
               </van-search>
             </van-panel>
           </div>
