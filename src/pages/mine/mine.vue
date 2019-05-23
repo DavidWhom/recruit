@@ -11,7 +11,7 @@
           <van-col span="8">
             <view class="member-title">
               <div class="member-circle-header">
-                <img :src="userinfo.avatarUrl"/>
+                <img :src="userinfo.avatarUrl === null ? default_img : userinfo.avatarUrl"/>
               </div>
             </view>
           </van-col>
@@ -1369,6 +1369,7 @@
           // 使用延时初始化
           lazyLoad: true
         },
+        default_img: require('../../../static/images/mine/default-headimg.png'),
         userinfo: {},
         identity: 'admin',
         mainTendencyData: [],
@@ -2293,8 +2294,8 @@
       },
       commonInit () {
         this.userinfo.id = this.global.id
-        this.userinfo.openId = this.global.openId
         this.userinfo.name = this.global.name
+        console.log(this.global.name)
         this.userinfo.nickname = this.global.nickname
         this.userinfo.avatarUrl = this.global.avatarUrl
         this.userinfo.gender = this.global.gender

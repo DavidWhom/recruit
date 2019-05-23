@@ -62,21 +62,11 @@ export default {
       this_.$http.get(requestUrl).then(function (res) {
         this_.headlines = res.data.data
       })
-    },
-    commonInit () {
-      this.global.id = '1'
-      this.global.openId = 'augsjdgajsgdjgj11'
-      this.global.name = '杨过'
-      this.global.nickname = '远方'
-      this.global.avatarUrl = 'http://img0.pconline.com.cn/pconline/1509/28/7007256_312_thumb.jpg'
-      this.global.gender = 1
-      this.global.type = 0
     }
   },
   mounted () {
     const this_ = this
     this_.getHeadlines()
-    this_.commonInit()
   }
 }
 </script>

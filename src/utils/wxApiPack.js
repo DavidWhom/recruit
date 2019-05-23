@@ -21,3 +21,23 @@ export function setNavigationBarTitle (title) {
     title: title
   })
 }
+
+export function setStorage (key, value) {
+  wx.setStorage({
+    key: key,
+    data: value
+  })
+}
+
+export function getStorageSync (key) {
+  try {
+    const value = wx.getStorageSync(key)
+    return value
+  } catch (e) {
+    return null
+  }
+}
+
+export function clearStorage () {
+  wx.clearStorage()
+}

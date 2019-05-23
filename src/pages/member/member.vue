@@ -19,7 +19,7 @@
             <van-col span="7">
               <view class="member-title">
                 <div class="member-circle-header">
-                  <img :src="user.avatar_url"/>
+                  <img :src="user.avatar_url === null ? default_img : user.avatar_url"/>
                 </div>
               </view>
             </van-col>
@@ -32,7 +32,7 @@
             <van-col span="8" class="member-complete">
               <div class="member-content van-ellipsis">姓名:{{user.name}}</div>
               <div class="member-content">昵称:{{user.nickname}}</div>
-              <div class="member-content van-ellipsis">地址:{{user.province + user.city}}</div>
+              <div class="member-content van-ellipsis">地址:{{(user.province + user.city) === 0 ? '' : user.province + user.city}}</div>
               <div class="member-content">活跃时间:{{recentDate}}</div>
             </van-col>
           </van-row>
@@ -535,6 +535,7 @@
     data () {
       return {
         user: {},
+        default_img: require('../../../static/images/mine/default-headimg.png'),
         recruits: [],
         recruitIndex: 0,
         recruitNum: 0,
@@ -835,6 +836,9 @@
         const this_ = this
         this_.$http.get(requestUrl, params).then(function (res) {
           this_.recentDate = formateDate(res.data.data, 'yyyy-MM-dd')
+          if (this_.recentDate === '1970-01-01') {
+            this_.recentDate = ''
+          }
         }).catch(function (err) {
           console.log(err)
         })
@@ -846,6 +850,9 @@
     mounted () {
       this.user = this.$root.$mp.query.user
       this.user = JSON.parse(this.user)
+      if (this.user.create_time === '1970-01-01') {
+        this.user.create_time = ''
+      }
       this.commonInit()
       console.log(this.user)
       if (this.user.type === 0) {

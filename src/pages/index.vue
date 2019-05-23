@@ -4,102 +4,97 @@
     <img class="slogan-img" src="../../static/welcome/slogan.gif"/>
     <div class="auth-btn-div">
       <van-transition name="fade-up" :show="loginShow">
-        <van-cell-group>
-          <van-cell>
-            <van-field
-              required
-              clearable
-              label="手机号"
-              icon="contact"
-              placeholder="请输入用户名"
-            />
-          </van-cell>
-          <van-cell>
-            <van-field
-              type="password"
-              label="密码"
-              placeholder="请输入密码"
-              required
-              clearable
-              icon="closed-eye"
-              border="false"
-            />
-          </van-cell>
-          <van-cell>
-            <button class="button-class" @click="login" type="info">登录</button>
-            <span style="margin-left: 10px; margin-right: 10px"></span>
-            <button class="button-class" @click="register" type="info">注册</button>
-          </van-cell>
-        </van-cell-group>
+        <div style="border-radius: 10px; overflow: hidden;">
+          <van-cell-group>
+            <van-cell>
+              <van-field
+                required
+                :value="userName"
+                clearable
+                label="账号"
+                icon="contact"
+                placeholder="请输入用户名"
+                @change="userNameChange"
+              />
+            </van-cell>
+            <van-cell>
+              <van-field
+                type="password"
+                label="密码"
+                :value="password"
+                placeholder="请输入密码"
+                required
+                clearable
+                icon="closed-eye"
+                border="false"
+                @change="passwordTextChange"
+              />
+            </van-cell>
+          </van-cell-group>
+        </div>
       </van-transition>
       <van-transition name="fade-up" :show="registerShow">
-        <van-cell-group>
+        <div style="border-radius: 10px; overflow: hidden;">
+          <van-cell-group>
           <van-cell>
             <van-field
               required
               clearable
+              :value="r_name"
               label="用户名"
               icon="contact"
               placeholder="请输入用户名"
+              @change="validateUserName"
+              :error-message="name_error"
             />
           </van-cell>
           <van-cell>
             <van-field
               type="password"
               label="密码"
+              :value="r_password"
               placeholder="请输入密码"
               required
               clearable
               icon="closed-eye"
               border="false"
+              @change="validPassword"
+              :error-message="pwd_error"
             />
           </van-cell>
           <van-cell>
             <van-field
               type="password"
               label="重复密码"
+              :value="r_rep_pwd"
               placeholder="请确认密码"
               required
               clearable
+              @change="validateRpPwd"
+              :error-message="r_pwd_error"
               icon="closed-eye"
               border="false"
             />
           </van-cell>
           <van-cell>
             <van-field
-              label="注册身份"
-              :value="identity"
-              disabled="true"
-              placeholder="请选择申请身份"
-              required
-              icon="friends-o"
-              border="false"
-              @click="showIndentity"
-            />
-          </van-cell>
-          <van-popup :show="identityShow" position="bottom">
-            <van-picker
-              show-toolbar
-              v-if="identityShow"
-              title="注册身份"
-              :columns="['用户', 'HR']"
-              @cancel="onCancel"
-              @confirm="onConfirm"
-            />
-          </van-popup>
-          <van-cell>
-            <van-field
               label="手机号"
-              placeholder="请输入手机号(HR必填)"
+              :value="tel"
+              placeholder="请输入手机号"
               icon="phone-o"
               border="false"
+              @change="validateTel"
+              :error-message="tel_error"
             />
           </van-cell>
-          <van-cell>
-            <button class="button-class" @click="register" type="info">确认</button>
-          </van-cell>
         </van-cell-group>
+        </div>
       </van-transition>
+      <van-cell>
+        <button class="button-class" @click="login">登录</button>
+        <span style="margin-left: 10px; margin-right: 10px"></span>
+        <button class="button-class" @click="register">注册</button>
+      </van-cell>
       <span class="account-btn" style="margin-left: 200px" @click="toBusinessPage()">游客登录</span>
     </div>
     <van-toast id="van-toast" />
@@ -107,7 +102,10 @@
 </template>
 
 <script>
-import {switchTab, navigateTo} from '../../../recruit/src/utils/wxApiPack.js'
+import Toast from '../../static/vant-weapp/dist/toast/toast'
+import {switchTab, setStorage, getStorageSync} from '../../../recruit/src/utils/wxApiPack.js'
+import {validPwd, isNum} from '../utils/index'
+
 export default {
   mpType: 'page',
   data () {
@@ -117,89 +115,260 @@ export default {
         nickName: 'mpvue',
         avatarUrl: 'http://mpvue.com/assets/logo.png'
       },
-      identity: '普通用户',
-      identityShow: false,
       loginShow: true,
       registerShow: false,
       keyword: '',
       headlines: {},
-      default_cover: require('../../static/images/index/job-ad-default.png')
+      default_cover: require('../../static/images/index/job-ad-default.png'),
+      userName: '',
+      pwd_error: '',
+      password: '',
+      name_error: '',
+      r_name: '',
+      r_password: '',
+      r_rep_pwd: '',
+      tel: '',
+      tel_error: '',
+      r_pwd_error: '',
+      state: false
     }
   },
 
   methods: {
-    onConfirm (event) {
-      this.identityShow = !this.identityShow
-      this.identity = event.mp.detail.value
-      console.log(this.identity)
+    checkState () {
+      const this_ = this
+      const requestUrl = '/api/index/getUserState'
+      const params = {
+        'id': getStorageSync('userCode')
+      }
+      this_.$http.get(requestUrl, params).then(function (res) {
+        if (res.data.code === 1) {
+          this_.state = false
+          Toast.fail('您已被禁止登录')
+          return
+        }
+        this_.state = true
+      })
     },
-
-    onCancel () {
-      this.identityShow = !this.identityShow
+    validateRpPwd (e) {
+      this.r_rep_pwd = e.mp.detail
+      if (this.r_rep_pwd !== this.r_password) {
+        this.r_pwd_error = '两次密码不一致'
+        return
+      }
+      this.r_pwd_error = ''
     },
-    showIndentity () {
-      this.identityShow = true
+    userNameChange (e) {
+      this.userName = e.mp.detail
+    },
+    passwordTextChange (e) {
+      this.password = e.mp.detail
+      console.log(this.password)
+    },
+    validPassword (e) {
+      this.r_password = e.mp.detail
+      if (!validPwd(this.r_password)) {
+        this.pwd_error = '密码不符合规范哦~'
+        return
+      }
+      this.pwd_error = ''
+    },
+    commonInit (user) {
+      console.log(user)
+      this.global.id = user.id
+      this.global.name = user.name
+      this.global.nickname = user.nickname
+      this.global.avatarUrl = user.avatar_url
+      this.global.gender = user.gender
+      this.global.type = user.type
+      console.log(this.global.name)
+      // 开发测试
+      // this.global.id = '1'
+      // this.global.openId = 'augsjdgajsgdjgj11'
+      // this.global.name = '杨过'
+      // this.global.nickname = '远方'
+      // this.global.avatarUrl = 'http://img0.pconline.com.cn/pconline/1509/28/7007256_312_thumb.jpg'
+      // this.global.gender = 1
+      // this.global.type = 0
+    },
+    validateTel (e) {
+      this.tel = e.mp.detail
+      if (!isNum(this.tel) || this.tel.length !== 11) {
+        this.tel_error = '手机号不符合格式规范'
+        return
+      }
+      const this_ = this
+      const params = {
+        'tel': this_.tel
+      }
+      const requestUrl = '/api/index/validateTel'
+      this_.$http.get(requestUrl, params).then(function (res) {
+        if (res.data.code === 1) {
+          this_.tel_error = '手机号已存在'
+        }
+        this_.tel_error = ''
+      })
+    },
+    validateUserName (e) {
+      this.r_name = e.mp.detail
+      if (this.r_name.indexOf(' ') !== -1) {
+        this.name_error = '用户名不能包含空格'
+        return
+      }
+      if (this.r_name.trim().length === 0) {
+        return
+      }
+      const this_ = this
+      const requestUrl = '/api/index/validateUserName'
+      const params = {
+        'name': this_.r_name
+      }
+      this_.$http.get(requestUrl, params).then(function (res) {
+        if (res.data.code === 1) {
+          this_.name_error = '用户名已存在'
+          return
+        }
+        Toast.success('用户名可用')
+        this_.name_error = ''
+      })
+    },
+    registerInit () {
+      this.r_name = ''
+      this.r_password = ''
+      this.r_rep_pwd = ''
+      this.r_pwd_error = ''
+      this.tel_error = ''
+      this.pwd_error = ''
+      this.name_error = ''
+      this.tel = ''
+      this.tel_error = ''
+    },
+    register () {
+      if (!this.registerShow) {
+        this.registerInit()
+        this.registerShow = true
+        this.loginShow = false
+        return
+      }
+      if (this.r_name.trim().length === 0 || this.r_password.trim().length === 0 || this.r_rep_pwd.trim().length === 0) {
+        Toast.fail('注册信息不全哦~')
+        return
+      }
+      if (this.pwd_error.length !== 0) {
+        Toast.fail('密码不符合规范哦~')
+        return
+      }
+      if (this.r_pwd_error.length !== 0 || this.pwd_error.length !== 0 || this.tel_error.length !== 0 || this.name_error.length !== 0) {
+        Toast.fail('注册信息错误')
+        return
+      }
+      const this_ = this
+      const requestUrl = '/api/index/register'
+      const params = {
+        'name': this.r_name,
+        'pwd': this.r_password,
+        'tel': this.tel
+      }
+      this_.$http.get(requestUrl, params).then(function (res) {
+        if (res.data.code === 1) {
+          Toast.fail('注册失败')
+          return
+        }
+        Toast.success('注册成功')
+        this_.loginShow = true
+        this_.registerShow = false
+      })
     },
     login () {
       if (!this.loginShow) {
         this.loginShow = true
         this.registerShow = false
-      }
-    },
-    register () {
-      if (!this.registerShow) {
-        this.registerShow = true
-        this.loginShow = false
         return
       }
-      this.loginShow = true
-      this.registerShow = false
+      if (this.userName.length === 0 || this.password.length === 0) {
+        Toast.fail('账号或密码为空')
+        return
+      }
+      const this_ = this
+      const requestUrl = '/api/index/login'
+      const params = {
+        'name': this_.userName,
+        'pwd': this_.password
+      }
+      this_.$http.get(requestUrl, params).then(function (res) {
+        if (res.data.code === 1) {
+          Toast.fail(res.data.msg)
+          return
+        }
+        var user = res.data.data
+        // 初始化小程序全局个人信息
+        this_.commonInit(user)
+        setStorage('userCode', user.id) // 缓存表示用户已经登陆过，下次进入小程序走快捷路径
+        switchTab('index/main')
+      })
     },
     toBusinessPage () {
       switchTab('index/main')
     },
-    getUserInfo (e) {},
-    getPhoneNumber (e) {},
     clickHandle (ev) {
       console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
     },
-    onSearch (event) {
-      if (event == null) {
-        return
-      }
-      this.global.keyword = event.mp.detail
-      switchTab('../recruit/main')
-    },
-    showRecruit (id) {
-      navigateTo('../recruit/recruitDetail/main?id=' + id)
-    },
-    getHeadlines () {
+    getUser () {
       const this_ = this
-      const requestUrl = '/api/index/getHeadlines'
-      this_.$http.get(requestUrl).then(function (res) {
-        this_.headlines = res.data.data
+      const requestUrl = '/api/index/getUserInfo'
+      const params = {
+        'id': getStorageSync('userCode')
+      }
+      this_.$http.get(requestUrl, params).then(function (res) {
+        if (res.data.code === 0) {
+          this_.commonInit(res.data.data)
+        }
       })
     },
-    commonInit () {
-      this.global.id = '1'
-      this.global.openId = 'augsjdgajsgdjgj11'
-      this.global.name = '杨过'
-      this.global.nickname = '远方'
-      this.global.avatarUrl = 'http://img0.pconline.com.cn/pconline/1509/28/7007256_312_thumb.jpg'
-      this.global.gender = 1
-      this.global.type = 0
+    visit () {
+      const this_ = this
+      const requestUrl = '/api/index/visit'
+      const params = {
+        'id': getStorageSync('userCode')
+      }
+      this_.$http.get(requestUrl, params).then(function (res) {
+        // if (res.data.code === 0) {
+        // }
+      })
     }
   },
   mounted () {
     const this_ = this
-    this_.getHeadlines()
-    this_.commonInit()
+    var userCode = getStorageSync('userCode')
+    if (userCode) {
+      Toast.loading({
+        mask: true,
+        duration: 0,
+        forbidClick: true,
+        message: '预登录中...'
+      })
+      this_.checkState()
+      console.log(this_.state)
+      const interval = setInterval(function () {
+        if (this_.state === true) {
+          this_.getUser()
+          this_.visit()
+          this_.toBusinessPage()
+          Toast.clear()
+          clearInterval(interval)
+        }
+      }, 500)
+    }
   }
 }
 </script>
 
 <style>
+  .van-cell {
+    background: rgba(255, 255, 255, 0.3) !important;
+  }
+
   .button-class {
     margin: 10px 0px 10px 0px;
     height: 40px;
@@ -212,10 +381,6 @@ export default {
     vertical-align: middle;
     color: #ffffff;
   }
-  .van-cell {
-    background: rgba(255, 255, 255, 0.3) !important;
-  }
-
   .welcome-div {
     height: 100%;
     width: 100%;
@@ -236,7 +401,7 @@ export default {
     align-items: center;
     text-align: center;
     position: fixed;
-    bottom: 150rpx;
+    bottom: 50rpx;
   }
 
   .auth-btn {

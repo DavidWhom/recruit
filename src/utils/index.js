@@ -31,6 +31,19 @@ export function dateDiff (sDate1) {
   return iDays
 }
 
+/**
+ * 密码验证 4到16位（字母，数字，下划线，减号）
+ *
+ */
+export function validPwd (text) {
+  var pattern = /^[a-zA-Z0-9_-]{4,16}$/
+  if (pattern.test(text.trim())) {
+    return (true)
+  } else {
+    return (false)
+  }
+}
+
 export function formateDate (obj, fmt) {
   let date
   // 传进来的参数有可能为string 也有可能为date
@@ -57,6 +70,14 @@ export function formateDate (obj, fmt) {
     }
   }
   return fmt
+}
+
+export function isNum (num) {
+  var re = /^[0-9]+.?[0-9]*$/
+  if (!re.test(num)) {
+    return false
+  }
+  return true
 }
 
 function padLeftZero (str) {
