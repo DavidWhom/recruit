@@ -11,21 +11,20 @@
           <van-col span="8">
             <view class="member-title">
               <div class="member-circle-header">
-                <img :src="userinfo.avatarUrl === null ? default_img : userinfo.avatarUrl"/>
+                <img :src="userInfo.avatarUrl === null ? default_img : userInfo.avatarUrl"/>
               </div>
             </view>
           </van-col>
           <van-col span="15" offset="1" class="member-complete">
             <div class="mine-title-content" style="margin-top: 38px;">
-              <span style="font-size: 18px;">{{userinfo.name}}</span>
-              <span style="margin-left: 14px;font-size: 14px;">{{identity == 'user' ? "普通用户" : "管理员"}}</span>
-              <van-button type="info" size="small" @click="changeIdentity">devTest</van-button>
+              <span style="font-size: 18px;">{{userInfo.name}}</span>
+              <span style="margin-left: 14px;font-size: 14px;">{{userInfo.type === 1 ? 'HR' : (userInfo.type === 2 ? '管理员' : '普通用户')}}</span>
             </div>
           </van-col>
         </van-row>
       </div>
     </van-panel>
-    <div class="user_common" v-if="identity == 'user'">
+    <div class="user_common" v-if="userInfo.type === 0">
       <!-- 用户显示的内容 -->
       <div style="width: 100%;" @click="showUserCollection" class="van-hairline--bottom mine-title-tr data-panel">
         <van-row>
@@ -38,7 +37,7 @@
             <div class="van-ellipsis mine-title-name mine-title-list"><span>我的收藏</span></div>
           </van-col>
           <van-col span="7" offset="2">
-            <div class="mine-title-list"><span>{{global.recruitNum + global.salaryNum}} 个 </span></div>
+            <div class="mine-title-list"><span>{{userTotal.collect === null ? 0 : userTotal.collect}} 个 </span></div>
           </van-col>
           <van-col offset="1" span="2">
             <div class="mine-title-content mine-title-list">
@@ -58,7 +57,7 @@
             <div class="van-ellipsis mine-title-name mine-title-list"><span>我的爆料</span></div>
           </van-col>
           <van-col span="7" offset="2">
-            <div class="mine-title-list"><span>3 条 </span></div>
+            <div class="mine-title-list"><span>{{userTotal.tip === null ? 0 : userTotal.tip}} 条 </span></div>
           </van-col>
           <van-col offset="1" span="2">
             <div class="mine-title-content mine-title-list">
@@ -78,7 +77,7 @@
             <div class="van-ellipsis mine-title-name mine-title-list"><span>我的评论</span></div>
           </van-col>
           <van-col span="7" offset="2">
-            <div class="mine-title-list"><span>15 条 </span></div>
+            <div class="mine-title-list"><span>{{userTotal.comment === null ? 0 : userTotal.comment}} 条 </span></div>
           </van-col>
           <van-col offset="1" span="2">
             <div class="mine-title-content mine-title-list">
@@ -122,44 +121,41 @@
           </van-button>
         </div>
         <van-popup :show="isUserTipoffShow" position="bottom">
-          <div style="height: 100%;padding-bottom: 55px;">
+          <div v-if="isUserTipoffShow" style="height: 100%;padding-bottom: 55px;">
             <user-tipoff></user-tipoff>
           </div>
         </van-popup>
         <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserTipoffShow">
-          <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-            <view style="width: 88px;">提交</view>
-          </van-button>
-          <van-button type="danger" @click="hideUserTipoffPopup()" style="margin-right: 5%;width: 40%;float: right">
-            <view style="width: 88px;">取消</view>
-          </van-button>
+          <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center">
+            <van-button type="danger" @click="hideUserTipoffPopup()" style="width: 40%;">
+              <view style="width: 88px;">取消</view>
+            </van-button>
+          </div>
         </div>
         <van-popup :show="isUserCollectionShow" position="bottom">
-          <div style="height: 100%;padding-bottom: 55px;">
+          <div v-if="isUserCollectionShow" style="height: 100%;padding-bottom: 55px;">
             <user-collection></user-collection>
           </div>
         </van-popup>
         <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCollectionShow">
-          <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-            <view style="width: 88px;">提交</view>
-          </van-button>
-          <van-button type="danger" @click="hideUserCollectionPopup()" style="margin-right: 5%;width: 40%;float: right">
-            <view style="width: 88px;">取消</view>
-          </van-button>
+          <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center">
+            <van-button type="danger" @click="hideUserCollectionPopup()" style="width: 40%;">
+              <view style="width: 88px;">取消</view>
+            </van-button>
+          </div>
         </div>
         <van-popup :show="isUserCommentShow" position="bottom">
-          <div style="height: 100%;padding-bottom: 55px;">
+          <div v-if="isUserCommentShow" style="height: 100%;padding-bottom: 55px;">
             <user-comment></user-comment>
           </div>
         </van-popup>
         <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isUserCommentShow">
-        <van-button type="info" @click="" style="margin-left: 13%;width: 40%;">
-          <view style="width: 88px;">提交</view>
-        </van-button>
-        <van-button type="danger" @click="hideUserCommentPopup()" style="margin-right: 5%;width: 40%;float: right">
-          <view style="width: 88px;">取消</view>
-        </van-button>
-      </div>
+          <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center">
+            <van-button type="danger" @click="hideUserCommentPopup()" style="width: 40%;">
+              <view style="width: 88px;">取消</view>
+            </van-button>
+          </div>
+        </div>
       </div>
     </div>
     <div v-else>
@@ -1122,7 +1118,7 @@
                             <span>性别</span>
                           </div>
                         </van-col>
-                        <van-col span="5" offset="1">
+                        <van-col span="4" offset="2">
                           <div class="mine-title-list">
                             <img src="../../../static/images/mine/mine-city.png" style="height: 15px;width: 15px;"/>
                             <span>城市</span>
@@ -1145,12 +1141,12 @@
                           <div class="mine-title-list"><span>{{item.gender}}</span></div>
                         </div>
                       </van-col>
-                      <van-col span="4" offset="0">
+                      <van-col span="4" offset="1">
                         <div class="content-text-center">
-                          <div class="mine-title-list van-ellipsis"><span>{{item.city}}</span></div>
+                          <div class="mine-title-list van-ellipsis"><span>{{item.city === null ? '未知' : item.city}}</span></div>
                         </div>
                       </van-col>
-                      <van-col offset="3" span="2">
+                      <van-col offset="2" span="2">
                         <div class="mine-title-content mine-title-list">
                           <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
                         </div>
@@ -1370,8 +1366,8 @@
           lazyLoad: true
         },
         default_img: require('../../../static/images/mine/default-headimg.png'),
-        userinfo: {},
-        identity: 'admin',
+        userInfo: {},
+        userTotal: {},
         mainTendencyData: [],
         mainTendencyCount: 7,
         reportTabIndex: 0,
@@ -1439,6 +1435,7 @@
         commentNoData: false,
         c_pageNo: 1,
         // hr
+        hr: {},
         hrs: [],
         hrIndex: 0,
         hrNum: 0,
@@ -1920,6 +1917,20 @@
           }
         })
       },
+      getUserTotal () {
+        const this_ = this
+        const requestUrl = '/api/mine/user/getUserTotal'
+        const params = {
+          'id': this.userInfo.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.userTotal = res.data.data
+          } else {
+            Toast.fail('获取用户概览数据失败')
+          }
+        })
+      },
       getComment (item) {
         let appendUrl = ''
         if (item.type === 0) {
@@ -2109,6 +2120,20 @@
           console.log(err)
         })
       },
+      getHR (id) {
+        const requestUrl = '/api/mine/admin/getHR'
+        const params = {
+          'id': id
+        }
+        const this_ = this
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.hr = res.data.data
+          }
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
       getHRs (size) {
         const requestUrl = '/api/mine/admin/getHRs'
         const params = {
@@ -2293,23 +2318,15 @@
         })
       },
       commonInit () {
-        this.userinfo.id = this.global.id
-        this.userinfo.name = this.global.name
-        console.log(this.global.name)
-        this.userinfo.nickname = this.global.nickname
-        this.userinfo.avatarUrl = this.global.avatarUrl
-        this.userinfo.gender = this.global.gender
-        this.userinfo.type = this.global.type
+        this.userInfo.id = this.global.id
+        this.userInfo.name = this.global.name
+        this.userInfo.nickname = this.global.nickname
+        this.userInfo.avatarUrl = this.global.avatarUrl
+        this.userInfo.gender = this.global.gender
+        this.userInfo.type = this.global.type
       },
       onCancel () {},
       onConfirm () {},
-      changeIdentity () {
-        if (this.identity === 'user') {
-          this.identity = 'admin'
-        } else {
-          this.identity = 'user'
-        }
-      },
       computedTendencyTickCount (resData) {
         switch (this.reportTabIndex) {
           case 0:
@@ -2800,27 +2817,42 @@
       }
     },
     mounted () {
-      const this_ = this
-      if (this_.identity === 'admin') {
-        this_.updateAllData()
-        this_.initData()
-      }
     },
     created () {
       // let app = getApp()
     },
     onShow () {
-      this.commonInit()
+      console.log('onShow')
+      const this_ = this
+      this_.commonInit()
+      if (this_.userInfo.type === 2) {
+        this_.updateAllData()
+        this_.initData()
+      }
+      if (this_.userInfo.type === 1) {
+        this_.getHR(this.userInfo.id)
+        const interval = setInterval(function () {
+          if (this_.hr !== null) {
+            this_.toUserInfoPage()
+            clearInterval(interval)
+          }
+        }, 100)
+      }
+      if (this_.userInfo.type === 0) {
+        this_.getUserTotal()
+      }
     }
   }
 </script>
 
-<style scoped>
+<style>
   page {
     background-color: #f8f8f8;
     height: 100%;
     width: 100%;
     overflow-x:hidden;
+    overflow-y:hidden;
+    padding-bottom: 0px !important;;
   }
 
   .mine-admin-tabs {
