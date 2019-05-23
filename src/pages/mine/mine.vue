@@ -2845,15 +2845,16 @@
           }
         }, 100)
       }
-      if (this_.userInfo.type === 0) {
-        this_.getUserTotal()
-      }
     },
     created () {
       // let app = getApp()
     },
     onShow () {
-      this.commonInit()
+      const this_ = this
+      this_.commonInit()
+      if (this_.userInfo.type === 0) {
+        this_.getUserTotal()
+      }
     }
   }
 </script>

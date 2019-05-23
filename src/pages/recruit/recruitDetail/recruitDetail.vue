@@ -382,7 +382,7 @@
     display: flex;
     font-size: 20px;
     right: 25px;
-    bottom: 25px;
+    bottom: 60px;
     z-index: 110;
     position: fixed;
     width: 46px;
