@@ -309,9 +309,9 @@
         }
         this_.$http.get(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
-            this.recruits = []
-            this.recruitIndex = 0
-            this.pageNo = 1
+            this_.recruits = []
+            this_.recruitIndex = 0
+            this_.pageNo = 1
             this_.getRecruits()
             this_.rejectShow = false
             Toast.success('资讯拒绝上线成功')

@@ -52,10 +52,10 @@
     </div>
     <div class="data-panel" style="padding-bottom: 10px">
       <van-panel>
-        <div class="recruit-user-common" v-for="(item, index) in comments" :key="index">
+        <div class="recruit-user-common van-hairline--bottom" v-for="(item, index) in comments" :key="index">
           <van-row>
             <van-col span="2" offset="1">
-              <img class="recruit-user-img" :src="item.avatarUrl">
+              <img class="recruit-user-img" :src="item.avatarUrl === null ? default_img : item.avatarUrl">
             </van-col>
             <van-col span="16">
               <div class="recruit-user-name">{{item.userName}}</div>
@@ -79,7 +79,60 @@
               </div>
             </van-col>
           </van-row>
+          <div style="margin-top: 10px">
+            <van-row v-if="item.reply">
+              <van-col span="20" offset="3">
+                <div>
+                  <div class="before-title-blue"></div>
+                  <div class="panel-title" style="font-size: 12px">HR回复</div>
+                </div>
+              </van-col>
+            </van-row>
+          </div>
+          <van-row v-if="item.reply">
+            <van-col span="20" offset="3">
+              <div class="recruit-common-content">
+                <span>{{item.reply}}</span>
+              </div>
+            </van-col>
+          </van-row>
+          <van-row v-if="userInfo.type !== 0 && recruitDetail.publisher_id === userInfo.id">
+            <van-col v-if="!item.isTop" span="2" offset="16">
+              <div class="recruit-common-content">
+                <span class="blue-text" @click="setCommentTop(item.id, item.isTop)">置顶</span>
+              </div>
+            </van-col>
+            <van-col v-if="item.isTop" span="4" offset="14">
+              <div class="recruit-common-content">
+                <span class="blue-text" @click="setCommentTop(item.id, item.isTop)">取消置顶</span>
+              </div>
+            </van-col>
+            <van-col span="2" offset="1" @click="replyComment(item.id, item.reply)">
+              <div class="recruit-common-content">
+                <span class="blue-text">回复</span>
+              </div>
+            </van-col>
+            <van-col span="2" offset="1">
+              <div class="recruit-common-content">
+                <span class="blue-text" @click="deleteComment(item.id)">删除</span>
+              </div>
+            </van-col>
+          </van-row>
         </div>
+        <van-dialog
+          use-slot
+          :show="replyShow"
+          show-cancel-button
+          @cancel="replyCancle"
+          @confirm="replyConfirm"
+        >·
+          <van-field
+            :value="replyWord"
+            label="回复"
+            placeholder="请回复"
+            @change="replyTextChange"
+          />
+        </van-dialog>
         <div class="van-hairline--bottom" v-if="userInfo.type === 0">
           <van-row>
             <van-col span="24">
@@ -93,12 +146,13 @@
           <div style="margin: auto;">
             <van-icon v-if="!isUserCollection" name="star-o" color="#1c85ee"/>
             <van-icon v-if="isUserCollection" name="star" color="#1c85ee"/>
-            <div style="font-size: 10px">收藏</div>
+            <div style="font-size: 10px">{{isUserCollection ? '取消收藏' : '收藏'}}</div>
           </div>
         </div>
       </van-panel>
     </div>
     <van-toast id="van-toast" />
+    <van-dialog id="van-dialog" />
   </div>
 </template>
 
@@ -107,6 +161,7 @@
   import marked from 'marked'
   import {formateDate} from '../../../utils/index'
   import Toast from '../../../../static/vant-weapp/dist/toast/toast'
+  import Dialog from '../../../../static/vant-weapp/dist/dialog/dialog'
   export default {
     components: {
       wxParse
@@ -116,12 +171,16 @@
         userInfo: {},
         isRecruitLoading: true,
         id: '',
-        recruitDetail: {},
+        replyShow: false,
+        replyWord: '',
+        temp_id: null,
+        recruitDetail: null,
         comments: [],
         goodedImg: require('../../../../static/images/recruit/recruit-gooed.png'),
         goodImg: require('../../../../static/images/recruit/recruit-good.png'),
         comment: '',
-        isUserCollection: false
+        isUserCollection: false,
+        default_img: require('../../../../static/images/mine/default-headimg.png')
       }
     },
     mounted () {
@@ -138,8 +197,90 @@
       this.isRecruitLoading = true
       this.recruitDetail = {}
       this.comments = []
+      console.log('pub')
+      console.log(this.recruitDetail.publisher_id)
+      console.log(this.userInfo.id)
     },
     methods: {
+      replyTextChange (e) {
+        this.replyWord = e.mp.detail
+      },
+      setCommentTop (id, isTop) {
+        var word = isTop ? '取消' : ''
+        Dialog.confirm({
+          message: '确定' + word + '置顶评论吗？'
+        }).then(() => {
+          const this_ = this
+          const requestUrl = '/api/recruit/setCommentTop'
+          const params = {
+            'id': id,
+            'isTop': isTop ? 1 : 0
+          }
+          this_.$http.get(requestUrl, params).then(function (res) {
+            if (res.data.code === 0) {
+              Toast.success(word + '评论置顶成功')
+              this_.comments = []
+              this_.replyShow = false
+              this_.getRecruitComment()
+            } else {
+              Toast.fail(word + '评论置顶失败')
+            }
+          })
+        })
+      },
+      deleteComment (id) {
+        Dialog.confirm({
+          message: '确定删除评论吗？'
+        }).then(() => {
+          const this_ = this
+          const requestUrl = '/api/mine/admin/deleteRecruitComment'
+          const params = {
+            'id': id
+          }
+          this_.$http.get(requestUrl, params).then(function (res) {
+            if (res.data.code === 0) {
+              Toast.success('评论删除成功')
+              this_.comments = []
+              this_.replyShow = false
+              this_.getRecruitComment()
+            } else {
+              Toast.fail('评论删除失败')
+            }
+          })
+        })
+      },
+      replyComment (id, reply) {
+        console.log(reply)
+        if (reply === null) {
+          this.replyShow = true
+          this.temp_id = id
+          this.replyWord = ''
+          return
+        }
+        Toast.fail('回复过了哦~')
+      },
+      replyConfirm () {
+        const this_ = this
+        const requestUrl = '/api/recruit/replyComment'
+        const params = {
+          'id': this.temp_id,
+          'reply': this.replyWord
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.comments = []
+            this_.replyShow = false
+            this_.getRecruitComment()
+            Toast.success('回复成功')
+          } else {
+            Toast.fail('回复失败')
+          }
+        })
+      },
+      replyCancle () {
+        this.replyShow = false
+        this.replyWord = ''
+      },
       commonInit () {
         this.userInfo.id = this.global.id
         this.userInfo.name = this.global.name
@@ -349,6 +490,7 @@
   }
   .recruit-user-common {
     padding-top: 20px;
+    padding-bottom: 5px;
   }
   .recruit-comment-good {
     float: right;
@@ -365,6 +507,18 @@
   }
   .recruit-common-content {
     float: left;
+  }
+  .before-title-blue {
+    width: 5px;
+    height: 16px;
+    background-color: #1c85ee;
+    border-radius: 5px;
+    float: left;
+    margin-left:0rpx;
+  }
+  .panel-title {
+    float: left;
+    margin-left:10rpx;
   }
   .recruit-common-content span {
     font-size: 12px;
@@ -385,10 +539,10 @@
     bottom: 60px;
     z-index: 110;
     position: fixed;
-    width: 46px;
+    width: 60px;
     text-align: center;
     justify-content: center;
-    height: 46px;
+    height: 60px;
     background-color:#ccc;
     border-radius: 50%;
     -moz-border-radius: 50%;

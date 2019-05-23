@@ -180,7 +180,7 @@
         this.recruits = []
         this.recruitIndex = 0
         this.pageNo = 1
-        this.getRecruits()
+        this.getRecruits(10)
       },
       showRecruit (id) {
         console.log(id)
@@ -255,7 +255,6 @@
     height: 16px;
     background-color: #1c85ee;
     border-radius: 5px;
-    margin-left: 20px;
   }
   .panel-title {
     margin-left: 12px;

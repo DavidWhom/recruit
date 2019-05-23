@@ -7,6 +7,8 @@
     "van-col": "/static/vant-weapp/dist/col/index",
     "van-loading": "/static/vant-weapp/dist/loading/index",
     "van-toast": "/static/vant-weapp/dist/toast/index",
-    "van-icon": "/static/vant-weapp/dist/icon/index"
+    "van-icon": "/static/vant-weapp/dist/icon/index",
+    "van-dialog": "/static/vant-weapp/dist/dialog/index",
+    "van-field": "/static/vant-weapp/dist/field/index"
   }
 }
