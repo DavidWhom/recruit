@@ -61,6 +61,22 @@
           <van-col span="15"><span class="small-text">{{salary.remark}}</span></van-col>
         </van-row>
       </div>
+      <div class="salry-banner van-hairline--bottom" v-if="userInfo.type === 0">
+        <van-row>
+          <van-col v-if="!isUserCollection" span="4" offset="20" @click="collect">
+            <span class="blue-text" style="font-size: 14px; margin-right: 5px">收藏</span>
+            <van-icon v-if="!isUserCollection" name="star-o" color="#1c85ee"/>
+            <van-icon v-if="isUserCollection" name="star" color="#1c85ee"/>
+          </van-col>
+        </van-row>
+        <van-row>
+          <van-col v-if="isUserCollection" span="6" offset="18" @click="collect">
+            <span class="blue-text" style="font-size: 14px; margin-right: 5px">取消收藏</span>
+            <van-icon v-if="!isUserCollection" name="star-o" color="#1c85ee"/>
+            <van-icon v-if="isUserCollection" name="star" color="#1c85ee"/>
+          </van-col>
+        </van-row>
+      </div>
       <div class="salry-banner van-hairline--bottom">
         <van-row>
           <van-col span="11" offset="1"><van-button :disabled="isUserAuthed" type="warning" size="large" @click="updateSalaryAuth(1)">不可信</van-button></van-col>
@@ -68,7 +84,7 @@
         </van-row>
       </div>
     </div>
-    <div class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
+    <div v-if="userInfo.type === 0" class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
       <div style="height: 150px;padding: 5px 15px 15px 35px">
         <textarea v-model="comment" style="font-size: 14px;border:solid 1px #f8f8f8" rows="4" cols="50" placeholder="说点什么吧...">
         </textarea>
@@ -107,17 +123,69 @@
         salary: {},
         comments: [],
         isUserAuthed: false,
-        comment: ''
+        comment: '',
+        isUserCollection: null,
+        userInfo: {}
       }
     },
     mounted () {
+    },
+    onShow () {
       this.id = this.$root.$mp.query.id
       this.from = this.$root.$mp.query.from
+      this.commonInit()
       this.getSalaryDetail()
       this.getSalaryComment()
       this.checkIsUserAuthed()
+      this.isUserCollect()
     },
     methods: {
+      commonInit () {
+        this.userInfo.id = this.global.id
+        this.userInfo.name = this.global.name
+        this.userInfo.nickname = this.global.nickname
+        this.userInfo.avatarUrl = this.global.avatarUrl
+        this.userInfo.gender = this.global.gender
+        this.userInfo.type = this.global.type
+      },
+      isUserCollect () {
+        const this_ = this
+        const requestUrl = '/api/recruit/isUserSalaryCollect'
+        const params = {
+          'salary_id': this.id,
+          'user_id': this.global.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          this_.isUserCollection = res.data.data
+        })
+      },
+      collect () {
+        const this_ = this
+        var appendUrl = ''
+        if (this.isUserCollection) {
+          appendUrl = 'notCollectSalary'
+        } else {
+          appendUrl = 'collectSalary'
+        }
+        const requestUrl = '/api/recruit/' + appendUrl
+        const params = {
+          'salary_id': this.id,
+          'user_id': this.global.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            if (!this_.isUserCollection) {
+              Toast.success('收藏成功')
+              this_.isUserCollection = true
+            } else {
+              Toast.success('取消收藏成功')
+              this_.isUserCollection = false
+            }
+            return
+          }
+          Toast.fail('爆料收藏操作失败')
+        })
+      },
       addComment () {
         if (this.comment === undefined || this.comment.length === 0) {
           Toast.fail('评论内容不能为空哦~')
@@ -214,6 +282,7 @@
           if (res.data.code === 0) {
             Toast.success('成功置评~')
             this_.isUserAuthed = true
+            this_.salary.auth += 1
           } else {
             Toast.fail('置评失败')
           }
