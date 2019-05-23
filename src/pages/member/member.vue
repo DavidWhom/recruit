@@ -9,6 +9,11 @@
               <div class="panel-title">{{user.type === 0 ? '会员' : 'HR'}}信息</div>
             </div>
           </van-col>
+          <van-col v-if="identity === 1" span="6" offset="7">
+            <div class="panel-header-number">
+              <div class="blue-text" style="vertical-align: middle" @click="gotoHomePage">回到首页 <van-icon name="wap-home" size="20px"/> </div>
+            </div>
+          </van-col>
         </van-row>
       </van-panel>
     </div>
@@ -529,12 +534,13 @@
 
 <script>
   // import Toast from '../../../static/vant-weapp/dist/toast/toast'
-  import {navigateTo, setNavigationBarTitle} from '../../utils/wxApiPack.js'
+  import {navigateTo, setNavigationBarTitle, switchTab} from '../../utils/wxApiPack.js'
   import {formateDate} from '../../utils/index'
   export default {
     data () {
       return {
         user: {},
+        identity: 0, // 2 表示管理员查看 1 表示HR查看
         default_img: require('../../../static/images/mine/default-headimg.png'),
         recruits: [],
         recruitIndex: 0,
@@ -831,7 +837,7 @@
       getUserRecentVisitDate () {
         const requestUrl = '/api/mine/admin/getUserRecentVisitDate'
         const params = {
-          'id': this.user.id
+          'id': this.global.type === 1 ? this.global.type : this.user.id
         }
         const this_ = this
         this_.$http.get(requestUrl, params).then(function (res) {
@@ -844,17 +850,23 @@
         })
       },
       commonInit () {
+        this.identity = this.global.type
         this.getUserRecentVisitDate()
+      },
+      gotoHomePage: function () { // 自定义页面跳转方法
+        switchTab('../index/main')
       }
     },
     mounted () {
+    },
+    onShow () {
       this.user = this.$root.$mp.query.user
       this.user = JSON.parse(this.user)
       if (this.user.create_time === '1970-01-01') {
         this.user.create_time = ''
       }
       this.commonInit()
-      console.log(this.user)
+      console.log(this.user.id)
       if (this.user.type === 0) {
         setNavigationBarTitle('会员信息')
         this.userDataInit()
@@ -863,8 +875,6 @@
         setNavigationBarTitle('HR信息')
         this.hrDataInit()
       }
-    },
-    onShow () {
     }
   }
 </script>
@@ -939,7 +949,6 @@
     height: 100%;
     width: 100%;
     overflow-x:hidden;
-    padding-bottom: 55px;
   }
   .panel-complete {
     padding-top: 10rpx;

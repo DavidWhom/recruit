@@ -13,6 +13,7 @@
     "van-picker": "/static/vant-weapp/dist/picker/index",
     "van-popup": "/static/vant-weapp/dist/popup/index",
     "van-toast": "/static/vant-weapp/dist/toast/index",
-    "van-notify": "/static/vant-weapp/dist/notify/index"
+    "van-notify": "/static/vant-weapp/dist/notify/index",
+    "van-icon": "/static/vant-weapp/dist/icon/index"
   }
 }

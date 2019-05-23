@@ -38,6 +38,12 @@ export function getStorageSync (key) {
   }
 }
 
+export function reLaunch (url) {
+  wx.reLaunch({
+    url: url
+  })
+}
+
 export function clearStorage () {
   wx.clearStorage()
 }

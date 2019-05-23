@@ -6,7 +6,7 @@
         <div class="panel-title">个人信息</div>
         <div style="clear: both"></div>
       </div>-->
-      <div>
+      <div v-if="userInfo.type === 0 || userInfo.type === 2">
         <van-row>
           <van-col span="8">
             <view class="member-title">
@@ -158,12 +158,12 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-if="userInfo.type === 2">
       <div @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <!--管理员显示的内容-->
         <div class="data-panel">
-          <van-tabs animated color="#1c86ee" class="flex-basis" @change="" line-width="60">
-            <van-tab title="仪表盘" class="mine-admin-tabs">
+          <van-tabs animated :active="mainReportTabIndex" @change="onMainTabChange" color="#1c86ee" class="flex-basis" line-width="60">
+            <van-tab title="仪表盘" class="mine-admin-tabs" >
               <van-panel>
                 <div>
                   <van-tabs animated :active="reportTabIndex" color="#1c86ee" class="flex-basis" @change="onTabChange" line-width="60">
@@ -1342,7 +1342,7 @@
 <script>
   import Toast from '../../../static/vant-weapp/dist/toast/toast'
   import Notify from '../../../static/vant-weapp/dist/notify/notify'
-  import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
+  import {navigateTo, reLaunch} from '../../../../recruit/src/utils/wxApiPack.js'
   import commentAdmin from '@/components/commentAdmin/commentAdmin'
   import adviceAdmin from '@/components/adviceAdmin/adviceAdmin'
   import userAdvice from '@/components/userAdvice/userAdvice'
@@ -1370,6 +1370,7 @@
         userTotal: {},
         mainTendencyData: [],
         mainTendencyCount: 7,
+        mainReportTabIndex: 0,
         reportTabIndex: 0,
         // 报表页面左右滑切换tab
         startX: 0,
@@ -1435,7 +1436,7 @@
         commentNoData: false,
         c_pageNo: 1,
         // hr
-        hr: {},
+        hr: null,
         hrs: [],
         hrIndex: 0,
         hrNum: 0,
@@ -1513,6 +1514,10 @@
     methods: {
       toUserInfoPage (item) {
         let str = JSON.stringify(item)
+        if (this.userInfo.type === 1) {
+          reLaunch('../member/main?user=' + str)
+          return
+        }
         navigateTo('../member/main?user=' + str)
       },
       enterprise_placeChange (e) {
@@ -2129,6 +2134,7 @@
         this_.$http.get(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
             this_.hr = res.data.data
+            this_.hr.create_time = formateDate(this_.hr.create_time, 'yyyy-MM-dd')
           }
         }).catch(function (err) {
           console.log(err)
@@ -2324,6 +2330,7 @@
         this.userInfo.avatarUrl = this.global.avatarUrl
         this.userInfo.gender = this.global.gender
         this.userInfo.type = this.global.type
+        console.log(this.userInfo)
       },
       onCancel () {},
       onConfirm () {},
@@ -2626,6 +2633,57 @@
         this.reportTabIndex = event.mp.detail.index
         this.updateAllData()
       },
+      onMainTabChange (event) {
+        this.mainReportTabIndex = event.mp.detail.index
+        const this_ = this
+        if (this.mainReportTabIndex === 0) {
+          this.updateAllData()
+        }
+        if (this.mainReportTabIndex === 1) {
+          this_.headlines = []
+          this_.getHeadlines()
+          this_.recruits = []
+          this_.recruitIndex = 0
+          this_.r_pageNo = 1
+          this_.getRecruits(5)
+
+          this_.salaries = []
+          this_.salaryIndex = 0
+          this_.s_pageNo = 1
+          this_.getSalaries(5)
+
+          this_.comments = []
+          this_.commentIndex = 0
+          this_.c_pageNo = 1
+          this_.getComments(5)
+
+          this_.advices = []
+          this_.adviceIndex = 0
+          this_.a_pageNo = 1
+          this_.getAdvices(5)
+        }
+        if (this.mainReportTabIndex === 2) {
+          this_.hrs = []
+          this_.hrIndex = 0
+          this_.h_pageNo = 1
+          this_.getHRs(5)
+
+          this_.admins = []
+          this_.adminIndex = 0
+          this_.ad_pageNo = 1
+          this_.getAdmins(5)
+
+          this_.members = []
+          this_.memberIndex = 0
+          this_.m_pageNo = 1
+          this_.getMembers(5)
+
+          this_.companys = []
+          this_.companyIndex = 0
+          this_.cp_pageNo = 1
+          this_.getCompanys(5)
+        }
+      },
       touchStart (e) {
         this.moveX = 0
         this.disX = 0
@@ -2771,69 +2829,18 @@
         this.adminName_error = ''
         this.adminName = ''
         this.adminTel_error = ''
-      },
-      initData () {
-        const this_ = this
-        this_.getHeadlines()
-        this_.recruits = []
-        this_.recruitIndex = 0
-        this_.r_pageNo = 1
-        this_.getRecruits(5)
-
-        this_.salaries = []
-        this_.salaryIndex = 0
-        this_.s_pageNo = 1
-        this_.getSalaries(5)
-
-        this_.comments = []
-        this_.commentIndex = 0
-        this_.c_pageNo = 1
-        this_.getComments(5)
-
-        this_.advices = []
-        this_.adviceIndex = 0
-        this_.a_pageNo = 1
-        this_.getAdvices(5)
-
-        this_.hrs = []
-        this_.hrIndex = 0
-        this_.h_pageNo = 1
-        this_.getHRs(5)
-
-        this_.admins = []
-        this_.adminIndex = 0
-        this_.ad_pageNo = 1
-        this_.getAdmins(5)
-
-        this_.members = []
-        this_.memberIndex = 0
-        this_.m_pageNo = 1
-        this_.getMembers(5)
-
-        this_.companys = []
-        this_.companyIndex = 0
-        this_.cp_pageNo = 1
-        this_.getCompanys(5)
       }
     },
     mounted () {
-    },
-    created () {
-      // let app = getApp()
-    },
-    onShow () {
-      console.log('onShow')
       const this_ = this
-      this_.commonInit()
       if (this_.userInfo.type === 2) {
         this_.updateAllData()
-        this_.initData()
       }
       if (this_.userInfo.type === 1) {
-        this_.getHR(this.userInfo.id)
+        this_.getHR(this_.userInfo.id)
         const interval = setInterval(function () {
           if (this_.hr !== null) {
-            this_.toUserInfoPage()
+            this_.toUserInfoPage(this_.hr)
             clearInterval(interval)
           }
         }, 100)
@@ -2841,6 +2848,12 @@
       if (this_.userInfo.type === 0) {
         this_.getUserTotal()
       }
+    },
+    created () {
+      // let app = getApp()
+    },
+    onShow () {
+      this.commonInit()
     }
   }
 </script>
@@ -2851,8 +2864,6 @@
     height: 100%;
     width: 100%;
     overflow-x:hidden;
-    overflow-y:hidden;
-    padding-bottom: 0px !important;;
   }
 
   .mine-admin-tabs {
