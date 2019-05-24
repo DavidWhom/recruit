@@ -13,7 +13,7 @@
                 clearable
                 label="账号"
                 icon="contact"
-                placeholder="请输入用户名"
+                placeholder="请输入用户名/手机号"
                 @change="userNameChange"
               />
             </van-cell>
@@ -65,7 +65,7 @@
           <van-cell>
             <van-field
               type="password"
-              label="重复密码"
+              label="确认密码"
               :value="r_rep_pwd"
               placeholder="请确认密码"
               required
@@ -80,7 +80,7 @@
             <van-field
               label="手机号"
               :value="tel"
-              placeholder="请输入手机号"
+              placeholder="请输入手机号(可用手机号登录)"
               icon="phone-o"
               border="false"
               @change="validateTel"
@@ -204,6 +204,8 @@ export default {
       this_.$http.get(requestUrl, params).then(function (res) {
         if (res.data.code === 1) {
           this_.tel_error = '手机号已存在'
+          console.log(this_.tel_error)
+          return
         }
         this_.tel_error = ''
       })
@@ -212,6 +214,10 @@ export default {
       this.r_name = e.mp.detail
       if (this.r_name.indexOf(' ') !== -1) {
         this.name_error = '用户名不能包含空格'
+        return
+      }
+      if (this.r_name.length < 5) {
+        this.name_error = '用户名长度不符合规范'
         return
       }
       if (this.r_name.trim().length === 0) {
