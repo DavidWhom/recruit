@@ -1365,7 +1365,6 @@
   import {navigateTo, reLaunch} from '../../../../recruit/src/utils/wxApiPack.js'
   import commentAdmin from '@/components/commentAdmin/commentAdmin'
   import adviceAdmin from '@/components/adviceAdmin/adviceAdmin'
-  import userAdvice from '@/components/userAdvice/userAdvice'
   import userCollection from '@/components/userCollection/userCollection'
   import userComment from '@/components/userComment/userComment'
   import userTipoff from '@/components/userTipoff/userTipoff'
@@ -1374,7 +1373,6 @@
     components: {
       commentAdmin,
       adviceAdmin,
-      userAdvice,
       userCollection,
       userComment,
       userTipoff
