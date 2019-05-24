@@ -214,11 +214,9 @@
         })
       },
       ToSalaryDynamicDetail (keyword) {
-        let propsKeyword = {
-          keyword: keyword,
-          from: 2
-        }
-        navigateTo('../salaryDynamic/main?keyword=' + propsKeyword)
+        this.global.salaryKeyword = keyword
+        this.global.from = 2
+        navigateTo('../salaryDynamic/main')
       },
       getSalaryDetail () {
         const this_ = this

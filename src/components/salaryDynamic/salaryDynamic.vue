@@ -5,7 +5,7 @@
         <div class="before-title-blue"></div>
         <div class="panel-title">查看薪资动态<!--<span> (显示最近100条)</span>--></div>
       </div>
-      <van-search :value="salaryKeyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
+      <van-search :value="keyword.salaryKeyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
                   background="#ffffff">
       </van-search>
     </div>
@@ -66,18 +66,11 @@
   import {formateDate} from '../../utils/index'
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
   export default {
-    props: {
-      keyword: {
-        type: String,
-        required: true,
-        default: 0
-      }
-    },
     data () {
       return {
         keyword: {
-          salaryKeyword: '',
-          from: ''
+          'salaryKeyword': '',
+          'from': 1
         },
         headerLocationTop: 0,
         scrollTop: 0,
@@ -114,7 +107,7 @@
         if (event == null) {
           return
         }
-        this.salaryKeyword = event.mp.detail
+        this.keyword.salaryKeyword = event.mp.detail
         this.salaries = []
         this.salaryIndex = 0
         this.pageNo = 1
@@ -123,7 +116,7 @@
       getSalaries () {
         const requestUrl = '/api/salary/getSalarys'
         const params = {
-          'keyword': this.salaryKeyword === undefined ? '' : this.salaryKeyword,
+          'keyword': this.keyword.salaryKeyword === undefined ? '' : this.keyword.salaryKeyword,
           'pageSize': 10,
           'pageNo': this.pageNo++
         }
@@ -158,7 +151,6 @@
     },
     mounted () {
       console.log('mounted')
-      console.log('架子啊')
       const this_ = this
       let query = wx.createSelectorQuery()
       query.select('.salary-dynamic-header').boundingClientRect(function (res) {
@@ -166,14 +158,18 @@
         // section header 距离 ‘当前顶部’ 距离
         this_.headerLocationTop = res.top + this_.scrollTop
       }).exec()
-      console.log(this._props.keyword)
-      console.log('keyword')
-      this.keyword = this._props.keyword
-      console.log(this.keyword)
+      // console.log(this_._props.keyword)
+      // console.log('keyword')
+      // this_.keyword = this_._props.keyword
+      // console.log(this_.keyword.salaryKeyword)
+      this_.keyword.salaryKeyword = this_.global.salaryKeyword === undefined || this_.global.salaryKeyword === '' ? '' : this_.global.salaryKeyword
+      if (this_.global.from !== undefined) {
+        this_.keyword.from = this_.global.from
+      }
       this_.salaries = []
       this_.salaryIndex = 0
-      this.pageNo = 1
-      this.getSalaries()
+      this_.pageNo = 1
+      this_.getSalaries()
     },
     onPageScroll: function (e) {
       // console.log(e)
@@ -192,6 +188,16 @@
       // this.salaryIndex = 0
       // this.pageNo = 1
       // this.getSalaries()
+      console.log('onshow')
+      const this_ = this
+      this_.keyword.salaryKeyword = this_.global.salaryKeyword === undefined || this_.global.salaryKeyword === '' ? '' : this_.global.salaryKeyword
+      if (this_.global.from !== undefined) {
+        this_.keyword.from = this_.global.from
+      }
+      this_.salaries = []
+      this_.salaryIndex = 0
+      this_.pageNo = 1
+      this_.getSalaries()
     }
   }
 </script>
@@ -228,7 +234,7 @@
     color: darkgray;
   }
   .salary-dynamics {
-    padding: 10rpx 10rpx 10rpx 10rpx;
+    padding: 5rpx 5rpx 5rpx 5rpx;
   }
   .salary-dynamic {
     background-color: #ffffff;
@@ -236,7 +242,7 @@
     text-align: center;
     vertical-align: middle;
     border-radius: 10rpx;
-    margin: 10rpx 10rpx;
+    margin: 5rpx 0rpx 5rpx 0rpx;
   }
   .salary-dynamic-left {
     float: left;

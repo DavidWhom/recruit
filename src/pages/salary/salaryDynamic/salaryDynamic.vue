@@ -1,5 +1,5 @@
 <template>
-  <salary-dynamic :keyword="keyword"></salary-dynamic>
+  <salary-dynamic></salary-dynamic>
 </template>
 
 <script>
@@ -16,8 +16,6 @@
     mounted () {
     },
     onShow () {
-      this.keyword = this.$root.$mp.query.keyword
-      console.log(this.keyword)
     }
   }
 </script>

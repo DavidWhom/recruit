@@ -86,7 +86,7 @@
       </van-tab>
       <van-tab title="薪资动态">
         <div>
-          <salary-dynamic :keyword="keyword"></salary-dynamic>
+          <salary-dynamic></salary-dynamic>
         </div>
       </van-tab>
     </van-tabs>
@@ -121,11 +121,7 @@
         isSalaryDynShow: true,
         headerLocationTop: 0,
         scrollTop: 0,
-        fixed: false,
-        keyword: {
-          salaryKeyword: '',
-          from: 1
-        }
+        fixed: false
       }
     },
 
@@ -260,7 +256,6 @@
         this.isqueryEduShow = !this.isqueryEduShow
       },
       onSearch () {
-        console.log('搜索关键字:' + this.salaryKeyword)
       }
     },
     mounted () {
@@ -271,6 +266,12 @@
         // section header 距离 ‘当前顶部’ 距离
         this_.headerLocationTop = res.top + this_.scrollTop
       }).exec()
+      console.log('reset from')
+    },
+    onShow () {
+      const this_ = this
+      this_.global.salaryKeyword = ''
+      this_.global.from = 1
     },
     onPageScroll: function (e) {
       // console.log(e)
