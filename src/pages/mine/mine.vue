@@ -636,6 +636,8 @@
                         </van-col>
                       </van-row>
                     </div>
+                  </van-row>
+                  <van-row>
                     <van-panel>
                       <van-row v-if="commentMore">
                         <van-col span="8">
