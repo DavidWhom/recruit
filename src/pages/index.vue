@@ -163,7 +163,6 @@ export default {
     },
     passwordTextChange (e) {
       this.password = e.mp.detail
-      console.log(this.password)
     },
     validPassword (e) {
       this.r_password = e.mp.detail
@@ -304,6 +303,8 @@ export default {
         // 初始化小程序全局个人信息
         this_.commonInit(user)
         setStorage('userCode', user.id) // 缓存表示用户已经登陆过，下次进入小程序走快捷路径
+        this_.name = ''
+        this_.password = ''
         switchTab('index/main')
       })
     },
@@ -340,6 +341,7 @@ export default {
   },
   mounted () {
     const this_ = this
+    this_.registerInit()
     var userCode = getStorageSync('userCode')
     if (userCode) {
       Toast.loading({

@@ -34,10 +34,10 @@
             </div>
           </van-col>
           <van-col span="7" offset="3">
-            <div class="van-ellipsis mine-title-name mine-title-list"><span>我的收藏</span></div>
+            <div class="van-ellipsis mine-title-name mine-title-list"><span style="font-size: 14px">我的收藏</span></div>
           </van-col>
           <van-col span="7" offset="2">
-            <div class="mine-title-list"><span>{{userTotal.collect === null ? 0 : userTotal.collect}} 个 </span></div>
+            <div class="mine-title-list blue-text"><span>{{userTotal.collect === null ? 0 : userTotal.collect}} 个 </span></div>
           </van-col>
           <van-col offset="1" span="2">
             <div class="mine-title-content mine-title-list">
@@ -54,10 +54,10 @@
             </div>
           </van-col>
           <van-col span="7" offset="3">
-            <div class="van-ellipsis mine-title-name mine-title-list"><span>我的爆料</span></div>
+            <div class="van-ellipsis mine-title-name mine-title-list"><span style="font-size: 14px">我的爆料</span></div>
           </van-col>
           <van-col span="7" offset="2">
-            <div class="mine-title-list"><span>{{userTotal.tip === null ? 0 : userTotal.tip}} 条 </span></div>
+            <div class="mine-title-list blue-text"><span>{{userTotal.tip === null ? 0 : userTotal.tip}} 条 </span></div>
           </van-col>
           <van-col offset="1" span="2">
             <div class="mine-title-content mine-title-list">
@@ -74,10 +74,10 @@
             </div>
           </van-col>
           <van-col span="7" offset="3">
-            <div class="van-ellipsis mine-title-name mine-title-list"><span>我的评论</span></div>
+            <div class="van-ellipsis mine-title-name mine-title-list"><span style="font-size: 14px">我的评论</span></div>
           </van-col>
           <van-col span="7" offset="2">
-            <div class="mine-title-list"><span>{{userTotal.comment === null ? 0 : userTotal.comment}} 条 </span></div>
+            <div class="mine-title-list blue-text"><span>{{userTotal.comment === null ? 0 : userTotal.comment}} 条 </span></div>
           </van-col>
           <van-col offset="1" span="2">
             <div class="mine-title-content mine-title-list">
@@ -94,7 +94,27 @@
             </div>
           </van-col>
           <van-col span="7" offset="3">
-            <div class="van-ellipsis mine-title-name mine-title-list"><span>意见反馈</span></div>
+            <div class="van-ellipsis mine-title-name mine-title-list"><span style="font-size: 14px">意见反馈</span></div>
+          </van-col>
+          <van-col span="6" offset="3">
+            <div class="mine-title-list"></div>
+          </van-col>
+          <van-col offset="1" span="2">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/goal-forward.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+      <div style="width: 100%;" @click="logOut" class="van-hairline--bottom mine-title-tr data-panel">
+        <van-row>
+          <van-col offset="1" span="1">
+            <div class="mine-title-content mine-title-list">
+              <img src="../../../static/images/mine/mine-logout.png" style="height: 20px;width: 20px;"/>
+            </div>
+          </van-col>
+          <van-col span="7" offset="3">
+            <div class="van-ellipsis mine-title-name mine-title-list"><span style="font-size: 14px">注销登录</span></div>
           </van-col>
           <van-col span="6" offset="3">
             <div class="mine-title-list"></div>
@@ -1352,17 +1372,17 @@
             </van-tab>
           </van-tabs>
         </div>
-        <van-toast id="van-toast" />
-        <van-notify id="van-notify" />
       </div>
     </div>
+    <van-toast id="van-toast" />
+    <van-notify id="van-notify" />
   </div>
 </template>
 
 <script>
   import Toast from '../../../static/vant-weapp/dist/toast/toast'
   import Notify from '../../../static/vant-weapp/dist/notify/notify'
-  import {navigateTo, reLaunch} from '../../../../recruit/src/utils/wxApiPack.js'
+  import {navigateTo, reLaunch, clearStorage} from '../../../../recruit/src/utils/wxApiPack.js'
   import commentAdmin from '@/components/commentAdmin/commentAdmin'
   import adviceAdmin from '@/components/adviceAdmin/adviceAdmin'
   import userCollection from '@/components/userCollection/userCollection'
@@ -2772,6 +2792,19 @@
       },
       toFeedback () {
         navigateTo('feedback/main?type=2')
+      },
+      logOut () {
+        Toast.loading({
+          mask: true,
+          duration: 0,
+          forbidClick: true,
+          message: '正在注销...'
+        })
+        setTimeout(function () {
+          clearStorage()
+          navigateTo('../main')
+          Toast.clear()
+        }, 500)
       },
       toSalaryDetail (id) {
         navigateTo('../salary/salaryDetail/main?id=' + id)
