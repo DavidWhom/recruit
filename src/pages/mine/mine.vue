@@ -187,25 +187,34 @@
                   </van-col>
                 </van-row>
                 <van-row>
-                  <van-col :span="11">
-                    <span class="large-text blue-text">{{recruitTotal}}</span><span class="small-text blue-text">条</span>
-                  </van-col>
-                  <van-col :span="13">
-                    <span class="large-text orange-text">{{visitTotal}}</span><span class="small-text orange-text">次</span>
-                  </van-col>
+                  <div v-if="isMainPrepared !== 1" style="width: 100%; text-align: center; padding-top: 250rpx; padding-bottom: 250rpx"><van-loading type="spinner" color="#1c86ee" /></div>
                 </van-row>
                 <van-row>
-                  <div class="tendency-unit">
-                    <div class="tendency_unit_left tendency-small-text">单位：条</div>
-                    <div class="tendency_unit_right tendency-small-text">单位：次</div>
+                  <div v-if="isMainPrepared === 1">
+                    <van-col :span="11">
+                      <span class="large-text blue-text">{{recruitTotal}}</span><span class="small-text blue-text">条</span>
+                    </van-col>
+                    <van-col :span="13">
+                      <span class="large-text orange-text">{{visitTotal}}</span><span class="small-text orange-text">次</span>
+                    </van-col>
                   </div>
                 </van-row>
                 <van-row>
-                  <van-col :span="24">
-                    <div class="mix-chart-wrapper">
-                      <ff-canvas id="mixMainChart-dom" canvas-id="mixMainChart" :opts="opts"></ff-canvas>
+                  <div v-if="isMainPrepared === 1">
+                    <div class="tendency-unit">
+                      <div class="tendency_unit_left tendency-small-text">单位：条</div>
+                      <div class="tendency_unit_right tendency-small-text">单位：次</div>
                     </div>
-                  </van-col>
+                  </div>
+                </van-row>
+                <van-row>
+                  <div v-if="isMainPrepared === 1">
+                    <van-col :span="24">
+                      <div class="mix-chart-wrapper">
+                        <ff-canvas id="mixMainChart-dom" canvas-id="mixMainChart" :opts="opts"></ff-canvas>
+                      </div>
+                    </van-col>
+                  </div>
                 </van-row>
               </van-panel>
               <div class="data-panel">
@@ -220,16 +229,21 @@
                     </van-col>
                   </van-row>
                   <van-row>
-                    <div class="tendency-unit">
+                    <div v-if="isSalaryPrepared !== 1" style="width: 100%; text-align: center; padding-top: 250rpx; padding-bottom: 250rpx"><van-loading type="spinner" color="#1c86ee" /></div>
+                  </van-row>
+                  <van-row>
+                    <div class="tendency-unit" v-if="isSalaryPrepared === 1">
                       <div class="tendency_unit_left tendency-small-text">单位：条</div>
                     </div>
                   </van-row>
                   <van-row>
-                    <van-col :span="24">
-                      <div class="mix-chart-wrapper">
-                        <ff-canvas id="mixBLChart-dom" canvas-id="mixBLChart" :opts="opts"></ff-canvas>
-                      </div>
-                    </van-col>
+                    <div v-if="isSalaryPrepared === 1">
+                      <van-col :span="24">
+                        <div class="mix-chart-wrapper">
+                          <ff-canvas id="mixBLChart-dom" canvas-id="mixBLChart" :opts="opts"></ff-canvas>
+                        </div>
+                      </van-col>
+                    </div>
                   </van-row>
                 </van-panel>
               </div>
@@ -245,16 +259,21 @@
                     </van-col>
                   </van-row>
                   <van-row>
-                    <div class="tendency-unit">
+                    <div v-if="isCommentPrepared !== 1" style="width: 100%; text-align: center; padding-top: 250rpx; padding-bottom: 250rpx"><van-loading type="spinner" color="#1c86ee" /></div>
+                  </van-row>
+                  <van-row>
+                    <div class="tendency-unit" v-if="isCommentPrepared === 1">
                       <div class="tendency_unit_left tendency-small-text">单位：条</div>
                     </div>
                   </van-row>
                   <van-row>
-                    <van-col :span="24">
-                      <div class="mix-chart-wrapper">
-                        <ff-canvas id="mixPLChart-dom" canvas-id="mixPLChart" :opts="opts"></ff-canvas>
-                      </div>
-                    </van-col>
+                    <div v-if="isCommentPrepared === 1">
+                      <van-col :span="24">
+                        <div class="mix-chart-wrapper">
+                          <ff-canvas id="mixPLChart-dom" canvas-id="mixPLChart" :opts="opts"></ff-canvas>
+                        </div>
+                      </van-col>
+                    </div>
                   </van-row>
                 </van-panel>
               </div>
@@ -270,16 +289,21 @@
                     </van-col>
                   </van-row>
                   <van-row>
-                    <div class="tendency-unit">
+                    <div v-if="isAdvicePrepared !== 1" style="width: 100%; text-align: center; padding-top: 250rpx; padding-bottom: 250rpx"><van-loading type="spinner" color="#1c86ee" /></div>
+                  </van-row>
+                  <van-row>
+                    <div class="tendency-unit" v-if="isAdvicePrepared === 1">
                       <div class="tendency_unit_left tendency-small-text">单位：条</div>
                     </div>
                   </van-row>
                   <van-row>
-                    <van-col :span="24">
-                      <div class="mix-chart-wrapper">
-                        <ff-canvas id="mixFKChart-dom" canvas-id="mixFKChart" :opts="opts"></ff-canvas>
-                      </div>
-                    </van-col>
+                    <div v-if="isAdvicePrepared === 1">
+                      <van-col :span="24">
+                        <div class="mix-chart-wrapper">
+                          <ff-canvas id="mixFKChart-dom" canvas-id="mixFKChart" :opts="opts"></ff-canvas>
+                        </div>
+                      </van-col>
+                    </div>
                   </van-row>
                 </van-panel>
               </div>
@@ -1503,11 +1527,21 @@
         enterprise_type: '',
         enterprise_type_error: '',
         enterprise_place: '',
-        enterprise_place_error: ''
+        enterprise_place_error: '',
+        isMainPrepared: 0,
+        isSalaryPrepared: 0,
+        isCommentPrepared: 0,
+        isAdvicePrepared: 0
       }
     },
 
     methods: {
+      loadingInit () {
+        this.isMainPrepared = 0
+        this.isSalaryPrepared = 0
+        this.isCommentPrepared = 0
+        this.isAdvicePrepared = 0
+      },
       toUserInfoPage (item) {
         let str = JSON.stringify(item)
         if (this.userInfo.type === 1) {
@@ -1776,6 +1810,7 @@
       },
       updateAllData () {
         const this_ = this
+        this_.loadingInit()
         let type = this_.reportTabIndex
         this_.judgeTime = new Date().getTime() + ''
         console.log(this_.judgeTime)
@@ -1805,7 +1840,7 @@
             this_.salaryTotal = this_.salaryTendencyChartData.list[0].beDateLeftTotal
             setTimeout(function () {
               this_.$mp.page.selectComponent('#mixBLChart-dom').init(this_.initBLChart)
-            }, 1000)
+            }, 500)
           } else {
             Toast.fail('获取爆料趋势图数据失败')
           }
@@ -1834,7 +1869,7 @@
             this_.commentTotal = this_.commentTendencyChartData.list[0].beDateLeftTotal
             setTimeout(function () {
               this_.$mp.page.selectComponent('#mixPLChart-dom').init(this_.initPLChart)
-            }, 1000)
+            }, 500)
           } else {
             Toast.fail('获取评论趋势图数据失败')
           }
@@ -1863,12 +1898,12 @@
             this_.adviceTotal = this_.adviceTendencyChartData.list[0].beDateLeftTotal
             setTimeout(function () {
               this_.$mp.page.selectComponent('#mixFKChart-dom').init(this_.initFKChart)
-            }, 1000)
+            }, 500)
           } else {
             Toast.fail('获取反馈趋势图数据失败')
           }
         }).catch(function (err) {
-          this_.isMainPrepared = 2
+          this_.isAdvicePrepared = 2
           console.log('趋势图异常')
           console.log(err)
         })
@@ -1887,13 +1922,13 @@
             if (res.data.data.type !== this_.reportTabIndex || res.data.data.judgeTime !== this_.judgeTime) {
               return
             }
-            this_.isMainPrepared = 1
             this_.mainTendencyChartData = resData
             this_.recruitTotal = this_.mainTendencyChartData.list[0].beDateLeftTotal
             this_.visitTotal = this_.mainTendencyChartData.list[0].beDateRightTotal
+            this_.isMainPrepared = 1
             setTimeout(function () {
               this_.$mp.page.selectComponent('#mixMainChart-dom').init(this_.initMainChart)
-            }, 1000)
+            }, 500)
           } else {
             Toast.fail('获取主趋势图数据失败')
           }
