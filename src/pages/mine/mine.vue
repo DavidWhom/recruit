@@ -1136,7 +1136,7 @@
                 </div>
               </div>
               <van-panel class="job-search">
-                <van-search :value="keyword" placeholder="请输入会员名/编号" use-action-slot @search="onSearch_Member"
+                <van-search :value="keyword" placeholder="请输入会员名/编号/手机号" use-action-slot @search="onSearch_Member"
                             background="#ffffff">
                 </van-search>
               </van-panel>
@@ -1651,7 +1651,6 @@
       },
       adminTelChange (e) {
         this.adminTel = e.mp.detail
-        this.adminTel = e.mp.detail
         var numReg = /^[0-9]+$/
         var numRe = new RegExp(numReg)
         if (!numRe.test(this.adminTel)) {
@@ -1660,9 +1659,22 @@
         }
         if (this.adminTel.length !== 11) {
           this.adminTel_error = '手机号格式不正确'
+          return
         } else {
           this.adminTel_error = ''
         }
+        const this_ = this
+        const params = {
+          'tel': this_.adminTel
+        }
+        const requestUrl = '/api/index/validateTel'
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 1) {
+            this_.adminTel_error = res.data.msg
+            return
+          }
+          this_.adminTel_error = ''
+        })
       },
       hrNameChange (e) {
         this.hrName = e.mp.detail
@@ -1682,9 +1694,22 @@
         }
         if (this.hrTel.length !== 11) {
           this.hrTel_error = '手机号格式不正确'
+          return
         } else {
           this.hrTel_error = ''
         }
+        const this_ = this
+        const params = {
+          'tel': this_.hrTel_error
+        }
+        const requestUrl = '/api/index/validateTel'
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 1) {
+            this_.hrTel_error = res.data.msg
+            return
+          }
+          this_.hrTel_error = ''
+        })
       },
       addCompany () {
         if (this.enterprise_error !== '' || this.enterprise_type_error !== '' || this.enterprise_place_error !== '' || this.enterprise === '' || this.enterprise_type === '' || this.enterprise_place === '') {

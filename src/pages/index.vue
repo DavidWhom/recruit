@@ -202,8 +202,7 @@ export default {
       const requestUrl = '/api/index/validateTel'
       this_.$http.get(requestUrl, params).then(function (res) {
         if (res.data.code === 1) {
-          this_.tel_error = '手机号已存在'
-          console.log(this_.tel_error)
+          this_.tel_error = res.data.msg
           return
         }
         this_.tel_error = ''
