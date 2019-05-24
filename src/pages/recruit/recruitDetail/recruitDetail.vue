@@ -48,7 +48,7 @@
         <textarea v-model="comment" style="font-size: 14px;border:solid 1px #f8f8f8" rows="4" cols="50" placeholder="说点什么吧...">
         </textarea>
       </div>
-      <div style="text-align: center"><van-button type="info" size="small" @click="addComment">&nbsp;&nbsp;评论&nbsp;</van-button></div>
+      <div style="text-align: center"><van-button type="info" size="normal" @click="addComment">&nbsp;&nbsp;评论&nbsp;</van-button></div>
     </div>
     <div class="data-panel" style="padding-bottom: 10px">
       <van-panel>
@@ -314,6 +314,7 @@
             temp.isTop = false
             temp.userName = this_.global.name
             this_.comments.push(temp)
+            this_.comment = ''
             Toast.success(res.data.data)
           } else {
             Toast.fail('评论失败')

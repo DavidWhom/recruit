@@ -86,10 +86,10 @@
     </div>
     <div v-if="userInfo.type === 0" class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
       <div style="height: 150px;padding: 5px 15px 15px 35px">
-        <textarea v-model="comment" style="font-size: 14px;border:solid 1px #f8f8f8" rows="4" cols="50" placeholder="说点什么吧...">
+        <textarea v-model="comment" style="font-size: 14px;border:solid 1px #f8f8f8" rows="3" cols="50" placeholder="说点什么吧...">
         </textarea>
       </div>
-      <div style="text-align: center"><van-button type="info" size="small" @click="addComment">&nbsp;&nbsp;评论&nbsp;</van-button></div>
+      <div style="text-align: center"><van-button type="info" size="normal" @click="addComment">&nbsp;&nbsp;评论&nbsp;</van-button></div>
     </div>
     <div class="data-panel">
       <div class="salry-comment van-hairline--bottom" v-for="(item, index) in comments" :key="index">
@@ -208,6 +208,7 @@
             let temp = {}
             temp.content = this_.comment
             this_.comments.push(temp)
+            this_.comment = ''
           } else {
             Toast.fail('评论失败')
           }
@@ -220,6 +221,7 @@
       },
       getSalaryDetail () {
         const this_ = this
+        this_.salary = {} // 防止看到残留数据
         const requestUrl = '/api/salary/getSalary'
         const params = {
           'id': this.id,
@@ -280,7 +282,11 @@
           if (res.data.code === 0) {
             Toast.success('成功置评~')
             this_.isUserAuthed = true
-            this_.salary.auth += 1
+            if (type === 1) {
+              this_.salary.auth -= 1
+            } else {
+              this_.salary.auth += 1
+            }
           } else {
             Toast.fail('置评失败')
           }

@@ -145,8 +145,15 @@
       cityTextChange (e) {
         this.city = e.mp.detail
       },
+      clearInfo () {
+        this.company = ''
+        this.jobTitle = ''
+        this.city = ''
+        this.salary = ''
+        this.remark = ''
+      },
       addSalary () {
-        if (this.company.length === 0 || this.jobTitle.length === 0 || this.remark.length === 0 || this.salary.length === 0 || this.city.length === 0) {
+        if (this.company.length === 0 || this.jobTitle.length === 0 || this.salary.length === 0 || this.city.length === 0) {
           Toast.fail('信息不全哦~')
           return
         }
@@ -163,11 +170,13 @@
           'salary': this.salary,
           'education': this.education,
           'remark': this.remark,
-          'industry': this.industry
+          'industry': this.industry,
+          'user_id': this.global.id
         }
         this_.$http.post(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
             Toast.success('爆料成功')
+            this_.clearInfo()
           } else {
             Toast.fail('爆料失败，稍后重试哦~')
           }
@@ -287,16 +296,14 @@
     }
   }
 </script>
-
-
-
-
-
-
-
-
-
 <style>
+  page {
+    background-color: #f8f8f8 !important;
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+    padding-bottom: 55px;
+  }
   .remark-tip {
     text-align: center;
     font-size: 25rpx;

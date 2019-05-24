@@ -204,7 +204,6 @@
 
 <style scoped>
   page {
-    background-color: #f8f8f8;
     height: 100%;
     width: 100%;
     overflow-x:hidden;
@@ -212,7 +211,6 @@
   }
   .panel-complete {
     padding-top: 10rpx;
-    background-color: #f8f8f8;
   }
   .data-panel {
     width: 100%;
@@ -234,7 +232,7 @@
     color: darkgray;
   }
   .salary-dynamics {
-    padding: 5rpx 5rpx 5rpx 5rpx;
+    padding: 10rpx 10rpx 15rpx 10rpx;
   }
   .salary-dynamic {
     background-color: #ffffff;
@@ -242,7 +240,7 @@
     text-align: center;
     vertical-align: middle;
     border-radius: 10rpx;
-    margin: 5rpx 0rpx 5rpx 0rpx;
+    margin: 8rpx 0rpx 0rpx 0rpx;
   }
   .salary-dynamic-left {
     float: left;
