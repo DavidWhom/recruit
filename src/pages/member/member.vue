@@ -36,9 +36,9 @@
             </van-col>
             <van-col span="8" class="member-complete">
               <div class="member-content van-ellipsis">姓名:{{user.name}}</div>
-              <div class="member-content">昵称:{{user.nickname}}</div>
               <div class="member-content van-ellipsis">地址:{{(user.province + user.city) === 0 ? '' : user.province + user.city}}</div>
-              <div class="member-content">活跃时间:{{recentDate}}</div>
+              <div class="member-content">是否禁止登录: &nbsp;&nbsp;<van-switch :checked="user.state === 1" active-color="#1c86ee"
+                                                                                                                   inactive-color="#f8f8f8" size="12px" @change="onSwitchChange" /></div>
             </van-col>
           </van-row>
         </div>
@@ -394,9 +394,10 @@
             </van-col>
             <van-col span="8" class="member-complete">
               <div class="member-content van-ellipsis">姓名:{{user.name}}</div>
-              <div class="member-content">昵称:{{user.nickname === null ? '' : user.nickname}}</div>
               <div class="member-content van-ellipsis">地址:{{(user.province + user.city) === 0 ? '' : user.province + user.city}}</div>
               <div class="member-content">活跃时间:{{recentDate === null ? '' : recentDate}}</div>
+              <div class="member-content">是否禁止登录: &nbsp;&nbsp;<van-switch :checked="user.state === 1" active-color="#1c86ee"
+                                                                          inactive-color="#f8f8f8" size="12px" @change="onSwitchChange" /></div>
             </van-col>
           </van-row>
           <van-row>
@@ -529,11 +530,12 @@
         </van-panel>
       </div>
     </div>
+    <van-toast id="van-toast" />
   </div>
 </template>
 
 <script>
-  // import Toast from '../../../static/vant-weapp/dist/toast/toast'
+  import Toast from '../../../static/vant-weapp/dist/toast/toast'
   import {navigateTo, setNavigationBarTitle, switchTab} from '../../utils/wxApiPack.js'
   import {formateDate} from '../../utils/index'
   export default {
@@ -579,6 +581,33 @@
     },
 
     methods: {
+      onSwitchChange () {
+        var state = null
+        var word = ''
+        const this_ = this
+        if (this_.user.state === 0) {
+          state = 1
+          word = '该用户已被禁止登录'
+        } else {
+          state = 0
+          word = '该用户允许登录'
+        }
+        const requestUrl = '/api/mine/admin/prohibit'
+        const params = {
+          'id': this_.user.id,
+          'state': state
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            Toast.success(word)
+            this_.user.state = state
+            return
+          }
+          Toast.fail('操作失败，请重试')
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
       tipMoreHandler (type) {
         if (type !== 1) {
           this.tips = []
@@ -862,6 +891,7 @@
     onShow () {
       this.user = this.$root.$mp.query.user
       this.user = JSON.parse(this.user)
+      console.log(this.user)
       if (this.user.create_time === '1970-01-01') {
         this.user.create_time = ''
       }

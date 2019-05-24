@@ -176,7 +176,6 @@ export default {
       console.log(user)
       this.global.id = user.id
       this.global.name = user.name
-      this.global.nickname = user.nickname
       this.global.avatarUrl = user.avatar_url
       this.global.gender = user.gender
       this.global.type = user.type

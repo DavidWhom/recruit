@@ -284,7 +284,6 @@
       commonInit () {
         this.userInfo.id = this.global.id
         this.userInfo.name = this.global.name
-        this.userInfo.nickname = this.global.nickname
         this.userInfo.avatarUrl = this.global.avatarUrl
         this.userInfo.gender = this.global.gender
         this.userInfo.type = this.global.type

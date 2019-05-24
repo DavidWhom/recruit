@@ -2163,6 +2163,7 @@
             tmpmember.type = tmp.type
             tmpmember.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
             tmpmember.tel = tmp.tel
+            tmpmember.state = tmp.state
             tmpmember.province = tmp.province
             this_.members.push(tmpmember)
           }
@@ -2208,7 +2209,6 @@
             tmpHr.id = tmp.id
             tmpHr.companyName = tmp.companyName
             tmpHr.name = tmp.name
-            tmpHr.nickname = tmp.nickname
             tmpHr.master_id = tmp.master_id
             tmpHr.publishTimes = tmp.publishTimes
             tmpHr.gender = tmp.gender === 1 ? '男' : (tmp.gender === 2 ? '女' : '未知')
@@ -2377,7 +2377,6 @@
       commonInit () {
         this.userInfo.id = this.global.id
         this.userInfo.name = this.global.name
-        this.userInfo.nickname = this.global.nickname
         this.userInfo.avatarUrl = this.global.avatarUrl
         this.userInfo.gender = this.global.gender
         this.userInfo.type = this.global.type
@@ -2804,7 +2803,7 @@
         })
         setTimeout(function () {
           clearStorage()
-          navigateTo('../main')
+          reLaunch('../main')
           Toast.clear()
         }, 500)
       },
