@@ -67,6 +67,10 @@ export default {
   mounted () {
     const this_ = this
     this_.getHeadlines()
+  },
+  onShow () {
+    const this_ = this
+    this_.getHeadlines()
   }
 }
 </script>

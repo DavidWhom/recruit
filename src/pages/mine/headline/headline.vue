@@ -11,6 +11,9 @@
             </van-col>
           </van-row>
         </van-panel>
+        <van-row>
+          <div v-if="isHeadlinePrepared !== 1" style="width: 100%; background-color: #ffffff; text-align: center; padding-top: 250rpx; padding-bottom: 250rpx"><van-loading type="spinner" color="#1c86ee" /></div>
+        </van-row>
         <van-panel>
           <div v-for="(item,index) in headlines" :key="index" class="van-hairline--bottom">
             <van-row>
@@ -197,7 +200,8 @@
         recruitLess: false,
         recruitSingleMore: false,
         recruitNoData: false,
-        pageNo: 1
+        pageNo: 1,
+        isHeadlinePrepared: 0
       }
     },
     methods: {
@@ -250,6 +254,7 @@
       },
       getHeadlines () {
         const this_ = this
+        this_.isHeadlinePrepared = 0
         const requestUrl = '/api/index/getHeadlines'
         this_.$http.get(requestUrl).then(function (res) {
           const resData = res.data.data
@@ -260,6 +265,7 @@
             tmpHeadline.title = tmp.title
             tmpHeadline.headline_order = tmp.headline_order
             this_.headlines.push(tmpHeadline)
+            this_.isHeadlinePrepared = 1
           }
         })
       },

@@ -10,6 +10,7 @@
     "van-cell-group": "/static/vant-weapp/dist/cell-group/index",
     "van-dialog": "/static/vant-weapp/dist/dialog/index",
     "van-search": "/static/vant-weapp/dist/search/index",
-    "van-toast": "/static/vant-weapp/dist/toast/index"
+    "van-toast": "/static/vant-weapp/dist/toast/index",
+    "van-loading": "/static/vant-weapp/dist/loading/index"
   }
 }
