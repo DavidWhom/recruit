@@ -232,7 +232,7 @@
     color: darkgray;
   }
   .salary-dynamics {
-    padding: 10rpx 10rpx 15rpx 10rpx;
+    padding: 0rpx 10rpx 15rpx 10rpx;
   }
   .salary-dynamic {
     background-color: #ffffff;
@@ -240,7 +240,7 @@
     text-align: center;
     vertical-align: middle;
     border-radius: 10rpx;
-    margin: 8rpx 0rpx 0rpx 0rpx;
+    margin: 15rpx 0rpx 0rpx 0rpx;
   }
   .salary-dynamic-left {
     float: left;

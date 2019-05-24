@@ -296,9 +296,8 @@
     }
   }
 </script>
-<style>
+<style scoped>
   page {
-    background-color: #f8f8f8 !important;
     height: 100%;
     width: 100%;
     overflow-x:hidden;

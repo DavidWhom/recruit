@@ -52,7 +52,7 @@
     </div>
     <div class="data-panel" style="padding-bottom: 10px">
       <van-panel>
-        <div class="recruit-user-common van-hairline--bottom" v-for="(item, index) in comments" :key="index">
+        <div :class="userInfo.id === item.userId ? 'recruit-user-common-self van-hairline--bottom' : 'recruit-user-common van-hairline--bottom'" v-for="(item, index) in comments" :key="index">
           <van-row>
             <van-col span="2" offset="1">
               <img class="recruit-user-img" :src="item.avatarUrl === null ? default_img : item.avatarUrl">
@@ -492,6 +492,13 @@
   .recruit-user-common {
     padding-top: 20px;
     padding-bottom: 5px;
+  }
+  .recruit-user-common-self {
+    padding-top: 20px;
+    padding-bottom: 5px;
+    background-color: #fffbd5;
+    border-radius: 10px;
+    overflow: hidden;
   }
   .recruit-comment-good {
     float: right;
