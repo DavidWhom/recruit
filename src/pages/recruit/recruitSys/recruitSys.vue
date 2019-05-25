@@ -265,6 +265,7 @@
         recruitIndex_: 0,
         recruitNum_: 0,
         recruitMore_: false,
+        recruitBottom_: false,
         recruitLess_: false,
         recruitSingleMore_: false,
         recruitNoData_: false,

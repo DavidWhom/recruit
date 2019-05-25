@@ -243,6 +243,7 @@
         salaryNum: 0,
         salaryMore: false,
         salaryLess: false,
+        salaryBottom: false,
         salarySingleMore: false,
         salaryNoData: false,
         pageNo: 1,
@@ -254,6 +255,7 @@
         salaryNum_: 0,
         salaryMore_: false,
         salaryLess_: false,
+        salaryBottom_: false,
         salarySingleMore_: false,
         recruitNoData_: false,
         pageNo_: 1

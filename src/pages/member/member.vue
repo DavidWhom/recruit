@@ -43,8 +43,7 @@
               <div class="member-content van-ellipsis">姓名:{{user.name}}</div>
               <div class="member-content van-ellipsis">地址:{{(user.place) === 0 ? '' : user.place}}</div>
               <div class="member-content">活跃时间:{{recentDate === null ? '' : recentDate}}</div>
-              <div class="member-content" v-if="identity === 2">是否禁止登录: &nbsp;&nbsp;<van-switch :checked="user.state === 1" active-color="#1c86ee"
-                                                                                                                   inactive-color="#f8f8f8" size="12px" @change="onSwitchChange" /></div>
+              <div class="member-content" v-if="identity === 2">是否禁止登录:<switch :checked="user.state === 1" color="#1c86ee" @change="onSwitchChange" /></div>
             </van-col>
           </van-row>
         </div>
@@ -421,8 +420,7 @@
                 <span v-if="isEdit" class="blue-text" @click="choosePlace" style="text-decoration: underline">{{place_tmp === '' ? '输入地址' : place_tmp}}</span>
               </div>
               <div class="member-content">活跃时间:{{recentDate === null ? '' : recentDate}}</div>
-              <div class="member-content" v-if="identity === 2">是否禁止登录:{{user.state}} &nbsp;&nbsp;<van-switch :checked="user.state === 1" active-color="#1c86ee"
-                                                                                                inactive-color="#f8f8f8" size="12px" @change="onSwitchChange" /></div>
+              <div class="member-content" v-if="identity === 2">是否禁止登录:<switch :checked="user.state === 1" color="#1c86ee" @change="onSwitchChange" /></div>
             </van-col>
           </van-row>
           <van-row>
@@ -1260,6 +1258,9 @@
 </script>
 
 <style scoped>
+  switch{
+    zoom: .5;
+  }
   .member-title {
     font-size: 14px;
     display: flex;
