@@ -9,6 +9,7 @@
     "van-toast": "/static/vant-weapp/dist/toast/index",
     "van-transition": "/static/vant-weapp/dist/transition/index",
     "van-picker": "/static/vant-weapp/dist/picker/index",
-    "van-popup": "/static/vant-weapp/dist/popup/index"
+    "van-popup": "/static/vant-weapp/dist/popup/index",
+    "van-notify": "/static/vant-weapp/dist/notify/index"
   }
 }

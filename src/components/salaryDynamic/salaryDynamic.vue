@@ -59,11 +59,13 @@
         </van-col>
       </van-row>
     </div>
+    <van-toast id="van-toast" />
   </div>
 </template>
 
 <script>
   import {formateDate} from '../../utils/index'
+  import Toast from '../../../static/vant-weapp/dist/toast/toast'
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
   export default {
     data () {
@@ -79,6 +81,7 @@
         salaryIndex: 0,
         salaryNum: 0,
         salaryMore: false,
+        salaryBottom: false,
         salaryLess: false,
         salarySingleMore: false,
         salaryNoData: false,
@@ -87,6 +90,10 @@
     },
     methods: {
       toSalaryDetail (id) {
+        if (this.global.id === undefined || this.global.id === null) {
+          Toast.fail('请先登录哦~')
+          return
+        }
         if (this.keyword.from === 1) {
           console.log('1')
           navigateTo('../salary/salaryDetail/main?id=' + id)
@@ -202,7 +209,7 @@
   }
 </script>
 
-<style scoped>
+<style scope>
   page {
     height: 100%;
     width: 100%;

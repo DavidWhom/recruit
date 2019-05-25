@@ -98,11 +98,13 @@
       <span class="account-btn" style="margin-left: 200px" @click="toBusinessPage()">游客登录</span>
     </div>
     <van-toast id="van-toast" />
+    <van-notify id="van-notify" />
   </div>
 </template>
 
 <script>
 import Toast from '../../static/vant-weapp/dist/toast/toast'
+import Notify from '../../static/vant-weapp/dist/notify/notify'
 import {switchTab, setStorage, getStorageSync} from '../../../recruit/src/utils/wxApiPack.js'
 import {validPwd, isNum} from '../utils/index'
 
@@ -167,7 +169,7 @@ export default {
     validPassword (e) {
       this.r_password = e.mp.detail
       if (!validPwd(this.r_password)) {
-        this.pwd_error = '密码不符合规范哦~'
+        this.pwd_error = '密码长度为8-20位,必须由字母、数字、特殊符号组成'
         return
       }
       this.pwd_error = ''
@@ -179,6 +181,10 @@ export default {
       this.global.avatarUrl = user.avatar_url
       this.global.gender = user.gender
       this.global.type = user.type
+      this.global.tel = user.tel
+      this.global.gender = user.gender
+      this.global.place = user.place
+      this.global.create_time = user.create_time
       console.log(this.global.name)
       // 开发测试
       // this.global.id = '1'
@@ -186,7 +192,7 @@ export default {
       // this.global.name = '杨过'
       // this.global.nickname = '远方'
       // this.global.avatarUrl = 'http://img0.pconline.com.cn/pconline/1509/28/7007256_312_thumb.jpg'
-      // this.global.gender = 1
+      // this.global.isMan = 1
       // this.global.type = 0
     },
     validateTel (e) {
@@ -214,7 +220,7 @@ export default {
         this.name_error = '用户名不能包含空格'
         return
       }
-      if (this.r_name.length < 5) {
+      if (this.r_name.length < 5 || this.r_name.length > 10) {
         this.name_error = '用户名长度不符合规范'
         return
       }
@@ -231,7 +237,12 @@ export default {
           this_.name_error = '用户名已存在'
           return
         }
-        Toast.success('用户名可用')
+        Notify({
+          text: '用户名可用',
+          duration: 1000,
+          selector: '#van-notify',
+          backgroundColor: '#07c160'
+        })
         this_.name_error = ''
       })
     },

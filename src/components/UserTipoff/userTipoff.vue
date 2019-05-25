@@ -37,7 +37,7 @@
               </van-col>
             </van-row>
           </div>
-          <div style="width: 100%;"  v-for="(item, index) in tips" :key="index" @click="toSalaryDetail(item.id)" class="van-hairline--bottom mine-title-tr">
+          <div style="width: 100%;"  v-for="(item, index) in tips" :key="index" @click="toSalaryDetail(item)" class="van-hairline--bottom mine-title-tr">
             <van-row>
               <van-col span="8" offset="1">
                 <div class="van-ellipsis mine-title-name mine-title-list"><span>{{item.create_time}}</span></div>
@@ -91,10 +91,12 @@
         </van-row>
       </van-panel>
     </div>
+    <van-toast id="van-toast" />
   </div>
 </template>
 
 <script>
+  import Toast from '../../../static/vant-weapp/dist/toast/toast'
   import {navigateTo} from '../../utils/wxApiPack.js'
   import {formateDate} from '../../utils/index'
   export default {
@@ -120,8 +122,17 @@
         }
         this.getUserSalaryTip(5)
       },
-      toSalaryDetail (id) {
-        navigateTo('../salary/salaryDetail/main?id=' + id)
+      toSalaryDetail (item) {
+        console.log(item.state)
+        if (item.state === 0) {
+          Toast.fail('该爆料尚未审核')
+          return
+        }
+        if (item.state === -1) {
+          Toast.fail('该爆料审核不通过')
+          return
+        }
+        navigateTo('../salary/salaryDetail/main?id=' + item.id)
       },
       getUserSalaryTip (size) {
         const requestUrl = '/api/mine/user/getUserSalaryTip'
@@ -143,6 +154,7 @@
             tmptip.city = tmp.city
             tmptip.auth = tmp.auth
             tmptip.education = tmp.education
+            tmptip.state = tmp.state
             tmptip.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd hh:mm')
             tmptip.salary = tmp.salary
             tmptip.job = tmp.job

@@ -7,7 +7,7 @@
             <div class="before-title-blue"></div>
             <div class="panel-title">OfferGo</div>
           </div>
-          <van-search :value="jobkeyword" placeholder="请输入公司名/职位名称" use-action-slot @search="onSearch"
+          <van-search :value="jobkeyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
                       background="#ffffff">
           </van-search>
         </div>
@@ -122,6 +122,7 @@
         recruitIndex: 0,
         recruitNum: 0,
         recruitMore: false,
+        recruitBottom: false,
         recruitLess: false,
         recruitSingleMore: false,
         recruitNoData: false,

@@ -32,11 +32,13 @@ export function dateDiff (sDate1) {
 }
 
 /**
- * 密码验证 4到16位（字母，数字，下划线，减号）
+ * 1.密码必须由字母、数字、特殊符号组成，区分大小写
+ 2.特殊符号包含（. _ ~ ! @ # $ ^ & *）
+ 3.密码长度为8-20位
  *
  */
 export function validPwd (text) {
-  var pattern = /^[a-zA-Z0-9_-]{4,16}$/
+  var pattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[._~!@#$^&*])[A-Za-z0-9._~!@#$^&*]{8,20}$/
   if (pattern.test(text.trim())) {
     return (true)
   } else {

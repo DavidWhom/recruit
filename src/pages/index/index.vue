@@ -9,9 +9,9 @@
                       background="#ffffff">
           </van-search>
       </van-panel>
-      <div class="kind-tip">
-        <span>温馨提示：公司+地点/岗位可组合查询，例如：锐捷网络+福州</span>
-      </div>
+      <!--<div class="kind-tip">-->
+        <!--<span>温馨提示：游客只有登录才能查看爆料</span>-->
+      <!--</div>-->
     </div>
     <div class="data-panel job-ads">
       <div class="data-panenil all-jobAds">
@@ -113,6 +113,7 @@ export default {
   .job-ads {
     width: 100%;
     margin: 0 auto;
+    padding: 20px 0px 55px 0px;
   }
   .all-jobAds {
     margin: 0 auto;

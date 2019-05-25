@@ -13,8 +13,10 @@
     "van-search": "/static/vant-weapp/dist/search/index",
     "van-picker": "/static/vant-weapp/dist/picker/index",
     "van-popup": "/static/vant-weapp/dist/popup/index",
+    "van-dialog": "/static/vant-weapp/dist/dialog/index",
     "van-toast": "/static/vant-weapp/dist/toast/index",
     "van-notify": "/static/vant-weapp/dist/notify/index",
-    "van-loading": "/static/vant-weapp/dist/loading/index"
+    "van-loading": "/static/vant-weapp/dist/loading/index",
+    "van-checkbox": "/static/vant-weapp/dist/checkbox/index"
   }
 }

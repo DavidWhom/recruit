@@ -1,6 +1,7 @@
 <template>
-  <div @click="clickHandle">
+  <div>
     <van-tabs swipeable :change="onChange" color="#1c86ee">
+      <van-toast id="van-toast" />
       <van-tab title="薪资爆料">
         <van-cell-group>
           <van-field
@@ -90,7 +91,6 @@
         </div>
       </van-tab>
     </van-tabs>
-    <van-toast id="van-toast" />
   </div>
 </template>
 
@@ -103,6 +103,7 @@
     },
     data () {
       return {
+        userInfo: {},
         company: '',
         jobTitle: '',
         city: '',
@@ -130,6 +131,17 @@
     // },
 
     methods: {
+      commonInit () {
+        this.userInfo.id = this.global.id
+        this.userInfo.name = this.global.name
+        this.userInfo.avatar_url = this.global.avatarUrl
+        this.userInfo.gender = this.global.gender
+        this.userInfo.type = this.global.type
+        this.userInfo.tel = this.global.tel
+        this.userInfo.gender = this.global.gender
+        this.userInfo.place = this.global.place
+        // this.userInfo.create_time = this.global.create_time = formateDate(this.global.create_time, 'yyyy-MM-dd')
+      },
       companyTextChange (e) {
         this.company = e.mp.detail
       },
@@ -153,6 +165,11 @@
         this.remark = ''
       },
       addSalary () {
+        if (this.global.id === undefined) {
+          this.clearInfo()
+          Toast.fail('登录后才能爆料哦~')
+          return
+        }
         if (this.company.length === 0 || this.jobTitle.length === 0 || this.salary.length === 0 || this.city.length === 0) {
           Toast.fail('信息不全哦~')
           return
@@ -279,6 +296,7 @@
     },
     onShow () {
       const this_ = this
+      this_.commonInit()
       this_.global.salaryKeyword = ''
       this_.global.from = 1
     },

@@ -28,7 +28,7 @@
             用户
           </van-col>
           <van-col span="17" offset="0">
-            <span class="blue-text">{{comment.userName}} >></span>
+            <span class="blue-text" @click="toMemberDetail()">{{comment.userName}} >></span>
           </van-col>
         </van-row>
       </div>
@@ -67,9 +67,11 @@
 
 <script>
   import {navigateTo} from '../../../../recruit/src/utils/wxApiPack.js'
+  import {formateDate} from '../../utils/index'
   export default {
     props: {
-      comment: {}
+      comment: {},
+      userInfo: {}
     },
     data () {
       return {
@@ -77,6 +79,35 @@
       }
     },
     methods: {
+      getUser () {
+        console.log(this.comment)
+        const this_ = this
+        const requestUrl = '/api/index/getUserInfo'
+        const params = {
+          'id': this.comment.userId
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.userInfo = res.data.data
+            if (this_.userInfo.createTime !== null) {
+              this_.userInfo.create_time = this_.user.createTime
+            }
+            console.log(this_.userInfo.create_time)
+            this_.userInfo.create_time = formateDate(this_.userInfo.create_time, 'yyyy-MM-dd')
+          }
+        })
+      },
+      toMemberDetail () {
+        const this_ = this
+        this_.getUser()
+        const interval = setInterval(function () {
+          if (this_.userInfo !== null) {
+            let str = JSON.stringify(this_.userInfo)
+            navigateTo('../member/main?user=' + str)
+            clearInterval(interval)
+          }
+        }, 100)
+      },
       toSalaryDetail (id) {
         if (this.comment.from === 1) {
           navigateTo('../salary/salaryDetail/main?id=' + id)

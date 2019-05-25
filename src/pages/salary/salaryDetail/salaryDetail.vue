@@ -84,24 +84,25 @@
         </van-row>
       </div>
     </div>
-    <div v-if="userInfo.type === 0" class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
+    <div v-if="userInfo.type !== null && userInfo.type !== undefined && userInfo.type === 0" class="van-hairline--bottom data-panel" style="padding-bottom: 10px">
       <div style="height: 150px;padding: 5px 15px 15px 35px">
         <textarea v-model="comment" style="font-size: 14px;border:solid 1px #f8f8f8" rows="3" cols="50" placeholder="说点什么吧...">
         </textarea>
       </div>
-      <div style="text-align: center"><van-button type="info" size="normal" @click="addComment">&nbsp;&nbsp;评论&nbsp;</van-button></div>
+      <div style="text-align: center" ><van-button type="info" size="normal" @click="addComment">&nbsp;&nbsp;评论&nbsp;</van-button></div>
     </div>
     <div class="data-panel">
       <div class="salry-comment van-hairline--bottom" v-for="(item, index) in comments" :key="index">
         <van-row>
           <van-col span="4" offset="1"><span class="small-text">留言{{index + 1}}</span></van-col>
           <van-col span="15"><span class="small-text">{{item.content}}</span></van-col>
+          <van-col span="4" v-if="userInfo.type === 2"><span class="small-text blue-text" style="text-decoration: underline" @click="deleteComment(item.id)">删除</span></van-col>
         </van-row>
       </div>
-      <div class="van-hairline--bottom">
+      <div class="van-hairline--bottom" v-if="userInfo.type !== null && userInfo.type !== undefined && userInfo.type === 0">
         <van-row>
           <van-col span="24">
-            <div class="normal-rol" @click="recruitMoreHandler(1)">
+            <div class="normal-rol">
               <span>留下你的精彩评论吧~</span>
             </div>
           </van-col>
@@ -109,12 +110,14 @@
       </div>
     </div>
     <van-toast id="van-toast" />
+    <van-dialog id="van-dialog" />
   </div>
 </template>
 
 <script>
   import {navigateTo} from '../../../../../recruit/src/utils/wxApiPack.js'
   import Toast from '../../../../static/vant-weapp/dist/toast/toast'
+  import Dialog from '../../../../static/vant-weapp/dist/dialog/dialog'
   export default {
     data () {
       return {
@@ -140,13 +143,6 @@
       this.isUserCollect()
     },
     methods: {
-      commonInit () {
-        this.userInfo.id = this.global.id
-        this.userInfo.name = this.global.name
-        this.userInfo.avatarUrl = this.global.avatarUrl
-        this.userInfo.gender = this.global.gender
-        this.userInfo.type = this.global.type
-      },
       isUserCollect () {
         const this_ = this
         const requestUrl = '/api/recruit/isUserSalaryCollect'
@@ -183,6 +179,26 @@
             return
           }
           Toast.fail('爆料收藏操作失败')
+        })
+      },
+      deleteComment (id) {
+        Dialog.confirm({
+          message: '确定删除评论吗？'
+        }).then(() => {
+          const this_ = this
+          const requestUrl = '/api/mine/admin/deleteSalaryComment'
+          const params = {
+            'id': id
+          }
+          this_.$http.get(requestUrl, params).then(function (res) {
+            if (res.data.code === 0) {
+              Toast.success('评论删除成功')
+              this_.comments = {}
+              this_.getSalaryComment()
+            } else {
+              Toast.fail('评论删除失败')
+            }
+          })
         })
       },
       addComment () {
@@ -265,7 +281,22 @@
           }
         })
       },
+      commonInit () {
+        this.userInfo.id = this.global.id
+        this.userInfo.name = this.global.name
+        this.userInfo.avatar_url = this.global.avatarUrl
+        this.userInfo.gender = this.global.gender
+        this.userInfo.type = this.global.type
+        this.userInfo.tel = this.global.tel
+        this.userInfo.gender = this.global.gender
+        this.userInfo.place = this.global.place
+        // this.userInfo.create_time = this.global.create_time = formateDate(this.global.create_time, 'yyyy-MM-dd')
+      },
       updateSalaryAuth (type) {
+        if (this.userInfo.id === null || this.userInfo.id === undefined) {
+          Toast.fail('请先登录哦~')
+          return
+        }
         if (this.isUserAuthed) {
           Toast.fail('您已经置评~')
           return

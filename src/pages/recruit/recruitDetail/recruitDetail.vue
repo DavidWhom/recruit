@@ -96,7 +96,8 @@
               </div>
             </van-col>
           </van-row>
-          <van-row v-if="userInfo.type !== 0 && recruitDetail.publisher_id === userInfo.id">
+          <!--&lt;!&ndash;<van-row v-if="userInfo.type !== 0 && recruitDetail.publisher_id === userInfo.id">&ndash;&gt;管理员也应该可以管理咨询页面的评论-->
+          <van-row v-if="userInfo.type !== 0">
             <van-col v-if="!item.isTop" span="2" offset="16">
               <div class="recruit-common-content">
                 <span class="blue-text" @click="setCommentTop(item.id, item.isTop)">置顶</span>
@@ -491,6 +492,7 @@
   .recruit-user-common {
     padding-top: 20px;
     padding-bottom: 5px;
+    margin-top: 5px;
   }
   .recruit-user-common-self {
     padding-top: 20px;

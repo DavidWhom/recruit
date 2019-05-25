@@ -29,7 +29,7 @@
 
 <script>
   import Toast from '../../../../static/vant-weapp/dist/toast/toast'
-  import {makePhoneCall} from '../../../../../recruit/src/utils/wxApiPack.js'
+  import {makePhoneCall, switchTab} from '../../../../../recruit/src/utils/wxApiPack.js'
   export default {
     data () {
       return {
@@ -58,7 +58,16 @@
         }
         this_.$http.post(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
-            Toast.success('反馈成功')
+            Toast.loading({
+              mask: true,
+              duration: 0,
+              forbidClick: true,
+              message: '反馈成功'
+            })
+            this_.advice = ''
+            setTimeout(function () {
+              switchTab('../main')
+            }, 500)
           } else {
             Toast.fail('反馈失败')
           }

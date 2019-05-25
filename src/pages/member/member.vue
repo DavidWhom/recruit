@@ -9,9 +9,14 @@
               <div class="panel-title">{{user.type === 0 ? '会员' : 'HR'}}信息</div>
             </div>
           </van-col>
-          <van-col v-if="identity === 1" span="6" offset="7">
-            <div class="panel-header-number">
-              <div class="blue-text" style="vertical-align: middle" @click="gotoHomePage">回到首页 <van-icon name="wap-home" size="20px"/> </div>
+          <van-col v-if="identity === 1" span="10" offset="3">
+            <div style="font-size: 14px">
+              <div class="panel-header-number" style="display:flex;float: left">
+                <div class="blue-text" style="vertical-align: middle" @click="gotoHomePage"><van-icon name="wap-home" size="18px"/>回到首页</div>
+              </div>
+              <div class="panel-header-number" style="display:flex;float: left;margin-left: 10px">
+                <div class="blue-text" style="vertical-align: middle" @click="logOut"><van-icon name="stop-circle-o" size="18px"/>注销</div>
+              </div>
             </div>
           </van-col>
         </van-row>
@@ -36,8 +41,9 @@
             </van-col>
             <van-col span="8" class="member-complete">
               <div class="member-content van-ellipsis">姓名:{{user.name}}</div>
-              <div class="member-content van-ellipsis">地址:{{(user.province + user.city) === 0 ? '' : user.province + user.city}}</div>
-              <div class="member-content">是否禁止登录: &nbsp;&nbsp;<van-switch :checked="user.state === 1" active-color="#1c86ee"
+              <div class="member-content van-ellipsis">地址:{{(user.place) === 0 ? '' : user.place}}</div>
+              <div class="member-content">活跃时间:{{recentDate === null ? '' : recentDate}}</div>
+              <div class="member-content" v-if="identity === 2">是否禁止登录: &nbsp;&nbsp;<van-switch :checked="user.state === 1" active-color="#1c86ee"
                                                                                                                    inactive-color="#f8f8f8" size="12px" @change="onSwitchChange" /></div>
             </van-col>
           </van-row>
@@ -388,22 +394,135 @@
             </van-col>
             <van-col span="8" offset="1" class="member-complete">
               <div class="member-content">编号:{{user.id}}</div>
-              <div class="member-content">电话:{{user.tel}}</div>
-              <div class="member-content">性别:{{user.gender === 0 ? '未知' : (user.gender === 1 ? '男' : (user.gender === null ? '未知' : '女'))}}</div>
+              <div class="member-content">电话:
+                <span v-if="!isEdit">{{user.tel}}</span>
+                <span v-if="isEdit" class="blue-text" @click="editTel" style="text-decoration: underline">{{tel_tmp === '' ? '添加手机号' : tel_tmp}}</span>
+              </div>
+              <div class="member-content">
+                <span v-if="!isEdit">性别:{{user.gender === 0 ? '未知' : (user.gender === 1 ? '男' : '女')}}</span>
+                <span v-if="isEdit" @click="isSexChoose = true">性别:<span class="blue-text" style="text-decoration: underline">{{gender_tmp}}</span></span>
+              </div>
+              <van-popup :show="isSexChoose" position="bottom">
+                <van-picker
+                  show-toolbar
+                  v-if="isSexChoose"
+                  title="性别"
+                  :columns="['保密', '男', '女']"
+                  @cancel="onCancelSex"
+                  @confirm="onConfirmSex"
+                />
+              </van-popup>
               <div class="member-content">创建时间:{{user.create_time}}</div>
             </van-col>
             <van-col span="8" class="member-complete">
               <div class="member-content van-ellipsis">姓名:{{user.name}}</div>
-              <div class="member-content van-ellipsis">地址:{{(user.province + user.city) === 0 ? '' : user.province + user.city}}</div>
+              <div class="member-content van-ellipsis">地址:
+                <span v-if="!isEdit">{{user.place === null ? '' : user.place}}</span>
+                <span v-if="isEdit" class="blue-text" @click="choosePlace" style="text-decoration: underline">{{place_tmp === '' ? '输入地址' : place_tmp}}</span>
+              </div>
               <div class="member-content">活跃时间:{{recentDate === null ? '' : recentDate}}</div>
-              <div class="member-content">是否禁止登录: &nbsp;&nbsp;<van-switch :checked="user.state === 1" active-color="#1c86ee"
-                                                                          inactive-color="#f8f8f8" size="12px" @change="onSwitchChange" /></div>
+              <div class="member-content" v-if="identity === 2">是否禁止登录:{{user.state}} &nbsp;&nbsp;<van-switch :checked="user.state === 1" active-color="#1c86ee"
+                                                                                                inactive-color="#f8f8f8" size="12px" @change="onSwitchChange" /></div>
             </van-col>
           </van-row>
           <van-row>
             <van-col span="16" offset="8" class="member-complete">
               <div class="member-content">所属公司:{{user.companyName}}</div>
             </van-col>
+          </van-row>
+          <van-row v-if="identity === 1">
+            <van-col span="16" offset="8" class="member-complete">
+              <div class="member-content">
+                <span v-if="!isEdit" class="blue-text" style="font-size: 10px;text-decoration: underline" @click="editProfile">编辑资料</span>
+                <span v-if="!isEdit" class="blue-text" style="font-size: 10px;margin-left: 10px;text-decoration: underline" @click="passwordBoardShow">修改密码</span>
+                <van-button v-if="isEdit" type="info" size="mini" @click="confirmProfile">确定</van-button><span style="margin-left:10px;"></span>
+                <van-button v-if="isEdit" type="warning" size="mini" @click="cancelEdit">取消</van-button>
+              </div>
+            </van-col>
+            <van-popup :show="isPasswordChangeShow" position="bottom">
+              <div v-if="isPasswordChangeShow" style="height: 100%;padding-bottom: 55px;">
+                <van-cell>
+                  <van-field
+                    type="password"
+                    label="密码"
+                    :value="r_password"
+                    placeholder="请输入密码"
+                    required
+                    clearable
+                    icon="closed-eye"
+                    border="false"
+                    @change="validPassword"
+                    :error-message="pwd_error"
+                  />
+                </van-cell>
+                <van-cell>
+                  <van-field
+                    type="password"
+                    label="新密码"
+                    :value="r_rep_pwd"
+                    placeholder="请输入新密码"
+                    required
+                    clearable
+                    @change="validateRpPwd"
+                    :error-message="r_pwd_error"
+                    icon="closed-eye"
+                    border="false"
+                  />
+                </van-cell>
+                <van-cell>
+                  <van-field
+                    type="password"
+                    label="确认密码"
+                    :value="r_r_rep_pwd"
+                    placeholder="请确认新密码"
+                    required
+                    clearable
+                    @change="validateR_RpPwd"
+                    :error-message="r_r_pwd_error"
+                    icon="closed-eye"
+                    border="false"
+                  />
+                </van-cell>
+              </div>
+            </van-popup>
+            <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500" v-if="isPasswordChangeShow">
+              <van-button type="info" @click="changePwd" style="margin-left: 13%;width: 40%;">
+                <view style="width: 88px;">确定</view>
+              </van-button>
+              <van-button type="danger" @click="hidePasswordChangePopup()" style="margin-right: 5%;width: 40%;float: right">
+                <view style="width: 88px;">取消</view>
+              </van-button>
+            </div>
+            <van-dialog
+              use-slot
+              :show="isTelEdit"
+              show-cancel-button
+              @cancel="telCancle"
+              @confirm="telConfirm"
+            >
+              <van-field
+                :value="tel_tmp"
+                label="手机号"
+                :error-message = 'tel_error'
+                placeholder="请输入手机号"
+                @change="validateTel"
+              />
+            </van-dialog>
+            <van-dialog
+              use-slot
+              :show="choosePlaceShow"
+              show-cancel-button
+              @cancel="placeCancle"
+              @confirm="placeConfirm"
+            >
+              <van-field
+                :value="place_tmp"
+                label="地址"
+                :error-message = 'tel_error'
+                placeholder="请输入地址"
+                @change="placeTextChange"
+              />
+            </van-dialog>
           </van-row>
         </div>
       </van-panel>
@@ -476,10 +595,10 @@
             <div style="width: 100%;" v-for="(item, index) in recruits" :key="index" @click="showRecruit(item.id)" class="van-hairline--bottom mine-title-tr">
               <div :class="item.state === 1 ? 'recruit-pass' : (item.state === 2 ? 'recruit-head' : (item.state === 3 ? 'recruit-down' : (item.state === 0 ? 'recruit-wait' : 'recruit-reject')))">
                 <van-row>
-                  <van-col span="5" offset="1">
+                  <van-col span="6" offset="1">
                     <div class="van-ellipsis mine-title-name mine-title-list"><span>{{item.create_time}}</span></div>
                   </van-col>
-                  <van-col span="10">
+                  <van-col span="9">
                     <div class="mine-title-list van-ellipsis"><span>{{item.title}}</span></div>
                   </van-col>
                   <van-col span="4" offset="1">
@@ -536,14 +655,29 @@
 
 <script>
   import Toast from '../../../static/vant-weapp/dist/toast/toast'
-  import {navigateTo, setNavigationBarTitle, switchTab} from '../../utils/wxApiPack.js'
-  import {formateDate} from '../../utils/index'
+  import {navigateTo, setNavigationBarTitle, switchTab, reLaunch, clearStorage} from '../../utils/wxApiPack.js'
+  import {formateDate, isNum, validPwd} from '../../utils/index'
   export default {
     data () {
       return {
         user: {},
         identity: 0, // 2 表示管理员查看 1 表示HR查看
         default_img: require('../../../static/images/mine/default-headimg.png'),
+        isEdit: false,
+        isPasswordChangeShow: false,
+        r_password: '',
+        r_rep_pwd: '',
+        r_pwd_error: '',
+        r_r_rep_pwd: '',
+        r_r_pwd_error: '',
+        tel_error: '',
+        pwd_error: '',
+        isSexChoose: false,
+        choosePlaceShow: false,
+        gender_tmp: '',
+        isTelEdit: false,
+        tel_tmp: '',
+        place_tmp: '',
         recruits: [],
         recruitIndex: 0,
         recruitNum: 0,
@@ -581,6 +715,182 @@
     },
 
     methods: {
+      onConfirmSex (event) {
+        this.isSexChoose = !this.isSexChoose
+        this.gender_tmp = event.mp.detail.value
+      },
+      onCancelSex () {
+        this.isSexChoose = !this.isSexChoose
+      },
+      choosePlace () {
+        this.choosePlaceShow = true
+      },
+      confirmProfile () {
+        this.choosePlaceShow = false
+        this.isSexChoose = false
+        this.isTelEdit = false
+        this.isEdit = false
+        if (this.gender_tmp === '保密') {
+          this.gender_tmp = 0
+        }
+        if (this.gender_tmp === '男') {
+          this.gender_tmp = 1
+        }
+        if (this.gender_tmp === '女') {
+          this.gender_tmp = 2
+        }
+        console.log(this.gender_tmp)
+        console.log(this.tel_tmp)
+        console.log(this.place_tmp)
+        const this_ = this
+        const requestUrl = '/api/mine/user/updateProfile'
+        const params = {
+          'id': this_.global.id,
+          'tel': this_.tel_tmp,
+          'place': this_.place_tmp,
+          'sex': this_.gender_tmp
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.user.place = this_.place_tmp
+            this_.user.gender = this_.gender_tmp
+            this_.user.tel = this_.tel_tmp
+            this_.global.place = this_.place_tmp
+            this_.global.tel = this_.tel_tmp
+            this_.global.gender = this_.gender_tmp
+            Toast.success('个人信息更新成功')
+          } else {
+            Toast.fail('个人信息更新失败')
+          }
+        })
+      },
+      validPassword (e) {
+        this.r_password = e.mp.detail
+        console.log(this.r_password)
+        const this_ = this
+        const params = {
+          'pwd': this_.r_password,
+          'id': this_.user.id
+        }
+        const requestUrl = '/api/mine/user/validatePwd'
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 1) {
+            this_.pwd_error = '密码错误'
+            return
+          }
+          this_.pwd_error = ''
+        })
+      },
+      validateRpPwd (e) {
+        this.r_rep_pwd = e.mp.detail
+        if (!validPwd(this.r_rep_pwd)) {
+          this.r_pwd_error = '密码长度为8-20位,必须由字母、数字、特殊符号组成'
+          return
+        }
+        this.r_pwd_error = ''
+      },
+      validateR_RpPwd (e) {
+        this.r_r_rep_pwd = e.mp.detail
+        if (this.r_r_rep_pwd !== this.r_rep_pwd) {
+          this.r_r_pwd_error = '两次密码不一致'
+          return
+        }
+        this.r_r_pwd_error = ''
+      },
+      cancelEdit () {
+        this.isEdit = false
+        this.choosePlaceShow = false
+        this.isSexChoose = false
+        this.isTelEdit = false
+      },
+      editTel () {
+        this.isTelEdit = true
+        this.tel_tmp = this.user.tel
+      },
+      placeConfirm () {
+        console.log(this.place_tmp)
+      },
+      telConfirm (e) {
+        console.log(this.tel_tmp)
+      },
+      placeCancle () {
+        this.choosePlaceShow = false
+        this.place = ''
+      },
+      telCancle () {
+        this.isTelEdit = false
+      },
+      passwordBoardShow () {
+        this.isPasswordChangeShow = true
+        this.r_rep_pwd = ''
+        this.r_pwd_error = ''
+        this.pwd_error = ''
+        this.r_password = ''
+        this.r_r_pwd_error = ''
+        this.r_rep_pwd = ''
+        this.r_r_rep_pwd = ''
+      },
+      editProfile () {
+        this.isEdit = true
+        this.gender_tmp = this.user.gender === 0 ? '保密' : (this.user.gender === 1 ? '男' : '女')
+        this.tel_tmp = this.user.tel === null ? '' : this.user.tel
+        this.place_tmp = this.user.place === null ? '' : this.user.place
+      },
+      placeTextChange (e) {
+        if (e.mp.detail.length > 10) {
+          this.tel_error = '地址太长'
+          return
+        }
+        this.place_tmp = e.mp.detail
+      },
+      hidePasswordChangePopup () {
+        this.isPasswordChangeShow = false
+      },
+      changePwd () {
+        if (this.pwd_error.length !== 0 || this.r_pwd_error.length !== 0 || this.r_r_pwd_error.length !== 0) {
+          Toast.fail('请输入正确信息')
+          return
+        }
+        const this_ = this
+        const params = {
+          'id': this.user.id,
+          'pwd': this.r_rep_pwd
+        }
+        const requestUrl = '/api/mine/user/resetPwd'
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 1) {
+            Toast.fail('密码修改失败')
+            return
+          }
+          this_.r_r_pwd_error = ''
+          this_.r_pwd_error = ''
+          this_.pwd_error = ''
+          Toast.success('密码修改成功')
+          this_.isPasswordChangeShow = false
+        })
+      },
+      validateTel (e) {
+        this.tel_tmp = e.mp.detail
+        if (!isNum(this.tel_tmp) || this.tel_tmp.length !== 11) {
+          this.tel_error = '手机号不符合格式规范'
+          return
+        }
+        const this_ = this
+        const params = {
+          'tel': this_.tel_tmp
+        }
+        const requestUrl = '/api/index/validateTel'
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 1) {
+            this_.tel_error = res.data.msg
+            if (this_.tel_tmp === this_.user.tel) {
+              this_.tel_error = ''
+            }
+            return
+          }
+          this_.tel_error = ''
+        })
+      },
       onSwitchChange () {
         var state = null
         var word = ''
@@ -599,8 +909,8 @@
         }
         this_.$http.get(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
-            Toast.success(word)
             this_.user.state = state
+            Toast.success(word)
             return
           }
           Toast.fail('操作失败，请重试')
@@ -866,7 +1176,7 @@
       getUserRecentVisitDate () {
         const requestUrl = '/api/mine/admin/getUserRecentVisitDate'
         const params = {
-          'id': this.global.type === 1 ? this.global.type : this.user.id
+          'id': this.global.type === 1 ? this.global.id : this.user.id
         }
         const this_ = this
         this_.$http.get(requestUrl, params).then(function (res) {
@@ -881,9 +1191,48 @@
       commonInit () {
         this.identity = this.global.type
         this.getUserRecentVisitDate()
+        this.isEdit = false
       },
       gotoHomePage: function () { // 自定义页面跳转方法
         switchTab('../index/main')
+      },
+      logOut () {
+        const this_ = this
+        Toast.loading({
+          mask: true,
+          duration: 0,
+          forbidClick: true,
+          message: '正在注销...'
+        })
+        setTimeout(function () {
+          clearStorage()
+          this_.global.id = null
+          this_.global.name = null
+          this_.global.avatarUrl = null
+          this_.global.gender = null
+          this_.global.type = null
+          this_.global.tel = null
+          this_.global.gender = null
+          this_.global.place = null
+          this_.global.create_time = null
+          reLaunch('../main')
+          Toast.clear()
+        }, 500)
+      },
+      getUser () {
+        const this_ = this
+        const requestUrl = '/api/index/getUserInfo'
+        const params = {
+          'id': this.user.id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            this_.user.state = res.data.data.state
+            this_.user.place = res.data.data.place
+            this_.user.tel = res.data.data.tel
+            this_.user.gender = res.data.data.gender
+          }
+        })
       }
     },
     mounted () {
@@ -891,6 +1240,7 @@
     onShow () {
       this.user = this.$root.$mp.query.user
       this.user = JSON.parse(this.user)
+      this.getUser() // 更新用户状态
       console.log(this.user)
       if (this.user.create_time === '1970-01-01') {
         this.user.create_time = ''

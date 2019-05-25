@@ -197,6 +197,7 @@
         recruitIndex: 0,
         recruitNum: 0,
         recruitMore: false,
+        recruitBottom: false,
         recruitLess: false,
         recruitSingleMore: false,
         recruitNoData: false,
