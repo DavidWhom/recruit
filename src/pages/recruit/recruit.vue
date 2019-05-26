@@ -59,7 +59,7 @@
             </div>
             <div class="recruit-content-row">
               <div class="recruit-content-row-left">
-                <div class="gray-text float-left">{{item.require}}</div>
+                <div class="gray-text float-left">{{item.want}}</div>
               </div>
               <div class="recruit-content-row-right">
                 <div class="gray-text float-right">{{item.create_time}}</div>
@@ -159,7 +159,7 @@
             tmpRecruit.companyPlace = tmp.companyPlace
             tmpRecruit.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
             tmpRecruit.salary = tmp.salary
-            tmpRecruit.require = tmp.require
+            tmpRecruit.want = tmp.want
             tmpRecruit.type = tmp.type
             this_.recruits.push(tmpRecruit)
           }

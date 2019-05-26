@@ -126,7 +126,7 @@
           show-cancel-button
           @cancel="replyCancle"
           @confirm="replyConfirm"
-        >·
+        >
           <van-field
             :value="replyWord"
             label="回复"
@@ -369,9 +369,7 @@
         this_.$http.get(requestUrl, params).then(function (res) {
           this_.recruitDetail = res.data.data
           this_.recruitDetail.create_time = formateDate(this_.recruitDetail.create_time, 'yyyy-MM-dd')
-          if (this_.recruitDetail.content_id === 1) {
-            this_.recruitDetail.content = marked(this_.recruitDetail.content)
-          }
+          this_.recruitDetail.content = marked(this_.recruitDetail.content)
           this_.isRecruitLoading = false
         })
       },
