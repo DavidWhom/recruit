@@ -165,7 +165,7 @@
         this.remark = ''
       },
       addSalary () {
-        if (this.global.id === undefined) {
+        if (this.global.id === null || this.global.id === undefined) {
           this.clearInfo()
           Toast.fail('登录后才能爆料哦~')
           return

@@ -12,7 +12,7 @@
             <div style="padding-top: 20rpx;">
               <van-col span="7">
                 <view class="member-title">
-                  <div class="member-circle-header">
+                  <div class="member-circle-header" @click="chooseImageTap">
                     <img :src="userInfo.avatar_url === null ? default_img : userInfo.avatar_url"/>
                   </div>
                 </view>
@@ -144,7 +144,7 @@
         <van-row>
           <van-col span="8">
             <view class="member-title">
-              <div class="member-circle-header">
+              <div class="member-circle-header" @click="chooseImageTap">
                 <img :src="userInfo.avatar_url === null ? default_img : userInfo.avatar_url"/>
               </div>
             </view>
@@ -1709,6 +1709,72 @@
     },
 
     methods: {
+      chooseImageTap: function () {
+        var that = this
+        wx.showActionSheet({
+          itemList: ['从相册中选择', '拍照'],
+          itemColor: '#00000',
+          success: function (res) {
+            if (!res.cancel) {
+              if (res.tapIndex === 0) {
+                that.chooseWxImage('album')
+              } else if (res.tapIndex === 1) {
+                that.chooseWxImage('camera')
+              }
+            }
+          }
+        })
+      },
+      chooseWxImage: function (type) {
+        var that = this
+        // var imgsPaths = that.data.imgs
+        wx.chooseImage({
+          sizeType: ['original', 'compressed'],
+          sourceType: [type],
+          count: 1,
+          success: function (res) {
+            var tempFilesSize = res.tempFiles[0].size
+            console.log(tempFilesSize)
+            if (tempFilesSize <= 2000000) {
+              console.log(res.tempFilePaths[0])
+              that.upImgs(res.tempFilePaths[0])
+            } else {
+              wx.showToast({
+                title: '上传图片不能大于2M!',
+                icon: 'none'
+              })
+            }
+          }
+        })
+      },
+      upImgs (imgurl) {
+        console.log(imgurl)
+        const this_ = this
+        const requestUrl = '/api/img/uploadUserImg'
+        wx.uploadFile({
+          url: 'http://192.168.1.108:8089' + requestUrl,
+          filePath: imgurl,
+          name: 'image',
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          formData: {
+            'id': this.global.id
+          },
+          success: function (res) {
+            console.log(res) // 接口返回网络路径
+            const resData = JSON.parse(res.data)
+            if (resData.code === 0) {
+              this_.userInfo.avatar_url = resData.data
+              this_.global.avatarUrl = resData.data
+              this_.getUser()
+              Toast.success('头像更改成功')
+            } else {
+              Toast.fail('头像更改失败')
+            }
+          }
+        })
+      },
       onConfirmSex (event) {
         this.isSexChoose = !this.isSexChoose
         this.gender_tmp = event.mp.detail.value
@@ -3396,7 +3462,9 @@
     width: 100%;
     overflow-x:hidden;
   }
-
+  .hiddenInput {
+    display: none;
+  }
   .mine-admin-tabs {
     background-color: #f8f8f8;
     height: 100%;

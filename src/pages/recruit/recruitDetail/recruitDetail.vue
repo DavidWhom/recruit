@@ -97,7 +97,7 @@
             </van-col>
           </van-row>
           <!--&lt;!&ndash;<van-row v-if="userInfo.type !== 0 && recruitDetail.publisher_id === userInfo.id">&ndash;&gt;管理员也应该可以管理咨询页面的评论-->
-          <van-row v-if="userInfo.type !== 0">
+          <van-row v-if="(userInfo.type === 1 && recruitDetail.publisher_id === userInfo.id) || userInfo.type === 2">
             <van-col v-if="!item.isTop" span="2" offset="16">
               <div class="recruit-common-content">
                 <span class="blue-text" @click="setCommentTop(item.id, item.isTop)">置顶</span>
