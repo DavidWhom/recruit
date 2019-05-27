@@ -1296,7 +1296,7 @@
             this_.user.place = res.data.data.place
             this_.user.tel = res.data.data.tel
             this_.user.gender = res.data.data.gender
-            this_.user.avatar_url = this_.global.baseUrl + res.data.data.avatar_url
+            this_.user.avatar_url = res.data.data.avatar_url === null || res.data.data.avatar_url === '' ? null : this_.global.baseUrl + res.data.data.avatar_url
           }
         })
       }
