@@ -7,6 +7,7 @@
     "van-tab": "/static/vant-weapp/dist/tab/index",
     "van-tabs": "/static/vant-weapp/dist/tabs/index",
     "van-search": "/static/vant-weapp/dist/search/index",
-    "van-loading": "/static/vant-weapp/dist/loading/index"
+    "van-loading": "/static/vant-weapp/dist/loading/index",
+    "van-tag": "/static/vant-weapp/dist/tag/index"
   }
 }

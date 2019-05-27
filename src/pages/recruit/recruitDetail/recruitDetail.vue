@@ -308,7 +308,7 @@
         this_.$http.get(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
             let temp = {}
-            temp.avatarUrl = this_.global.avatarUrl
+            temp.avatarUrl = this_.global.baseUrl + this_.global.avatarUrl
             temp.content = this_.comment
             temp.good = 0
             temp.isTop = false
@@ -383,6 +383,7 @@
         this_.$http.get(requestUrl, params).then(function (res) {
           this_.comments = res.data.data
           for (var i = 0; i < this_.comments.length; i++) {
+            this_.comments[i].avatarUrl = this_.global.baseUrl + this_.comments[i].avatarUrl
             if (this_.comments[i].isGooded === null) {
               this_.comments[i].isGooded = false
             }

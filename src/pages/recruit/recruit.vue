@@ -59,7 +59,7 @@
             </div>
             <div class="recruit-content-row">
               <div class="recruit-content-row-left">
-                <div class="gray-text float-left">{{item.want}}</div>
+                <van-tag type="primary" round v-for="(tag, tag_index) in item.want" :key="tag_index">{{tag}}</van-tag>
               </div>
               <div class="recruit-content-row-right">
                 <div class="gray-text float-right">{{item.create_time}}</div>
@@ -159,7 +159,11 @@
             tmpRecruit.companyPlace = tmp.companyPlace
             tmpRecruit.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
             tmpRecruit.salary = tmp.salary
-            tmpRecruit.want = tmp.want
+            if (tmp.want.indexOf(',') > 0) {
+              tmpRecruit.want = tmp.want.split(',')
+            } else {
+              tmpRecruit.want = tmp.want.split('，')
+            }
             tmpRecruit.type = tmp.type
             this_.recruits.push(tmpRecruit)
           }
