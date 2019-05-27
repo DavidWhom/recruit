@@ -873,9 +873,17 @@
         this.tel_tmp = this.user.tel
       },
       placeConfirm () {
-        console.log(this.place_tmp)
+        if (this.tel_error.length !== 0) {
+          Toast.fail('地址设置失败：' + this.tel_error)
+          this.place_tmp = this.userInfo.place
+        }
       },
       telConfirm (e) {
+        if (this.tel_error.length !== 0) {
+          Toast.fail('手机号设置失败：' + this.tel_error)
+          this.tel_tmp = this.userInfo.tel
+          return
+        }
         console.log(this.tel_tmp)
       },
       placeCancle () {
@@ -896,6 +904,7 @@
         this.r_r_rep_pwd = ''
       },
       editProfile () {
+        this.tel_error = ''
         this.isEdit = true
         this.gender_tmp = this.user.gender === 0 ? '保密' : (this.user.gender === 1 ? '男' : '女')
         this.tel_tmp = this.user.tel === null ? '' : this.user.tel
@@ -912,6 +921,10 @@
         this.isPasswordChangeShow = false
       },
       changePwd () {
+        if (this.r_password.length === 0 || this.r_rep_pwd.length === 0 || this.r_r_rep_pwd.length === 0) {
+          Toast.fail('请输入完整信息')
+          return
+        }
         if (this.pwd_error.length !== 0 || this.r_pwd_error.length !== 0 || this.r_r_pwd_error.length !== 0) {
           Toast.fail('请输入正确信息')
           return

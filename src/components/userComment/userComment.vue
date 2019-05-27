@@ -96,6 +96,7 @@
         commentNum: 0,
         commentMore: false,
         commentLess: false,
+        commentBottom: false,
         commentSingleMore: false,
         commentNoData: false,
         pageNo: 1

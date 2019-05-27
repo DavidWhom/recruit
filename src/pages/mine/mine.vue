@@ -277,7 +277,7 @@
             <view style="width: 88px;">取消</view>
           </van-button>
         </div>
-        <van-popup :show="isUserTipoffShow" position="bottom">
+        <van-popup :show="isUserTipoffShow" position="bottom" close-on-click-overlay="false">
           <div v-if="isUserTipoffShow" style="height: 100%;padding-bottom: 55px;">
             <user-tipoff></user-tipoff>
           </div>
@@ -1063,7 +1063,7 @@
                       @change="queryCompanyByName"
                       :error-message="company_error"
                     />
-                    <van-popup custom-style="z-index=3000" :show="isChooseCompany" position="bottom">
+                    <van-popup :show="isChooseCompany" position="bottom">
                       <van-picker
                         show-toolbar
                         v-if="isChooseCompany"
@@ -1094,7 +1094,7 @@
                   </van-cell-group>
                 </div>
               </van-popup>
-              <div style="bottom:5px;position: fixed;width: 100%;z-index: 2500;text-align:center" v-if="isHRAddShow">
+              <div style="bottom:5px;position: fixed;width: 100%;z-index: 20000;text-align:center" v-if="isHRAddBottomShow">
                 <van-button type="info" @click="" style="margin-left: 13%;width: 40%;" @click="addHR()">
                   <view style="width: 88px;">提交</view>
                 </van-button>
@@ -1588,6 +1588,7 @@
         company: '',
         company_id: '',
         isChooseCompany: false,
+        isHRAddBottomShow: false,
         company_choose: [],
         company_full: [],
         company_error: '',
@@ -1878,9 +1879,17 @@
         this.tel_tmp = this.userInfo.tel
       },
       placeConfirm () {
-        console.log(this.place_tmp)
+        if (this.tel_error.length !== 0) {
+          Toast.fail('地址设置失败：' + this.tel_error)
+          this.place_tmp = this.userInfo.place
+        }
       },
       telConfirm (e) {
+        if (this.tel_error.length !== 0) {
+          Toast.fail('手机号设置失败：' + this.tel_error)
+          this.tel_tmp = this.userInfo.tel
+          return
+        }
         console.log(this.tel_tmp)
       },
       placeCancle () {
@@ -1901,6 +1910,7 @@
         this.r_r_rep_pwd = ''
       },
       editProfile () {
+        this.tel_error = ''
         this.isEdit = true
         this.gender_tmp = this.userInfo.gender === 0 ? '保密' : (this.userInfo.gender === 1 ? '男' : '女')
         this.tel_tmp = this.userInfo.tel === null ? '' : this.userInfo.tel
@@ -1914,6 +1924,10 @@
         this.place_tmp = e.mp.detail
       },
       changePwd () {
+        if (this.r_password.length === 0 || this.r_rep_pwd.length === 0 || this.r_r_rep_pwd.length === 0) {
+          Toast.fail('请输入完整信息')
+          return
+        }
         if (this.pwd_error.length !== 0 || this.r_pwd_error.length !== 0 || this.r_r_pwd_error.length !== 0) {
           Toast.fail('请输入正确信息')
           return
@@ -2023,10 +2037,13 @@
             this.company_id = this.company_full[i].id
           }
         }
+        this.isHRAddBottomShow = true
         console.log(this.company_id)
       },
       onCancelCompany () {
+        this.validateCompany()
         this.isChooseCompany = !this.isChooseCompany
+        this.isHRAddBottomShow = true
       },
       addAdmin () {
         if (this.adminName_error !== '' || this.adminTel_error !== '' || this.adminName === '' || this.adminTel === '') {
@@ -2249,8 +2266,7 @@
           console.log(err)
         })
       },
-      queryCompanyByName (e) {
-        this.company = e.mp.detail
+      validateCompany () {
         const this_ = this
         const requestUrl = '/api/mine/admin/queryCompanyByName'
         const params = {
@@ -2273,6 +2289,7 @@
               this_.company_error = '公司信息不存在'
             } else {
               this_.isChooseCompany = true
+              this_.isHRAddBottomShow = false
               this_.company_error = ''
             }
           }
@@ -2280,6 +2297,10 @@
           console.log('获取公司信息异常')
           console.log(err)
         })
+      },
+      queryCompanyByName (e) {
+        this.company = e.mp.detail
+        this.validateCompany()
       },
       onSearch_CP (event) {
         if (event == null) {
@@ -2502,6 +2523,7 @@
         })
       },
       showContentDetail (item) {
+        this.global.ca_from = 1
         if (item.type === undefined) {
           this.getAdvice(item)
         } else {
@@ -3384,10 +3406,13 @@
         this.enterprise_place_error = ''
       },
       ShowAddHR () {
+        this.company = ''
+        this.isHRAddBottomShow = true
         this.isHRAddShow = true
       },
       hideHRAdd () {
         this.isChooseCompany = false
+        this.isHRAddBottomShow = false
         this.isHRAddShow = false
         this.comment = ''
         this.company_error = ''
@@ -3458,12 +3483,6 @@
 </script>
 
 <style scope>
-  page {
-    background-color: #f8f8f8;
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-  }
   .hiddenInput {
     display: none;
   }

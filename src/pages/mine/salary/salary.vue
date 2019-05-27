@@ -419,7 +419,7 @@
         this.salaries_ = []
         this.salaryIndex_ = 0
         this.pageNo_ = 1
-        this.getSalaries_()
+        this.getSalaries_(10)
       },
       getSalaries_ (size) {
         const requestUrl = '/api/mine/admin/getSalarys'

@@ -171,6 +171,7 @@
         recruitNum: 0,
         recruitMore: false,
         recruitLess: false,
+        recruitBottom: false,
         recruitSingleMore: false,
         recruitNoData: false,
         pageNo: 1,
@@ -179,6 +180,7 @@
         salaryNum: 0,
         salaryMore: false,
         salaryLess: false,
+        salaryBottom: false,
         salarySingleMore: false,
         salaryNoData: false,
         pageNo_: 1
@@ -189,16 +191,16 @@
         if (type !== 1) {
           this.salaries = []
           this.salaryIndex = 0
-          this.pageNo = 1
+          this.pageNo_ = 1
         }
-        this.getSalaries(10)
+        this.getSalaries(5)
       },
       getSalaries (size) {
         const requestUrl = '/api/mine/user/getUserCollectSalary'
         const params = {
           'userId': this.global.id,
           'pageSize': size,
-          'pageNo': this.pageNo++
+          'pageNo': this.pageNo_++
         }
         const this_ = this
         this_.$http.get(requestUrl, params).then(function (res) {
@@ -287,7 +289,7 @@
       this.pageNo = 1
       this.getRecruits(5)
 
-      this.slaries = []
+      this.salaries = []
       this.salaryIndex = 0
       this.pageNo_ = 1
       this.getSalaries(5)

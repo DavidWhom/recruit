@@ -374,6 +374,9 @@
         })
       },
       getRecruitComment () {
+        if (this.global.id === null || this.global.id === undefined) {
+          return
+        }
         const this_ = this
         const requestUrl = '/api/recruit/getRecruitComment'
         const params = {

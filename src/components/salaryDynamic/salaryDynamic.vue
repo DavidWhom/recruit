@@ -115,6 +115,7 @@
           return
         }
         this.keyword.salaryKeyword = event.mp.detail
+        this.global.salaryKeyword = this.keyword.salaryKeyword
         this.salaries = []
         this.salaryIndex = 0
         this.pageNo = 1
@@ -123,7 +124,7 @@
       getSalaries () {
         const requestUrl = '/api/salary/getSalarys'
         const params = {
-          'keyword': this.keyword.salaryKeyword === undefined ? '' : this.keyword.salaryKeyword,
+          'keyword': this.global.salaryKeyword === undefined ? '' : this.global.salaryKeyword,
           'pageSize': 10,
           'pageNo': this.pageNo++
         }

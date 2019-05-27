@@ -182,6 +182,7 @@
           return
         }
         this.jobkeyword = event.mp.detail
+        this.global.keyword = this.jobkeyword
         this.recruits = []
         this.recruitIndex = 0
         this.pageNo = 1

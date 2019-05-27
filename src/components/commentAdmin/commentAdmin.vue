@@ -5,7 +5,7 @@
         <van-col span="13">
           <div class="panel-header-number">
             <div class="before-title-blue"></div>
-            <div v-if="comment.type === 1" class="panel-title" style="font-size: 14px;">用户评论</div>
+            <div v-if="comment.type !== undefined" class="panel-title" style="font-size: 14px;">用户评论</div>
             <div v-if="comment.type === undefined" class="panel-title" style="font-size: 14px;">意见反馈</div>
           </div>
         </van-col>
@@ -90,7 +90,7 @@
           if (res.data.code === 0) {
             this_.userInfo = res.data.data
             if (this_.userInfo.createTime !== null) {
-              this_.userInfo.create_time = this_.user.createTime
+              this_.userInfo.create_time = this_.userInfo.createTime
             }
             console.log(this_.userInfo.create_time)
             this_.userInfo.create_time = formateDate(this_.userInfo.create_time, 'yyyy-MM-dd')
@@ -101,9 +101,13 @@
         const this_ = this
         this_.getUser()
         const interval = setInterval(function () {
-          if (this_.userInfo !== null) {
+          if (this_.userInfo !== null && this_.userInfo !== undefined) {
             let str = JSON.stringify(this_.userInfo)
-            navigateTo('../member/main?user=' + str)
+            if (this_.global.ca_from === 1) {
+              navigateTo('../member/main?user=' + str)
+            } else {
+              navigateTo('../../member/main?user=' + str)
+            }
             clearInterval(interval)
           }
         }, 100)

@@ -445,6 +445,7 @@
         })
       },
       showContentDetail (item) {
+        this.global.ca_from = 2
         if (item.type === undefined) {
           this.getAdvice(item)
         } else {

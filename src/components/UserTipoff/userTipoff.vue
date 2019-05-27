@@ -108,6 +108,7 @@
         tipNum: 0,
         tipMore: false,
         tipLess: false,
+        tipBottom: false,
         tipSingleMore: false,
         tipNoData: false,
         pageNo: 1
