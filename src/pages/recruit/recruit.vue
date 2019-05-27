@@ -1,110 +1,105 @@
 <template>
   <div class="panel-complete">
-    <van-tabs swipeable color="#1c86ee" class="flex-basis" line-width="60">
-      <van-tab title="招聘资讯" style="flex-basis: 20% !important;" class="mine-admin-tabs">
-        <div :class='fixed ? "salary-dynamic-header salary-dynamic-header-fixed": "salary-dynamic-header"'>
-          <div class="van-hairline--bottom salary-title-bar panel-header-number">
-            <div class="before-title-blue"></div>
-            <div class="panel-title">OfferGo</div>
+    <div :class='fixed ? "salary-dynamic-header salary-dynamic-header-fixed": "salary-dynamic-header"'>
+      <div class="van-hairline--bottom salary-title-bar panel-header-number">
+        <div class="before-title-blue"></div>
+        <div class="panel-title">OfferGo</div>
+      </div>
+      <van-search :value="jobkeyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
+                  background="#ffffff">
+      </van-search>
+    </div>
+    <div v-if="fixed" class="salary-dynamic-header-placeholder"></div>
+    <div>
+      <div class="recruit-content data-panel" v-for="(item,index) in recruits" :key="index">
+        <div v-if="item.type === 0" @click="showRecruit(item.id)">
+          <div class="recruit-content-row">
+            <div class="van-ellipsis">{{item.title}}</div>
           </div>
-          <van-search :value="jobkeyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
-                      background="#ffffff">
-          </van-search>
+          <div class="recruit-content-row">
+            <div class="recruit-content-row-left">
+              <div class="recruit-content-company">{{item.companyName}}</div>
+            </div>
+            <div class="recruit-content-row-right">
+              <div class="blue-text float-right" style="margin-left: 5px">{{item.companyType}}</div>
+              <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
+              <div class="blue-text float-right">{{item.companyPlace}}</div>
+            </div>
+            <div style="clear: both"></div>
+          </div>
+          <div class="recruit-content-row">
+            <div class="recruit-content-row-right">
+              <div class="gray-text float-right">{{item.create_time}}</div>
+            </div>
+            <div style="clear: both"></div>
+          </div>
         </div>
-        <div v-if="fixed" class="salary-dynamic-header-placeholder"></div>
-        <div>
-          <div class="recruit-content data-panel" v-for="(item,index) in recruits" :key="index">
-            <div v-if="item.type === 0" @click="showRecruit(item.id)">
-              <div class="recruit-content-row">
-                <div class="van-ellipsis">{{item.title}}</div>
-              </div>
-              <div class="recruit-content-row">
-                <div class="recruit-content-row-left">
-                  <div class="recruit-content-company">{{item.companyName}}</div>
-                </div>
-                <div class="recruit-content-row-right">
-                  <div class="blue-text float-right" style="margin-left: 5px">{{item.companyType}}</div>
-                  <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
-                  <div class="blue-text float-right">{{item.companyPlace}}</div>
-                </div>
-                <div style="clear: both"></div>
-              </div>
-              <div class="recruit-content-row">
-                <div class="recruit-content-row-right">
-                  <div class="gray-text float-right">{{item.create_time}}</div>
-                </div>
-                <div style="clear: both"></div>
-              </div>
-            </div>
-            <div v-if="item.type === 1" @click="showRecruit(item.id)">
-            <div class="recruit-content-row">
-              <div class="recruit-content-row-left">
-                <div class="van-ellipsis">{{item.title}}</div>
-              </div>
-              <div class="recruit-content-row-right">
-                <div class="van-ellipsis red-text">{{item.salary}}</div>
-              </div>
-              <div style="clear: both"></div>
-            </div>
-            <div class="recruit-content-row">
-              <div class="recruit-content-row-left">
-                <div class="recruit-content-company">{{item.companyName}}</div>
-              </div>
-              <div class="recruit-content-row-right">
-                <div class="blue-text float-right" style="margin-left: 5px">{{item.companyType}}</div>
-                <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
-                <div class="blue-text float-right">{{item.companyPlace}}</div>
-              </div>
-              <div style="clear: both"></div>
-            </div>
-            <div class="recruit-content-row">
-              <div class="recruit-content-row-left">
-                <van-tag type="primary" round v-for="(tag, tag_index) in item.want" :key="tag_index">{{tag}}</van-tag>
-              </div>
-              <div class="recruit-content-row-right">
-                <div class="gray-text float-right">{{item.create_time}}</div>
-              </div>
-              <div style="clear: both"></div>
-            </div>
+        <div v-if="item.type === 1" @click="showRecruit(item.id)">
+        <div class="recruit-content-row">
+          <div class="recruit-content-row-left">
+            <div class="van-ellipsis">{{item.title}}</div>
           </div>
+          <div class="recruit-content-row-right">
+            <div class="van-ellipsis red-text">{{item.salary}}</div>
           </div>
-          <van-panel>
-            <van-row v-if="recruitMore">
-              <van-col span="8">
-                <div class="normal-rol">
-                </div>
-              </van-col>
-              <van-col span="8" v-if="recruitSingleMore">
-                <div class="normal-rol" @click="recruitMoreHandler(1)">
-                  <span>加载更多</span>
-                </div>
-              </van-col>
-              <van-col span="8" v-if="recruitBottom">
-                <div class="normal-rol">
-                  <span>没有了~</span>
-                </div>
-              </van-col>
-              <van-col span="8" v-if="recruitLess">
-                <div class="normal-rol" @click="recruitMoreHandler(2)">
-                  <div style="float: right;margin-right:50px">
-                    <span style="margin-right: 5px">收起</span>
-                    <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
-                  </div>
-                </div>
-              </van-col>
-            </van-row>
-            <van-row v-if="recruitNoData">
-              <van-col span="24">
-                <div class="normal-rol">
-                  <span>没有哦~</span>
-                </div>
-              </van-col>
-            </van-row>
-          </van-panel>
+          <div style="clear: both"></div>
         </div>
-      </van-tab>
-      <van-tab title="智能抓取" style="flex-basis: 20% !important;" class="mine-admin-tabs"></van-tab>
-    </van-tabs>
+        <div class="recruit-content-row">
+          <div class="recruit-content-row-left">
+            <div class="recruit-content-company">{{item.companyName}}</div>
+          </div>
+          <div class="recruit-content-row-right">
+            <div class="blue-text float-right" style="margin-left: 5px">{{item.companyType}}</div>
+            <div class="float-right" style="color: lightgray;margin-left: 5px">|</div>
+            <div class="blue-text float-right">{{item.companyPlace}}</div>
+          </div>
+          <div style="clear: both"></div>
+        </div>
+        <div class="recruit-content-row">
+          <div class="recruit-content-row-left">
+            <van-tag type="primary" round v-for="(tag, tag_index) in item.want" :key="tag_index">{{tag}}</van-tag>
+          </div>
+          <div class="recruit-content-row-right">
+            <div class="gray-text float-right">{{item.create_time}}</div>
+          </div>
+          <div style="clear: both"></div>
+        </div>
+      </div>
+      </div>
+      <van-panel>
+        <van-row v-if="recruitMore">
+          <van-col span="8">
+            <div class="normal-rol">
+            </div>
+          </van-col>
+          <van-col span="8" v-if="recruitSingleMore">
+            <div class="normal-rol" @click="recruitMoreHandler(1)">
+              <span>加载更多</span>
+            </div>
+          </van-col>
+          <van-col span="8" v-if="recruitBottom">
+            <div class="normal-rol">
+              <span>没有了~</span>
+            </div>
+          </van-col>
+          <van-col span="8" v-if="recruitLess">
+            <div class="normal-rol" @click="recruitMoreHandler(2)">
+              <div style="float: right;margin-right:50px">
+                <span style="margin-right: 5px">收起</span>
+                <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
+              </div>
+            </div>
+          </van-col>
+        </van-row>
+        <van-row v-if="recruitNoData">
+          <van-col span="24">
+            <div class="normal-rol">
+              <span>没有哦~</span>
+            </div>
+          </van-col>
+        </van-row>
+      </van-panel>
+    </div>
   </div>
 </template>
 

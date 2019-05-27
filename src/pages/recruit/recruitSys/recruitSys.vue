@@ -1,241 +1,236 @@
 <template>
     <div class="panel-complete">
-      <van-tabs animated color="#1c86ee" class="flex-basis" line-width="60">
-        <van-tab title="招聘资讯" style="flex-basis: 20% !important;" class="mine-admin-tabs">
-          <div class="data-panel">
-            <div class="panel-header-number">
-              <div class="before-title-blue"></div>
-              <div class="panel-title" style="font-size: 14px;">发布审核</div>
-            </div>
-            <van-panel class="job-search">
-              <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
-                          background="#ffffff">
-              </van-search>
+      <div class="data-panel">
+        <div class="panel-header-number">
+          <div class="before-title-blue"></div>
+          <div class="panel-title" style="font-size: 14px;">发布审核</div>
+        </div>
+        <van-panel class="job-search">
+          <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
+                      background="#ffffff">
+          </van-search>
 
 
-            </van-panel>
+        </van-panel>
+      </div>
+      <div class="data-panel">
+        <van-panel>
+          <div style="width: 100%;" class="van-hairline--bottom headline-title">
+            <van-row>
+              <van-col  span="5" offset="1">
+                <div class="headline-title-list">
+                  <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
+                  <span>编号</span>
+                </div>
+              </van-col>
+              <van-col span="7" offset="1">
+                <div class="headline-title-list van-ellipsis">
+                  <img src="../../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
+                  <span>发布时间</span>
+                </div>
+              </van-col>
+              <van-col span="8" offset="2">
+                <div class="headline-title-list van-ellipsis">
+                  <img src="../../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
+                  <span>招聘资讯</span>
+                </div>
+              </van-col>
+            </van-row>
           </div>
-          <div class="data-panel">
-            <van-panel>
-              <div style="width: 100%;" class="van-hairline--bottom headline-title">
-                <van-row>
-                  <van-col  span="5" offset="1">
-                    <div class="headline-title-list">
-                      <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
-                      <span>编号</span>
-                    </div>
-                  </van-col>
-                  <van-col span="7" offset="1">
-                    <div class="headline-title-list van-ellipsis">
-                      <img src="../../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
-                      <span>发布时间</span>
-                    </div>
-                  </van-col>
-                  <van-col span="8" offset="2">
-                    <div class="headline-title-list van-ellipsis">
-                      <img src="../../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
-                      <span>招聘资讯</span>
-                    </div>
-                  </van-col>
-                </van-row>
+        </van-panel>
+        <div class="van-hairline--bottom" v-for="(item, index) in recruits" :key="index" @click="showRecruit(item.id)">
+          <van-row>
+            <van-col span="3" offset="1">
+              <div class="van-ellipsis" style="height: 44px;">
+                <div class="mine-headline-recruit-id">{{item.id}}</div>
               </div>
-            </van-panel>
-            <div class="van-hairline--bottom" v-for="(item, index) in recruits" :key="index" @click="showRecruit(item.id)">
-              <van-row>
-                <van-col span="3" offset="1">
-                  <div class="van-ellipsis" style="height: 44px;">
-                    <div class="mine-headline-recruit-id">{{item.id}}</div>
-                  </div>
-                </van-col>
-                <van-col span="20" offset="0">
-                  <van-swipe-cell id="swipe-recruit" left-width="65" right-width="65" async-close>
-                    <van-cell-group :border="false">
-                      <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + ' ' + item.title" :border="false" />
-                    </van-cell-group>
-                    <view slot="left">
-                      <van-button type="danger" @click="rejectRecruit(item.id)">拒绝</van-button>
-                    </view>
-                    <view slot="right">
-                      <van-button type="info" @click="releaseRecruit(item.title,item.id)">发布</van-button>
-                    </view>
-                  </van-swipe-cell>
-                </van-col>
-              </van-row>
-            </div>
-            <van-panel>
-              <van-row v-if="recruitMore">
-                <van-col span="8">
-                  <div class="normal-rol">
-                  </div>
-                </van-col>
-                <van-col span="8" v-if="recruitSingleMore">
-                  <div class="normal-rol" @click="recruitMoreHandler(1)">
-                    <span>加载更多</span>
-                  </div>
-                </van-col>
-                <van-col span="8" v-if="recruitBottom">
-                  <div class="normal-rol">
-                    <span>没有了~</span>
-                  </div>
-                </van-col>
-                <van-col span="8" v-if="recruitLess">
-                  <div class="normal-rol" @click="recruitMoreHandler(2)">
-                    <div style="float: right;margin-right:50px">
-                      <span style="margin-right: 5px">收起</span>
-                      <img style="width: 14px; height:8px;" src="../../../../static/images/recruit/collapse-up.png"/>
-                    </div>
-                  </div>
-                </van-col>
-              </van-row>
-              <van-row v-if="recruitNoData">
-                <van-col span="24">
-                  <div class="normal-rol">
-                    <span>暂无数据~</span>
-                  </div>
-                </van-col>
-              </van-row>
-            </van-panel>
-            <van-dialog
-              use-slot
-              :show="rejectShow"
-              show-cancel-button
-              @cancel="rejectCancle"
-              @confirm="rejectConfirm"
-            >·
-              <van-field
-                :value="rejectWord"
-                label="拒绝"
-                placeholder="请输入拒绝理由"
-                @change="rejectTextChange"
-              />
-            </van-dialog>
+            </van-col>
+            <van-col span="20" offset="0">
+              <van-swipe-cell id="swipe-recruit" left-width="65" right-width="65" async-close>
+                <van-cell-group :border="false">
+                  <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + ' ' + item.title" :border="false" />
+                </van-cell-group>
+                <view slot="left">
+                  <van-button type="danger" @click="rejectRecruit(item.id)">拒绝</van-button>
+                </view>
+                <view slot="right">
+                  <van-button type="info" @click="releaseRecruit(item.title,item.id)">发布</van-button>
+                </view>
+              </van-swipe-cell>
+            </van-col>
+          </van-row>
+        </div>
+        <van-panel>
+          <van-row v-if="recruitMore">
+            <van-col span="8">
+              <div class="normal-rol">
+              </div>
+            </van-col>
+            <van-col span="8" v-if="recruitSingleMore">
+              <div class="normal-rol" @click="recruitMoreHandler(1)">
+                <span>加载更多</span>
+              </div>
+            </van-col>
+            <van-col span="8" v-if="recruitBottom">
+              <div class="normal-rol">
+                <span>没有了~</span>
+              </div>
+            </van-col>
+            <van-col span="8" v-if="recruitLess">
+              <div class="normal-rol" @click="recruitMoreHandler(2)">
+                <div style="float: right;margin-right:50px">
+                  <span style="margin-right: 5px">收起</span>
+                  <img style="width: 14px; height:8px;" src="../../../../static/images/recruit/collapse-up.png"/>
+                </div>
+              </div>
+            </van-col>
+          </van-row>
+          <van-row v-if="recruitNoData">
+            <van-col span="24">
+              <div class="normal-rol">
+                <span>暂无数据~</span>
+              </div>
+            </van-col>
+          </van-row>
+        </van-panel>
+        <van-dialog
+          use-slot
+          :show="rejectShow"
+          show-cancel-button
+          @cancel="rejectCancle"
+          @confirm="rejectConfirm"
+        >·
+          <van-field
+            :value="rejectWord"
+            label="拒绝"
+            placeholder="请输入拒绝理由"
+            @change="rejectTextChange"
+          />
+        </van-dialog>
+      </div>
+      <div class="data-panel">
+        <div class="panel-header-number">
+          <div class="before-title-blue"></div>
+          <div class="panel-title" style="font-size: 14px;">已发布资讯 - <span class="blue-text">{{recruitNum}} 条</span></div>
+        </div>
+        <van-panel class="job-search">
+          <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch_"
+                      background="#ffffff">
+          </van-search>
+        </van-panel>
+      </div>
+      <div class="data-panel">
+        <van-panel>
+          <div style="width: 100%;" class="van-hairline--bottom headline-title">
+            <van-row>
+              <van-col  span="5" offset="1">
+                <div class="headline-title-list">
+                  <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
+                  <span>编号</span>
+                </div>
+              </van-col>
+              <van-col span="7" offset="1">
+                <div class="headline-title-list van-ellipsis">
+                  <img src="../../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
+                  <span>发布时间</span>
+                </div>
+              </van-col>
+              <van-col span="8" offset="2">
+                <div class="headline-title-list van-ellipsis">
+                  <img src="../../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
+                  <span>招聘资讯</span>
+                </div>
+              </van-col>
+            </van-row>
           </div>
-          <div class="data-panel">
-            <div class="panel-header-number">
-              <div class="before-title-blue"></div>
-              <div class="panel-title" style="font-size: 14px;">已发布资讯 - <span class="blue-text">{{recruitNum}} 条</span></div>
-            </div>
-            <van-panel class="job-search">
-              <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch_"
-                          background="#ffffff">
-              </van-search>
-            </van-panel>
+        </van-panel>
+        <van-panel>
+          <div style="width: 100%;" class="van-hairline--bottom headline-title">
+            <van-row>
+              <van-col  span="4" offset="1">
+                <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                  <div class="recruit-pass" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>审核通过</span>
+                </div>
+              </van-col>
+              <van-col  span="3" offset="1">
+                <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                  <div class="recruit-wait" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>待审核</span>
+                </div>
+              </van-col>
+              <van-col  span="3" offset="1">
+                <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                  <div class="recruit-head" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>头条</span>
+                </div>
+              </van-col>
+              <van-col  span="3" offset="1">
+                <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                  <div class="recruit-down" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>已下线</span>
+                </div>
+              </van-col>
+              <van-col  span="3" offset="1">
+                <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
+                  <div class="recruit-reject" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>已拒绝</span>
+                </div>
+              </van-col>
+            </van-row>
           </div>
-          <div class="data-panel">
-            <van-panel>
-              <div style="width: 100%;" class="van-hairline--bottom headline-title">
-                <van-row>
-                  <van-col  span="5" offset="1">
-                    <div class="headline-title-list">
-                      <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
-                      <span>编号</span>
-                    </div>
-                  </van-col>
-                  <van-col span="7" offset="1">
-                    <div class="headline-title-list van-ellipsis">
-                      <img src="../../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
-                      <span>发布时间</span>
-                    </div>
-                  </van-col>
-                  <van-col span="8" offset="2">
-                    <div class="headline-title-list van-ellipsis">
-                      <img src="../../../../static/images/mine/mine-zixun.png" style="height: 15px;width: 15px;"/>
-                      <span>招聘资讯</span>
-                    </div>
-                  </van-col>
-                </van-row>
+        </van-panel>
+        <div class="van-hairline--bottom" v-for="(item, index) in recruits_" :key="index" @click="showRecruit(item.id)">
+          <div :class="item.state === 1 ? 'recruit-pass' : (item.state === 2 ? 'recruit-head' : (item.state === 3 ? 'recruit-down' : (item.state === 0 ? 'recruit-wait' : 'recruit-reject')))">
+          <van-row>
+            <van-col span="4" offset="0">
+              <div class="rank-circle">{{ index+1 }}</div>
+              <div class="van-ellipsis" style="height: 44px;float:left">
+                <div class="mine-headline-recruit-id">{{item.id}}</div>
               </div>
-            </van-panel>
-            <van-panel>
-              <div style="width: 100%;" class="van-hairline--bottom headline-title">
-                <van-row>
-                  <van-col  span="4" offset="1">
-                    <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
-                      <div class="recruit-pass" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>审核通过</span>
-                    </div>
-                  </van-col>
-                  <van-col  span="3" offset="1">
-                    <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
-                      <div class="recruit-wait" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>待审核</span>
-                    </div>
-                  </van-col>
-                  <van-col  span="3" offset="1">
-                    <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
-                      <div class="recruit-head" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>头条</span>
-                    </div>
-                  </van-col>
-                  <van-col  span="3" offset="1">
-                    <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
-                      <div class="recruit-down" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>已下线</span>
-                    </div>
-                  </van-col>
-                  <van-col  span="3" offset="1">
-                    <div class="headline-title-list van-ellipsis" style="font-size: 16rpx">
-                      <div class="recruit-reject" style="width: 25rpx;height: 25rpx;border-radius: 8rpx;display: inline-block"></div><span>已拒绝</span>
-                    </div>
-                  </van-col>
-                </van-row>
-              </div>
-            </van-panel>
-            <div class="van-hairline--bottom" v-for="(item, index) in recruits_" :key="index" @click="showRecruit(item.id)">
-              <div :class="item.state === 1 ? 'recruit-pass' : (item.state === 2 ? 'recruit-head' : (item.state === 3 ? 'recruit-down' : (item.state === 0 ? 'recruit-wait' : 'recruit-reject')))">
-              <van-row>
-                <van-col span="4" offset="0">
-                  <div class="rank-circle">{{ index+1 }}</div>
-                  <div class="van-ellipsis" style="height: 44px;float:left">
-                    <div class="mine-headline-recruit-id">{{item.id}}</div>
-                  </div>
-                </van-col>
-                <van-col span="20" offset="0">
-                  <van-swipe-cell id="swipe-recruit" right-width="65">
-                    <van-cell-group :border="false">
-                      <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + ' ' + item.title" :border="false" />
-                    </van-cell-group>
-                    <view slot="right">
-                      <van-button type="danger" :disabled="item.state !== 1" @click="downRecruit(item.title, item.id, item.state)">下线</van-button>
-                    </view>
-                  </van-swipe-cell>
-                </van-col>
-              </van-row>
-              </div>
-            </div>
-            <van-panel>
-              <van-row v-if="recruitMore_">
-                <van-col span="8">
-                  <div class="normal-rol">
-                  </div>
-                </van-col>
-                <van-col span="8" v-if="recruitSingleMore_">
-                  <div class="normal-rol" @click="recruit_MoreHandler(1)">
-                    <span>加载更多</span>
-                  </div>
-                </van-col>
-                <van-col span="8" v-if="recruitBottom_">
-                  <div class="normal-rol">
-                    <span>没有了~</span>
-                  </div>
-                </van-col>
-                <van-col span="8" v-if="recruitLess_">
-                  <div class="normal-rol" @click="recruit_MoreHandler(2)">
-                    <div style="float: right;margin-right:50px">
-                      <span style="margin-right: 5px">收起</span>
-                      <img style="width: 14px; height:8px;" src="../../../../static/images/recruit/collapse-up.png"/>
-                    </div>
-                  </div>
-                </van-col>
-              </van-row>
-              <van-row v-if="recruitNoData_">
-                <van-col span="24">
-                  <div class="normal-rol">
-                    <span>暂无数据~</span>
-                  </div>
-                </van-col>
-              </van-row>
-            </van-panel>
+            </van-col>
+            <van-col span="20" offset="0">
+              <van-swipe-cell id="swipe-recruit" right-width="65">
+                <van-cell-group :border="false">
+                  <van-cell class="van-ellipsis" title-width="200px" :title="item.create_time + ' ' + item.title" :border="false" />
+                </van-cell-group>
+                <view slot="right">
+                  <van-button type="danger" :disabled="item.state !== 1" @click="downRecruit(item.title, item.id, item.state)">下线</van-button>
+                </view>
+              </van-swipe-cell>
+            </van-col>
+          </van-row>
           </div>
-        </van-tab>
-        <van-tab title="智能抓取" style="flex-basis: 20% !important;" class="mine-admin-tabs"></van-tab>
-      </van-tabs>
+        </div>
+        <van-panel>
+          <van-row v-if="recruitMore_">
+            <van-col span="8">
+              <div class="normal-rol">
+              </div>
+            </van-col>
+            <van-col span="8" v-if="recruitSingleMore_">
+              <div class="normal-rol" @click="recruit_MoreHandler(1)">
+                <span>加载更多</span>
+              </div>
+            </van-col>
+            <van-col span="8" v-if="recruitBottom_">
+              <div class="normal-rol">
+                <span>没有了~</span>
+              </div>
+            </van-col>
+            <van-col span="8" v-if="recruitLess_">
+              <div class="normal-rol" @click="recruit_MoreHandler(2)">
+                <div style="float: right;margin-right:50px">
+                  <span style="margin-right: 5px">收起</span>
+                  <img style="width: 14px; height:8px;" src="../../../../static/images/recruit/collapse-up.png"/>
+                </div>
+              </div>
+            </van-col>
+          </van-row>
+          <van-row v-if="recruitNoData_">
+            <van-col span="24">
+              <div class="normal-rol">
+                <span>暂无数据~</span>
+              </div>
+            </van-col>
+          </van-row>
+        </van-panel>
+      </div>
       <van-toast id="van-toast" />
       <van-dialog id="van-dialog" />
     </div>
