@@ -383,7 +383,7 @@
         this_.$http.get(requestUrl, params).then(function (res) {
           this_.comments = res.data.data
           for (var i = 0; i < this_.comments.length; i++) {
-            this_.comments[i].avatarUrl = this_.global.baseUrl + this_.comments[i].avatarUrl
+            this_.comments[i].avatarUrl = this_.comments[i].avatarUrl === null || this_.comments[i].avatarUrl === '' ? null : this_.global.baseUrl + this_.comments[i].avatarUrl
             if (this_.comments[i].isGooded === null) {
               this_.comments[i].isGooded = false
             }
