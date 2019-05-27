@@ -286,6 +286,11 @@
               Toast.success('头条下线成功')
               this_.headlines = []
               this_.getHeadlines()
+
+              this_.recruits = []
+              this_.recruitIndex = 0
+              this_.pageNo = 1
+              this_.getRecruits(10)
             } else {
               Toast.fail('头条下线失败')
             }
@@ -401,10 +406,10 @@
               this_.headlines = []
               this_.getHeadlines()
 
-              this.recruits = []
-              this.recruitIndex = 0
-              this.pageNo = 1
-              this.getRecruits(10)
+              this_.recruits = []
+              this_.recruitIndex = 0
+              this_.pageNo = 1
+              this_.getRecruits(10)
             } else {
               Toast.fail('头条上线失败')
             }
