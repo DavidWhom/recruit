@@ -1752,21 +1752,21 @@
         const this_ = this
         const requestUrl = '/api/img/uploadUserImg'
         wx.uploadFile({
-          url: 'http://192.168.1.108:8089' + requestUrl,
+          url: this_.global.baseUrl + requestUrl,
           filePath: imgurl,
           name: 'image',
           header: {
             'content-type': 'multipart/form-data'
           },
           formData: {
-            'id': this.global.id
+            'id': this_.global.id
           },
           success: function (res) {
             console.log(res) // 接口返回网络路径
             const resData = JSON.parse(res.data)
             if (resData.code === 0) {
-              this_.userInfo.avatar_url = resData.data
-              this_.global.avatarUrl = resData.data
+              this_.userInfo.avatar_url = resData.data === null || resData.data === '' ? null : this_.global.baseUrl + resData.data
+              this_.global.avatarUrl = resData.data === null || resData.data === '' ? null : this_.global.baseUrl + resData.data
               this_.getUser()
               Toast.success('头像更改成功')
             } else {
@@ -1823,11 +1823,12 @@
         const this_ = this
         const requestUrl = '/api/index/getUserInfo'
         const params = {
-          'id': this.global.id
+          'id': this_.global.id
         }
         this_.$http.get(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
             this_.userInfo = res.data.data
+            this_.userInfo.avatar_url = this_.global.baseUrl + this_.userInfo.avatar_url
             this_.userInfo.create_time = formateDate(this_.userInfo.create_time, 'yyyy-MM-dd')
             this_.reverse(this_.userInfo)
           }
@@ -2651,7 +2652,7 @@
             tmpmember.name = tmp.name
             tmpmember.gender = tmp.gender === 1 ? '男' : (tmp.gender === 2 ? '女' : '未知')
             tmpmember.place = tmp.place
-            tmpmember.avatar_url = tmp.avatar_url
+            tmpmember.avatar_url = tmp.avatar_url === null || resData.data === '' ? null : this_.global.baseUrl + tmp.avatar_url
             tmpmember.type = tmp.type
             tmpmember.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
             tmpmember.tel = tmp.tel
@@ -2677,6 +2678,7 @@
         this_.$http.get(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
             this_.hr = res.data.data
+            this_.hr.avatar_url = this_.global.baseUrl + res.data.data.avatar_url
             this_.hr.create_time = formateDate(this_.hr.create_time, 'yyyy-MM-dd')
           }
         }).catch(function (err) {
@@ -2704,7 +2706,7 @@
             tmpHr.publishTimes = tmp.publishTimes
             tmpHr.gender = tmp.gender === 1 ? '男' : (tmp.gender === 2 ? '女' : '未知')
             tmpHr.place = tmp.place
-            tmpHr.avatar_url = tmp.avatar_url
+            tmpHr.avatar_url = tmp.avatar_url === null || resData.data === '' ? null : this_.global.baseUrl + tmp.avatar_url
             tmpHr.type = tmp.type
             tmpHr.state = tmp.state
             tmpHr.create_time = formateDate(tmp.create_time, 'yyyy-MM-dd')
@@ -2868,7 +2870,7 @@
       commonInit () {
         this.userInfo.id = this.global.id
         this.userInfo.name = this.global.name
-        this.userInfo.avatar_url = this.global.avatarUrl
+        this.userInfo.avatar_url = (this.global.avatarUrl === null || this.global.avatarUrl === '') < 0 ? null : (this.global.avatarUrl.indexOf(this.global.baseUrl) < 0 ? this.global.baseUrl + this.global.avatarUrl : this.global.avatarUrl)
         this.userInfo.gender = this.global.gender
         this.userInfo.type = this.global.type
         this.userInfo.tel = this.global.tel

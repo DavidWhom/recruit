@@ -759,7 +759,7 @@
         const this_ = this
         const requestUrl = '/api/img/uploadUserImg'
         wx.uploadFile({
-          url: 'http://192.168.1.108:8089' + requestUrl,
+          url: this_.global.baseUrl + requestUrl,
           filePath: imgurl,
           name: 'image',
           header: {
@@ -774,8 +774,8 @@
             // console.log(resData)
             // console.log(resData.data)
             // console.log(resData.data.data)
-            this_.userInfo.avatar_url = resData.data
-            this_.global.avatarUrl = resData.data
+            this_.user.avatar_url = resData.data === null || resData.data === '' ? null : this_.global.baseUrl + resData.data
+            this_.global.avatarUrl = resData.data === null || resData.data === '' ? null : this_.global.baseUrl + resData.data
             this_.getUser()
           }
         })
@@ -1296,6 +1296,7 @@
             this_.user.place = res.data.data.place
             this_.user.tel = res.data.data.tel
             this_.user.gender = res.data.data.gender
+            this_.user.avatar_url = this_.global.baseUrl + res.data.data.avatar_url
           }
         })
       }

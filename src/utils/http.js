@@ -1,6 +1,7 @@
 import Fly from '../../node_modules/flyio/dist/npm/wx'
 const fly = new Fly()
 // const baseURL = 'http://localhost:8089'
+// const baseURL = 'http://192.168.43.66:8089'
 const baseURL = 'http://192.168.1.108:8089'
 // const baseURL = 'http://jovan.free.idcfengye.com'
 fly.config.baseURL = baseURL

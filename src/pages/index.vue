@@ -354,6 +354,11 @@ export default {
       })
     }
   },
+  onShow () {
+    // this.global.baseUrl = 'http://192.168.43.66:8089'
+    this.global.baseUrl = 'http://192.168.1.108:8089'
+    console.log(this.global.baseUrl)
+  },
   mounted () {
     const this_ = this
     this_.registerInit()
