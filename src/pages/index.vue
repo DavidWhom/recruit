@@ -136,7 +136,8 @@ export default {
       tel: '',
       tel_error: '',
       r_pwd_error: '',
-      state: false
+      state: false,
+      baseUrl: 'http://192.168.1.108:8089'
     }
   },
 
@@ -328,6 +329,8 @@ export default {
       })
     },
     toBusinessPage () {
+      this.global.baseUrl = this.baseUrl
+      console.log(this.global.baseUrl)
       switchTab('index/main')
     },
     clickHandle (ev) {
@@ -360,8 +363,7 @@ export default {
   },
   onShow () {
     // this.global.baseUrl = 'http://192.168.43.66:8089'
-    this.global.baseUrl = 'http://192.168.1.108:8089'
-    console.log(this.global.baseUrl)
+    // this.global.baseUrl =this.baseUrl
   },
   mounted () {
     const this_ = this
