@@ -8,13 +8,13 @@
       </van-row>
       <div style="margin-top: 10px">
         <van-row>
-          <van-col span="8" offset="1">
+          <van-col span="7" offset="0">
             <div class="van-ellipsis recruit-title-name">
               <img src="../../../../static/images/mine/mine-time.png" style="height: 15px;width: 15px;"/>
               <span class="recruit-header-son">{{recruitDetail.create_time}}</span>
             </div>
           </van-col>
-          <van-col span="5">
+          <van-col span="4">
             <div class="van-ellipsis recruit-title-name">
               <img src="../../../../static/images/mine/mine-liulang.png" style="height: 15px;width: 15px;"/>
               <span class="recruit-header-son">{{recruitDetail.view}}</span>
@@ -26,10 +26,16 @@
               <span class="recruit-header-son">{{comments.length}}</span>
             </div>
           </van-col>
-          <van-col span="6" v-if="userInfo.type === 2">
+          <van-col span="4" v-if="userInfo.type === 2">
             <div class="van-ellipsis recruit-title-name">
               <img src="../../../../static/images/headline/headline-id.png" style="height: 15px;width: 15px;"/>
               <span class="recruit-header-son">{{id}}</span>
+            </div>
+          </van-col>
+          <van-col span="5" v-if="userInfo.type === 2">
+            <div class="van-ellipsis recruit-title-name">
+              <img src="../../../../static/images/mine/mine-user.png" style="height: 15px;width: 15px;"/>
+              <span class="recruit-header-son">{{recruitDetail.publisherName}}</span>
             </div>
           </van-col>
         </van-row>
@@ -307,14 +313,16 @@
         }
         this_.$http.get(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
-            let temp = {}
-            temp.avatarUrl = this_.global.baseUrl + this_.global.avatarUrl
-            temp.content = this_.comment
-            temp.good = 0
-            temp.isTop = false
-            temp.userName = this_.global.name
-            this_.comments.push(temp)
             this_.comment = ''
+            this_.comments = []
+            this_.getRecruitComment()
+            // let temp = {}
+            // temp.avatarUrl = this_.global.baseUrl + this_.global.avatarUrl
+            // temp.content = this_.comment
+            // temp.good = 0
+            // temp.isTop = false
+            // temp.userName = this_.global.name
+            // this_.comments.push(temp)
             Toast.success(res.data.data)
           } else {
             Toast.fail('评论失败')

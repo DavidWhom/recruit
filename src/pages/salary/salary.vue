@@ -174,6 +174,10 @@
           Toast.fail('信息不全哦~')
           return
         }
+        if (this.company.length > 20 || this.jobTitle.length > 20 || this.salary.length > 30 || this.city.length > 10) {
+          Toast.fail('信息太长~')
+          return
+        }
         if (this.remark.length > 150) {
           Toast.fail('备注不能超过150字哦~')
           return
@@ -315,12 +319,6 @@
   }
 </script>
 <style scoped>
-  page {
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-    padding-bottom: 55px;
-  }
   .remark-tip {
     text-align: center;
     font-size: 25rpx;

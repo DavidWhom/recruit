@@ -211,12 +211,12 @@
 </script>
 
 <style scope>
-  page {
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-    padding-bottom: 55px;
-  }
+  /*page {*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*overflow-x:hidden;*/
+    /*padding-bottom: 55px;*/
+  /*}*/
   .panel-complete {
     padding-top: 10rpx;
   }

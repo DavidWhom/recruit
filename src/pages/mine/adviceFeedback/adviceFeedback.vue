@@ -497,12 +497,6 @@
 </script>
 
 <style scoped>
-  page {
-    background-color: #f8f8f8;
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-  }
   .recruit-pass {
     background: #99CC00;
   }

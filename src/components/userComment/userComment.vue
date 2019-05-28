@@ -165,13 +165,13 @@
 
 
 <style>
-  page {
-    background-color: #f8f8f8;
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-    padding-bottom: 55px;
-  }
+  /*page {*/
+    /*background-color: #f8f8f8;*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*overflow-x:hidden;*/
+    /*padding-bottom: 55px;*/
+  /*}*/
   .panel-complete {
     padding-top: 10rpx;
     background-color: #f8f8f8;

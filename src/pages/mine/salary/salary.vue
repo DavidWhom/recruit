@@ -469,7 +469,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   page {
     background-color: #f8f8f8;
     height: 100%;

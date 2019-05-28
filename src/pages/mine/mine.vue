@@ -1179,7 +1179,7 @@
                       </div>
                     </van-col>
                     <van-col span="8" v-if="companySingleMore">
-                      <div class="normal-rol" @click="hrMoreHandler(1)">
+                      <div class="normal-rol" @click="cpMoreHandler(1)">
                         <span>加载更多</span>
                       </div>
                     </van-col>
@@ -1189,7 +1189,7 @@
                       </div>
                     </van-col>
                     <van-col span="8" v-if="companyLess">
-                      <div class="normal-rol" @click="hrMoreHandler(2)">
+                      <div class="normal-rol" @click="cpMoreHandler(2)">
                         <div style="float: right;margin-right:50px">
                           <span style="margin-right: 5px">收起</span>
                           <img style="width: 14px; height:8px;" src="../../../static/images/recruit/collapse-up.png"/>
@@ -1829,7 +1829,7 @@
         this_.$http.get(requestUrl, params).then(function (res) {
           if (res.data.code === 0) {
             this_.userInfo = res.data.data
-            this_.userInfo.avatar_url = this_.global.baseUrl + this_.userInfo.avatar_url
+            this_.userInfo.avatar_url = (this_.userInfo.avatar_url === null || this_.userInfo.avatar_url === '') ? null : this_.global.baseUrl + this_.userInfo.avatar_url
             this_.userInfo.create_time = formateDate(this_.userInfo.create_time, 'yyyy-MM-dd')
             this_.reverse(this_.userInfo)
           }
@@ -2041,6 +2041,7 @@
         console.log(this.company_id)
       },
       onCancelCompany () {
+        this.company_choose = []
         this.validateCompany()
         this.isChooseCompany = !this.isChooseCompany
         this.isHRAddBottomShow = true
@@ -2253,11 +2254,11 @@
             this_.hrIndex = 0
             this_.h_pageNo = 1
             this_.getHRs(5)
-            this.ad_keyword = ''
-            this.admins = []
-            this.adminIndex = 0
-            this.ad_pageNo = 1
-            this.getAdmins(5)
+            this_.cp_keyword = ''
+            this_.companys = []
+            this_.companyIndex = 0
+            this_.cp_pageNo = 1
+            this_.getCompanys(5)
           } else {
             Toast.fail('HR信息添加失败')
           }
@@ -2300,6 +2301,7 @@
       },
       queryCompanyByName (e) {
         this.company = e.mp.detail
+        this.company_choose = []
         this.validateCompany()
       },
       onSearch_CP (event) {
@@ -2563,6 +2565,14 @@
           this.h_pageNo = 1
         }
         this.getHRs(5)
+      },
+      cpMoreHandler (type) {
+        if (type !== 1) {
+          this.companys = []
+          this.companyIndex = 0
+          this.cp_pageNo = 1
+        }
+        this.getCompanys(5)
       },
       memberMoreHandler (type) {
         if (type !== 1) {
@@ -2892,7 +2902,7 @@
       commonInit () {
         this.userInfo.id = this.global.id
         this.userInfo.name = this.global.name
-        this.userInfo.avatar_url = (this.global.avatarUrl === null || this.global.avatarUrl === '') < 0 ? null : (this.global.avatarUrl.indexOf(this.global.baseUrl) < 0 ? this.global.baseUrl + this.global.avatarUrl : this.global.avatarUrl)
+        this.userInfo.avatar_url = (this.global.avatarUrl === null || this.global.avatarUrl === '') ? null : (this.global.avatarUrl.indexOf(this.global.baseUrl) < 0 ? this.global.baseUrl + this.global.avatarUrl : this.global.avatarUrl)
         this.userInfo.gender = this.global.gender
         this.userInfo.type = this.global.type
         this.userInfo.tel = this.global.tel

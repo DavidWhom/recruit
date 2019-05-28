@@ -266,8 +266,8 @@
             tmpHeadline.title = tmp.title
             tmpHeadline.headline_order = tmp.headline_order
             this_.headlines.push(tmpHeadline)
-            this_.isHeadlinePrepared = 1
           }
+          this_.isHeadlinePrepared = 1
         })
       },
       onCloseHeadline (recruitTitle, recruitId) {
@@ -431,12 +431,6 @@
 </script>
 
 <style>
-  page {
-    background-color: #f8f8f8;
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-  }
   .recruit-pass {
     background: #99CC00;
   }

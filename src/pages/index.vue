@@ -1,7 +1,11 @@
 <template>
   <div class="welcome-div">
     <img class="welcome-bg" src="../../static/welcome/welcome_background.png"/>
-    <img class="slogan-img" src="../../static/welcome/slogan.gif"/>
+    <div class="slogan">
+      <div style="font-family: 'Yu Gothic Medium';font-size: 30px; margin-bottom: 10px; letter-spacing: 2px">OfferGo</div>
+      <div style="font-family: '方正舒体';font-size: 25px; margin-bottom: 10px; letter-spacing: 10px">校招薪资透明化</div>
+      <div style="font-family: '方正舒体';font-size: 25px; letter-spacing: 10px" >给找工作做减法</div>
+    </div>
     <div class="auth-btn-div">
       <van-transition name="fade-up" :show="loginShow">
         <div style="border-radius: 10px; overflow: hidden;">
@@ -459,10 +463,15 @@ export default {
     vertical-align: middle;
   }
 
-  .slogan-img {
-    height: 100%;
+  .slogan {
     width: 100%;
-    z-index: -1;
-    position:absolute;
+    color: #ffffff;
+    text-align: center;
+    position: fixed;
+    top: 100px;
+    -webkit-animation-name: fadeIn; /*动画名称*/
+    -webkit-animation-duration: 3s; /*动画持续时间*/
+    -webkit-animation-iteration-count: 1; /*动画次数*/
+    -webkit-animation-delay: 0s; /*延迟时间*/
   }
 </style>

@@ -47,7 +47,7 @@
               </van-col>
               <van-col  span="3" offset="0">
                 <div class="mine-title-list van-ellipsis">
-                  <span>5000</span>
+                  <span>{{item.auth}}</span>
                 </div>
               </van-col>
               <van-col offset="1" span="2">
@@ -182,13 +182,13 @@
 </script>
 
 <style>
-  page {
-    background-color: #f8f8f8;
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-    padding-bottom: 55px;
-  }
+  /*page {*/
+    /*background-color: #f8f8f8;*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*overflow-x:hidden;*/
+    /*padding-bottom: 55px;*/
+  /*}*/
   .panel-complete {
     padding-top: 10rpx;
     background-color: #f8f8f8;

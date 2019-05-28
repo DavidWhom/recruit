@@ -1406,12 +1406,6 @@
     justify-content: center;
     align-items: flex-start;
   }
-  page {
-    background-color: #f8f8f8;
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-  }
   .panel-complete {
     padding-top: 10rpx;
     background-color: #f8f8f8;

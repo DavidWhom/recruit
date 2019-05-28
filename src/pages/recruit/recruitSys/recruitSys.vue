@@ -311,6 +311,11 @@
             this_.pageNo = 1
             this_.getRecruits()
             this_.rejectShow = false
+
+            this_.recruits_ = []
+            this_.recruitIndex_ = 0
+            this_.pageNo_ = 1
+            this_.getRecruits_(10)
             Toast.success('资讯拒绝上线成功')
           } else {
             Toast.fail('资讯拒绝上线失败')
@@ -341,7 +346,13 @@
             if (res.data.code === 0) {
               Toast.success('资讯上线成功')
               this_.recruits = []
+              this_.recruitIndex = 0
+              this_.pageNo = 1
               this_.getRecruits()
+              this_.recruits_ = []
+              this_.recruitIndex_ = 0
+              this_.pageNo_ = 1
+              this_.getRecruits_(10)
             } else {
               Toast.fail('资讯上线失败')
             }
@@ -463,7 +474,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   page {
     background-color: #f8f8f8;
     height: 100%;

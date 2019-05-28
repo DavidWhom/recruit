@@ -31,15 +31,12 @@ export default {
 </script>
 
 <style>
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
+  page {
+    background-color: #f8f8f8;
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+  }
 /* this rule will be remove */
 * {
   transition: width 2s;

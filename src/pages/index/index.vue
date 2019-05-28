@@ -61,6 +61,9 @@ export default {
       const requestUrl = '/api/index/getHeadlines'
       this_.$http.get(requestUrl).then(function (res) {
         this_.headlines = res.data.data
+        for (var i = 0; i < this_.headlines.length; i++) {
+          this_.headlines[i].cover_img = this_.global.baseUrl + this_.headlines[i].cover_img
+        }
       })
     }
   },
@@ -76,12 +79,6 @@ export default {
 </script>
 
 <style>
-  page {
-    background-color: #f8f8f8;
-    height: 100%;
-    width: 100%;
-    overflow-x:hidden;
-  }
   .panel-complete {
     margin-top: 20rpx;
   }
