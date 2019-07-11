@@ -6,7 +6,7 @@
           <div class="panel-title" style="font-size: 14px;">发布审核</div>
         </div>
         <van-panel class="job-search">
-          <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch"
+          <van-search :value="keyword" placeholder="请输入公司名/岗位名称" use-action-slot @search="onSearch"
                       background="#ffffff">
           </van-search>
         </van-panel>
@@ -113,7 +113,7 @@
           <div class="panel-title" style="font-size: 14px;">已发布爆料</div>
         </div>
         <van-panel class="job-search">
-          <van-search :value="keyword" placeholder="请输入公司名/城市/岗位名称" use-action-slot @search="onSearch_"
+          <van-search :value="keyword" placeholder="请输入公司名/岗位名称" use-action-slot @search="onSearch_"
                       background="#ffffff">
           </van-search>
         </van-panel>

@@ -35,7 +35,7 @@
           <van-col span="5" v-if="userInfo.type === 2">
             <div class="van-ellipsis recruit-title-name">
               <img src="../../../../static/images/mine/mine-user.png" style="height: 15px;width: 15px;"/>
-              <span class="recruit-header-son">{{recruitDetail.publisherName}}</span>
+              <span class="recruit-header-son" style="font: bold" @click="toMemberDetail(recruitDetail.publisher_id)">{{recruitDetail.publisherName}}</span>
             </div>
           </van-col>
         </van-row>
@@ -167,6 +167,7 @@
   import wxParse from 'mpvue-wxparse'
   import marked from 'marked'
   import {formateDate} from '../../../utils/index'
+  import {navigateTo} from '../../../../../recruit/src/utils/wxApiPack.js'
   import Toast from '../../../../static/vant-weapp/dist/toast/toast'
   import Dialog from '../../../../static/vant-weapp/dist/dialog/dialog'
   export default {
@@ -209,6 +210,19 @@
       console.log(this.userInfo.id)
     },
     methods: {
+      toMemberDetail (id) {
+        const this_ = this
+        const requestUrl = '/api/index/getUserInfo'
+        const params = {
+          'id': id
+        }
+        this_.$http.get(requestUrl, params).then(function (res) {
+          if (res.data.code === 0) {
+            console.log(res.data.data)
+            navigateTo('../../member/main?user=' + JSON.stringify(res.data.data))
+          }
+        })
+      },
       replyTextChange (e) {
         this.replyWord = e.mp.detail
       },

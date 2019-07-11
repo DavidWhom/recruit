@@ -1837,7 +1837,6 @@
       },
       validPassword (e) {
         this.r_password = e.mp.detail
-        console.log(this.r_password)
         const this_ = this
         const params = {
           'pwd': this_.r_password,

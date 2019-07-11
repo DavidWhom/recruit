@@ -17,7 +17,7 @@
                 clearable
                 label="账号"
                 icon="contact"
-                placeholder="请输入用户名/手机号"
+                placeholder="请输入用户名"
                 @change="userNameChange"
               />
             </van-cell>
@@ -84,7 +84,7 @@
             <van-field
               label="手机号"
               :value="tel"
-              placeholder="请输入手机号(可用手机号登录)"
+              placeholder="请输入手机号"
               icon="phone-o"
               border="false"
               @change="validateTel"
@@ -137,6 +137,7 @@ export default {
       tel_error: '',
       r_pwd_error: '',
       state: false,
+      // baseUrl: 'http://192.168.43.66:8089'
       baseUrl: 'http://192.168.1.108:8089'
     }
   },
@@ -325,7 +326,7 @@ export default {
         setStorage('userCode', user.id) // 缓存表示用户已经登陆过，下次进入小程序走快捷路径
         this_.name = ''
         this_.password = ''
-        switchTab('index/main')
+        this_.toBusinessPage()
       })
     },
     toBusinessPage () {

@@ -198,6 +198,7 @@
       // this.getSalaries()
       console.log('onshow')
       const this_ = this
+      console.log(this_.global.salaryKeyword)
       this_.keyword.salaryKeyword = this_.global.salaryKeyword === undefined || this_.global.salaryKeyword === '' ? '' : this_.global.salaryKeyword
       if (this_.global.from !== undefined) {
         this_.keyword.from = this_.global.from

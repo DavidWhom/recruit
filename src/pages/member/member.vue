@@ -41,7 +41,7 @@
             </van-col>
             <van-col span="8" class="member-complete">
               <div class="member-content van-ellipsis">姓名:{{user.name}}</div>
-              <div class="member-content van-ellipsis">地址:{{(user.place) === 0 ? '' : user.place}}</div>
+              <div class="member-content van-ellipsis">地址:{{(user.place) === null ? '' : user.place}}</div>
               <div class="member-content">活跃时间:{{recentDate === null ? '' : recentDate}}</div>
               <div class="member-content" v-if="identity === 2">是否禁止登录:<switch :checked="user.state === 1" color="#1c86ee" @change="onSwitchChange" /></div>
             </van-col>
@@ -831,7 +831,6 @@
       },
       validPassword (e) {
         this.r_password = e.mp.detail
-        console.log(this.r_password)
         const this_ = this
         const params = {
           'pwd': this_.r_password,
@@ -1318,6 +1317,7 @@
     },
     onShow () {
       this.user = this.$root.$mp.query.user
+      console.log(this.user)
       this.user = JSON.parse(this.user)
       this.getUser() // 更新用户状态
       console.log(this.user)

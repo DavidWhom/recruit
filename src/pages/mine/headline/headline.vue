@@ -56,7 +56,7 @@
             </van-col>
           </van-row>
         </van-panel>
-        <van-search :value="headlineKeyword" placeholder="请输入招聘资讯名称/编号" use-action-slot @search="onSearch"
+        <van-search :value="headlineKeyword" placeholder="请输入资讯名称/公司/编号" use-action-slot @search="onSearch"
                     background="#ffffff">
         </van-search>
       </div>
