@@ -1,5 +1,5 @@
-# myRecruit
-### 基于微信小程序的招聘资讯发布平台的设计与实现-后台
+# recruit
+### 基于微信小程序的招聘资讯发布平台的设计与实现
 #### 微信：weinixieshi210
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
