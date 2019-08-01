@@ -1,5 +1,5 @@
-# myRecruit
-### 基于微信小程序的招聘资讯发布平台的设计与实现-后台
+# recruit
+### 基于微信小程序的招聘资讯发布平台的设计与实现
 #### 微信：weinixieshi210
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
@@ -247,6 +247,7 @@ HR信息管理模块包含查看HR信息详情、搜索HR信息、添加HR信息
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
 </p>
+<<<<<<< HEAD
 
 
 
@@ -255,3 +256,5 @@ HR信息管理模块包含查看HR信息详情、搜索HR信息、添加HR信息
 <div align="center">
     <img src="img/money-qrcode.jpg"/>
 </div>
+=======
+>>>>>>> dfa87230ce1ea3b87c1c0b9d1ae8526b38cbdfaa
