@@ -247,3 +247,11 @@ HR信息管理模块包含查看HR信息详情、搜索HR信息、添加HR信息
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
 </p>
+
+
+
+#### 撸码不易，如果对你有所帮助，欢迎您的赞赏(1分钱就行，让我知道我写这些东西有用)
+
+<div align="center">
+    <img src="img/money-qrcode.jpg"/>
+</div>
