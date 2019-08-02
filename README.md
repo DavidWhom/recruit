@@ -1,5 +1,9 @@
 # recruit
+![总访问次数](https://visitor-count-badge.herokuapp.com/total.svg?repo_id=DavidWhom.recruit) ![今日来访](https://visitor-count-badge.herokuapp.com/today.svg?repo_id=DavidWhom.recruit) [![star this repo](http://githubbadges.com/star.svg?user=DavidWhom&repo=recruit&style=default)](https://github.com/DavidWhom/recruit)
+[![fork this repo](http://githubbadges.com/fork.svg?user=DavidWhom&repo=recruit&style=default)](https://github.com/DavidWhom/recruit/fork)
+
 ### 基于微信小程序的招聘资讯发布平台的设计与实现
+
 #### 微信：weinixieshi210
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
