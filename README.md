@@ -1,7 +1,3 @@
-# 1. 基于微信小程序的招聘资讯发布平台的设计与实现
-![总访问次数](https://visitor-count-badge.herokuapp.com/total.svg?repo_id=DavidWhom.recruit) ![今日来访](https://visitor-count-badge.herokuapp.com/today.svg?repo_id=DavidWhom.recruit) [![star this repo](http://githubbadges.com/star.svg?user=DavidWhom&repo=recruit&style=default)](https://github.com/DavidWhom/recruit)
-[![fork this repo](http://githubbadges.com/fork.svg?user=DavidWhom&repo=recruit&style=default)](https://github.com/DavidWhom/recruit/fork)
-
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
@@ -35,6 +31,10 @@
       - [1.9. 小程序后端](#19-小程序后端)
 
 <!-- /code_chunk_output -->
+
+# 1. 基于微信小程序的招聘资讯发布平台的设计与实现
+![总访问次数](https://visitor-count-badge.herokuapp.com/total.svg?repo_id=DavidWhom.recruit) ![今日来访](https://visitor-count-badge.herokuapp.com/today.svg?repo_id=DavidWhom.recruit) [![star this repo](http://githubbadges.com/star.svg?user=DavidWhom&repo=recruit&style=default)](https://github.com/DavidWhom/recruit)
+[![fork this repo](http://githubbadges.com/fork.svg?user=DavidWhom&repo=recruit&style=default)](https://github.com/DavidWhom/recruit/fork)
 
 #### 1.1. 微信：weinixieshi210
 <p align="center">
