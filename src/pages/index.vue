@@ -138,7 +138,7 @@ export default {
       r_pwd_error: '',
       state: false,
       // baseUrl: 'http://192.168.43.66:8089'
-      baseUrl: 'http://192.168.1.108:8089'
+      baseUrl: 'http://192.168.1.106:8089'
     }
   },
 

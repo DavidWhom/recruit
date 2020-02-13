@@ -305,6 +305,15 @@ npm start
 
 4. 微信开发者工具打开项目
 
+5. 如何通过手机微信访问小程序？
+
+   - 要求电脑和手机在同一局域网内，电脑和手机连同一个wifi即可
+   - 修改小程序代码 src/utils/https.js baseUrl地址为电脑局域网ip地址，同時修改src/index.vue #141行的 baseUrl
+   - 启动小程序的Java后端程序，即可
+
+   - [演示效果](img/video.mp4)，由于未设置图片服务器，因此无法显示图片。
+
+
 #### 1.8. 微信：weinixieshi210
 
 <p align="center">
