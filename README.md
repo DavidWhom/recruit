@@ -307,6 +307,8 @@ HR信息管理模块包含查看HR信息详情、搜索HR信息、添加HR信息
 
 #### 1.7. 如何运行
 
+[详细安装文档-wiki](https://github.com/DavidWhom/recruit/wiki)
+
 0. 工具
    - node v10
    - webstorm
