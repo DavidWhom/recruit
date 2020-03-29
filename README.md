@@ -343,7 +343,7 @@ npm start
 
 
 #### 1.8. 微信：weinixieshi210
-
+**加好友前帮忙start一下，并备注仓库平台+账号id**。例如：github-wangdachui,码云-wangdachui
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
 </p>
@@ -352,7 +352,9 @@ npm start
 #### 1.9. 小程序后端
 
 **加微信好友后截图赞赏记录，为您发送后端代码，并提供部署安装技术支持。开源不易，谢谢支持~**
-
+技术支持说明：
+- 详细的安装步骤已在wiki说明，不支持wiki已详细说明的事项。
+- 不帮忙搭建环境，实在需要请在付款前说明
 <p align="center">
     <img src="img/wechat-pay.jpg" width="350px" height="500px" style="text-align: center;"/>
 </p>
