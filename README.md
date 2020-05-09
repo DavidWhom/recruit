@@ -344,6 +344,13 @@ npm start
 
 #### 1.8. 微信：weinixieshi210
 **加好友前帮忙start一下，并备注仓库平台+账号id**。例如：github-wangdachui,码云-wangdachui
+
+加好友说明（被部分 s b 网友整得心力交瘁）：
+
+- 加好友务必按照格式备注
+- 避免浪费各自的时间，不议价！不议价！不议价！
+- 当“客服”不容易，repo 主是体面人，不爆粗，性格好，文明人。上面的 `sb` 字眼请谅解，你如果知道我经历过的你也会骂人的。
+
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
 </p>
@@ -352,6 +359,7 @@ npm start
 #### 1.9. 小程序后端
 
 **加微信好友后截图赞赏记录，为您发送后端代码，并提供开发环境的部署安装技术支持。开源不易，谢谢支持~**
+
 技术支持说明：
 
 - 详细的安装步骤已在[wiki](https://github.com/DavidWhom/recruit/wiki)说明
