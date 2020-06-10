@@ -5,7 +5,7 @@
 
 [1. 基于微信小程序的招聘资讯发布平台的设计与实现](#1-基于微信小程序的招聘资讯发布平台的设计与实现) 
 
-- [1.1. 微信：weinixieshi210](#11-微信weinixieshi210)
+- [1.1. 微信：fuckingjava](#11-微信fuckingjava)
   
 - [1.2.系统描述](#12-系统描述) 
   
@@ -51,7 +51,7 @@
    
  - [1.7. 如何运行](#17-如何运行)
    
- - [1.8. 微信：weinixieshi210](#18-微信weinixieshi210)
+ - [1.8. 微信：fuckingjava](#18-微信fuckingjava)
    
  - [1.9. 小程序后端](#19-小程序后端)
         
@@ -62,7 +62,7 @@
 ![总访问次数](https://visitor-count-badge.herokuapp.com/total.svg?repo_id=DavidWhom.recruit) ![今日来访](https://visitor-count-badge.herokuapp.com/today.svg?repo_id=DavidWhom.recruit) [![star this repo](http://githubbadges.com/star.svg?user=DavidWhom&repo=recruit&style=default)](https://github.com/DavidWhom/recruit)
 [![fork this repo](http://githubbadges.com/fork.svg?user=DavidWhom&repo=recruit&style=default)](https://github.com/DavidWhom/recruit/fork)
 
-#### 1.1. 微信：weinixieshi210
+#### 1.1. 微信：fuckingjava
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
 </p>
@@ -342,14 +342,14 @@ npm start
    - [演示效果](img/video.mp4)，由于未设置图片服务器，因此无法显示图片。
 
 
-#### 1.8. 微信：weinixieshi210
+#### 1.8. 微信：fuckingjava
 **加好友前帮忙start一下，并备注仓库平台+账号id**。例如：github-wangdachui,码云-wangdachui
 
 加好友说明（被部分 s b 网友整得心力交瘁）：
 
 - 加好友务必按照格式备注
 - 避免浪费各自的时间，不议价！不议价！不议价！
-- 当“客服”不容易，repo 主是体面人，不爆粗，性格好，文明人。上面的 `sb` 字眼请谅解，你如果知道我经历过的你也会骂人的。
+- 当“客服”不容易，repo 主是体面人，不爆粗，性格好，文明人。上面的 `sb` 字眼请谅解。
 
 <p align="center">
     <img src="img/weixin.jpg" width="250px" height="250px" style="text-align: center;"/>
