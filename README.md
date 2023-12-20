@@ -366,9 +366,5 @@ npm start
 技术支持说明：
 
 - 详细的安装步骤已在[wiki](https://github.com/DavidWhom/recruit/wiki)说明
-- 不帮忙搭建环境（例如安装jdk、maven、node等），实在需要请在付款前说明
-<p align="center">
-    <img src="img/wechat-pay.jpg" width="350px" height="500px" style="text-align: center;"/>
-	<img src="img/ali-pay.jpg" width="350px" height="500px" style="text-align: center;"/>
-</p>
+- 不帮忙搭建环境（例如安装jdk、maven、node等）
 
