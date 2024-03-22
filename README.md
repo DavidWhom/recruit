@@ -361,6 +361,11 @@ npm start
 
 **加微信好友后截图付款记录（199元），为您发送后端代码，并提供开发环境的部署安装技术支持。开源不易，谢谢支持~**
 
+<p align="center">
+    <img src="img/wechat-pay.jpg" width="350px" height="500px" style="text-align: center;"/>
+	<img src="img/ali-pay.jpg" width="350px" height="500px" style="text-align: center;"/>
+</p>
+
 **有些毕设贩子盗版我的视频、材料来骗人，已经有很多网友被骗，在此申明不是找作者购买的本人概不负责。在此警告那些不尊重原创，人品低劣的勿徘徊在违法犯罪边缘，请你们安心做好一只蛆藏于阴沟暗角处，莫再做鼠窃谄谀之事。**
 
 技术支持说明：
